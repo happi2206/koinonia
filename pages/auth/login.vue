@@ -1,0 +1,167 @@
+<template>
+  <main class="verticalspacing">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="relativecontainer">
+          <div class="absolutecontainer absolutes absolute1">
+            <img src="images/carouselpeople1.png" alt="" class="img-fluid" />
+          </div>
+          <div class="absolutecontainer absolutes absolute2">
+            <img src="images/carouselpeople2.png" alt="" class="img-fluid" />
+          </div>
+          <div class="absolutecontainer absolutes absolute3">
+            <img src="images/carouselpeople3.png" alt="" class="img-fluid" />
+          </div>
+          <div class="absolutecontainer absolutes absolute4">
+            <img src="images/carouselpeople4.png" alt="" class="img-fluid" />
+          </div>
+          <!-- <div class="absolutecontainer absolutes absolute5">
+              <img src="images/man2.png" alt="" class="img-fluid" />
+            </div> -->
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="">
+          <div class="mt-5">
+            <h2 class="brownheader text-center">Log in</h2>
+
+            <p class="brownparagraph text-center">
+              Go inside the best gamers social network!
+            </p>
+
+            <div class="mt-3">
+              <div>
+                <div class="d-flex justify-content-center">
+                  <div class="d-flex">
+                    <div
+                      class="whitelogocontainer d-flex justify-content-center align-items-center mx-2 p-3"
+                    >
+                      <a href="#">
+                        <img
+                          src="images/googleicon.png"
+                          alt=""
+                          class="img-fluid"
+                      /></a>
+                    </div>
+                    <div
+                      class="whitelogocontainer d-flex justify-content-center align-items-center mx-2 p-3"
+                    >
+                      <a href="#">
+                        <img
+                          src="images/twittericon.png"
+                          alt=""
+                          class="img-fluid"
+                      /></a>
+                    </div>
+                    <div
+                      class="whitelogocontainer d-flex justify-content-center align-items-center mx-2 p-3"
+                    >
+                      <a href="#">
+                        <img
+                          src="images/linkedinicon.png"
+                          alt=""
+                          class="img-fluid"
+                      /></a>
+                    </div>
+                    <div
+                      class="whitelogocontainer d-flex justify-content-center align-items-center mx-2 p-3"
+                    >
+                      <a href="#">
+                        <img
+                          src="images/facebookicon.png"
+                          alt=""
+                          class="img-fluid"
+                      /></a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="px-sm-5 px-3">
+                  <div class="my-4 px-md-5">
+                    <p class="medbrownparagraph text-center">Or</p>
+
+                    <div class="my-3 px-2">
+                      <div class="my-4">
+                        <label for="" class="d-block medbrownparagraph graytext"
+                          >Your email</label
+                        >
+                        <input
+                          type="email"
+                          name=""
+                          id=""
+                          placeholder="Email"
+                          class="forminputs"
+                        />
+                      </div>
+                      <div class="my-4 relativecontainer">
+                        <label for="" class="d-block medbrownparagraph graytext"
+                          >Choose a password</label
+                        >
+                        <input
+                          type="password"
+                          name=""
+                          id=""
+                          placeholder="********"
+                          class="forminputs"
+                        />
+                        <span
+                          toggle="#password-field"
+                          class="lightgraytext absolutecontainer eyeicon"
+                          ><span
+                            class="iconify"
+                            data-icon="el:eye-open"
+                            data-width="20"
+                            data-height="20"
+                          ></span
+                        ></span>
+                      </div>
+
+                      <div class="my-4">
+                        <div class="form-check">
+                          <label class="form-check-label medbrownparagraph">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name=""
+                              id=""
+                              value="checkedValue"
+                              checked
+                            />
+
+                            Keep me signed in
+                          </label>
+                        </div>
+                      </div>
+
+                      <button class="subscribebtn rad6 btn mt-3 py-3">
+                        Login
+                      </button>
+                    </div>
+
+                    <div class="my-4 d-flex justify-content-center">
+                      <a href="#" class="medbrownparagraph text-center">
+                        <u>Forgot Password?</u>
+                      </a>
+                    </div>
+                    <div class="my-4 d-flex justify-content-center">
+                      <p class="medparagraph mx-2">Don’t have an account?</p>
+                      <a href="#" class="medbrownparagraph text-center">
+                        <u>Sign up</u>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style></style>
