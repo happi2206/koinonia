@@ -135,7 +135,7 @@
                           >
                           <input
                             type="email"
-                            v-model="loginInputs.username"
+                            v-model="loginInputs.email"
                             name=""
                             id=""
                             placeholder="Email"
@@ -226,7 +226,7 @@ export default {
   data() {
     return {
       loginInputs: {
-        username: '',
+        email: '',
         password: '',
         checked: false,
       },
