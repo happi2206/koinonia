@@ -17,7 +17,7 @@ export default {
   actions: {
     async loginUser({ dispatch }, credentials) {
       const response = await this.$axios.$post(
-        'https://koinonia.herokuapp.com/api/v1/slate/user/login-user',
+        '/api/v1/slate/user/login-user',
         credentials
       )
       console.log(response.data)

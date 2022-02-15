@@ -1066,10 +1066,36 @@ button.loginbtn {
 }
 .custom-tabs .nav-link {
   color: #333333;
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 .custom-tabs .nav-link.active {
   border-bottom: 7px solid #ffce31;
   color: #0734aa;
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.custom-tabs .nav-tabs {
+  background-color: #fff !important;
+  border-radius: 5px;
+}
+
+#__BVID__15___BV_tab_button__ {
+  border-left: none !important;
+  border-radius: 0 !important;
+  border-right: none !important;
+  border-top: none !important;
 }
 
 @media (max-width: 1200.5px) {
