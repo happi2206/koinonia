@@ -1,6 +1,5 @@
 <template>
   <div class="bodylightgray">
-    
     <section class="horizontalspacing">
       <div class="imagesection">
         <div class="textsection">
@@ -641,6 +640,17 @@ export default {
 
         // any options from Flickity can be used
       },
+    }
+  },
+
+  async fetch() {
+    try {
+      const response = await this.$axios.$get(
+        `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=50`
+      )
+      console.log(response)
+    } catch (e) {
+      console.log(e)
     }
   },
   computed: {

@@ -95,7 +95,7 @@
                   My learning
                 </nuxt-link>
               </li>
-              <li class="nav-item mb-0">
+              <li class="nav-item mb-0" v-if="user.instructor">
                 <nuxt-link to="" class="nav-link text-white dashboardlink mb-0">
                   Instructors dashboard
                 </nuxt-link>
