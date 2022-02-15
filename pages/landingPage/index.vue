@@ -41,11 +41,11 @@
           <li class="nav-item mx-md-3 mx-1" role="presentation">
             <a
               class="nav-link medbrownparagraph active"
-              id="pills-overview-tab"
+              id="pills-courses-tab"
               data-toggle="pill"
-              href="#pills-overview"
+              href="#pills-courses"
               role="tab"
-              aria-controls="pills-overview"
+              aria-controls="pills-courses"
               aria-selected="true"
               >All Courses
             </a>
@@ -53,11 +53,11 @@
           <li class="nav-item mx-md-3 mx-1" role="presentation">
             <a
               class="nav-link medbrownparagraph"
-              id="pills-instructors"
+              id="pills-ongoing"
               data-toggle="pill"
-              href="#pills-instructors"
+              href="#pills-ongoing"
               role="tab"
-              aria-controls="pills-instructors"
+              aria-controls="pills-ongoing"
               aria-selected="false"
               >On-going</a
             >
@@ -65,11 +65,11 @@
           <li class="nav-item mx-md-3 mx-1" role="presentation">
             <a
               class="nav-link medbrownparagraph"
-              id="pills-students-tab"
+              id="pills-archived-tab"
               data-toggle="pill"
-              href="#pills-students"
+              href="#pills-archived"
               role="tab"
-              aria-controls="pills-students"
+              aria-controls="pills-archived"
               aria-selected="false"
               >Archived</a
             >
@@ -77,11 +77,11 @@
           <li class="nav-item mx-md-3 mx-1" role="presentation">
             <a
               class="nav-link medbrownparagraph"
-              id="pills-assignments-tab"
+              id="pills-applied-tab"
               data-toggle="pill"
-              href="#pills-assignments"
+              href="#pills-applied"
               role="tab"
-              aria-controls="pills-assignments"
+              aria-controls="pills-applied"
               aria-selected="false"
               >Applied</a
             >
@@ -349,7 +349,11 @@
       <div class="d-flex justify-content-center py-5 p-3">
         <div class="row">
           <div class="col-md-6 d-flex align-items-center">
-            <img src="images/Illustration.png" alt="" class="img-fluid" />
+            <img
+              src="~/assets/images/Illustration.png"
+              alt=""
+              class="img-fluid"
+            />
           </div>
           <div class="col-md-6 mt-5">
             <h2 class="rubikheader mainbluecolor col-lg-9 p-0">
@@ -357,7 +361,7 @@
             </h2>
 
             <img
-              src="images/logotext.png"
+              src="~/assets/images/logotext.png"
               alt=""
               class="img-fluid my-md-4 mx-2"
             />
@@ -380,6 +384,8 @@
         </div>
       </div>
     </section>
+
+    <footer />
   </div>
 </template>
 
