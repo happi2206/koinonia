@@ -231,9 +231,13 @@ export default {
     ...mapActions({
       login: 'auth/loginUser',
     }),
-    loginUser() {
-      this.login(this.loginInputs)
-      this.$router.push('/')
+    async loginUser() {
+      try {
+        await this.login(this.loginInputs)
+        this.$router.push('/')
+      } catch (e) {
+        console.log(e)
+      }
     },
   },
 }

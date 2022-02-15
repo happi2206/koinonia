@@ -1,7 +1,7 @@
 export default {
   namespaced: true,
   state: () => ({
-    token: null,
+    token: '',
     user: null,
   }),
   mutations: {
@@ -9,23 +9,24 @@ export default {
       state.token = token
     },
     SET_USER(state, data) {
-      state.user = token
+      state.user = data
+
+      console.log('userstate', data)
     },
   },
   actions: {
-    async loginUser({ dispatch }, credentials) {
+    async loginUser({ commit }, credentials) {
       try {
         const response = await this.$axios.$post(
           `user/login-user?school_id=${process.env.SCHOOL_ID}`,
           credentials
         )
-        console.log('token', response.access_token.accessToken)
-        console.log('data', response.access_token)
-        console.log('response', response)
 
         commit('SET_TOKEN', response.access_token.accessToken)
         commit('SET_USER', response.user)
+        return Promise.resolve(response.user)
       } catch (error) {
+        return Promise.reject(error)
         this.$toast.error(error)
       }
     },
