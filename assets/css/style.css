@@ -1065,6 +1065,14 @@ button.loginbtn {
   border-bottom: 0.2px solid #828282;
   width: 100%;
 }
+
+.custom-tabs .nav-tabs .nav-link {
+  border-left: none !important;
+  border-radius: 0 !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+
 .custom-tabs .nav-link {
   color: #333333;
   font-family: Brown;
@@ -1090,13 +1098,6 @@ button.loginbtn {
 .custom-tabs .nav-tabs {
   background-color: #fff !important;
   border-radius: 5px;
-}
-
-#__BVID__15___BV_tab_button__ {
-  border-left: none !important;
-  border-radius: 0 !important;
-  border-right: none !important;
-  border-top: none !important;
 }
 
 @media (max-width: 1200.5px) {
