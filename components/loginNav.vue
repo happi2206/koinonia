@@ -23,7 +23,11 @@
       <div class="d-block d-md-none">
         <div class="d-flex align-items-center">
           <a class="navbar-brand logo-icon-mobile pr-2 mr-2" href="#">
-            <img src="images/blueyellologo.png" alt="" class="img-fluid" />
+            <img
+              src="~assets/images/blueyellologo.png"
+              alt=""
+              class="img-fluid"
+            />
           </a>
         </div>
       </div>
@@ -130,6 +134,44 @@
             Sign Up
           </button>
         </ul>
+
+        <div class="ml-2">
+          <div
+            class="
+              dropdown
+              account-dropdown
+              d-none d-md-flex
+              align-items-center
+            "
+          >
+            <div class="profimgfull d-none d-md-block">
+              <b-avatar variant="success"></b-avatar>
+            </div>
+
+            <a
+              href="#"
+              class="dropdown-toggle text-white"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="mx-2"> John Doe</span
+              ><span
+                class="iconify"
+                data-icon="akar-icons:chevron-down"
+                data-width="20"
+                data-height="20"
+              ></span>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-right"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <a class="dropdown-item medbrownparagraph" href="#">Option 1</a>
+              <a class="dropdown-item medbrownparagraph" href="#">Option 2</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </b-navbar>
