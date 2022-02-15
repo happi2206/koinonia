@@ -610,6 +610,15 @@ button.loginbtn {
   letter-spacing: 0em;
   text-align: left;
 }
+.brown28 {
+  font-family: Brown;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+}
 
 .navz {
   z-index: 1000;
@@ -675,6 +684,7 @@ button.loginbtn {
 .page-content {
   margin-left: 250px;
   margin-top: 60px;
+  background-color: #f5f6f7;
 }
 
 .icontoggle {
@@ -1055,12 +1065,39 @@ button.loginbtn {
   border-bottom: 0.2px solid #828282;
   width: 100%;
 }
+
+.custom-tabs .nav-tabs .nav-link {
+  border-left: none !important;
+  border-radius: 0 !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+
 .custom-tabs .nav-link {
   color: #333333;
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 .custom-tabs .nav-link.active {
   border-bottom: 7px solid #ffce31;
   color: #0734aa;
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.custom-tabs .nav-tabs {
+  background-color: #fff !important;
+  border-radius: 5px;
 }
 
 @media (max-width: 1200.5px) {
@@ -1111,10 +1148,10 @@ button.loginbtn {
     width: 80%;
   }
 
-  .textsection {
+  /* .textsection {
     left: 20px;
     top: 140px;
-  }
+  } */
 
   .header {
     font-size: 28px;
@@ -1238,9 +1275,9 @@ button.loginbtn {
     margin-right: 20px;
   }
 
-  .textsection {
+  /* .textsection {
     left: 10px;
-  }
+  } */
 
   .forminputpadding {
     padding-left: 50px;
@@ -1256,9 +1293,9 @@ button.loginbtn {
     width: 90%;
   }
 
-  .imagesection {
+  /* .imagesection {
     height: 50vh;
-  }
+  } */
 
   button.loginbtndashboard {
     font-size: 12px !important;
@@ -1274,6 +1311,15 @@ button.loginbtn {
 
   button.loginbtn {
     font-size: 12px !important;
+  }
+}
+@media (max-width: 576.5px) {
+  .coursewidth1 {
+    width: 100%;
+  }
+
+  .coursewidth2 {
+    width: 100%;
   }
 }
 @media (max-width: 500.5px) {

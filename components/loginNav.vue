@@ -1,19 +1,24 @@
 <template>
-  <nav
+  <b-navbar
+    toggleable="md"
     class="
       navz
       darkerbluebg
       align-items-center
       navbar-expand-md
       mobilenavigation
-      pt-3
-      pb-3
+      pt-2
+      pb-2
       pt-md-0
       pb-md-1
       secondaryheader
       darkborderbottom
     "
   >
+    <b-navbar-toggle target="nav-collapse" class="text-white"
+      ><Icon icon="bytesize:menu"
+    /></b-navbar-toggle>
+
     <div class="d-flex justify-content-between width100">
       <div class="d-block d-md-none">
         <div class="d-flex align-items-center">
@@ -39,22 +44,25 @@
           Sign Up
         </button>
       </div>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span
-          class="iconify text-white"
-          data-icon="ci:menu-alt-04"
-          data-width="30"
-          data-height="30"
-        ></span>
-      </button>
+      <!-- <b-collapse id="nav-collapse" is-nav>
+        <div class="d-md-none d-flex">
+          <button
+            class="
+              btn
+              loginbtndashboard
+              px-md-4 px-3
+              py-md-2 py-1
+              text-white
+              mx-md-2 mx-1
+            "
+          >
+            Login
+          </button>
+          <button class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1">
+            Sign Up
+          </button>
+        </div>
+      </b-collapse> -->
     </div>
     <div
       class="collapse navbar-collapse horizontalspacing my-3"
@@ -124,7 +132,7 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </b-navbar>
 </template>
 
 <script>

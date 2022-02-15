@@ -1,7 +1,6 @@
 <template>
   <div>
     <main class="">
-      <login-nav />
       <div class="row verticalspacing">
         <div class="col-lg-6">
           <div class="relativecontainer">
@@ -126,71 +125,65 @@
                     <div class="my-4 px-md-5">
                       <p class="medbrownparagraph text-center">Or</p>
 
-                     <form @submit.prevent="loginUser">
+                      <form @submit.prevent="loginUser">
                         <div class="my-3 px-2">
-                        <div class="my-4">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Your email</label
-                          >
-                          <input
-                            type="email"
-                            v-model="loginInputs.username"
-                            required
-                            placeholder="Email"
-                            class="forminputs"
-                          />
-                        </div>
-                        <div class="my-4 relativecontainer">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Choose a password</label
-                          >
-                          <input
-                            type="password"
-                            v-model="loginInputs.password"
-                            required
-                            placeholder="********"
-                            class="forminputs"
-                          />
-                          <span
-                            toggle="#password-field"
-                            class="lightgraytext absolutecontainer eyeicon"
-                            ><span
-                              class="iconify"
-                              data-icon="el:eye-open"
-                              data-width="20"
-                              data-height="20"
-                            ></span
-                          ></span>
-                        </div>
-
-                        <div class="my-4">
-                          <div class="form-check">
-                            <label class="form-check-label medbrownparagraph">
-                              <input
-                                type="checkbox"
-                                required
-                                class="form-check-input"
-                               
-                                value="checkedValue"
-                                checked
-                              />
-
-                              Keep me signed in
-                            </label>
+                          <div class="my-4">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Your email</label
+                            >
+                            <input
+                              type="email"
+                              v-model="loginInputs.username"
+                              required
+                              placeholder="Email"
+                              class="forminputs"
+                            />
                           </div>
-                        </div>
+                          <div class="my-4 relativecontainer">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Choose a password</label
+                            >
+                            <input
+                              type="password"
+                              v-model="loginInputs.password"
+                              required
+                              placeholder="********"
+                              class="forminputs"
+                            />
+                            <span
+                              toggle="#password-field"
+                              class="lightgraytext absolutecontainer eyeicon"
+                              ><Icon icon="el:eye-open" width="20" height="20"
+                            /></span>
+                          </div>
 
-                        <input
-                          class="subscribebtn btn rad6 btn mt-3 py-3"
-                        type="submit"
-                        value="Login" 
-                        />
-                      </div>
-                     </form>
+                          <div class="my-4">
+                            <div class="form-check">
+                              <label class="form-check-label medbrownparagraph">
+                                <input
+                                  type="checkbox"
+                                  required
+                                  class="form-check-input"
+                                  value="checkedValue"
+                                  checked
+                                />
+
+                                Keep me signed in
+                              </label>
+                            </div>
+                          </div>
+
+                          <input
+                            class="subscribebtn btn rad6 btn mt-3 py-3"
+                            type="submit"
+                            value="Login"
+                          />
+                        </div>
+                      </form>
 
                       <div class="my-4 d-flex justify-content-center">
                         <nuxt-link
@@ -223,12 +216,12 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name:'login',
+  name: 'login',
   data() {
     return {
       loginInputs: {
         username: '',
-        password: ''
+        password: '',
         // checkedValue: false,
       },
     }

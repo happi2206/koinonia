@@ -32,79 +32,12 @@
     </section>
 
     <section class="mt-3 horizontalspacing">
-      <!-- <b-tabs content-class="mt-3">
-        <b-tab title="First" active><p>I'm the first tab</p></b-tab>
-        <b-tab title="Second"><p>I'm the second tab</p></b-tab>
-        <b-tab title="Disabled" disabled><p>I'm a disabled tab!</p></b-tab>
-      </b-tabs> -->
-      <div class="custom-tabs mt-1 bg-white rounded">
-        <ul
-          class="nav px-md-4 px-3 flex-nowrap customscroll"
-          id="pills-tab"
-          role="tablist"
-        >
-          <li class="nav-item mx-md-3 mx-1" role="presentation">
-            <a
-              class="nav-link medbrownparagraph active"
-              id="pills-courses-tab"
-              data-toggle="pill"
-              href="#pills-courses"
-              role="tab"
-              aria-controls="pills-courses"
-              aria-selected="true"
-              >All Courses
-            </a>
-          </li>
-          <li class="nav-item mx-md-3 mx-1" role="presentation">
-            <a
-              class="nav-link medbrownparagraph"
-              id="pills-ongoing"
-              data-toggle="pill"
-              href="#pills-ongoing"
-              role="tab"
-              aria-controls="pills-ongoing"
-              aria-selected="false"
-              >On-going</a
-            >
-          </li>
-          <li class="nav-item mx-md-3 mx-1" role="presentation">
-            <a
-              class="nav-link medbrownparagraph"
-              id="pills-archived-tab"
-              data-toggle="pill"
-              href="#pills-archived"
-              role="tab"
-              aria-controls="pills-archived"
-              aria-selected="false"
-              >Archived</a
-            >
-          </li>
-          <li class="nav-item mx-md-3 mx-1" role="presentation">
-            <a
-              class="nav-link medbrownparagraph"
-              id="pills-applied-tab"
-              data-toggle="pill"
-              href="#pills-applied"
-              role="tab"
-              aria-controls="pills-applied"
-              aria-selected="false"
-              >Applied</a
-            >
-          </li>
-        </ul>
-      </div>
-
-      <div class="tab-content" id="pills-tabContent">
-        <div
-          class="tab-pane fade show active mx-0 px-0"
-          id="pills-courses"
-          role="tabpanel"
-          aria-labelledby="pills-courses-tab"
-        >
+      <b-tabs content-class="mt-3" class="custom-tabs">
+        <b-tab title="All Courses" active>
           <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="col-lg-6 my-3 my-lg-0">
               <div class="bg-white rounded">
-                <div class="p-2 d-flex">
+                <div class="p-2 d-flex flex-sm-row flex-column">
                   <div class="coursewidth1 d-flex align-items-center">
                     <img
                       src="~/assets/images/man1.png"
@@ -140,9 +73,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6 my-3 my-lg-0">
               <div class="bg-white rounded">
-                <div class="p-2 d-flex">
+                <div class="p-2 d-flex flex-sm-row flex-column">
                   <div class="coursewidth1 d-flex align-items-center">
                     <img
                       src="~/assets/images/man1.png"
@@ -174,32 +107,230 @@
                       esse cillum dolore eu fugiat nulla pariatur....
                     </p>
                     <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></b-tab
+        >
+        <b-tab title="On-going" class=""><p>I'm the second tab</p></b-tab>
+        <b-tab title="Archived" disabled><p>I'm a disabled tab!</p></b-tab>
+        <b-tab title="Applied" disabled><p>I'm a disabled tab!</p></b-tab>
+      </b-tabs>
+    </section>
+
+    <section class="horizontalspacing mt-5">
+      <div>
+        <h1 class="brown28 text-center mainbluecolor">Top Featured Courses</h1>
+        <p class="mt-3 brownparagraph horizontalspacing text-center graytext">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-lg-3 col-6 my-3 my-lg-0">
+          <div class="d-flex flex-column">
+            <img
+              src="~/assets/images/featuredimg.png"
+              alt=""
+              class="img-fluid"
+            />
+            <div class="bg-white">
+              <div class="my-3 px-3">
+                <p class="brownparagraph bold700">
+                  Lorem ipsum dolor sit amet, ctetur adipiscing elit
+                </p>
+                <div class="my-2 row">
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> Start Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> End Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <button class="btn mainbtndashboard px-lg-5 px-3 py-2">
+                      Apply
+                    </button>
+
+                    <div>
+                      <Icon
+                        icon="bi:bookmark-star-fill"
+                        class="mainyellowcolor"
+                      />
+                      <span class="medbrownparagraph mb-0">Save</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="tab-pane fade mx-0 px-0 bg-white rounded"
-          id="pills-ongoing"
-          role="tabpanel"
-          aria-labelledby="pills-ongoing"
-        ></div>
-        <div
-          class="tab-pane fade mx-0 px-0 bg-white rounded"
-          id="pills-archived"
-          role="tabpanel"
-          aria-labelledby="pills-archived"
-        ></div>
+        <div class="col-lg-3 col-6 my-3 my-lg-0">
+          <div class="d-flex flex-column">
+            <img
+              src="~/assets/images/featuredimg.png"
+              alt=""
+              class="img-fluid"
+            />
+            <div class="bg-white">
+              <div class="my-3 px-3">
+                <p class="brownparagraph bold700">
+                  Lorem ipsum dolor sit amet, ctetur adipiscing elit
+                </p>
+                <div class="my-2 row">
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> Start Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> End Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <button class="btn mainbtndashboard px-lg-5 px-3 py-2">
+                      Apply
+                    </button>
+
+                    <div>
+                      <Icon
+                        icon="bi:bookmark-star-fill"
+                        class="mainyellowcolor"
+                      />
+                      <span class="medbrownparagraph mb-0">Save</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6 my-3 my-lg-0">
+          <div class="d-flex flex-column">
+            <img
+              src="~/assets/images/featuredimg.png"
+              alt=""
+              class="img-fluid"
+            />
+            <div class="bg-white">
+              <div class="my-3 px-3">
+                <p class="brownparagraph bold700">
+                  Lorem ipsum dolor sit amet, ctetur adipiscing elit
+                </p>
+                <div class="my-2 row">
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> Start Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> End Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <button class="btn mainbtndashboard px-lg-5 px-3 py-2">
+                      Apply
+                    </button>
+
+                    <div>
+                      <Icon
+                        icon="bi:bookmark-star-fill"
+                        class="mainyellowcolor"
+                      />
+                      <span class="medbrownparagraph mb-0">Save</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6 my-3 my-lg-0">
+          <div class="d-flex flex-column">
+            <img
+              src="~/assets/images/featuredimg.png"
+              alt=""
+              class="img-fluid"
+            />
+            <div class="bg-white">
+              <div class="my-3 px-3">
+                <p class="brownparagraph bold700">
+                  Lorem ipsum dolor sit amet, ctetur adipiscing elit
+                </p>
+                <div class="my-2 row">
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> Start Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p class="my-2 medbrownparagraph">
+                      <span class="lightgraytext"> End Date:</span>
+                      01/01/2022
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <button class="btn mainbtndashboard px-lg-5 px-3 py-2">
+                      Apply
+                    </button>
+
+                    <div>
+                      <Icon
+                        icon="bi:bookmark-star-fill"
+                        class="mainyellowcolor"
+                      />
+                      <span class="medbrownparagraph mb-0">Save</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="my-5">
       <div class="horizontalspacing">
         <div>
-          <h1 class="arialheader">Top Tutors</h1>
-          <p class="mt-3 mainparagraph graytext">
+          <h1 class="brown28 text-center mainbluecolor">Top Tutors</h1>
+          <p class="mt-3 brownparagraph horizontalspacing text-center graytext">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -208,92 +339,122 @@
         </div>
 
         <div class="mt-5 slider">
-          <div
-            class="main-carousel horizontalspacing slider"
-            data-flickity='{"pageDots": false, "wrapAround": true, "autoPlay": 2500, "freeScroll": true, "contain": true, "prevNextButtons": true, "resize": false }'
-          >
-            <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
-              <div class="d-flex justify-content-center">
-                <div>
-                  <img
-                    src="~/assets/images/carouselpeople1.png"
-                    class="p-0 m-0"
-                    alt=""
-                  />
+          <div class="horizontalspacing px-lg-5 px-0">
+            <div class="px-md-5 mx-lg-3">
+              <flickity ref="flickity" :options="flickityOptions">
+                <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
+                  <div class="d-flex justify-content-center">
+                    <div>
+                      <img
+                        src="~/assets/images/carouselpeople1.png"
+                        class="p-0 m-0"
+                        alt=""
+                      />
 
-                  <h3 class="mainparagraph text-center my-3 mainparagraph18">
-                    John S. Sergent 1
-                  </h3>
-                  <p class="mainparagraph text-center graytext">Lorem ipsum</p>
+                      <h3
+                        class="mainparagraph text-center my-3 mainparagraph18"
+                      >
+                        John S. Sergent 1
+                      </h3>
+                      <p class="mainparagraph text-center graytext">
+                        Lorem ipsum
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+                <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
+                  <div class="d-flex justify-content-center">
+                    <div>
+                      <img
+                        src="~/assets/images/carouselpeople2.png"
+                        class="p-0 m-0"
+                        alt=""
+                      />
+
+                      <h3
+                        class="mainparagraph text-center my-3 mainparagraph18"
+                      >
+                        John S. Sergent 1
+                      </h3>
+                      <p class="mainparagraph text-center graytext">
+                        Lorem ipsum
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
+                  <div class="d-flex justify-content-center">
+                    <div>
+                      <img
+                        src="~/assets/images/carouselpeople3.png"
+                        class="p-0 m-0"
+                        alt=""
+                      />
+
+                      <h3
+                        class="mainparagraph text-center my-3 mainparagraph18"
+                      >
+                        John S. Sergent 1
+                      </h3>
+                      <p class="mainparagraph text-center graytext">
+                        Lorem ipsum
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
+                  <div class="d-flex justify-content-center">
+                    <div>
+                      <img
+                        src="~/assets/images/carouselpeople4.png"
+                        class="p-0 m-0"
+                        alt=""
+                      />
+
+                      <h3
+                        class="mainparagraph text-center my-3 mainparagraph18"
+                      >
+                        John S. Sergent 1
+                      </h3>
+                      <p class="mainparagraph text-center graytext">
+                        Lorem ipsum
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
+                  <div class="d-flex justify-content-center">
+                    <div>
+                      <img
+                        src="~/assets/images/carouselpeople1.png"
+                        class="p-0 m-0"
+                        alt=""
+                      />
+
+                      <h3
+                        class="mainparagraph text-center my-3 mainparagraph18"
+                      >
+                        John S. Sergent 1
+                      </h3>
+                      <p class="mainparagraph text-center graytext">
+                        Lorem ipsum
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </flickity>
             </div>
 
-            <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
-              <div class="d-flex justify-content-center">
-                <div>
-                  <img
-                    src="images/carouselpeople2.png"
-                    class="p-0 m-0"
-                    alt=""
-                  />
-
-                  <h3 class="mainparagraph text-center my-3 mainparagraph18">
-                    John S. Sergent 1
-                  </h3>
-                  <p class="mainparagraph text-center graytext">Lorem ipsum</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
-              <div class="d-flex justify-content-center">
-                <div>
-                  <img
-                    src="~/assets/images/carouselpeople3.png"
-                    class="p-0 m-0"
-                    alt=""
-                  />
-
-                  <h3 class="mainparagraph text-center my-3 mainparagraph18">
-                    John S. Sergent 1
-                  </h3>
-                  <p class="mainparagraph text-center graytext">Lorem ipsum</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
-              <div class="d-flex justify-content-center">
-                <div>
-                  <img
-                    src="images/carouselpeople4.png"
-                    class="p-0 m-0"
-                    alt=""
-                  />
-
-                  <h3 class="mainparagraph text-center my-3 mainparagraph18">
-                    John S. Sergent 1
-                  </h3>
-                  <p class="mainparagraph text-center graytext">Lorem ipsum</p>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-cell col-lg-3 col-sm-6 maincarous">
-              <div class="d-flex justify-content-center">
-                <div>
-                  <img
-                    src="~/assets/images/carouselpeople1.png"
-                    class="p-0 m-0"
-                    alt=""
-                  />
-
-                  <h3 class="mainparagraph text-center my-3 mainparagraph18">
-                    John S. Sergent 1
-                  </h3>
-                  <p class="mainparagraph text-center graytext">Lorem ipsum</p>
-                </div>
-              </div>
+            <div class="customarrows">
+              <span @click="previous()" class="customarrowleft"
+                ><Icon icon="la:long-arrow-alt-left" width="60" height="60"
+              /></span>
+              <span @click="next()" class="customarrowright"
+                ><Icon icon="la:long-arrow-alt-right" width="60" height="60"
+              /></span>
             </div>
           </div>
         </div>
@@ -302,8 +463,8 @@
     <section class="my-5">
       <div class="horizontalspacing">
         <div>
-          <h1 class="arialheader">Testimonials</h1>
-          <p class="mt-3 mainparagraph graytext">
+          <h1 class="brown28 text-center mainbluecolor">Testimonials</h1>
+          <p class="mt-3 brownparagraph horizontalspacing text-center graytext">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -312,12 +473,8 @@
         </div>
 
         <div class="my-3 slider">
-          <div
-            id="carouselExampleControls"
-            class="carousel slide"
-            data-ride="carousel"
-          >
-            <div class="carousel-inner horizontalspacing">
+          <flickity ref="flickity2" :options="flickityOptions">
+            <div class="carousel-cell maincarous">
               <div class="carousel-item active relativecontainer">
                 <div
                   class="
@@ -337,7 +494,7 @@
                         />
                       </div>
                       <img
-                        src="images/testimonial1.png"
+                        src="~/assets/images/testimonial1.png"
                         class="img mx-lg-5"
                         alt="..."
                       />
@@ -347,7 +504,7 @@
                   <div class="relativecontainer ml-4">
                     <div class="absolutecontainer blockquote">
                       <img
-                        src="images/testimonialquoteblock.png"
+                        src="~/assets/images/testimonialquoteblock.png"
                         class="img"
                         alt="..."
                       />
@@ -367,7 +524,10 @@
                   </div>
                 </div>
               </div>
-              <div class="carousel-item relativecontainer">
+            </div>
+
+            <div class="carousel-cell maincarous">
+              <div class="carousel-item active relativecontainer">
                 <div
                   class="
                     d-flex
@@ -380,13 +540,13 @@
                     <div class="relativecontainer">
                       <div class="absolutecontainer blockblue">
                         <img
-                          src="images/testimonialblock.png"
+                          src="~/assets/images/testimonialblock.png"
                           class="img"
                           alt=""
                         />
                       </div>
                       <img
-                        src="images/testimonial1.png"
+                        src="~/assets/images/testimonial1.png"
                         class="img mx-lg-5"
                         alt="..."
                       />
@@ -396,7 +556,7 @@
                   <div class="relativecontainer ml-4">
                     <div class="absolutecontainer blockquote">
                       <img
-                        src="images/testimonialquoteblock.png"
+                        src="~/assets/images/testimonialquoteblock.png"
                         class="img"
                         alt="..."
                       />
@@ -417,35 +577,7 @@
                 </div>
               </div>
             </div>
-            <div
-              class="carousel-control-prev custom"
-              data-target="#carouselExampleControls"
-              data-slide="prev"
-            >
-              <div class="absolutecontainer">
-                <span
-                  class="iconify"
-                  data-icon="bi:arrow-left-circle-fill"
-                  data-width="40"
-                  data-height="40"
-                ></span>
-                <span class="sr-only">Previous</span>
-              </div>
-            </div>
-            <div
-              class="carousel-control-next custom"
-              data-target="#carouselExampleControls"
-              data-slide="next"
-            >
-              <span
-                class="iconify"
-                data-icon="bi:arrow-right-circle-fill"
-                data-width="40"
-                data-height="40"
-              ></span>
-              <span class="sr-only">Next</span>
-            </div>
-          </div>
+          </flickity>
         </div>
       </div>
     </section>
@@ -490,16 +622,66 @@
       </div>
     </section>
 
-    <footer />
+    <main-footer />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import loginNav from '../../components/loginNav.vue'
+import Flickity from 'vue-flickity'
 export default {
-  components: { loginNav },
+  components: { loginNav, Flickity },
+  data() {
+    return {
+      flickityOptions: {
+        initialIndex: 3,
+        prevNextButtons: false,
+        pageDots: false,
+        wrapAround: true,
+
+        // any options from Flickity can be used
+      },
+    }
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedIn']),
+  },
+
+  methods: {
+    next() {
+      this.$refs.flickity.next()
+    },
+
+    previous() {
+      this.$refs.flickity.previous()
+    },
+  },
 }
 </script>
 
-<style>
+<style lang="css" scoped>
+.customarrows {
+  position: relative;
+}
+.customarrows span {
+  position: absolute;
+  top: -220px;
+  color: #c4c4c4;
+}
+.customarrows span:hover {
+  color: #003294;
+}
+.customarrows .customarrowleft {
+  left: -20px;
+}
+.customarrows .customarrowright {
+  right: -20px;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+}
+</style>>
 </style>

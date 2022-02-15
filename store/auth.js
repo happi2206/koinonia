@@ -1,4 +1,3 @@
-
 export default {
   namespaced: true,
   state: () => ({
@@ -9,6 +8,9 @@ export default {
     SET_TOKEN(state, token) {
       state.token = token
     },
+    SET_USER(state, data) {
+      state.user = token
+    },
   },
   actions: {
     async loginUser({ dispatch }, credentials) {
@@ -17,11 +19,16 @@ export default {
           `user/login-user?school_id=${process.env.SCHOOL_ID}`,
           credentials
         )
-        print(response)
+        console.log(response)
+
         // commit('SET_USER', response)
       } catch (error) {
         this.$toast.error(error.data.detail)
       }
     },
   },
+}
+
+export const getters = {
+  isLoggedIn: (state) => !!state.token,
 }
