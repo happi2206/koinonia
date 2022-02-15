@@ -684,6 +684,7 @@ button.loginbtn {
 .page-content {
   margin-left: 250px;
   margin-top: 60px;
+  background-color: #f5f6f7;
 }
 
 .icontoggle {
@@ -1291,9 +1292,9 @@ button.loginbtn {
     width: 90%;
   }
 
-  .imagesection {
+  /* .imagesection {
     height: 50vh;
-  }
+  } */
 
   button.loginbtndashboard {
     font-size: 12px !important;

@@ -22,7 +22,7 @@
         <button class="btn mainbtn px-3 py-2 mx-2">Sign Up</button>
       </div>
       <button
-        class="navbar-toggler"
+        class="navbar-toggler text-white"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -30,12 +30,7 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span
-          class="iconify"
-          data-icon="uil:bars"
-          data-width="20"
-          data-height="20"
-        ></span>
+ 
       </button>
     </div>
     <div
@@ -102,9 +97,7 @@ export default {
       isSignIn: false,
     }
   },
-  mounted() {
-    
-  },
+  mounted() {},
 }
 </script>
 
