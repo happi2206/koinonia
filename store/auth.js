@@ -10,11 +10,14 @@ export default {
     SET_TOKEN(state, token) {
       state.token = token
     },
+    SET_USER(state, data) {
+      state.user = token
+    },
   },
   actions: {
     async loginUser({ dispatch }, credentials) {
-      const response = await $axios.$post(
-        '/api/v1/slate/user/login-user',
+      const response = await this.$axios.$post(
+        'https://koinonia.herokuapp.com/api/v1/slate/user/login-user',
         credentials
       )
       console.log(response.data)
@@ -26,7 +29,7 @@ export default {
       commit('SET_TOKEN', token)
 
       try {
-        let response = $axios.get('auth/me')
+        let response = this.$axios.get('auth/me')
         commit('SET_USER', response)
       } catch (e) {
         console.log(e)

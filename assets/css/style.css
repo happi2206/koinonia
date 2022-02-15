@@ -610,6 +610,15 @@ button.loginbtn {
   letter-spacing: 0em;
   text-align: left;
 }
+.brown28 {
+  font-family: Brown;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+}
 
 .navz {
   z-index: 1000;
@@ -1111,10 +1120,10 @@ button.loginbtn {
     width: 80%;
   }
 
-  .textsection {
+  /* .textsection {
     left: 20px;
     top: 140px;
-  }
+  } */
 
   .header {
     font-size: 28px;
@@ -1238,9 +1247,9 @@ button.loginbtn {
     margin-right: 20px;
   }
 
-  .textsection {
+  /* .textsection {
     left: 10px;
-  }
+  } */
 
   .forminputpadding {
     padding-left: 50px;
@@ -1274,6 +1283,15 @@ button.loginbtn {
 
   button.loginbtn {
     font-size: 12px !important;
+  }
+}
+@media (max-width: 576.5px) {
+  .coursewidth1 {
+    width: 100%;
+  }
+
+  .coursewidth2 {
+    width: 100%;
   }
 }
 @media (max-width: 500.5px) {
