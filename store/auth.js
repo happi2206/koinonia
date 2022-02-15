@@ -19,16 +19,25 @@ export default {
           `/api/v1/slate/user/login-user?school_id=${process.env.SCHOOL_ID}`,
           credentials
         )
-        console.log(response)
+        console.log('token', response.access_token.accessToken)
+        console.log('data', response.access_token)
+        console.log('response', response)
 
-        // commit('SET_USER', response)
+        commit('SET_TOKEN', response.access_token.accessToken)
+        commit('SET_USER', response.user)
       } catch (error) {
-        this.$toast.error(error.data.detail)
+        this.$toast.error(error)
       }
     },
   },
 }
 
 export const getters = {
-  isLoggedIn: (state) => !!state.token,
+  isAuthenticated(state) {
+    return state.auth.loggedIn
+  },
+
+  loggedIn(state) {
+    return state.auth.user
+  },
 }

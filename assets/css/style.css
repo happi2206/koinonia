@@ -278,6 +278,20 @@ input.subscribebtn {
   text-align: center;
   border-radius: 0;
 }
+button.subscribebtn {
+  background-color: #0734aa;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 100%;
+  text-align: center;
+  border-radius: 0;
+}
 button.subscribebtn.rad6 {
   border-radius: 6px;
 }

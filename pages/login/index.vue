@@ -220,7 +220,7 @@ export default {
   data() {
     return {
       loginInputs: {
-        username: '',
+        username: 'usr@example.com',
         password: '',
         // checkedValue: false,
       },

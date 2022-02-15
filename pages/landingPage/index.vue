@@ -1,6 +1,5 @@
 <template>
   <div class="bodylightgray">
-    <login-nav />
     <section class="horizontalspacing">
       <div class="imagesection">
         <div class="textsection">
@@ -352,11 +351,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -373,11 +372,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -394,11 +393,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -415,11 +414,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -435,11 +434,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -513,7 +512,7 @@
                     <div class="col-lg-9">
                       <h3 class="roboto32">Emilet Jonas</h3>
 
-                      <p class="mainparagraph graytext mt-md-5 mt-3">
+                      <p class="brownparagraph graytext mt-md-5 mt-3">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -565,7 +564,7 @@
                     <div class="col-lg-9">
                       <h3 class="roboto32">Emilet Jonas</h3>
 
-                      <p class="mainparagraph graytext mt-md-5 mt-3">
+                      <p class="brownparagraph graytext mt-md-5 mt-3">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -639,6 +638,7 @@ export default {
         prevNextButtons: false,
         pageDots: false,
         wrapAround: true,
+        autoPlay: true,
 
         // any options from Flickity can be used
       },
