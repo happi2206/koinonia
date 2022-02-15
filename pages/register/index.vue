@@ -128,121 +128,115 @@
                     <div class="my-4 px-md-5">
                       <p class="medbrownparagraph text-center">Or</p>
 
-                      <div class="my-3 px-2">
-                        <div class="my-4">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >First Name</label
-                          >
-                          <input
-                            type="text"
-                            v-model="registerInputs.firstname"
-                            name=""
-                            id=""
-                            placeholder="Email"
-                            class="forminputs"
-                          />
-                        </div>
-                        <div class="my-4">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Last Name</label
-                          >
-                          <input
-                            type="text"
-                            v-model="registerInputs.lastname"
-                            name=""
-                            id=""
-                            placeholder="Email"
-                            class="forminputs"
-                          />
-                        </div>
-                        <div class="my-4">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Email address</label
-                          >
-                          <input
-                            type="email"
-                            v-model="registerInputs.email"
-                            name=""
-                            id=""
-                            placeholder="Email"
-                            class="forminputs"
-                          />
-                        </div>
-                        <div class="my-4 relativecontainer">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Create password</label
-                          >
-                          <input
-                            type="password"
-                            v-model="registerInputs.password"
-                            name=""
-                            id=""
-                            placeholder="********"
-                            class="forminputs"
-                          />
-                          <span
-                            toggle="#password-field"
-                            class="lightgraytext absolutecontainer eyeicon"
-                            ><span
-                              class="iconify"
-                              data-icon="el:eye-open"
-                              data-width="20"
-                              data-height="20"
-                            ></span
-                          ></span>
-                        </div>
-
-                        <div class="my-4">
-                          <div class="form-check">
-                            <label class="form-check-label medbrownparagraph">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                name=""
-                                id=""
-                                value="checkedValue"
-                                checked
-                              />
-
-                              I agree to
-
-                              <nuxt-link to="/" class="mb-0 py-2"
-                                >terms & conditions</nuxt-link
-                              >
-                            </label>
+                      <form @submit.prevent="registerUser">
+                        <div class="my-3 px-2">
+                          <div class="my-4">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >First Name</label
+                            >
+                            <input
+                              type="text"
+                              v-model="registerInputs.other_name"
+                              required
+                              placeholder="Email"
+                              class="forminputs"
+                            />
                           </div>
-                        </div>
-                        <div class="my-4">
-                          <div class="form-check">
-                            <label class="form-check-label medbrownparagraph">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                name=""
-                                id=""
-                                value="checkedValue"
-                                checked
-                              />
-                              I’d like being informed about latest news and tips
-                            </label>
+                          <div class="my-4">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Last Name</label
+                            >
+                            <input
+                              type="text"
+                              v-model="registerInputs.surname"
+                              required
+                              placeholder="Doe"
+                              class="forminputs"
+                            />
                           </div>
-                        </div>
+                          <div class="my-4">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Email address</label
+                            >
+                            <input
+                              type="email"
+                              v-model="registerInputs.user_type.email"
+                              required
+                              placeholder="Email"
+                              class="forminputs"
+                            />
+                          </div>
+                          <div class="my-4 relativecontainer">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Create password</label
+                            >
+                            <input
+                              type="password"
+                              v-model="registerInputs.user_type.password"
+                              required
+                              placeholder="********"
+                              class="forminputs"
+                            />
+                            <span
+                              toggle="#password-field"
+                              class="lightgraytext absolutecontainer eyeicon"
+                              ><span
+                                class="iconify"
+                                data-icon="el:eye-open"
+                                data-width="20"
+                                data-height="20"
+                              ></span
+                            ></span>
+                          </div>
 
-                        <button
-                          class="subscribebtn rad6 btn mt-3 py-3"
-                          @click="registerUser"
-                        >
-                          Register
-                        </button>
-                      </div>
+                          <div class="my-4">
+                            <div class="form-check">
+                              <label class="form-check-label medbrownparagraph">
+                                <input
+                                  type="checkbox"
+                                  class="form-check-input"
+                                  required
+                                  v-model="legal_check"
+                                />
+
+                                I agree to
+
+                                <nuxt-link to="/" class="mb-0 py-2"
+                                  >terms & conditions</nuxt-link
+                                >
+                              </label>
+                            </div>
+                          </div>
+                          <div class="my-4">
+                            <div class="form-check">
+                              <label class="form-check-label medbrownparagraph">
+                                <input
+                                  type="checkbox"
+                                  class="form-check-input"
+                                  v-model="registerInputs.send_lastest_updates"
+                                  checked
+                                />
+                                I’d like being informed about latest news and
+                                tips
+                              </label>
+                            </div>
+                          </div>
+
+                          <input
+                            class="subscribebtn rad6 btn mt-3 py-3"
+                            value="Register"
+                            type="submit"
+                          />
+                        </div>
+                      </form>
 
                       <div class="my-4 d-flex justify-content-center">
                         <p class="medparagraph mx-2">
@@ -270,21 +264,46 @@ export default {
   data() {
     return {
       registerInputs: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        checked: false,
+        surname: '',
+        other_name: '',
+        user_type: {
+          user_type: 'online_user',
+          email: '',
+          password: '',
+          legal: null,
+        },
+        send_lastest_updates: true,
       },
+      legal_check: false,
+      preloader: false,
     }
   },
 
   methods: {
     async registerUser() {
       try {
-        const response = await this.$axios.$post('/', registerInputs)
+        this.preloader = true
+
+        if (this.legal_check) {
+          this.registerInputs.user_type.legal = [
+            {
+              type: 'Term&Condition',
+              version: '0.0.1',
+              stamp: new Date().toISOString(),
+            },
+          ]
+        }
+        let response = await this.$axios.$post(
+          `user/register-user?school_id=${process.env.SCHOOL_ID}`,
+          this.registerInputs
+        )
+        
+        console.log(response)
+        
       } catch (e) {
-        console.log(e)
+        this.$toast.error(e.message)
+      } finally {
+        this.preloader = false
       }
     },
   },

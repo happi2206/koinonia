@@ -102,8 +102,15 @@ export default {
       isSignIn: false,
     }
   },
-  mounted() {
-    
+  methods: {
+    set_button() {
+      console.log(('henry'));
+      console.log(this.$nuxt.$route.path)
+    },
+  },
+  mounted(){
+    console.log(('henry'));
+    this.set_button()
   },
 }
 </script>

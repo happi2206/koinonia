@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="d-md-none d-flex">
-        <button
+        <button v-if="isSignIn"
           class="
             btn
             loginbtndashboard
@@ -35,7 +35,7 @@
         >
           Login
         </button>
-        <button class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1">
+        <button v-if="isSignUp" class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1">
           Sign Up
         </button>
       </div>
@@ -105,7 +105,7 @@
               >Instructors dashboard
             </a>
           </li>
-          <button
+          <button v-if="isSignUp"
             class="
               btn
               loginbtndashboard
@@ -118,7 +118,7 @@
           >
             Login
           </button>
-          <button class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block">
+          <button v-if="isSignIn" class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block">
             Sign Up
           </button>
         </ul>
@@ -128,7 +128,30 @@
 </template>
 
 <script>
-export default {}
+export default {
+   name: 'loginnavbar',
+  data() {
+    return {
+      isSignUp: false,
+      isSignIn: false,
+    }
+  },
+  methods: {
+    set_button() {
+      console.log(this.$nuxt.$route.name)
+
+      if(this.$nuxt.$route.name == 'login'){
+        this.isSignUp = true
+      }
+      if(this.$nuxt.$route.name == 'register'){
+        this.isSignIn = true
+      } 
+    },
+  },
+  mounted(){
+    this.set_button()
+  },
+}
 </script>
 
 <style>

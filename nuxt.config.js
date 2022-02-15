@@ -52,7 +52,7 @@ export default {
   },
 
   env: {
-    BASE_URL: 'https://koinonia.herokuapp.com',
+    BASE_URL: process.env.BASE_URL,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
