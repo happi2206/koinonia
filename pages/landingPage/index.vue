@@ -627,6 +627,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import loginNav from '../../components/loginNav.vue'
 import Flickity from 'vue-flickity'
 export default {
@@ -642,6 +643,9 @@ export default {
         // any options from Flickity can be used
       },
     }
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedIn']),
   },
 
   methods: {

@@ -147,10 +147,9 @@
           <b-tabs content-class="mt-3" class="custom-tabs">
             <b-tab title="All Status" active>
               <div class="mx-3">
-                <filter-component />
-                <div class="table-responsive">
-                  <table-component />
-                </div></div
+                <filter-component> </filter-component>
+
+                <table-component /></div
             ></b-tab>
             <b-tab title="Open" class=""><p>I'm the second tab</p></b-tab>
             <b-tab title="On-going"><p>I'm a tab!</p></b-tab>

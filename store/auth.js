@@ -1,4 +1,3 @@
-
 export default {
   namespaced: true,
   state: () => ({
@@ -20,11 +19,16 @@ export default {
           `/api/v1/slate/user/login-user?school_id=${process.env.SCHOOL_ID}`,
           credentials
         )
-        print(response)
+        console.log(response)
+
         // commit('SET_USER', response)
       } catch (error) {
         this.$toast.error(error.data.detail)
       }
     },
   },
+}
+
+export const getters = {
+  isLoggedIn: (state) => !!state.token,
 }

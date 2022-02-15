@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <login-nav />
-    <Nuxt />
-  </div>
+  <header-card />
 </template>
 
 <script>

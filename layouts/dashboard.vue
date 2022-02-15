@@ -5,11 +5,11 @@
   >
     <div class="sidebar-menu my-5">
       <li class="sidebar-dropdown py-1 my-3 px-3 py-2">
-        <a href="" class="text-dark">
+        <nuxt-link to="" class="text-dark">
           <span class="largebrownparagraph">
             <slot name="contentheader"></slot
           ></span>
-        </a>
+        </nuxt-link>
       </li>
 
       <li class="sidebar-dropdown py-1 my-3 px-3 py-2 active">

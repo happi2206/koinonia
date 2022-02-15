@@ -1,7 +1,9 @@
 <template>
   <div class="bodylightgray">
     <login-nav />
-    <dashboard />
+    <dashboard>
+      <template #contentactive> Account Settings</template>
+    </dashboard>
     <main class="page-content mt-0">
       <div class="mt-5 horizontalspacing">
         <div class="mt-5 pt-5">

@@ -1,7 +1,6 @@
 <template>
   <div>
     <main class="">
-      <login-nav />
       <div class="row verticalspacing">
         <div class="col-lg-6">
           <div class="relativecontainer">
