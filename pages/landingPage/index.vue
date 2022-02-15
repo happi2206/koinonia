@@ -32,6 +32,11 @@
     </section>
 
     <section class="mt-3 horizontalspacing">
+      <!-- <b-tabs content-class="mt-3">
+        <b-tab title="First" active><p>I'm the first tab</p></b-tab>
+        <b-tab title="Second"><p>I'm the second tab</p></b-tab>
+        <b-tab title="Disabled" disabled><p>I'm a disabled tab!</p></b-tab>
+      </b-tabs> -->
       <div class="custom-tabs mt-1 bg-white rounded">
         <ul
           class="nav px-md-4 px-3 flex-nowrap customscroll"
@@ -87,6 +92,106 @@
             >
           </li>
         </ul>
+      </div>
+
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active mx-0 px-0"
+          id="pills-courses"
+          role="tabpanel"
+          aria-labelledby="pills-courses-tab"
+        >
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="bg-white rounded">
+                <div class="p-2 d-flex">
+                  <div class="coursewidth1 d-flex align-items-center">
+                    <img
+                      src="~/assets/images/man1.png"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+
+                  <div class="p-3 coursewidth2">
+                    <h1 class="largebrownparagraph bold700 text-capitalize">
+                      concepts of fellowship, joint participation
+                    </h1>
+                    <div class="my-2 row">
+                      <div class="col-12">
+                        <p class="my-2 medbrownparagraph">
+                          <span class="lightgraytext"> Start Date:</span>
+                          01/01/2022
+                        </p>
+                      </div>
+                      <div class="col-12">
+                        <p class="my-2 medbrownparagraph">
+                          <span class="lightgraytext"> End Date:</span>
+                          01/01/2022
+                        </p>
+                      </div>
+                    </div>
+                    <p class="my-2 medbrownparagraph">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,it
+                      esse cillum dolore eu fugiat nulla pariatur....
+                    </p>
+                    <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="bg-white rounded">
+                <div class="p-2 d-flex">
+                  <div class="coursewidth1 d-flex align-items-center">
+                    <img
+                      src="~/assets/images/man1.png"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+
+                  <div class="p-3 coursewidth2">
+                    <h1 class="largebrownparagraph bold700 text-capitalize">
+                      concepts of fellowship, joint participation
+                    </h1>
+                    <div class="my-2 row">
+                      <div class="col-12">
+                        <p class="my-2 medbrownparagraph">
+                          <span class="lightgraytext"> Start Date:</span>
+                          01/01/2022
+                        </p>
+                      </div>
+                      <div class="col-12">
+                        <p class="my-2 medbrownparagraph">
+                          <span class="lightgraytext"> End Date:</span>
+                          01/01/2022
+                        </p>
+                      </div>
+                    </div>
+                    <p class="my-2 medbrownparagraph">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,it
+                      esse cillum dolore eu fugiat nulla pariatur....
+                    </p>
+                    <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade mx-0 px-0 bg-white rounded"
+          id="pills-ongoing"
+          role="tabpanel"
+          aria-labelledby="pills-ongoing"
+        ></div>
+        <div
+          class="tab-pane fade mx-0 px-0 bg-white rounded"
+          id="pills-archived"
+          role="tabpanel"
+          aria-labelledby="pills-archived"
+        ></div>
       </div>
     </section>
 
