@@ -160,6 +160,9 @@ html body main {
 .bodygray {
   background-color: #e5e5e5;
 }
+.bodylightgray {
+  background-color: #f5f6f7;
+}
 
 .borderrounded {
   border-radius: 3px;
@@ -529,6 +532,16 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 
+.brownheaderlarge {
+  font-family: Brown;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 60px;
+  letter-spacing: 0.002em;
+  text-align: left;
+}
+
 .brownparagraph {
   font-family: Brown;
   font-size: 16px;
@@ -688,12 +701,18 @@ button.loginbtn {
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100vw;
+
   height: 70vh;
+  background: #28438724;
 }
 .imagesection img {
   width: 100%;
   object-fit: cover;
+}
+
+.svgplaceholderimages {
+  position: absolute;
+  top: 260px;
 }
 
 .profimgfull img {
@@ -860,7 +879,7 @@ button.loginbtn {
   border-radius: 5px;
 }
 
-.imagesection:before {
+/* .imagesection:before {
   content: '';
   display: block;
   position: absolute;
@@ -875,12 +894,13 @@ button.loginbtn {
     rgba(0, 13, 49, 0.5) 0%,
     rgba(4, 43, 164, 0.335) 100%
   );
-}
+} */
 
 .textsection {
   position: absolute;
   top: 100px;
-  left: 50px;
+  /* left: 50px; */
+  width: 60%;
 }
 
 .midrelsection {

@@ -222,6 +222,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -234,12 +235,18 @@ export default {
   },
 
   methods: {
-    async loginUser() {
-      try {
-        const response = await this.$axios.$post('/', loginInputs)
-      } catch (e) {
-        console.log(e)
-      }
+    ...mapActions({
+      login: 'auth/loginUser',
+    }),
+
+    loginUser() {
+      this.login(this.loginInputs)
+      // try {
+      //   const response = await this.$axios.$post('/', loginInputs)
+      //   console.log(response)
+      // } catch (e) {
+      //   console.log(e)
+      // }
     },
   },
 }

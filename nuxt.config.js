@@ -30,7 +30,14 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['bootstrap-vue/nuxt'],
+  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios', '@nuxtjs/dotenv'],
+  axios: {
+    baseURL: process.env.BASE_URL,
+  },
+
+  env: {
+    BASE_URL: 'https://koinonia.herokuapp.com',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
