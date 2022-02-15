@@ -1,4 +1,3 @@
-import axios from 'axios'
 
 export default {
   namespaced: true,
@@ -13,23 +12,15 @@ export default {
   },
   actions: {
     async loginUser({ dispatch }, credentials) {
-      const response = await $axios.$post(
-        '/api/v1/slate/user/login-user',
-        credentials
-      )
-      console.log(response.data)
-
-      dispatch('validateToken', response)
-    },
-
-    async validateToken({ commit }, token) {
-      commit('SET_TOKEN', token)
-
       try {
-        let response = $axios.get('auth/me')
-        commit('SET_USER', response)
-      } catch (e) {
-        console.log(e)
+        const response = await this.$axios.$post(
+          `/api/v1/slate/user/login-user?school_id=${process.env.SCHOOL_ID}`,
+          credentials
+        )
+        print(response)
+        // commit('SET_USER', response)
+      } catch (error) {
+        this.$toast.error(error.data.detail)
       }
     },
   },

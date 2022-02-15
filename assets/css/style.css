@@ -264,7 +264,7 @@ button.searchbtninside {
   border-bottom-left-radius: 0;
 }
 
-button.subscribebtn {
+input.subscribebtn {
   background-color: #0734aa;
   color: #fff;
   font-family: Roboto;
