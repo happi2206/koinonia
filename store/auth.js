@@ -4,6 +4,15 @@ export default {
     token: '',
     user: null,
   }),
+
+  getters: {
+    authenticated(state) {
+      return state.token && state.user
+    },
+    user(state) {
+      return state.user
+    },
+  },
   mutations: {
     SET_TOKEN(state, token) {
       state.token = token
@@ -26,19 +35,28 @@ export default {
         commit('SET_USER', response.user)
         return Promise.resolve(response.user)
       } catch (error) {
-        return Promise.reject(error)
+        commit('SET_TOKEN', null)
+        commit('SET_USER', null)
         this.$toast.error(error)
+        return Promise.reject(error)
       }
+    },
+
+    signOut({ commit }) {
+      return this.$axios.$post('auth/signout').then(() => {
+        commit('SET_TOKEN', null)
+        commit('SET_USER', null)
+      })
     },
   },
 }
 
-export const getters = {
-  isAuthenticated(state) {
-    return state.auth.loggedIn
-  },
+// export const getters = {
+//   isAuthenticated(state) {
+//     return state.auth.loggedIn
+//   },
 
-  loggedIn(state) {
-    return state.auth.user
-  },
-}
+//   loggedIn(state) {
+//     return state.auth.user
+//   },
+// }

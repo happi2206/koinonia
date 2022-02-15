@@ -15,10 +15,11 @@
       darkborderbottom
     "
   >
-    <b-navbar-toggle target="nav-collapse" class="text-white"
-      ><Icon icon="bytesize:menu"
-    /></b-navbar-toggle>
-
+    <div>
+      <b-navbar-toggle target="nav-collapse" class="text-white"
+        ><Icon icon="bytesize:menu"
+      /></b-navbar-toggle>
+    </div>
     <div class="d-flex justify-content-between width100">
       <div class="d-block d-md-none">
         <div class="d-flex align-items-center">
@@ -31,8 +32,9 @@
           </a>
         </div>
       </div>
-      <div class="d-md-none d-flex">
-        <button v-if="isSignIn"
+      <div class="d-md-none d-flex" v-if="!authenticated">
+        <button
+          v-if="isSignIn"
           class="
             btn
             loginbtndashboard
@@ -44,34 +46,16 @@
         >
           Login
         </button>
-        <button v-if="isSignUp" class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1">
+        <button
+          v-if="isSignUp"
+          class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1"
+        >
           Sign Up
         </button>
       </div>
-      <!-- <b-collapse id="nav-collapse" is-nav>
-        <div class="d-md-none d-flex">
-          <button
-            class="
-              btn
-              loginbtndashboard
-              px-md-4 px-3
-              py-md-2 py-1
-              text-white
-              mx-md-2 mx-1
-            "
-          >
-            Login
-          </button>
-          <button class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1">
-            Sign Up
-          </button>
-        </div>
-      </b-collapse> -->
     </div>
-    <div
-      class="collapse navbar-collapse horizontalspacing my-3"
-      id="navbarSupportedContent"
-    >
+
+    <b-collapse id="nav-collapse" is-nav class="horizontalspacing my-3">
       <div
         class="
           d-flex
@@ -94,111 +78,154 @@
             </a>
           </div>
         </div>
-        <div class="secondcontent p-0 m-0">
-          <a href="index.html" class="maincolor largetext"></a>
-        </div>
 
-        <ul
-          class="
-            thirdcontent
-            d-flex
-            flex-md-row flex-column
-            align-items-center
-            mb-0
-          "
-        >
-          <li class="nav-item mb-0">
-            <a class="nav-link text-white dashboardlink mb-0" href="#"
-              >My learning
-            </a>
-          </li>
-          <li class="nav-item mb-0">
-            <a class="nav-link text-white dashboardlink" href="#"
-              >Instructors dashboard
-            </a>
-          </li>
-          <button v-if="isSignUp"
+        <div class="d-flex align-items-center">
+          <ul
             class="
-              btn
-              loginbtndashboard
-              px-4
-              py-2
-              text-white
-              mx-2
-              d-none d-md-block
-            "
-          >
-            Login
-          </button>
-          <button v-if="isSignIn" class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block">
-            Sign Up
-          </button>
-        </ul>
-
-        <div class="ml-2">
-          <div
-            class="
-              dropdown
-              account-dropdown
-              d-none d-md-flex
+              thirdcontent
+              d-flex
+              flex-md-row flex-column
               align-items-center
+              mb-0
             "
           >
-            <div class="profimgfull d-none d-md-block">
-              <b-avatar variant="success"></b-avatar>
+            <div v-if="authenticated" class="d-flex">
+              <li class="nav-item mb-0">
+                <nuxt-link to="" class="nav-link text-white dashboardlink mb-0">
+                  My learning
+                </nuxt-link>
+              </li>
+              <li class="nav-item mb-0">
+                <nuxt-link to="" class="nav-link text-white dashboardlink mb-0">
+                  Instructors dashboard
+                </nuxt-link>
+              </li>
             </div>
 
-            <a
-              href="#"
-              class="dropdown-toggle text-white"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <span class="mx-2"> John Doe</span
-              ><span
-                class="iconify"
-                data-icon="akar-icons:chevron-down"
-                data-width="20"
-                data-height="20"
-              ></span>
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right"
-              aria-labelledby="dropdownMenuButton"
-            >
-              <a class="dropdown-item medbrownparagraph" href="#">Option 1</a>
-              <a class="dropdown-item medbrownparagraph" href="#">Option 2</a>
+            <div v-else class="d-flex">
+              <button
+                v-if="isSignUp"
+                class="
+                  btn
+                  loginbtndashboard
+                  px-4
+                  py-2
+                  text-white
+                  mx-2
+                  d-none d-md-block
+                "
+              >
+                <nuxt-link
+                  to="/login"
+                  class="mb-0 text-white medbrownparagraph text-center"
+                >
+                  Login
+                </nuxt-link>
+              </button>
+              <button
+                v-if="isSignIn"
+                class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block"
+              >
+                Sign Up
+              </button>
+            </div>
+          </ul>
+
+          <div class="" v-if="authenticated">
+            <div class="relativecontainer">
+              <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
+              <div class="absolutecontainer online">
+                <span class="mainyellowcolor"
+                  ><b-icon icon="dot"></b-icon
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ml-2" v-if="authenticated">
+            <div class="d-md-flex align-items-md-center">
+              <b-dropdown
+                size="lg"
+                variant="link"
+                toggle-class="text-decoration-none"
+                class="p-0"
+                no-caret
+              >
+                <template #button-content>
+                  <div class="d-flex align-items-center medbrownparagraph">
+                    <div class="profimgfull d-none d-md-block">
+                      <b-avatar variant="success"></b-avatar>
+                    </div>
+                    <div>
+                      <span class="mx-2 medbrownparagraph text-white">
+                        {{ user.other_name }}
+                        {{ user.surname }}
+                      </span>
+                    </div>
+                    <b-icon
+                      icon="chevron-compact-down"
+                      class="text-white"
+                    ></b-icon>
+                  </div>
+                </template>
+                <b-dropdown-item href="#" class="medbrownparagraph"
+                  >Edit profile</b-dropdown-item
+                >
+                <b-dropdown-item
+                  @click="signOut"
+                  href="#"
+                  class="medbrownparagraph"
+                >
+                  Logout
+                </b-dropdown-item>
+              </b-dropdown>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </b-collapse>
   </b-navbar>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
-   name: 'loginnavbar',
+  name: 'loginnavbar',
   data() {
     return {
-      isSignUp: false,
-      isSignIn: false,
+      isSignUp: true,
+      isSignIn: true,
     }
   },
+  computed: {
+    ...mapGetters({
+      authenticated: 'auth/authenticated',
+      user: 'auth/user',
+    }),
+  },
   methods: {
+    ...mapActions({
+      signOutAction: 'auth/signOut',
+    }),
+    signOut() {
+      this.signOutAction().then(() => {
+        this.$router.push(-1)
+      })
+    },
     set_button() {
       console.log(this.$nuxt.$route.name)
 
-      if(this.$nuxt.$route.name == 'login'){
+      if (this.$nuxt.$route.name == 'login') {
         this.isSignUp = true
+        this.isSignIn = false
       }
-      if(this.$nuxt.$route.name == 'register'){
+      if (this.$nuxt.$route.name == 'register') {
         this.isSignIn = true
-      } 
+        this.isSignUp = false
+      }
     },
   },
-  mounted(){
+  mounted() {
     this.set_button()
   },
 }

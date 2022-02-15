@@ -278,6 +278,11 @@ input.subscribebtn {
   text-align: center;
   border-radius: 0;
 }
+.subscribebtn:hover {
+  border: #0734aa;
+  color: #0734aa;
+  background: transparent;
+}
 button.subscribebtn {
   background-color: #0734aa;
   color: #fff;
@@ -291,6 +296,11 @@ button.subscribebtn {
   width: 100%;
   text-align: center;
   border-radius: 0;
+}
+button.subscribebtn:hover {
+  border: 1px solid #0734aa;
+  color: #0734aa;
+  background: transparent;
 }
 button.subscribebtn.rad6 {
   border-radius: 6px;

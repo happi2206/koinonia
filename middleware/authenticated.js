@@ -1,6 +1,6 @@
 const Middleware = ({ store, redirect }) => {
   // Use context
-  if (!store.getters['auth/isLoggedIn']) {
+  if (!store.getters['auth/authenticated']) {
     return redirect('/auth/login')
   }
 }
