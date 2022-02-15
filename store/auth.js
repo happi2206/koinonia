@@ -16,7 +16,7 @@ export default {
     async loginUser({ dispatch }, credentials) {
       try {
         const response = await this.$axios.$post(
-          `/api/v1/slate/user/login-user?school_id=${process.env.SCHOOL_ID}`,
+          `user/login-user?school_id=${process.env.SCHOOL_ID}`,
           credentials
         )
         console.log('token', response.access_token.accessToken)
