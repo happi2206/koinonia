@@ -715,6 +715,14 @@ button.loginbtn {
   top: 260px;
 }
 
+.coursewidth1 {
+  width: 40%;
+}
+
+.coursewidth2 {
+  width: 60%;
+}
+
 .profimgfull img {
   height: 43px;
   width: 43px;
