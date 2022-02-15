@@ -233,6 +233,7 @@ export default {
     }),
     loginUser() {
       this.login(this.loginInputs)
+      this.$router.push('/')
     },
   },
 }
