@@ -94,7 +94,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'navbar',
+  data() {
+    return {
+      isSignUp: false,
+      isSignIn: false,
+    }
+  },
+  mounted() {
+    
+  },
+}
 </script>
 
 <style></style>

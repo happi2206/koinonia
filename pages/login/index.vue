@@ -126,7 +126,8 @@
                     <div class="my-4 px-md-5">
                       <p class="medbrownparagraph text-center">Or</p>
 
-                      <div class="my-3 px-2">
+                     <form @submit.prevent="loginUser">
+                        <div class="my-3 px-2">
                         <div class="my-4">
                           <label
                             for=""
@@ -135,9 +136,8 @@
                           >
                           <input
                             type="email"
-                            v-model="loginInputs.email"
-                            name=""
-                            id=""
+                            v-model="loginInputs.username"
+                            required
                             placeholder="Email"
                             class="forminputs"
                           />
@@ -151,8 +151,7 @@
                           <input
                             type="password"
                             v-model="loginInputs.password"
-                            name=""
-                            id=""
+                            required
                             placeholder="********"
                             class="forminputs"
                           />
@@ -173,9 +172,9 @@
                             <label class="form-check-label medbrownparagraph">
                               <input
                                 type="checkbox"
+                                required
                                 class="form-check-input"
-                                name=""
-                                id=""
+                               
                                 value="checkedValue"
                                 checked
                               />
@@ -185,13 +184,13 @@
                           </div>
                         </div>
 
-                        <button
-                          class="subscribebtn rad6 btn mt-3 py-3"
-                          @click="loginUser"
-                        >
-                          Login
-                        </button>
+                        <input
+                          class="subscribebtn btn rad6 btn mt-3 py-3"
+                        type="submit"
+                        value="Login" 
+                        />
                       </div>
+                     </form>
 
                       <div class="my-4 d-flex justify-content-center">
                         <nuxt-link
@@ -204,7 +203,7 @@
                       <div class="my-4 d-flex justify-content-center">
                         <p class="medparagraph mx-2">
                           Don’t have an account?
-                          <nuxt-link to="/" class="mb-0">
+                          <nuxt-link to="/register" class="mb-0">
                             <u>Sign up</u>
                           </nuxt-link>
                         </p>
@@ -224,12 +223,13 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  name:'login',
   data() {
     return {
       loginInputs: {
-        email: '',
-        password: '',
-        checked: false,
+        username: '',
+        password: ''
+        // checkedValue: false,
       },
     }
   },
@@ -238,15 +238,8 @@ export default {
     ...mapActions({
       login: 'auth/loginUser',
     }),
-
     loginUser() {
       this.login(this.loginInputs)
-      // try {
-      //   const response = await this.$axios.$post('/', loginInputs)
-      //   console.log(response)
-      // } catch (e) {
-      //   console.log(e)
-      // }
     },
   },
 }
