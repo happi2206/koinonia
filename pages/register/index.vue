@@ -2,7 +2,6 @@
   <div>
     <b-overlay :show="preloader" rounded="sm">
       <main class="">
-        <login-nav />
         <div class="row verticalspacing">
           <div class="col-lg-6">
             <div class="relativecontainer">
@@ -289,7 +288,7 @@ export default {
   },
 
   methods: {
-     ...mapActions({
+    ...mapActions({
       register: 'auth/registerUser',
     }),
     async registerUser() {
@@ -305,14 +304,14 @@ export default {
           ]
         }
         await this.register(this.registerInputs)
-        this.$router.push({'path':'/'})
+        this.$router.push({ path: '/' })
       } catch (e) {
         this.$toast.error(e.message)
       } finally {
-         this.$nuxt.$loading.finish()
+        this.$nuxt.$loading.finish()
       }
+    },
   },
-  }
 }
 </script>
 

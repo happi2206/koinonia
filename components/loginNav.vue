@@ -44,13 +44,23 @@
             mx-md-2 mx-1
           "
         >
-          Login
+          <nuxt-link
+            to="/login"
+            class="mb-0 text-white medbrownparagraph text-center"
+          >
+            Log in
+          </nuxt-link>
         </button>
         <button
           v-else
           class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1"
         >
-          Sign Up
+          <nuxt-link
+            to="/register"
+            class="mb-0 text-white medbrownparagraph text-center"
+          >
+            Sign Up
+          </nuxt-link>
         </button>
       </div>
     </div>
@@ -106,13 +116,37 @@
               </li>
             </div>
 
-            <div v-else class="d-flex gap">
-              <nuxt-link to="/login">
-                <a v-if="isSignIn" class="loginbtndashboard"> Login </a>
-              </nuxt-link>
-              <nuxt-link to="/register">
-                <a v-if="!isSignIn" class="mainbtndashboard"> Sign Up </a>
-              </nuxt-link>
+            <div v-else class="d-flex">
+              <button
+                v-if="isSignUp"
+                class="
+                  btn
+                  loginbtndashboard
+                  px-4
+                  py-2
+                  text-white
+                  mx-2
+                  d-none d-md-block
+                "
+              >
+                <nuxt-link
+                  to="/login"
+                  class="mb-0 text-white medbrownparagraph text-center"
+                >
+                  Login
+                </nuxt-link>
+              </button>
+              <button
+                v-if="isSignIn"
+                class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block"
+              >
+                <nuxt-link
+                  to="/register"
+                  class="mb-0 text-white medbrownparagraph text-center"
+                >
+                  Sign Up
+                </nuxt-link>
+              </button>
             </div>
           </ul>
 

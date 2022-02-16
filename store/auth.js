@@ -3,7 +3,7 @@ export default {
   state: () => ({
     token: null,
     user: null,
-    login_state: false
+    login_state: false,
   }),
 
   getters: {
@@ -19,11 +19,9 @@ export default {
   },
   mutations: {
     initialiseStore(state) {
-
       let get_token = localStorage.getItem('KOINONIA-TOKEN'),
         get_state = localStorage.getItem('KOINONIA-LOGIN-STATE'),
         get_user = localStorage.getItem('KOINONIA-USER-DATA')
-
 
       // Check if the ID exists
       if (get_token && get_user && get_state) {
@@ -47,7 +45,7 @@ export default {
       state.login_state = false
       // clear localStorage
       localStorage.clear()
-    }
+    },
   },
   actions: {
     // login user
@@ -60,8 +58,14 @@ export default {
         )
         // successful response
         if (response) {
-          localStorage.setItem('KOINONIA-TOKEN', response.access_token.accessToken)
-          localStorage.setItem('KOINONIA-USER-DATA', JSON.stringify(response.user))
+          localStorage.setItem(
+            'KOINONIA-TOKEN',
+            response.access_token.accessToken
+          )
+          localStorage.setItem(
+            'KOINONIA-USER-DATA',
+            JSON.stringify(response.user)
+          )
           localStorage.setItem('KOINONIA-LOGIN-STATE', true)
 
           commit('SET_TOKEN', response.access_token.accessToken)
@@ -69,7 +73,6 @@ export default {
           commit('SET_STATE', true)
           return Promise.resolve(true)
         }
-
       } catch (error) {
         return Promise.reject(error)
       }
@@ -83,8 +86,14 @@ export default {
         )
         // successful response
         if (response) {
-          localStorage.setItem('KOINONIA-TOKEN', response.access_token.accessToken)
-          localStorage.setItem('KOINONIA-USER-DATA', JSON.stringify(response.user))
+          localStorage.setItem(
+            'KOINONIA-TOKEN',
+            response.access_token.accessToken
+          )
+          localStorage.setItem(
+            'KOINONIA-USER-DATA',
+            JSON.stringify(response.user)
+          )
           localStorage.setItem('KOINONIA-LOGIN-STATE', true)
 
           commit('SET_TOKEN', response.access_token.accessToken)
@@ -92,12 +101,9 @@ export default {
           commit('SET_STATE', true)
           return Promise.resolve(true)
         }
-
-      }
-      catch (error) {
+      } catch (error) {
         return Promise.reject(error)
       }
-
     },
     // logout user
     signOut({ commit }) {
@@ -105,5 +111,3 @@ export default {
     },
   },
 }
-
-
