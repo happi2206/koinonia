@@ -249,6 +249,10 @@
                       placeholder="enter code"
                     />
                   </div>
+
+                  <div class="d-flex justify-content-center mx-5 my-3">
+                    <button class="btn subscribebtn">Link</button>
+                  </div>
                 </b-modal>
               </div>
             </div>
