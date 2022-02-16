@@ -54,14 +54,14 @@
                     <div class="my-2 row">
                       <div class="col-12">
                         <p class="my-2 medbrownparagraph">
-                          <span class="lightgraytext"> Start Date:</span>
-                          01/01/2022
+                          <span class="lightgraytext"> Start Date: </span>
+                         {{course.start_date | DateFormat}}
                         </p>
                       </div>
                       <div class="col-12">
                         <p class="my-2 medbrownparagraph">
                           <span class="lightgraytext"> End Date:</span>
-                          01/01/2022
+                        {{course.end_date | DateFormat}}
                         </p>
                       </div>
                     </div>
@@ -633,7 +633,7 @@ export default {
         }
         // make axios request for all courses
         const { items } = await this.$axios.$get(
-          `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=3`,
+          `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=2`,
           {
             headers: headers,
           }
