@@ -1,5 +1,7 @@
 export default function ({ store, redirect }) {
-  if (store.state.auth.loggedIn) {
+  // Use context
+  if (store.getters['auth/authenticated']) {
     return redirect('/')
   }
 }
+

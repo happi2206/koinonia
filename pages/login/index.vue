@@ -1,6 +1,5 @@
 <template>
   <div>
-    <b-overlay :show="show" rounded="sm">
       <main class="">
         <div class="row verticalspacing">
           <div class="col-lg-6">
@@ -158,11 +157,13 @@
                               <span
                                 toggle="#password-field"
                                 class="lightgraytext absolutecontainer eyeicon"
-                                ><Icon
+                              >
+                                <!-- <Icon
                                   icon="el:eye-open"
                                   width="20"
                                   height="20"
-                              /></span>
+                              /> -->
+                              </span>
                             </div>
 
                             <div class="my-4">
@@ -216,7 +217,7 @@
           </div>
         </div>
       </main>
-    </b-overlay>
+   
   </div>
 </template>
 
@@ -224,14 +225,14 @@
 import { mapActions } from 'vuex'
 export default {
   name: 'login',
+  middleware: 'login_auth',
   data() {
     return {
       loginInputs: {
         username: 'usr@example.com',
         password: '',
         // checkedValue: false,
-      },
-      show: false,
+      }
     }
   },
 
@@ -241,15 +242,22 @@ export default {
     }),
     async loginUser() {
       try {
-        this.show = true
+        // show preloader
+         this.$nuxt.$loading.start()
+        // call login function
         await this.login(this.loginInputs)
+        // redirect user
         this.$router.push('/')
       } catch (e) {
-        this.show = false
-        console.log(e)
+        // show error
+        this.$toast.error(e.data.detail)
+      } finally {
+        // hide preloader
+        this.$nuxt.$loading.finish()
       }
     },
   },
+  
 }
 </script>
 

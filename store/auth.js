@@ -1,86 +1,81 @@
 export default {
   namespaced: true,
   state: () => ({
-    token: '',
+    token: null,
     user: null,
+    login_state: false
   }),
 
   getters: {
     authenticated(state) {
-      return state.token && state.user
+      return state.login_state
     },
     user(state) {
       return state.user
     },
   },
   mutations: {
+    initialiseStore(state) {
+
+      let get_token = localStorage.getItem('KOINONIA-TOKEN'),
+        get_state = localStorage.getItem('KOINONIA-LOGIN-STATE'),
+        get_user = localStorage.getItem('KOINONIA-USER-DATA')
+
+
+      // Check if the ID exists
+      if (get_token && get_user && get_state) {
+        state.token = get_token
+        state.login_state = get_state
+        state.user = JSON.parse(get_user)
+      }
+    },
     SET_TOKEN(state, token) {
       state.token = token
     },
-    SET_USER(state, data) {
-      state.user = data
-
-      console.log('userstate', data)
+    SET_USER(state, user) {
+      state.user = user
     },
+    SET_STATE(state, login_state) {
+      state.login_state = login_state
+    },
+    SIGN_OUT(state) {
+      state.token = null
+      state.user = null
+      state.login_state = false
+      // clear localStorage
+      localStorage.clear()
+    }
   },
   actions: {
+    // login user
     async loginUser({ commit }, credentials) {
       try {
+        // making axios request
         const response = await this.$axios.$post(
           `user/login-user?school_id=${process.env.SCHOOL_ID}`,
           credentials
         )
+        // successful response
+        if (response) {
+          localStorage.setItem('KOINONIA-TOKEN', response.access_token.accessToken)
+          localStorage.setItem('KOINONIA-USER-DATA', JSON.stringify(response.user))
+          localStorage.setItem('KOINONIA-LOGIN-STATE', true)
 
-        commit('SET_TOKEN', response.access_token.accessToken)
-        commit('SET_USER', response.user)
-        return Promise.resolve(response.user)
+          commit('SET_TOKEN', response.access_token.accessToken)
+          commit('SET_USER', response.user)
+          commit('SET_STATE', true)
+          return Promise.resolve(true)
+        }
+
       } catch (error) {
-        commit('SET_TOKEN', null)
-        commit('SET_USER', null)
-        this.$toast.error(error)
         return Promise.reject(error)
       }
     },
-    // async registerUser({ commit }, credentials) {
-    //   try {
-    //     let response = await this.$axios.$post(
-    //       `user/register-user?school_id=${process.env.SCHOOL_ID}`,
-    //       credentials
-    //     )
-    //     console.log(response)
-
-    //   }
-    //   catch (error) {
-    //     console.log(error)
-    //   }
-
-    //   commit('SET_TOKEN', response.access_token.accessToken)
-    //   commit('SET_USER', response.user)
-    //   return Promise.resolve(response.user)
-    // }
-    //    catch (error) {
-    //     commit('SET_TOKEN', null)
-    //     commit('SET_USER', null)
-    //     this.$toast.error(error)
-    //     return Promise.reject(error)
-    //   }
-    // },
-
+    // logout user
     signOut({ commit }) {
-      return this.$axios.$post('auth/signout').then(() => {
-        commit('SET_TOKEN', null)
-        commit('SET_USER', null)
-      })
+      commit('SIGN_OUT')
     },
   },
 }
 
-// export const getters = {
-//   isAuthenticated(state) {
-//     return state.auth.loggedIn
-//   },
 
-//   loggedIn(state) {
-//     return state.auth.user
-//   },
-// }

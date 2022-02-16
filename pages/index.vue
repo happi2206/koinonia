@@ -29,8 +29,7 @@
         </div>
       </div>
     </section>
-
-    <section class="mt-3 horizontalspacing">
+    <section class="mt-3 horizontalspacing" v-if="authenticated && courses.length > 0">
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Courses" active>
           <div class="row mt-4">
@@ -166,10 +165,10 @@
                     </button>
 
                     <div>
-                      <Icon
+                      <!-- <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      />
+                      /> -->
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -214,10 +213,10 @@
                     </button>
 
                     <div>
-                      <Icon
+                      <!-- <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      />
+                      /> -->
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -262,10 +261,10 @@
                     </button>
 
                     <div>
-                      <Icon
+                      <!-- <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      />
+                      /> -->
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -310,10 +309,10 @@
                     </button>
 
                     <div>
-                      <Icon
+                      <!-- <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      />
+                      /> -->
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -448,12 +447,12 @@
             </div>
 
             <div class="customarrows">
-              <span @click="previous()" class="customarrowleft"
-                ><Icon icon="la:long-arrow-alt-left" width="60" height="60"
-              /></span>
-              <span @click="next()" class="customarrowright"
-                ><Icon icon="la:long-arrow-alt-right" width="60" height="60"
-              /></span>
+              <span @click="previous()" class="customarrowleft">
+                <!-- <Icon icon="la:long-arrow-alt-left" width="60" height="60"/> -->
+              </span>
+              <span @click="next()" class="customarrowright">
+                <!-- <Icon icon="la:long-arrow-alt-right" width="60" height="60"/> -->
+              </span>
             </div>
           </div>
         </div>
@@ -640,21 +639,14 @@ export default {
 
         // any options from Flickity can be used
       },
-    }
-  },
-
-  async fetch() {
-    try {
-      const response = await this.$axios.$get(
-        `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=50`
-      )
-      console.log(response)
-    } catch (e) {
-      console.log(e)
+      courses: [],
     }
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'loggedIn']),
+    ...mapGetters({
+      authenticated: 'auth/authenticated',
+      user: 'auth/user',
+    }),
   },
 
   methods: {
@@ -665,6 +657,23 @@ export default {
     previous() {
       this.$refs.flickity.previous()
     },
+    async get_all() {
+      try {
+        const { items } = await this.$axios.$get(
+          `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=3`
+        )
+        this.courses = items
+      } catch (e) {
+        this.$toast.error(e)
+      }
+    },
+  },
+  mounted() {
+    this.$nextTick(async () => {
+      this.$nuxt.$loading.start()
+      await this.get_all()
+      this.$nuxt.$loading.finish()
+    })
   },
 }
 </script>
@@ -692,5 +701,4 @@ export default {
   width: 50px;
   height: 50px;
 }
-</style>>
 </style>

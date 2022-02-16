@@ -16,9 +16,9 @@
     "
   >
     <div>
-      <b-navbar-toggle target="nav-collapse" class="text-white"
-        ><Icon icon="bytesize:menu"
-      /></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" class="text-white">
+        <!-- <Icon icon="bytesize:menu"/> -->
+      </b-navbar-toggle>
     </div>
     <div class="d-flex justify-content-between width100">
       <div class="d-block d-md-none">
@@ -95,7 +95,8 @@
                   My learning
                 </nuxt-link>
               </li>
-              <li class="nav-item mb-0" v-if="user.instructor">
+
+              <li class="nav-item mb-0" v-if="user.is_instructor || user.is_administrator">
                 <nuxt-link to="" class="nav-link text-white dashboardlink mb-0">
                   Instructors dashboard
                 </nuxt-link>
@@ -207,13 +208,11 @@ export default {
     ...mapActions({
       signOutAction: 'auth/signOut',
     }),
-    signOut() {
-      this.signOutAction().then(() => {
-        this.$router.push(-1)
-      })
+    async signOut() {
+      await this.signOutAction()
+      this.$router.push({ path: '/' })
     },
     set_button() {
-      console.log(this.$nuxt.$route.name)
 
       if (this.$nuxt.$route.name == 'login') {
         this.isSignUp = true

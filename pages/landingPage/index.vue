@@ -627,10 +627,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import loginNav from '../../components/loginNav.vue'
 import Flickity from 'vue-flickity'
 export default {
-  components: { loginNav, Flickity },
+  components: { Flickity },
   data() {
     return {
       flickityOptions: {

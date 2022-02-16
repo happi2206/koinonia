@@ -285,14 +285,14 @@ export default {
         send_lastest_updates: true,
       },
       legal_check: false,
-      preloader: false,
     }
   },
 
   methods: {
     async registerUser() {
       try {
-        this.preloader = true
+        // show preloader
+        this.$nuxt.$loading.start()
 
         if (this.legal_check) {
           this.registerInputs.user_type.legal = [
@@ -308,12 +308,11 @@ export default {
           this.registerInputs
         )
         this.$router.push('/')
-
-        console.log(response)
       } catch (e) {
         this.$toast.error(e.message)
       } finally {
-        this.preloader = false
+        // hide preloader
+        this.$nuxt.$loading.finish()
       }
     },
   },

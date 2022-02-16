@@ -24,7 +24,8 @@ export default {
 
   plugins: [
     '~/plugins/axios',
-    '~/plugins/iconify.js',
+    '~/plugins/store_initializer',
+    // '~/plugins/iconify.js',
     '~/plugins/bootstrap-icon.js',
   ],
 
@@ -44,7 +45,7 @@ export default {
   toast: {
     position: 'bottom-right',
     singleton: true,
-    duration: 1000,
+    duration: 5000,
     register: [
       // Register custom toasts
       {
