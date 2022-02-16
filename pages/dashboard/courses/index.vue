@@ -13,14 +13,14 @@
       <!-- Modal -->
       <b-modal id="addcourse" title="Add Course">
         <div class="modacontent">
-          <form class="modabody">
+          <form class="modabody" @submit.prevent="addCourse">
             <div class="my-4">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Code
               </label>
               <input
                 type="text"
-                v-model="addCourse.title"
+                v-model="courseData.title"
                 required
                 placeholder="e.g ECO23"
                 class="forminputs text-dark"
@@ -32,7 +32,7 @@
               </label>
               <input
                 type="text"
-                v-model="addCourse.course_name"
+                v-model="courseData.course_name"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -44,7 +44,7 @@
               </label>
               <input
                 type="text"
-                v-model="addCourse.course_subtitle"
+                v-model="courseData.course_subtitle"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -58,7 +58,7 @@
                   </label>
                   <input
                     type="date"
-                    v-model="addCourse.start_date"
+                    v-model="courseData.start_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
                     class="forminputs text-dark"
@@ -70,7 +70,7 @@
                   </label>
                   <input
                     type="date"
-                    v-model="addCourse.end_date"
+                    v-model="courseData.end_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
                     class="forminputs text-dark"
@@ -82,7 +82,7 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Subtitle
               </label>
-              <VueEditor v-model="addCourse.description" required> </VueEditor>
+              <VueEditor v-model="courseData.description" required> </VueEditor>
             </div>
 
             <div class="my-2">
@@ -95,7 +95,15 @@
             <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
-                <input type="file" name="myfile" />
+
+                <input
+                  type="file"
+                  name="myfile"
+                  multiple
+                  ref="fileup"
+                  @change="handlefileupload($event)"
+                />
+                <!-- <input type="file" name="myfile" /> -->
               </div>
             </div>
             <div class="my-4">
@@ -155,7 +163,7 @@ export default {
   components: { VueEditor },
   data() {
     return {
-      addCourse: {
+      courseData: {
         title: '',
         description: '',
         short_description: '',
@@ -177,6 +185,41 @@ export default {
     )
 
     console.log('courses are', courses)
+  },
+
+  methods: {
+    async addCourse() {
+      try {
+        const response = await this.$axios.$post(
+          `slate/course-v/add-course`,
+          courseData
+        )
+
+        console.log(response)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    handlefileupload(event) {
+      console.log('event is', event)
+      //   const submit = new FormData()
+      //   const temp = []
+      //   const temp2 = []
+      //   console.log(event)
+      //   temp.push(event.target.files)
+
+      //   const filedata = event.target.files[0]
+      //   submit.append('type', filedata.type)
+      //   submit.append('file', filedata)
+
+      //   console.log('est', event.target.files[0])
+
+      //   for (const f of temp) {
+      //     temp2.push(...f)
+      //   ｝
+      // },
+    },
   },
 }
 </script>

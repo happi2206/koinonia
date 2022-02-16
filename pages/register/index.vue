@@ -284,6 +284,7 @@ export default {
         send_lastest_updates: true,
       },
       legal_check: false,
+      preloader: false,
     }
   },
 
@@ -294,6 +295,7 @@ export default {
     async registerUser() {
       try {
         this.$nuxt.$loading.start()
+        this.preloader = true
         if (this.legal_check) {
           this.registerInputs.user_type.legal = [
             {
@@ -310,6 +312,7 @@ export default {
       } finally {
         this.$nuxt.$loading.finish()
       }
+      this.preloader = false
     },
   },
 }
