@@ -15,6 +15,7 @@
 
 <script>
 export default {
+  middleware: 'auth',
   components: {},
 }
 </script>

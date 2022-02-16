@@ -150,6 +150,8 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Code
               </label>
+
+              <pre>{{ currentCourse }}</pre>
               <input
                 type="text"
                 v-model="currentCourse.course_code"
@@ -333,7 +335,16 @@ export default {
   data() {
     return {
       dropdownItem: ['Edit', 'Delete'],
-      currentCourse: {},
+      currentCourse: {
+        title: '',
+        short_description: '',
+        long_description: '',
+        description: '',
+        course_code: '',
+        feature_image: '',
+        start_date: '',
+        end_date: '',
+      },
       fields: [
         { key: 'check', label: '', sortable: true },
         { key: 'title', label: 'Name', sortable: true },
@@ -416,16 +427,23 @@ export default {
     },
 
     handleEdit(e) {
+      const tds = e
       console.log(e)
-      this.currentCourse = e
+      this.currentCourse = tds
+      console.log(this.currentCourse)
       this.$bvModal.show('editmodal')
     },
 
-    async editCourse(e) {
+    async editCourse() {
       try {
+        const forSubmit = this.currentCourse
+        delete forSubmit.check
+        delete forSubmit.serial
+        delete forSubmit.dots
+
         await this.$axios.$patch(
-          `course-v/edit-course?course_id=${e.id}`,
-          currentCourse
+          `course-v/edit-course?course_id=${forSubmit.id}`,
+          forSubmit
         )
         this.$fetch()
         console.log(e)

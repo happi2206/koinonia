@@ -113,7 +113,10 @@
                 class="nav-item mb-0"
                 v-if="user.is_instructor || user.is_administrator"
               >
-                <nuxt-link to="/dashboard/courses" class="nav-link text-white dashboardlink mb-0">
+                <nuxt-link
+                  to="/dashboard/courses"
+                  class="nav-link text-white dashboardlink mb-0"
+                >
                   Instructors dashboard
                 </nuxt-link>
               </li>
@@ -196,13 +199,11 @@
                     ></b-icon>
                   </div>
                 </template>
-                <b-dropdown-item href="#" class="medbrownparagraph"
-                  >
+                <b-dropdown-item href="#" class="medbrownparagraph">
                   <nuxt-link to="/dashboard/accountsettings">
-                  Edit profile
+                    Edit profile
                   </nuxt-link>
-                  </b-dropdown-item
-                >
+                </b-dropdown-item>
                 <b-dropdown-item
                   @click="signOut"
                   href="#"
@@ -231,6 +232,16 @@ export default {
       authenticated: 'auth/authenticated',
       user: 'auth/user',
     }),
+    user() {
+      return this.$store.state.auth.user
+    },
+    isAdministrator() {
+      return user.is_administrator
+    },
+    isInstructor() {
+      return user.is_instructor
+    },
+
     isSignIn() {
       if (this.$nuxt.$route.name == 'login') {
         return false
@@ -246,6 +257,11 @@ export default {
       await this.signOutAction()
       this.$router.push({ path: '/' })
     },
+  },
+  mounted() {
+    const user = this.$store.state.auth.user
+    this.isAdministrator = user.is_administrator
+    this.isInstructor = user.is_instructor
   },
 }
 </script>

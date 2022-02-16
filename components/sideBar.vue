@@ -11,8 +11,8 @@
           </span>
           <span class="largebrownparagraph" v-if="isInstructor"
             >Instructor Dashboard
-          </span> 
-          <p class="largebrownparagraph" v-else>My learning </p>
+          </span>
+          <p class="largebrownparagraph" v-else>My learning</p>
         </nuxt-link>
       </li>
 
@@ -28,6 +28,14 @@
           <span class="medbrownparagraph">
             <slot name="content">Public Profile</slot>
           </span>
+        </a>
+      </li>
+
+      <li class="sidebar-dropdown py-1 my-3 px-3 py-2" v-if="isAdministrator">
+        <a href="" class="text-dark">
+          <nuxt-link to="/dashboard/allUsers" class="text-dark">
+            Users
+          </nuxt-link>
         </a>
       </li>
     </div>
@@ -47,6 +55,17 @@ export default {
     const user = this.$store.state.auth.user
     this.isAdministrator = user.is_administrator
     this.isInstructor = user.is_instructor
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user
+    },
+    isAdministrator() {
+      return user.is_administrator
+    },
+    isInstructor() {
+      return user.is_instructor
+    },
   },
 }
 </script>
