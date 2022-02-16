@@ -47,7 +47,9 @@ export default {
           `user/register-user?school_id=${process.env.SCHOOL_ID}`,
           credentials
         )
+
         console.log(response)
+
         commit('SET_TOKEN', response.access_token.accessToken)
         commit('SET_USER', response.user)
         return Promise.resolve(response.user)
