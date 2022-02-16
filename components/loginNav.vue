@@ -315,9 +315,15 @@ export default {
     },
   },
   mounted() {
-    const user = this.$store.state.auth.user
-    this.isAdministrator = user.is_administrator
-    this.isInstructor = user.is_instructor
+    if (this.$store.state.auth.user) {
+      try {
+        const user = this.$store.state.auth.user
+        this.isAdministrator = user.is_administrator
+        this.isInstructor = user.is_instructor
+      } catch (e) {
+        console.log(e)
+      }
+    }
   },
 }
 </script>

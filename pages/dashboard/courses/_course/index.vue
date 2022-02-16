@@ -50,12 +50,7 @@
                   >
                 </p>
                 <div>
-                  <span
-                    class="iconify"
-                    data-icon="bi:plus-square-dotted"
-                    data-width="20"
-                    data-height="20"
-                  ></span>
+                  <b-icon icon="plus-square" @click="addScheme"></b-icon>
 
                   <div class="fullborder p-5 my-2"></div>
                 </div></div
@@ -124,6 +119,7 @@ export default {
   data() {
     return {
       courseDetail: {},
+      schemeOfWork: [{ title: '', objective: 'objective' }],
       options: ['foo', 'bar', 'baz'],
     }
   },
@@ -153,6 +149,15 @@ export default {
     // console.log('instructors', instructors)
 
     console.log(courses)
+  },
+
+  methods: {
+    addScheme() {
+      this.schemeOfWork.push({
+        title: '',
+        objective: '',
+      })
+    },
   },
 }
 </script>
