@@ -47,7 +47,7 @@
           Login
         </button>
         <button
-          v-if="isSignUp"
+          v-else
           class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1"
         >
           Sign Up
@@ -96,39 +96,23 @@
                 </nuxt-link>
               </li>
 
-              <li class="nav-item mb-0" v-if="user.is_instructor || user.is_administrator">
+              <li
+                class="nav-item mb-0"
+                v-if="user.is_instructor || user.is_administrator"
+              >
                 <nuxt-link to="" class="nav-link text-white dashboardlink mb-0">
                   Instructors dashboard
                 </nuxt-link>
               </li>
             </div>
 
-            <div v-else class="d-flex">
-              <button
-                v-if="isSignUp"
-                class="
-                  btn
-                  loginbtndashboard
-                  px-4
-                  py-2
-                  text-white
-                  mx-2
-                  d-none d-md-block
-                "
-              >
-                <nuxt-link
-                  to="/login"
-                  class="mb-0 text-white medbrownparagraph text-center"
-                >
-                  Login
-                </nuxt-link>
-              </button>
-              <button
-                v-if="isSignIn"
-                class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block"
-              >
-                Sign Up
-              </button>
+            <div v-else class="d-flex gap">
+              <nuxt-link to="/login">
+                <a v-if="isSignIn" class="loginbtndashboard"> Login </a>
+              </nuxt-link>
+              <nuxt-link to="/register">
+                <a v-if="!isSignIn" class="mainbtndashboard"> Sign Up </a>
+              </nuxt-link>
             </div>
           </ul>
 
@@ -193,16 +177,19 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'loginnavbar',
   data() {
-    return {
-      isSignUp: true,
-      isSignIn: true,
-    }
+    return {}
   },
   computed: {
     ...mapGetters({
       authenticated: 'auth/authenticated',
       user: 'auth/user',
     }),
+    isSignIn() {
+      if (this.$nuxt.$route.name == 'login') {
+        return false
+      }
+      return true
+    },
   },
   methods: {
     ...mapActions({
@@ -212,20 +199,6 @@ export default {
       await this.signOutAction()
       this.$router.push({ path: '/' })
     },
-    set_button() {
-
-      if (this.$nuxt.$route.name == 'login') {
-        this.isSignUp = true
-        this.isSignIn = false
-      }
-      if (this.$nuxt.$route.name == 'register') {
-        this.isSignIn = true
-        this.isSignUp = false
-      }
-    },
-  },
-  mounted() {
-    this.set_button()
   },
 }
 </script>

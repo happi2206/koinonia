@@ -29,7 +29,10 @@
         </div>
       </div>
     </section>
-    <section class="mt-3 horizontalspacing" v-if="authenticated && courses.length > 0">
+    <section
+      class="mt-3 horizontalspacing"
+      v-if="authenticated && courses.length > 0"
+    >
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Courses" active>
           <div class="row mt-4">
@@ -646,6 +649,7 @@ export default {
     ...mapGetters({
       authenticated: 'auth/authenticated',
       user: 'auth/user',
+      token: 'auth/token',
     }),
   },
 
@@ -659,12 +663,22 @@ export default {
     },
     async get_all() {
       try {
+        // set custom hear
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.token}`,
+        }
+        // make axios request for all courses
         const { items } = await this.$axios.$get(
-          `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=3`
+          `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=3`,
+          {
+            headers: headers,
+          }
         )
+        // assign response to coures
         this.courses = items
       } catch (e) {
-        this.$toast.error(e)
+        this.$toast.error(e.data.detail)
       }
     },
   },

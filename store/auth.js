@@ -13,6 +13,9 @@ export default {
     user(state) {
       return state.user
     },
+    token(state) {
+      return state.token
+    },
   },
   mutations: {
     initialiseStore(state) {
@@ -70,6 +73,31 @@ export default {
       } catch (error) {
         return Promise.reject(error)
       }
+    },
+    // register user
+    async registerUser({ commit }, credentials) {
+      try {
+        let response = await this.$axios.$post(
+          `user/register-user?school_id=${process.env.SCHOOL_ID}`,
+          credentials
+        )
+        // successful response
+        if (response) {
+          localStorage.setItem('KOINONIA-TOKEN', response.access_token.accessToken)
+          localStorage.setItem('KOINONIA-USER-DATA', JSON.stringify(response.user))
+          localStorage.setItem('KOINONIA-LOGIN-STATE', true)
+
+          commit('SET_TOKEN', response.access_token.accessToken)
+          commit('SET_USER', response.user)
+          commit('SET_STATE', true)
+          return Promise.resolve(true)
+        }
+
+      }
+      catch (error) {
+        return Promise.reject(error)
+      }
+
     },
     // logout user
     signOut({ commit }) {

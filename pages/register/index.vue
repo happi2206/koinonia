@@ -289,11 +289,12 @@ export default {
   },
 
   methods: {
+     ...mapActions({
+      register: 'auth/registerUser',
+    }),
     async registerUser() {
       try {
-        // show preloader
         this.$nuxt.$loading.start()
-
         if (this.legal_check) {
           this.registerInputs.user_type.legal = [
             {
@@ -303,19 +304,15 @@ export default {
             },
           ]
         }
-        let response = await this.$axios.$post(
-          `user/register-user?school_id=${process.env.SCHOOL_ID}`,
-          this.registerInputs
-        )
-        this.$router.push('/')
+        await this.register(this.registerInputs)
+        this.$router.push({'path':'/'})
       } catch (e) {
         this.$toast.error(e.message)
       } finally {
-        // hide preloader
-        this.$nuxt.$loading.finish()
+         this.$nuxt.$loading.finish()
       }
-    },
   },
+  }
 }
 </script>
 
