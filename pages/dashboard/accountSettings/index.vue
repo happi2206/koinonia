@@ -13,7 +13,8 @@
             </label>
             <input
               type="email"
-              required
+              v-model="this.user.email"
+              disabled
               placeholder="e.g ella@mail.com"
               class="forminputs text-dark"
             />
@@ -29,6 +30,7 @@
             </label>
             <input
               type="password"
+              v-model="password_object.old_password"
               required
               placeholder="Enter current password"
               class="forminputs"
@@ -37,6 +39,7 @@
           <div class="my-5">
             <input
               type="password"
+              v-model="password_object.new_password"
               required
               placeholder="Enter new password"
               class="forminputs"
@@ -46,13 +49,15 @@
             <input
               type="password"
               required
+              v-model="password_object.new_password"
               placeholder="Retype new password"
               class="forminputs"
             />
           </div>
 
           <div class="d-flex justify-content-center pb-5">
-            <button class="btn mainbtndashboard px-5 mb-5">Save</button>
+            <input class="btn mainbtndashboard px-5 mb-5" type="sumbit" value="Save"/>
+           
           </div>
         </form>
       </div>
@@ -61,9 +66,30 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   layout: 'dashboard',
-  components: {},
+  data(){
+    return { 
+      password_object:{
+        old_password:'',
+        new_password:'',
+        confirm_pssword:''
+      }
+    }
+  },
+   computed: {
+     ...mapGetters({
+      authenticated: 'auth/authenticated',
+      user: 'auth/user',
+      token: 'auth/token',
+    }),
+  },
+  methods:{
+
+  },
+  
+
 }
 </script>
 

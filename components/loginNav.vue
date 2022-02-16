@@ -197,7 +197,11 @@
                   </div>
                 </template>
                 <b-dropdown-item href="#" class="medbrownparagraph"
-                  >Edit profile</b-dropdown-item
+                  >
+                  <nuxt-link to="/dashboard/accountsettings">
+                  Edit profile
+                  </nuxt-link>
+                  </b-dropdown-item
                 >
                 <b-dropdown-item
                   @click="signOut"
