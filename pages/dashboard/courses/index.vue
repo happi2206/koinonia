@@ -51,6 +51,18 @@
               />
             </div>
             <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Description
+              </label>
+              <input
+                type="text"
+                v-model="courseData.description"
+                required
+                placeholder="e.g Alchemy"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
               <div class="row">
                 <div class="col-md-6">
                   <label for="" class="d-block medbrownparagraph graytext"
@@ -173,12 +185,14 @@ export default {
         title: '',
         short_description: '',
         long_description: '',
+        description: '',
         course_code: '',
         feature_image: '',
         start_date: '',
         end_date: '',
       },
       imagedetail: [],
+      courses: [],
     }
   },
 
@@ -187,23 +201,17 @@ export default {
       `course-v/get-all-course?page=1&size=50`
     )
 
-    console.log('courses are', courses)
+    this.courses = courses.items
   },
 
   methods: {
     async addCourse() {
       try {
-        // this.courseData.start_date = DateTime.toISOString()(
-        //   this.courseData.start_date
-        // )
-        // this.courseData.end_date = DateTime.toISOString()(
-        //   this.courseData.end_date
-        // )
+        let start_date = new Date(this.courseData.start_date)
+        this.courseData.start_date = start_date.toISOString()
 
-        this.courseData.start_date.toISOString()
-        this.courseData.end.toISOString()
-
-        console.log(this.courseData)
+        let end_date = new Date(this.courseData.end_date)
+        this.courseData.end_date = end_date.toISOString()
 
         const response = await this.$axios.$post(
           `course-v/add-course`,
