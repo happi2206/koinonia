@@ -205,6 +205,30 @@
                   </nuxt-link>
                 </b-dropdown-item>
                 <b-dropdown-item
+                  href="#"
+                  class="medbrownparagraph"
+                  v-if="!user.is_instructor"
+                  @click.prevent="linkToContent"
+                >
+                  Link as Instructor
+                </b-dropdown-item>
+                <b-dropdown-item
+                  href="#"
+                  class="medbrownparagraph"
+                  v-if="!user.is_administrator"
+                  @click.prevent="linkToContent"
+                >
+                  Link as Administrator
+                </b-dropdown-item>
+                <b-dropdown-item
+                  href="#"
+                  class="medbrownparagraph"
+                  @click.prevent="linkToContent"
+                  v-else
+                >
+                  Link as Courses
+                </b-dropdown-item>
+                <b-dropdown-item
                   @click="signOut"
                   href="#"
                   class="medbrownparagraph"
@@ -212,6 +236,21 @@
                   Logout
                 </b-dropdown-item>
               </b-dropdown>
+
+              <div>
+                <b-modal id="link" centered hide-header hide-footer>
+                  <h2 class="brownparagraph bold700 text-center my-3">
+                    Link as {{ titlecontent }}
+                  </h2>
+                  <div class="content px-5">
+                    <input
+                      type="text"
+                      class="forminputs"
+                      placeholder="enter code"
+                    />
+                  </div>
+                </b-modal>
+              </div>
             </div>
           </div>
         </div>
@@ -225,7 +264,9 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'loginnavbar',
   data() {
-    return {}
+    return {
+      titlecontent: '',
+    }
   },
   computed: {
     ...mapGetters({
@@ -235,12 +276,12 @@ export default {
     user() {
       return this.$store.state.auth.user
     },
-    isAdministrator() {
-      return user.is_administrator
-    },
-    isInstructor() {
-      return user.is_instructor
-    },
+    // isAdministrator() {
+    //   return this.user.is_administrator
+    // },
+    // isInstructor() {
+    //   return this.user.is_instructor
+    // },
 
     isSignIn() {
       if (this.$nuxt.$route.name == 'login') {
@@ -256,6 +297,17 @@ export default {
     async signOut() {
       await this.signOutAction()
       this.$router.push({ path: '/' })
+    },
+
+    linkToContent() {
+      this.$bvModal.show('link')
+
+      if (!this.user.is_instructor) {
+        this.titlecontent = 'Instructor'
+      }
+      if (!this.user.is_administrator) {
+        this.titlecontent = 'Administrator'
+      }
     },
   },
   mounted() {
