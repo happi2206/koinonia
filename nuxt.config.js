@@ -27,6 +27,7 @@ export default {
     '~/plugins/store_initializer',
     '~/plugins/filter',
     // '~/plugins/iconify.js',
+    '~/plugins/vue-select.js',
     '~/plugins/bootstrap-icon.js',
     '~/plugins/vue-editor.js',
     '~/plugins/luxon.js',

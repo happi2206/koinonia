@@ -55,19 +55,22 @@
             mb-1 mb-md-0
           "
         >
-          <div class="search-input mx-2">
-            <span
-              class="iconify icon"
-              data-inline="false"
-              data-icon="carbon:search"
-            ></span>
+          <div class="searchbar my-2 my-md-0 d-flex flwidth">
             <input
               type="text"
-              class="form-control w-100"
-              placeholder="Search by Name"
+              name=""
+              id=""
+              required
+              placeholder="Search "
+              class="forminputs searchbar text-dark"
             />
+
+            <button class="btn searchbtninside">
+              <b-icon icon="search"></b-icon>
+            </button>
           </div>
-          <div>
+
+          <div class="mx-5">
             <slot name="besideFilterButton"></slot>
           </div>
           <div id="filters-container" class="filters-container d-none">
@@ -125,6 +128,9 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.flwidth {
+  width: 50%;
+}
 .display-toggle .icon-wrapper {
   background: #fbfdfe;
   /* Outline Color */

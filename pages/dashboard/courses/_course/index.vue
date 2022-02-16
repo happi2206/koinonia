@@ -66,10 +66,31 @@
                   <template #besideFilterButton>
                     <div>
                       <button
-                        class="btn py-1 mainbtndashboard medbrownparagraph"
+                        class="btn py-3 mainbtndashboard medbrownparagraph"
+                        v-b-modal.addinstructor
                       >
                         Add Instructor
                       </button>
+
+                      <b-modal
+                        id="addinstructor"
+                        centered
+                        hide-header
+                        hide-footer
+                      >
+                        <h2 class="brownparagraph bold700 text-center my-3">
+                          Add Instructor
+                        </h2>
+                        <div class="content px-5">
+                          <v-select :options="options"></v-select>
+                        </div>
+
+                        <div class="d-flex justify-content-center mx-5 my-3">
+                          <button class="btn mainbtndashboard">
+                            Add Instructor
+                          </button>
+                        </div>
+                      </b-modal>
                     </div>
                   </template>
                 </filter-component>
@@ -103,19 +124,31 @@ export default {
   data() {
     return {
       courseDetail: {},
+      options: ['foo', 'bar', 'baz'],
     }
   },
 
   async fetch() {
     // console.log(this.$route.params.course)
-    const courses = await this.$axios.$get(
-      `course-v/get-a-course?course_id=${this.$route.params.course}`
-    )
 
-    this.courseDetail = courses
-    // const instructors = await this.$axios.$get(
-    //   `get-all-course-instructors?course_id=${this.$route.params.course}&page=1&size=50`
-    // )
+    try {
+      const courses = await this.$axios.$get(
+        `course-v/get-a-course?course_id=${this.$route.params.course}`
+      )
+      this.courseDetail = courses
+      console.log(this.courseDetail)
+    } catch (e) {
+      console.log(e)
+    }
+
+    try {
+      const instructors = await this.$axios.$get(
+        `instructors-v/get-all-instructors?page=1&size=50`
+      )
+      console.log(instructors)
+    } catch (e) {
+      console.log(e)
+    }
 
     // console.log('instructors', instructors)
 
