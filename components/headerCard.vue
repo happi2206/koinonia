@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded p-3">
+  <div v-if="Object.keys(courseDetail)" class="bg-white rounded p-3">
     <div class="row">
       <div class="col-md-3 px-0 pl-md-2">
         <div
@@ -24,7 +24,7 @@
           "
         >
           <h2 class="largebrownparagraph bold700 text-capitalize mb-0">
-            concepts of fellowship, joint participation
+            {{ courseDetail.title }}
           </h2>
           <div class="dropdown account-dropdown">
             <a
@@ -62,40 +62,52 @@
           <div class="col-lg-3 col-6">
             <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> Class code:</span>
-              E023
+              {{ courseDetail.course_code }}
             </p>
             <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> Start Date:</span>
-              01/01/2022
+
+              {{
+                courseDetail.start_date
+                  ? courseDetail.start_date.slice(0, 10)
+                  : ''
+              }}
             </p>
           </div>
           <div class="col-lg-3 col-6">
             <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> No of student:</span>
-              2334
+              2
             </p>
             <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> End Date:</span>
-              01/01/2022
+              {{
+                courseDetail.end_date ? courseDetail.end_date.slice(0, 10) : ''
+              }}
             </p>
           </div>
         </div>
 
         <div>
           <p class="medbrownparagraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.......
+            {{ courseDetail.short_description }}
           </p>
         </div>
       </div>
     </div>
   </div>
+  <div v-else>no content</div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    courseDetail: {
+      type: Object,
+      default: () => {},
+    },
+  },
+}
 </script>
 
 <style>

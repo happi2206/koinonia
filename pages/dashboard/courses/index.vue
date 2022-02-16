@@ -10,7 +10,7 @@
       >
         Add Course
       </button>
-      <!-- Modal -->
+
       <b-modal id="addcourse" title="Add Course">
         <div class="modacontent">
           <form class="modabody" @submit.prevent="addCourse">
@@ -148,7 +148,14 @@
           <div class="mx-3">
             <filter-component> </filter-component>
 
-            <table-component :items="courses" />
+            <table-component
+              :items="courses"
+              :fields="fields"
+              :dropdownItem="dropdownItem"
+              @row-clicked="onRowClicked"
+              @Edit="handleEdit"
+              @Delete="handleDelete"
+            />
           </div>
         </b-tab>
         <b-tab title="Open" class=""><p>I'm the second tab</p></b-tab>
@@ -156,14 +163,26 @@
           <div class="mx-3">
             <filter-component> </filter-component>
 
-            <table-component :items="courses" />
+            <table-component
+              :items="courses"
+              :fields="fields"
+              :dropdownItem="dropdownItem"
+              @Edit="handleEdit"
+              @Delete="handleDelete"
+            />
           </div>
         </b-tab>
         <b-tab title="Archived">
           <div class="mx-3">
             <filter-component> </filter-component>
 
-            <table-component :items="courses" />
+            <table-component
+              :items="courses"
+              :fields="fields"
+              :dropdownItem="dropdownItem"
+              @Edit="handleEdit"
+              @Delete="handleDelete"
+            />
           </div>
         </b-tab>
       </b-tabs>
@@ -181,6 +200,15 @@ export default {
   components: { VueEditor },
   data() {
     return {
+      dropdownItem: ['Edit', 'Delete'],
+      fields: [
+        { key: 'check', label: '', sortable: true },
+        { key: 'title', label: 'Name', sortable: true },
+        { key: 'course_code', sortable: true },
+        { key: 'start_date', sortable: true },
+        { key: 'end_date', sortable: true },
+        { key: 'dots', label: '', sortable: true },
+      ],
       courseData: {
         title: '',
         short_description: '',
@@ -201,10 +229,21 @@ export default {
       `course-v/get-all-course?page=1&size=50`
     )
 
-    this.courses = courses.items
+    this.courses = courses.items.map((e, i) => ({
+      serial: i,
+      check: '',
+      dots: '',
+      ...e,
+    }))
+
+    console.log(this.courses)
   },
 
   methods: {
+    onRowClicked(e) {
+      console.log(e)
+      this.$router.push(`courses/${e.id}`)
+    },
     async addCourse() {
       try {
         let start_date = new Date(this.courseData.start_date)
@@ -241,6 +280,18 @@ export default {
           type: e.type,
         })
       )
+    },
+
+    handleEdit(e) {
+      console.log(e)
+    },
+    async handleDelete(e) {
+      try {
+        await this.$axios.delete(`course-v/delete-course?course_id=${e.id}`)
+        this.$fetch()
+      } catch (e) {
+        console.log(e)
+      }
     },
   },
 }

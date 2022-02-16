@@ -2,7 +2,7 @@
   <div class="table-responsive">
     <b-table
       :items="items"
-      :fields="sortable_cols"
+      :fields="fields"
       stacked="md"
       :filter="filter"
       hover
