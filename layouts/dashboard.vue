@@ -21,6 +21,6 @@ export default {
 
 <style>
 .height {
-  height: 100vh !important;
+  height: 150vh !important;
 }
 </style>

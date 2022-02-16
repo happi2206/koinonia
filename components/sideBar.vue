@@ -6,9 +6,13 @@
     <div class="sidebar-menu my-5">
       <li class="sidebar-dropdown py-1 my-3 px-3 py-2">
         <nuxt-link to="" class="text-dark">
-          <span class="largebrownparagraph">
-            <slot name="contentheader"></slot
-          ></span>
+          <span class="largebrownparagraph" v-if="isAdministrator"
+            >Adminstrator Dashboard
+          </span>
+          <span class="largebrownparagraph" v-if="isInstructor"
+            >Instructor Dashboard
+          </span>
+          <span class="largebrownparagraph" v-else>My learning </span>
         </nuxt-link>
       </li>
 
@@ -31,7 +35,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {},
+  data() {
+    return {
+      isAdministrator: '',
+      isInstructor: '',
+    }
+  },
+  mounted() {
+    const user = this.$store.state.auth.user
+    this.isAdministrator = user.is_administrator
+    this.isInstructor = user.is_instructor
+    console.log(user)
+  },
+}
 </script>
 
 <style>

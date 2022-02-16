@@ -20,7 +20,7 @@
               </label>
               <input
                 type="text"
-                v-model="addCourse.course_title"
+                v-model="addCourse.title"
                 required
                 placeholder="e.g ECO23"
                 class="forminputs text-dark"
@@ -124,11 +124,24 @@
           <div class="mx-3">
             <filter-component> </filter-component>
 
-            <table-component /></div
-        ></b-tab>
+            <table-component />
+          </div>
+        </b-tab>
         <b-tab title="Open" class=""><p>I'm the second tab</p></b-tab>
-        <b-tab title="On-going"><p>I'm a tab!</p></b-tab>
-        <b-tab title="Archived"><p>I'm a tab!</p></b-tab>
+        <b-tab title="On-going">
+          <div class="mx-3">
+            <filter-component> </filter-component>
+
+            <table-component />
+          </div>
+        </b-tab>
+        <b-tab title="Archived">
+          <div class="mx-3">
+            <filter-component> </filter-component>
+
+            <table-component />
+          </div>
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -136,20 +149,34 @@
 
 <script>
 import { VueEditor, Quill } from 'vue2-editor'
+
 export default {
   layout: 'dashboard',
   components: { VueEditor },
   data() {
     return {
       addCourse: {
-        course_title: '',
-        course_name: '',
-        course_subtitle: '',
+        title: '',
+        description: '',
+        short_description: '',
+        long_description: '',
+        course_code: '',
+        feature_image: '',
         start_date: '',
         end_date: '',
-        description: '',
+        students: [],
+        instructors: [],
+        events: [],
       },
     }
+  },
+
+  async fetch() {
+    const courses = await this.$axios.$get(
+      `/course-v/get-all-course?page=1&size=50`
+    )
+
+    console.log('courses are', courses)
   },
 }
 </script>

@@ -10,7 +10,7 @@
             justify-content-center
           "
         >
-          <img src="images/man1.png" alt="" class="img-fluid" />
+          <img src="~/assets/images/man1.png" alt="" class="img-fluid" />
         </div>
       </div>
 
