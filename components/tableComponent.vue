@@ -76,7 +76,12 @@
       <template #cell(avatar)="data">
         <slot name="avatar" :data="data">{{ data.value }}</slot>
       </template>
-
+      <template #cell(start_date)="data">
+        <span>{{ data.item.start_date | DateFormat }}</span>
+      </template>
+      <template #cell(end_date)="data">
+        <span>{{ data.item.end_date | DateFormat }}</span>
+      </template>
       <template #cell(actions)="row">
         <div class="text-left w-auto">
           <button

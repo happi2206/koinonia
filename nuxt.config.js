@@ -25,6 +25,7 @@ export default {
   plugins: [
     '~/plugins/axios',
     '~/plugins/store_initializer',
+    '~/plugins/filter',
     // '~/plugins/iconify.js',
     '~/plugins/bootstrap-icon.js',
     '~/plugins/vue-editor.js',

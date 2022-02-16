@@ -276,7 +276,7 @@
       </b-modal>
     </div>
 
-    <div class="card bg-white rounded">
+    <div class="card bg-white rounded pt-4">
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Status" active>
           <div class="mx-3">
@@ -326,6 +326,7 @@
 
 <script>
 import { DateTime } from 'luxon'
+import { mapGetters } from 'vuex'
 import { VueEditor, Quill } from 'vue2-editor'
 
 export default {
@@ -369,8 +370,9 @@ export default {
   },
 
   async fetch() {
+    let uri = (this.user.is_administrator)?"course-v/get-all-course?page=1&size=50":"course-v/get-current-instructor-courses?page=1&size=50"
     const courses = await this.$axios.$get(
-      `course-v/get-all-course?page=1&size=50`
+      uri
     )
 
     this.courses = courses.items.map((e, i) => ({
@@ -460,6 +462,13 @@ export default {
       }
     },
   },
+  computed:{
+     ...mapGetters({
+      authenticated: 'auth/authenticated',
+      user: 'auth/user',
+      token: 'auth/token',
+    }),
+  }
 }
 </script>
 
