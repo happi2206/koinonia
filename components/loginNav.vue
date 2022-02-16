@@ -117,8 +117,8 @@
             </div>
 
             <div v-else class="d-flex">
-              <button
-                v-if="isSignUp"
+              <nuxt-link
+                to="/login"
                 class="
                   btn
                   loginbtndashboard
@@ -127,26 +127,32 @@
                   text-white
                   mx-2
                   d-none d-md-block
+                  mb-0
+                  text-white
+                  medbrownparagraph
+                  text-center
                 "
               >
-                <nuxt-link
-                  to="/login"
-                  class="mb-0 text-white medbrownparagraph text-center"
-                >
-                  Login
-                </nuxt-link>
-              </button>
-              <button
-                v-if="isSignIn"
-                class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block"
+                Login
+              </nuxt-link>
+
+              <nuxt-link
+                to="/register"
+                class="
+                  mb-0
+                  btn
+                  px-4
+                  py-2
+                  mx-2
+                  d-none d-md-block
+                  text-white
+                  mainbtndashboard
+                  medbrownparagraph
+                  text-center
+                "
               >
-                <nuxt-link
-                  to="/register"
-                  class="mb-0 text-white medbrownparagraph text-center"
-                >
-                  Sign Up
-                </nuxt-link>
-              </button>
+                Sign Up
+              </nuxt-link>
             </div>
           </ul>
 

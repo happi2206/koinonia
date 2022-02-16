@@ -27,6 +27,7 @@ export default {
     '~/plugins/store_initializer',
     // '~/plugins/iconify.js',
     '~/plugins/bootstrap-icon.js',
+    '~/plugins/vue-editor.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,6 +42,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
     '@nuxtjs/toast',
+    'vue2-editor/nuxt',
   ],
   toast: {
     position: 'bottom-right',

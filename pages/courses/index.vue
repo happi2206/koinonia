@@ -13,15 +13,14 @@
       <!-- Modal -->
       <b-modal id="addcourse" title="Add Course">
         <div class="modacontent">
-          <div class="modabody">
+          <form class="modabody">
             <div class="my-4">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Code
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                v-model="addCourse.course_title"
                 required
                 placeholder="e.g ECO23"
                 class="forminputs text-dark"
@@ -33,8 +32,7 @@
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                v-model="addCourse.course_name"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -46,8 +44,7 @@
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                v-model="addCourse.course_subtitle"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -61,8 +58,7 @@
                   </label>
                   <input
                     type="date"
-                    name=""
-                    id=""
+                    v-model="addCourse.start_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
                     class="forminputs text-dark"
@@ -74,8 +70,7 @@
                   </label>
                   <input
                     type="date"
-                    name=""
-                    id=""
+                    v-model="addCourse.end_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
                     class="forminputs text-dark"
@@ -87,15 +82,7 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Subtitle
               </label>
-              <textarea
-                name=""
-                id=""
-                class="forminputs textarea tinyarea"
-                cols="30"
-                rows="40"
-                required
-                placeholder="e.g Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-              ></textarea>
+              <VueEditor v-model="addCourse.description" required> </VueEditor>
             </div>
 
             <div class="my-2">
@@ -126,7 +113,7 @@
                 </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </b-modal>
     </div>
@@ -148,8 +135,22 @@
 </template>
 
 <script>
+import { VueEditor, Quill } from 'vue2-editor'
 export default {
   layout: 'dashboard',
+  components: { VueEditor },
+  data() {
+    return {
+      addCourse: {
+        course_title: '',
+        course_name: '',
+        course_subtitle: '',
+        start_date: '',
+        end_date: '',
+        description: '',
+      },
+    }
+  },
 }
 </script>
 
