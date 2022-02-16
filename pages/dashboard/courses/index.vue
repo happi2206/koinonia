@@ -11,7 +11,8 @@
         Add Course
       </button>
 
-      <b-modal id="addcourse" title="Add Course">
+      <!-- add course -->
+      <b-modal id="addcourse" title="Add Course" hide-footer>
         <div class="modacontent">
           <form class="modabody" @submit.prevent="addCourse">
             <div class="my-4">
@@ -140,6 +141,137 @@
           </form>
         </div>
       </b-modal>
+
+      <!-- edit course -->
+      <b-modal id="editmodal" title="Edit Courses" hide-footer>
+        <div class="modacontent">
+          <form class="modabody" @submit.prevent="editCourse">
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Course Code
+              </label>
+              <input
+                type="text"
+                v-model="currentCourse.course_code"
+                required
+                placeholder="e.g ECO23"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Course Name
+              </label>
+              <input
+                type="text"
+                v-model="currentCourse.title"
+                required
+                placeholder="e.g Alchemy"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Course Subtitle
+              </label>
+              <input
+                type="text"
+                v-model="currentCourse.short_description"
+                required
+                placeholder="e.g Alchemy"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Description
+              </label>
+              <input
+                type="text"
+                v-model="currentCourse.description"
+                required
+                placeholder="e.g Alchemy"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Start Date
+                  </label>
+                  <input
+                    type="text"
+                    v-model="currentCourse.start_date"
+                    required
+                    placeholder="e.g DD/MM/YYYY"
+                    class="forminputs text-dark"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Start Date
+                  </label>
+                  <input
+                    type="text"
+                    v-model="currentCourse.end_date"
+                    required
+                    placeholder="e.g DD/MM/YYYY"
+                    class="forminputs text-dark"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Course Subtitle
+              </label>
+              <VueEditor v-model="currentCourse.long_description" required>
+              </VueEditor>
+            </div>
+
+            <div class="my-2">
+              <p class="medbrownparagraph lightgraytext">
+                Upload your course image here. It must meet our course image
+                quality standards to be accepted. Important guidelines: 750x422
+                pixels; .jpg, .jpeg,. gif, or .png. no text on the image.
+              </p>
+            </div>
+
+            <pre>{{ imagedetail }}</pre>
+            <div class="my-4 d-flex justify-content-end">
+              <div class="upload-btn-wrapper">
+                <button class="upbtn">Upload file</button>
+
+                <input
+                  type="file"
+                  name="myfile"
+                  multiple
+                  accept="image/png, image/gif, image/jpeg"
+                  ref="fileup"
+                  @change="handlefileupload($event)"
+                />
+                <!-- <input type="file" name="myfile" /> -->
+              </div>
+            </div>
+            <div class="my-4">
+              <div class="d-flex justify-content-center">
+                <button
+                  class="
+                    btn
+                    px-md-4 px-3
+                    py-2
+                    mainbtndashboard
+                    medbrownparagraph
+                  "
+                >
+                  Create Event
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </b-modal>
     </div>
 
     <div class="card bg-white rounded pt-4">
@@ -202,6 +334,7 @@ export default {
   data() {
     return {
       dropdownItem: ['Edit', 'Delete'],
+      currentCourse: {},
       fields: [
         { key: 'check', label: '', sortable: true },
         { key: 'title', label: 'Name', sortable: true },
@@ -286,6 +419,21 @@ export default {
 
     handleEdit(e) {
       console.log(e)
+      this.currentCourse = e
+      this.$bvModal.show('editmodal')
+    },
+
+    async editCourse(e) {
+      try {
+        await this.$axios.$patch(
+          `course-v/edit-course?course_id=${e.id}`,
+          currentCourse
+        )
+        this.$fetch()
+        console.log(e)
+      } catch (e) {
+        console.error(e)
+      }
     },
     async handleDelete(e) {
       try {
