@@ -13,14 +13,14 @@
       <!-- Modal -->
       <b-modal id="addcourse" title="Add Course">
         <div class="modacontent">
-          <form class="modabody">
+          <form class="modabody" @submit.prevent="addCourse">
             <div class="my-4">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Code
               </label>
               <input
                 type="text"
-                v-model="addCourse.title"
+                v-model="courseData.course_code"
                 required
                 placeholder="e.g ECO23"
                 class="forminputs text-dark"
@@ -32,7 +32,7 @@
               </label>
               <input
                 type="text"
-                v-model="addCourse.course_name"
+                v-model="courseData.title"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -44,7 +44,7 @@
               </label>
               <input
                 type="text"
-                v-model="addCourse.course_subtitle"
+                v-model="courseData.short_description"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -57,8 +57,8 @@
                     >Start Date
                   </label>
                   <input
-                    type="date"
-                    v-model="addCourse.start_date"
+                    type="datetime-local"
+                    v-model="courseData.start_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
                     class="forminputs text-dark"
@@ -69,8 +69,8 @@
                     >Start Date
                   </label>
                   <input
-                    type="date"
-                    v-model="addCourse.end_date"
+                    type="datetime-local"
+                    v-model="courseData.end_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
                     class="forminputs text-dark"
@@ -82,7 +82,8 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Subtitle
               </label>
-              <VueEditor v-model="addCourse.description" required> </VueEditor>
+              <VueEditor v-model="courseData.long_description" required>
+              </VueEditor>
             </div>
 
             <div class="my-2">
@@ -92,10 +93,21 @@
                 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.
               </p>
             </div>
+
+            <pre>{{ imagedetail }}</pre>
             <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
-                <input type="file" name="myfile" />
+
+                <input
+                  type="file"
+                  name="myfile"
+                  multiple
+                  accept="image/png, image/gif, image/jpeg"
+                  ref="fileup"
+                  @change="handlefileupload($event)"
+                />
+                <!-- <input type="file" name="myfile" /> -->
               </div>
             </div>
             <div class="my-4">
@@ -148,6 +160,7 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon'
 import { VueEditor, Quill } from 'vue2-editor'
 
 export default {
@@ -156,19 +169,16 @@ export default {
   components: { VueEditor },
   data() {
     return {
-      addCourse: {
+      courseData: {
         title: '',
-        description: '',
         short_description: '',
         long_description: '',
         course_code: '',
         feature_image: '',
         start_date: '',
         end_date: '',
-        students: [],
-        instructors: [],
-        events: [],
       },
+<<<<<<< HEAD
       courses:[]
     }
   },
@@ -194,6 +204,65 @@ export default {
       await this.get_all()
       this.$nuxt.$loading.finish()
     })
+=======
+
+      imagedetail: [],
+    }
+  },
+
+  async fetch() {
+    const courses = await this.$axios.$get(
+      `course-v/get-all-course?page=1&size=50`
+    )
+
+    console.log('courses are', courses)
+>>>>>>> dcf80d620c498fc345e3ffb3f1361e8db4f621b5
+  },
+
+  methods: {
+    async addCourse() {
+      try {
+        // this.courseData.start_date = DateTime.toISOString()(
+        //   this.courseData.start_date
+        // )
+        // this.courseData.end_date = DateTime.toISOString()(
+        //   this.courseData.end_date
+        // )
+
+        this.courseData.start_date.toISOString()
+        this.courseData.end.toISOString()
+
+        console.log(this.courseData)
+
+        const response = await this.$axios.$post(
+          `course-v/add-course`,
+          this.courseData
+        )
+
+        console.log(response)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    handlefileupload(event) {
+      const filedetail = []
+      filedetail.push(event.target.files)
+
+      const temp2 = []
+      for (const file of filedetail) {
+        temp2.push(...file)
+        console.log(temp2)
+      }
+
+      temp2.forEach((e) =>
+        this.imagedetail.push({
+          filename: e.name,
+          size: e.size,
+          type: e.type,
+        })
+      )
+    },
   },
 }
 </script>
