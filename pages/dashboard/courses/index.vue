@@ -124,7 +124,7 @@
           <div class="mx-3">
             <filter-component> </filter-component>
 
-            <table-component />
+            <table-component :items="courses" />
           </div>
         </b-tab>
         <b-tab title="Open" class=""><p>I'm the second tab</p></b-tab>
@@ -132,14 +132,14 @@
           <div class="mx-3">
             <filter-component> </filter-component>
 
-            <table-component />
+            <table-component :items="courses" />
           </div>
         </b-tab>
         <b-tab title="Archived">
           <div class="mx-3">
             <filter-component> </filter-component>
 
-            <table-component />
+            <table-component :items="courses" />
           </div>
         </b-tab>
       </b-tabs>
@@ -152,6 +152,7 @@ import { VueEditor, Quill } from 'vue2-editor'
 
 export default {
   layout: 'dashboard',
+  middleware: 'auth',
   components: { VueEditor },
   data() {
     return {
@@ -168,15 +169,31 @@ export default {
         instructors: [],
         events: [],
       },
+      courses:[]
     }
   },
-
-  async fetch() {
-    const courses = await this.$axios.$get(
-      `/course-v/get-all-course?page=1&size=50`
-    )
-
-    console.log('courses are', courses)
+  methods: {
+    async get_all() {
+      try {
+        // make axios request for all courses
+        const { items } = await this.$axios.$get(
+          `/course-v/get-all-course?page=1&size=50`
+        )
+        console.log(items)
+        // assign response to coures
+        this.courses = items
+      } catch (e) {
+        // throw Error
+        this.$toast.error(e.data.detail)
+      }
+    },
+  },
+  mounted() {
+    this.$nextTick(async () => {
+      this.$nuxt.$loading.start()
+      await this.get_all()
+      this.$nuxt.$loading.finish()
+    })
   },
 }
 </script>

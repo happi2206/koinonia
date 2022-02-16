@@ -113,7 +113,7 @@
                 class="nav-item mb-0"
                 v-if="user.is_instructor || user.is_administrator"
               >
-                <nuxt-link to="" class="nav-link text-white dashboardlink mb-0">
+                <nuxt-link to="/dashboard/courses" class="nav-link text-white dashboardlink mb-0">
                   Instructors dashboard
                 </nuxt-link>
               </li>
