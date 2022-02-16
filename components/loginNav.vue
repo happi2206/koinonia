@@ -44,13 +44,23 @@
             mx-md-2 mx-1
           "
         >
-          Login
+          <nuxt-link
+            to="/login"
+            class="mb-0 text-white medbrownparagraph text-center"
+          >
+            Log in
+          </nuxt-link>
         </button>
         <button
           v-if="isSignUp"
           class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1"
         >
-          Sign Up
+          <nuxt-link
+            to="/register"
+            class="mb-0 text-white medbrownparagraph text-center"
+          >
+            Sign Up
+          </nuxt-link>
         </button>
       </div>
     </div>
@@ -126,7 +136,12 @@
                 v-if="isSignIn"
                 class="btn mainbtndashboard px-4 py-2 mx-2 d-none d-md-block"
               >
-                Sign Up
+                <nuxt-link
+                  to="/register"
+                  class="mb-0 text-white medbrownparagraph text-center"
+                >
+                  Sign Up
+                </nuxt-link>
               </button>
             </div>
           </ul>

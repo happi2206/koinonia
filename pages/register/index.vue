@@ -290,6 +290,9 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      register: 'auth/registerUser',
+    }),
     async registerUser() {
       try {
         this.preloader = true
@@ -303,13 +306,8 @@ export default {
             },
           ]
         }
-        let response = await this.$axios.$post(
-          `user/register-user?school_id=${process.env.SCHOOL_ID}`,
-          this.registerInputs
-        )
+        await this.register(this.registerInputs)
         this.$router.push('/')
-
-        console.log(response)
       } catch (e) {
         this.$toast.error(e.message)
       } finally {
