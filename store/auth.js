@@ -41,30 +41,20 @@ export default {
         return Promise.reject(error)
       }
     },
-    // async registerUser({ commit }, credentials) {
-    //   try {
-    //     let response = await this.$axios.$post(
-    //       `user/register-user?school_id=${process.env.SCHOOL_ID}`,
-    //       credentials
-    //     )
-    //     console.log(response)
-
-    //   }
-    //   catch (error) {
-    //     console.log(error)
-    //   }
-
-    //   commit('SET_TOKEN', response.access_token.accessToken)
-    //   commit('SET_USER', response.user)
-    //   return Promise.resolve(response.user)
-    // }
-    //    catch (error) {
-    //     commit('SET_TOKEN', null)
-    //     commit('SET_USER', null)
-    //     this.$toast.error(error)
-    //     return Promise.reject(error)
-    //   }
-    // },
+    async registerUser({ commit }, credentials) {
+      try {
+        let response = await this.$axios.$post(
+          `user/register-user?school_id=${process.env.SCHOOL_ID}`,
+          credentials
+        )
+        console.log(response)
+        commit('SET_TOKEN', response.access_token.accessToken)
+        commit('SET_USER', response.user)
+        return Promise.resolve(response.user)
+      } catch (error) {
+        console.log(error)
+      }
+    },
 
     signOut({ commit }) {
       return this.$axios.$post('auth/signout').then(() => {
@@ -74,13 +64,3 @@ export default {
     },
   },
 }
-
-// export const getters = {
-//   isAuthenticated(state) {
-//     return state.auth.loggedIn
-//   },
-
-//   loggedIn(state) {
-//     return state.auth.user
-//   },
-// }
