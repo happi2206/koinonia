@@ -28,6 +28,7 @@ export default {
     // '~/plugins/iconify.js',
     '~/plugins/bootstrap-icon.js',
     '~/plugins/vue-editor.js',
+    '~/plugins/luxon.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

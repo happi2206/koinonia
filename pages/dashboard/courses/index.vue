@@ -20,7 +20,7 @@
               </label>
               <input
                 type="text"
-                v-model="courseData.title"
+                v-model="courseData.course_code"
                 required
                 placeholder="e.g ECO23"
                 class="forminputs text-dark"
@@ -32,7 +32,7 @@
               </label>
               <input
                 type="text"
-                v-model="courseData.course_name"
+                v-model="courseData.title"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -44,7 +44,7 @@
               </label>
               <input
                 type="text"
-                v-model="courseData.course_subtitle"
+                v-model="courseData.short_description"
                 required
                 placeholder="e.g Alchemy"
                 class="forminputs text-dark"
@@ -57,7 +57,7 @@
                     >Start Date
                   </label>
                   <input
-                    type="date"
+                    type="datetime-local"
                     v-model="courseData.start_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
@@ -69,7 +69,7 @@
                     >Start Date
                   </label>
                   <input
-                    type="date"
+                    type="datetime-local"
                     v-model="courseData.end_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
@@ -82,7 +82,8 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Subtitle
               </label>
-              <VueEditor v-model="courseData.description" required> </VueEditor>
+              <VueEditor v-model="courseData.long_description" required>
+              </VueEditor>
             </div>
 
             <div class="my-2">
@@ -92,6 +93,8 @@
                 pixels; .jpg, .jpeg,. gif, or .png. no text on the image.
               </p>
             </div>
+
+            <pre>{{ imagedetail }}</pre>
             <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
@@ -100,6 +103,7 @@
                   type="file"
                   name="myfile"
                   multiple
+                  accept="image/png, image/gif, image/jpeg"
                   ref="fileup"
                   @change="handlefileupload($event)"
                 />
@@ -156,6 +160,7 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon'
 import { VueEditor, Quill } from 'vue2-editor'
 
 export default {
@@ -165,23 +170,21 @@ export default {
     return {
       courseData: {
         title: '',
-        description: '',
         short_description: '',
         long_description: '',
         course_code: '',
         feature_image: '',
         start_date: '',
         end_date: '',
-        students: [],
-        instructors: [],
-        events: [],
       },
+
+      imagedetail: [],
     }
   },
 
   async fetch() {
     const courses = await this.$axios.$get(
-      `/course-v/get-all-course?page=1&size=50`
+      `course-v/get-all-course?page=1&size=50`
     )
 
     console.log('courses are', courses)
@@ -190,9 +193,21 @@ export default {
   methods: {
     async addCourse() {
       try {
+        // this.courseData.start_date = DateTime.toISOString()(
+        //   this.courseData.start_date
+        // )
+        // this.courseData.end_date = DateTime.toISOString()(
+        //   this.courseData.end_date
+        // )
+
+        this.courseData.start_date.toISOString()
+        this.courseData.end.toISOString()
+
+        console.log(this.courseData)
+
         const response = await this.$axios.$post(
-          `slate/course-v/add-course`,
-          courseData
+          `course-v/add-course`,
+          this.courseData
         )
 
         console.log(response)
@@ -202,23 +217,22 @@ export default {
     },
 
     handlefileupload(event) {
-      console.log('event is', event)
-      //   const submit = new FormData()
-      //   const temp = []
-      //   const temp2 = []
-      //   console.log(event)
-      //   temp.push(event.target.files)
+      const filedetail = []
+      filedetail.push(event.target.files)
 
-      //   const filedata = event.target.files[0]
-      //   submit.append('type', filedata.type)
-      //   submit.append('file', filedata)
+      const temp2 = []
+      for (const file of filedetail) {
+        temp2.push(...file)
+        console.log(temp2)
+      }
 
-      //   console.log('est', event.target.files[0])
-
-      //   for (const f of temp) {
-      //     temp2.push(...f)
-      //   ｝
-      // },
+      temp2.forEach((e) =>
+        this.imagedetail.push({
+          filename: e.name,
+          size: e.size,
+          type: e.type,
+        })
+      )
     },
   },
 }
