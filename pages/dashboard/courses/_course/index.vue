@@ -11,24 +11,18 @@
           Courses
         </a>
       </div>
-      <header-card />
+      <header-card :courseDetail="courseDetail" />
 
       <div class="card mt-3">
         <b-tabs content-class="mt-3" class="custom-tabs">
-          <div class="d-flex justify-content-between">
+          <div class="">
             <b-tab title="Course Overiew" active>
               <div class="border-bottom py-4 px-md-5 px-3">
                 <h2 class="brown24 my-3 graytext">Description</h2>
-                <p class="brownparagraph darktext">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.......
-                </p>
+                <div
+                  class="brownparagraph darktext"
+                  v-html="courseDetail.long_description"
+                ></div>
               </div>
 
               <div class="px-md-5 px-3 pb-5">
@@ -66,7 +60,24 @@
                   <div class="fullborder p-5 my-2"></div>
                 </div></div
             ></b-tab>
-            <b-tab title="Instructors" class=""> </b-tab>
+            <b-tab title="Instructors" class="">
+              <div class="mx-3">
+                <div class="d-flex justify-content-between">
+                  <filter-component> </filter-component>
+                  <button class="btn py-1 mainbtndashboard medbrownparagraph">
+                    Add Instructor
+                  </button>
+                </div>
+                <table-component
+                  :items="courses"
+                  :fields="fields"
+                  :dropdownItem="dropdownItem"
+                  @row-clicked="onRowClicked"
+                  @Edit="handleEdit"
+                  @Delete="handleDelete"
+                />
+              </div>
+            </b-tab>
             <b-tab title="Students" class=""> </b-tab>
             <b-tab title="Assignment" class=""> </b-tab>
             <b-tab title="Grade book" class=""> </b-tab>
@@ -82,6 +93,28 @@
 <script>
 export default {
   layout: 'dashboard',
+
+  data() {
+    return {
+      courseDetail: {},
+    }
+  },
+
+  async fetch() {
+    // console.log(this.$route.params.course)
+    const courses = await this.$axios.$get(
+      `course-v/get-a-course?course_id=${this.$route.params.course}`
+    )
+
+    this.courseDetail = courses
+    // const instructors = await this.$axios.$get(
+    //   `get-all-course-instructors?course_id=${this.$route.params.course}&page=1&size=50`
+    // )
+
+    // console.log('instructors', instructors)
+
+    console.log(courses)
+  },
 }
 </script>
 
