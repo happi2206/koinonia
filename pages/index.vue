@@ -36,7 +36,7 @@
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Courses" active>
           <div class="row mt-4">
-            <div class="col-lg-6 my-3 my-lg-0">
+            <div class="col-lg-6 my-3 my-lg-0" :key="index" v-for="(course, index) in courses">
               <div class="bg-white rounded">
                 <div class="p-2 d-flex flex-sm-row flex-column">
                   <div class="coursewidth1 d-flex align-items-center">
@@ -49,7 +49,7 @@
 
                   <div class="p-3 coursewidth2">
                     <h1 class="largebrownparagraph bold700 text-capitalize">
-                      concepts of fellowship, joint participation
+                      {{course.title}}
                     </h1>
                     <div class="my-2 row">
                       <div class="col-12">
@@ -74,44 +74,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 my-3 my-lg-0">
-              <div class="bg-white rounded">
-                <div class="p-2 d-flex flex-sm-row flex-column">
-                  <div class="coursewidth1 d-flex align-items-center">
-                    <img
-                      src="~/assets/images/man1.png"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
-
-                  <div class="p-3 coursewidth2">
-                    <h1 class="largebrownparagraph bold700 text-capitalize">
-                      concepts of fellowship, joint participation
-                    </h1>
-                    <div class="my-2 row">
-                      <div class="col-12">
-                        <p class="my-2 medbrownparagraph">
-                          <span class="lightgraytext"> Start Date:</span>
-                          01/01/2022
-                        </p>
-                      </div>
-                      <div class="col-12">
-                        <p class="my-2 medbrownparagraph">
-                          <span class="lightgraytext"> End Date:</span>
-                          01/01/2022
-                        </p>
-                      </div>
-                    </div>
-                    <p class="my-2 medbrownparagraph">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,it
-                      esse cillum dolore eu fugiat nulla pariatur....
-                    </p>
-                    <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div></b-tab
         >
         <b-tab title="On-going" class=""><p>I'm the second tab</p></b-tab>
