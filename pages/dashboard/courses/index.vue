@@ -280,43 +280,81 @@
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Status" active>
           <div class="mx-3">
-            <filter-component> </filter-component>
+            <filter-component>
+              <template #default="{ visualization }">
+                <table-component
+                  :items="courses"
+                  v-if="visualization === 'list'"
+                  :fields="fields"
+                  :dropdownItem="dropdownItem"
+                  @row-clicked="onRowClicked"
+                  @Edit="handleEdit"
+                  @Delete="handleDelete"
+                />
 
-            <table-component
-              :items="courses"
-              :fields="fields"
-              :dropdownItem="dropdownItem"
-              @row-clicked="onRowClicked"
-              @Edit="handleEdit"
-              @Delete="handleDelete"
-            />
+                <div class="row" v-else>
+                  <grid-component
+                    :data="courses"
+                    v-for="(courses, index) in courses"
+                    :key="index"
+                    @grid-clicked="onGridClicked"
+                  ></grid-component>
+                </div>
+              </template>
+            </filter-component>
           </div>
         </b-tab>
         <b-tab title="Open" class=""><p>I'm the second tab</p></b-tab>
         <b-tab title="On-going">
           <div class="mx-3">
-            <filter-component> </filter-component>
+            <filter-component>
+              <template #default="{ visualization }">
+                <table-component
+                  :items="courses"
+                  v-if="visualization === 'list'"
+                  :fields="fields"
+                  :dropdownItem="dropdownItem"
+                  @row-clicked="onRowClicked"
+                  @Edit="handleEdit"
+                  @Delete="handleDelete"
+                />
 
-            <table-component
-              :items="courses"
-              :fields="fields"
-              :dropdownItem="dropdownItem"
-              @Edit="handleEdit"
-              @Delete="handleDelete"
-            />
+                <div class="row" v-else>
+                  <grid-component
+                    :data="courses"
+                    v-for="(courses, index) in courses"
+                    :key="index"
+                    @grid-clicked="onGridClicked"
+                  ></grid-component>
+                </div>
+              </template>
+            </filter-component>
           </div>
         </b-tab>
         <b-tab title="Archived">
           <div class="mx-3">
-            <filter-component> </filter-component>
+            <filter-component>
+              <template #default="{ visualization }">
+                <table-component
+                  :items="courses"
+                  v-if="visualization === 'list'"
+                  :fields="fields"
+                  :dropdownItem="dropdownItem"
+                  @row-clicked="onRowClicked"
+                  @Edit="handleEdit"
+                  @Delete="handleDelete"
+                />
 
-            <table-component
-              :items="courses"
-              :fields="fields"
-              :dropdownItem="dropdownItem"
-              @Edit="handleEdit"
-              @Delete="handleDelete"
-            />
+                <div class="row" v-else>
+                  <grid-component
+                    :data="courses"
+                    v-for="(courses, index) in courses"
+                    :key="index"
+                    @grid-clicked="onGridClicked"
+                  ></grid-component>
+                </div>
+              </template>
+            </filter-component>
           </div>
         </b-tab>
       </b-tabs>
@@ -370,10 +408,10 @@ export default {
   },
 
   async fetch() {
-    let uri = (this.user.is_administrator)?"course-v/get-all-course?page=1&size=50":"course-v/get-current-instructor-courses?page=1&size=50"
-    const courses = await this.$axios.$get(
-      uri
-    )
+    let uri = this.user.is_administrator
+      ? 'course-v/get-all-course?page=1&size=50'
+      : 'course-v/get-current-instructor-courses?page=1&size=50'
+    const courses = await this.$axios.$get(uri)
 
     this.courses = courses.items.map((e, i) => ({
       serial: i,
@@ -387,6 +425,10 @@ export default {
 
   methods: {
     onRowClicked(e) {
+      console.log(e)
+      this.$router.push(`courses/${e.id}`)
+    },
+    onGridClicked(e) {
       console.log(e)
       this.$router.push(`courses/${e.id}`)
     },
@@ -462,13 +504,13 @@ export default {
       }
     },
   },
-  computed:{
-     ...mapGetters({
+  computed: {
+    ...mapGetters({
       authenticated: 'auth/authenticated',
       user: 'auth/user',
       token: 'auth/token',
     }),
-  }
+  },
 }
 </script>
 

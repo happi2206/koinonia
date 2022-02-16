@@ -62,12 +62,18 @@
             ></b-tab>
             <b-tab title="Instructors" class="">
               <div class="mx-3">
-                <div class="d-flex justify-content-between">
-                  <filter-component> </filter-component>
-                  <button class="btn py-1 mainbtndashboard medbrownparagraph">
-                    Add Instructor
-                  </button>
-                </div>
+                <filter-component>
+                  <template #besideFilterButton>
+                    <div>
+                      <button
+                        class="btn py-1 mainbtndashboard medbrownparagraph"
+                      >
+                        Add Instructor
+                      </button>
+                    </div>
+                  </template>
+                </filter-component>
+
                 <table-component
                   :items="courses"
                   :fields="fields"

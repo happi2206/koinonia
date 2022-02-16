@@ -259,6 +259,19 @@ a.mainbtndashboard:hover {
   color: black;
 }
 
+button.mainbtndashboard {
+  background-color: #ffcd06;
+  color: black;
+
+  text-align: left;
+  text-decoration: none;
+  outline: none;
+}
+button.mainbtndashboard:hover {
+  background-color: 10203f;
+  color: black;
+}
+
 button.loginbtndashboard {
   background-color: none;
   border-radius: 10px;
