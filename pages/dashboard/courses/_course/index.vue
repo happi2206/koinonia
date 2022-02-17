@@ -5,7 +5,7 @@
         <a
           href="#"
           @click.prevent="$router.go(-1)"
-          class="brownparagraph mainbluecolor"
+          class="text-xl mainbluecolor"
         >
           <b-icon icon="arrow-left"></b-icon>
           Courses
@@ -13,48 +13,194 @@
       </div>
       <header-card :courseDetail="courseDetail" />
 
-      <div class="card mt-3">
+      <!-- tabs -->
+      <div class="bg-white p-5 mt-4">
+        <ul
+          class="
+            nav nav-tabs
+            flex flex-col
+            md:flex-row
+            flex-wrap
+            list-none
+            border-b-0
+            pl-0
+            mb-4
+          "
+          id="tabs-tab"
+          role="tablist"
+        >
+          <li class="nav-item" role="presentation">
+            <a
+              @click.prevent="currentTab = 0"
+              class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                text-black
+                cursor-pointer
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
+              :class="{ active: currentTab == 0 }"
+              >Course Overview</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              @click.prevent="currentTab = 1"
+              class="
+                <!--
+                nav-link
+                -->
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                cursor-pointer
+                border-x-0 border-t-0 border-transparent
+                px-6
+                py-3
+                my-2
+                text-black
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
+              :class="{ active: currentTab == 1 }"
+              >Instructors</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              @click.prevent="currentTab = 2"
+              class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                cursor-pointer
+                uppercase
+                text-black
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
+              :class="{ active: currentTab == 2 }"
+              >Students</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              @click.prevent="currentTab = 3"
+              class="
+                nav-link
+                pointer-events-none
+                block
+                text-black
+                font-medium
+                text-xs
+                leading-tight
+                cursor-pointer
+                uppercase
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
+              :class="{ active: currentTab == 3 }"
+              >Attendance</a
+            >
+          </li>
+        </ul>
+        <div>
+          <div
+            v-show="currentTab == 0"
+            :class="{ 'fade show': currentTab == 0 }"
+          >
+           <course-overview :courseDetail="courseDetail"></course-overview>
+          </div>
+          <div
+            v-show="currentTab == 1"
+            :class="{ 'fade show': currentTab == 1 }"
+          >
+            <filter-component>
+            <template #default="{ visualization }">
+              <table-component
+                :items="courses"
+                v-if="visualization === 'list'"
+                :fields="fields"
+                :dropdownItem="dropdownItem"
+                @row-clicked="onRowClicked"
+                @Edit="handleEdit"
+                @Delete="handleDelete"
+              />
+
+              <div class="row" v-else>
+                <grid-component
+                  :data="courses"
+                  v-for="(courses, index) in courses"
+                  :key="index"
+                  @grid-clicked="onGridClicked"
+                ></grid-component>
+              </div>
+            </template>
+          </filter-component>
+          </div>
+          <div
+            v-show="currentTab == 2"
+            :class="{ 'fade show': currentTab == 2 }"
+          >
+             <filter-component>
+            <template #default="{ visualization }">
+              <table-component
+                :items="courses"
+                v-if="visualization === 'list'"
+                :fields="fields"
+                :dropdownItem="dropdownItem"
+                @row-clicked="onRowClicked"
+                @Edit="handleEdit"
+                @Delete="handleDelete"
+              />
+
+              <div class="row" v-else>
+                <grid-component
+                  :data="courses"
+                  v-for="(courses, index) in courses"
+                  :key="index"
+                  @grid-clicked="onGridClicked"
+                ></grid-component>
+              </div>
+            </template>
+          </filter-component>
+          </div>
+          <div
+            v-show="currentTab == 3"
+            :class="{ 'fade show': currentTab == 3 }"
+          >
+            Tab 4 content
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card mt-3">
         <b-tabs content-class="mt-3" class="custom-tabs">
           <div class="">
             <b-tab title="Course Overiew" active>
-              <div class="border-bottom py-4 px-md-5 px-3">
-                <h2 class="brown24 my-3 graytext">Description</h2>
-                <div
-                  class="brownparagraph darktext"
-                  v-html="courseDetail.long_description"
-                ></div>
-              </div>
-
-              <div class="px-md-5 px-3 pb-5">
-                <h2 class="brown24 my-3 graytext">Scheme of work</h2>
-
-                <p
-                  class="
-                    lightgraytext
-                    medbrownparagraph
-                    d-flex
-                    align-items-center
-                  "
-                >
-                  <span
-                    class="iconify"
-                    data-icon="dashicons:info"
-                    data-width="20"
-                    data-height="20"
-                  ></span>
-
-                  <span class="mx-2">
-                    Here’s where you add course content—like lectures, course
-                    sections, assignments, and more. Click a + icon on the left
-                    to get started.</span
-                  >
-                </p>
-                <div>
-                  <b-icon icon="plus-square" @click="addScheme"></b-icon>
-
-                  <div class="fullborder p-5 my-2"></div>
-                </div></div
-            ></b-tab>
+             
+            </b-tab>
             <b-tab title="Instructors" class="">
               <div class="mx-3">
                 <filter-component>
@@ -107,7 +253,7 @@
             <b-tab title="Attendance" class=""> </b-tab>
           </div>
         </b-tabs>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -121,6 +267,7 @@ export default {
       courseDetail: {},
       schemeOfWork: [{ title: '', objective: 'objective' }],
       options: ['foo', 'bar', 'baz'],
+      currentTab: 0,
     }
   },
 

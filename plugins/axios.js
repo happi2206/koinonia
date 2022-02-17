@@ -2,6 +2,7 @@
 export default function ({ store, $axios, redirect }) {
     // set token
     $axios.setToken(localStorage.getItem('KOINONIA-TOKEN'), 'Bearer')
+
     // catch error
     $axios.onError(error => {
         console.log(error)

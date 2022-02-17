@@ -200,8 +200,8 @@
             </a>
             <ul v-show="currentMenu == 'instructor'">
               <li class="relative">
-                <a
-                  href="#!"
+                <nuxt-link
+                  to="/dashboard/courses"
                   class="
                     flex
                     items-center
@@ -221,34 +221,10 @@
                   "
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="dark"
-                  >Link 3</a
+                  >Courses</nuxt-link
                 >
               </li>
-              <li class="relative">
-                <a
-                  href="#!"
-                  class="
-                    flex
-                    items-center
-                    text-xs
-                    py-4
-                    pl-12
-                    pr-6
-                    h-6
-                    overflow-hidden
-                    text-gray-700 text-ellipsis
-                    whitespace-nowrap
-                    rounded
-                    hover:text-gray-900 hover:bg-gray-100
-                    transition
-                    duration-300
-                    ease-in-out
-                  "
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="dark"
-                  >Link 4</a
-                >
-              </li>
+              
             </ul>
           </li>
             <hr class="my-2">

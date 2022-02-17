@@ -1,20 +1,20 @@
 <template>
   <div v-if="Object.keys(courseDetail)" class="bg-white rounded p-3">
-    <div class="row">
-      <div class="col-md-3 px-0 pl-md-2">
-        <div
+    <div class="grid grid-cols-5 gap-4">
+       <div
           class="
+          col-span-1
             courseplaceholder
             d-flex
             align-items-center
             justify-content-center
           "
         >
-          <img src="~/assets/images/man1.png" alt="" class="img-fluid" />
+         <b-avatar class="w-100 h-100" square></b-avatar>
+          <!-- <img src="~/assets/images/man1.png" alt="" class="img-fluid" /> -->
         </div>
-      </div>
 
-      <div class="col-md-9">
+      <div class="col-span-4">
         <div
           class="
             border-bottom
@@ -23,10 +23,10 @@
             justify-content-between
           "
         >
-          <h2 class="largebrownparagraph bold700 text-capitalize mb-0">
+          <h2 class="text-3xl py-3 bold700 text-capitalize mb-0">
             {{ courseDetail.title }}
           </h2>
-          <div class="dropdown account-dropdown">
+          <!-- <div class="dropdown account-dropdown">
             <a
               href="#"
               class="
@@ -56,43 +56,41 @@
               <a class="dropdown-item medbrownparagraph" href="#">Option 1</a>
               <a class="dropdown-item medbrownparagraph" href="#">Option 2</a>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="my-2 row">
-          <div class="col-lg-3 col-6">
-            <p class="my-2 medbrownparagraph">
+          <div class="col-lg-4 col-12">
+            <p class="my-2 text-md">
               <span class="lightgraytext"> Class code:</span>
               {{ courseDetail.course_code }}
             </p>
-            <p class="my-2 medbrownparagraph">
+            <p class="my-2 text-md">
               <span class="lightgraytext"> Start Date:</span>
 
               {{
-                courseDetail.start_date
-                  ? courseDetail.start_date.slice(0, 10)
-                  : ''
+                courseDetail.start_date | DateFormat
               }}
             </p>
           </div>
           <div class="col-lg-3 col-6">
-            <p class="my-2 medbrownparagraph">
+            <p class="my-2 text-md">
               <span class="lightgraytext"> No of student:</span>
               2
             </p>
-            <p class="my-2 medbrownparagraph">
+            <p class="my-2 text-md">
               <span class="lightgraytext"> End Date:</span>
               {{
-                courseDetail.end_date ? courseDetail.end_date.slice(0, 10) : ''
+                courseDetail.end_date | DateFormat
               }}
             </p>
           </div>
         </div>
 
-        <div>
+        <!-- <div>
           <p class="medbrownparagraph">
             {{ courseDetail.short_description }}
           </p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

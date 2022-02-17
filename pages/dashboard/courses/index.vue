@@ -1,21 +1,21 @@
 <template>
   <div class="mt-5 horizontalspacing pt-md-5">
-    <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
-      <h2 class="largebrownparagraph mb-0">Courses</h2>
-      <button
+    <div class="flex items-center pt-5 justify-between mb-4">
+      <h2 class="text-4xl mb-0">Courses</h2>
+      <!-- <button
         class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
         data-toggle="modal"
         data-target="#addCourse"
         v-b-modal.addcourse
       >
         Add Course
-      </button>
+      </button> -->
 
       <!-- add course -->
       <b-modal id="addcourse" title="Add Course" hide-footer>
         <div class="modacontent">
           <form class="modabody" @submit.prevent="addCourse">
-            <div class="my-4">
+            <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Code
               </label>
@@ -24,10 +24,10 @@
                 v-model="courseData.course_code"
                 required
                 placeholder="e.g ECO23"
-                class="forminputs text-dark"
+                class="forminputs"
               />
             </div>
-            <div class="my-4">
+            <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Name
               </label>
@@ -36,10 +36,10 @@
                 v-model="courseData.title"
                 required
                 placeholder="e.g Alchemy"
-                class="forminputs text-dark"
+                class="forminputs"
               />
             </div>
-            <div class="my-4">
+            <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Subtitle
               </label>
@@ -48,10 +48,10 @@
                 v-model="courseData.short_description"
                 required
                 placeholder="e.g Alchemy"
-                class="forminputs text-dark"
+                class="forminputs"
               />
             </div>
-            <div class="my-4">
+            <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Description
               </label>
@@ -60,10 +60,10 @@
                 v-model="courseData.description"
                 required
                 placeholder="e.g Alchemy"
-                class="forminputs text-dark"
+                class="forminputs"
               />
             </div>
-            <div class="my-4">
+            <div class="my-2">
               <div class="row">
                 <div class="col-md-6">
                   <label for="" class="d-block medbrownparagraph graytext"
@@ -91,7 +91,7 @@
                 </div>
               </div>
             </div>
-            <div class="my-4">
+            <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Subtitle
               </label>
@@ -107,8 +107,7 @@
               </p>
             </div>
 
-            <pre>{{ imagedetail }}</pre>
-            <div class="my-4 d-flex justify-content-end">
+            <!-- <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
 
@@ -120,9 +119,8 @@
                   ref="fileup"
                   @change="handlefileupload($event)"
                 />
-                <!-- <input type="file" name="myfile" /> -->
               </div>
-            </div>
+            </div> -->
             <div class="my-4">
               <div class="d-flex justify-content-center">
                 <button
@@ -134,7 +132,7 @@
                     medbrownparagraph
                   "
                 >
-                  Create Event
+                  Create Course
                 </button>
               </div>
             </div>
@@ -276,88 +274,153 @@
       </b-modal>
     </div>
 
-    <div class="card bg-white rounded pt-4">
-      <b-tabs content-class="mt-3" class="custom-tabs">
-        <b-tab title="All Status" active>
-          <div class="mx-3">
-            <filter-component>
-              <template #default="{ visualization }">
-                <table-component
-                  :items="courses"
-                  v-if="visualization === 'list'"
-                  :fields="fields"
-                  :dropdownItem="dropdownItem"
-                  @row-clicked="onRowClicked"
-                  @Edit="handleEdit"
-                  @Delete="handleDelete"
-                />
+    <div class="bg-white p-5">
+      <ul
+        class="
+          nav nav-tabs
+          flex flex-col
+          md:flex-row
+          flex-wrap
+          list-none
+          border-b-0
+          pl-0
+          mb-4
+        "
+        id="tabs-tab"
+        role="tablist"
+      >
+        <li class="nav-item" role="presentation">
+          <a
+            @click.prevent="currentTab = 0"
+            class="
+              nav-link
+              block
+              font-medium
+              text-xs
+              leading-tight
+              uppercase
+              text-black
+              cursor-pointer
+              border-x-0 border-t-0 border-b-2 border-transparent
+              px-6
+              py-3
+              my-2
+              hover:border-transparent hover:bg-gray-100
+              focus:border-transparent
+            "
+            :class="{ active: currentTab == 0 }"
+            >All Status</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            @click.prevent="currentTab = 1"
+            class="
+              <!--
+              nav-link
+              -->
+              block
+              font-medium
+              text-xs
+              leading-tight
+              uppercase
+              cursor-pointer
+              border-x-0 border-t-0 border-transparent
+              px-6
+              py-3
+              my-2
+              text-black
+              hover:border-transparent hover:bg-gray-100
+              focus:border-transparent
+            "
+            :class="{ active: currentTab == 1 }"
+            >Open</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            @click.prevent="currentTab = 2"
+            class="
+              nav-link
+              block
+              font-medium
+              text-xs
+              leading-tight
+              cursor-pointer
+              uppercase
+              text-black
+              border-x-0 border-t-0 border-b-2 border-transparent
+              px-6
+              py-3
+              my-2
+              hover:border-transparent hover:bg-gray-100
+              focus:border-transparent
+            "
+            :class="{ active: currentTab == 2 }"
+            >On Going</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            @click.prevent="currentTab = 3"
+            class="
+              nav-link
+              disabled
+              pointer-events-none
+              block
+              text-black
+              font-medium
+              text-xs
+              leading-tight
+              cursor-pointer
+              uppercase
+              border-x-0 border-t-0 border-b-2 border-transparent
+              px-6
+              py-3
+              my-2
+              hover:border-transparent hover:bg-gray-100
+              focus:border-transparent
+            "
+            :class="{ active: currentTab == 3 }"
+            >Archived</a
+          >
+        </li>
+      </ul>
+      <div>
+        <div v-show="currentTab == 0" :class="{ 'fade show': currentTab == 0 }">
+          <filter-component>
+            <template #default="{ visualization }">
+              <table-component
+                :items="courses"
+                v-if="visualization === 'list'"
+                :fields="fields"
+                :dropdownItem="dropdownItem"
+                @row-clicked="onRowClicked"
+                @Edit="handleEdit"
+                @Delete="handleDelete"
+              />
 
-                <div class="row" v-else>
-                  <grid-component
-                    :data="courses"
-                    v-for="(courses, index) in courses"
-                    :key="index"
-                    @grid-clicked="onGridClicked"
-                  ></grid-component>
-                </div>
-              </template>
-            </filter-component>
-          </div>
-        </b-tab>
-        <b-tab title="Open" class=""><p>I'm the second tab</p></b-tab>
-        <b-tab title="On-going">
-          <div class="mx-3">
-            <filter-component>
-              <template #default="{ visualization }">
-                <table-component
-                  :items="courses"
-                  v-if="visualization === 'list'"
-                  :fields="fields"
-                  :dropdownItem="dropdownItem"
-                  @row-clicked="onRowClicked"
-                  @Edit="handleEdit"
-                  @Delete="handleDelete"
-                />
-
-                <div class="row" v-else>
-                  <grid-component
-                    :data="courses"
-                    v-for="(courses, index) in courses"
-                    :key="index"
-                    @grid-clicked="onGridClicked"
-                  ></grid-component>
-                </div>
-              </template>
-            </filter-component>
-          </div>
-        </b-tab>
-        <b-tab title="Archived">
-          <div class="mx-3">
-            <filter-component>
-              <template #default="{ visualization }">
-                <table-component
-                  :items="courses"
-                  v-if="visualization === 'list'"
-                  :fields="fields"
-                  :dropdownItem="dropdownItem"
-                  @row-clicked="onRowClicked"
-                  @Edit="handleEdit"
-                  @Delete="handleDelete"
-                />
-
-                <div class="row" v-else>
-                  <grid-component
-                    :data="courses"
-                    v-for="(courses, index) in courses"
-                    :key="index"
-                    @grid-clicked="onGridClicked"
-                  ></grid-component>
-                </div>
-              </template>
-            </filter-component>
-          </div>
-        </b-tab>
-      </b-tabs>
+              <div class="row" v-else>
+                <grid-component
+                  :data="courses"
+                  v-for="(courses, index) in courses"
+                  :key="index"
+                  @grid-clicked="onGridClicked"
+                ></grid-component>
+              </div>
+            </template>
+          </filter-component>
+        </div>
+        <div v-show="currentTab == 1" :class="{ 'fade show': currentTab == 1 }">
+          Tab 2 content
+        </div>
+        <div v-show="currentTab == 2" :class="{ 'fade show': currentTab == 2 }">
+          Tab 3 content
+        </div>
+        <div v-show="currentTab == 3" :class="{ 'fade show': currentTab == 3 }">
+          Tab 4 content
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -404,23 +467,8 @@ export default {
       },
       imagedetail: [],
       courses: [],
+      currentTab: 0,
     }
-  },
-
-  async fetch() {
-    let uri = this.user.is_administrator
-      ? 'course-v/get-all-course?page=1&size=50'
-      : 'course-v/get-current-instructor-courses?page=1&size=50'
-    const courses = await this.$axios.$get(uri)
-
-    this.courses = courses.items.map((e, i) => ({
-      serial: i,
-      check: '',
-      dots: '',
-      ...e,
-    }))
-
-    console.log(this.courses)
   },
 
   methods: {
@@ -449,6 +497,17 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    async getAllCourses() {
+      let uri =  `course-v/get-current-instructor-courses?page=1&size=50&searh=${null}`
+      const courses = await this.$axios.$get(uri)
+
+      this.courses = courses.items.map((e, i) => ({
+        serial: i,
+        check: '',
+        dots: '',
+        ...e,
+      }))
     },
 
     handlefileupload(event) {
@@ -510,6 +569,9 @@ export default {
       user: 'auth/user',
       token: 'auth/token',
     }),
+  },
+  mounted() {
+    this.getAllCourses()
   },
 }
 </script>

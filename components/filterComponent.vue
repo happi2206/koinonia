@@ -67,6 +67,9 @@
               <b-icon icon="search"></b-icon>
             </button>
           </div>
+          <div>
+            <button>Add students</button>
+          </div>
 
           <!-- <div class="mx-5">
             <slot name="besideFilterButton"></slot>
