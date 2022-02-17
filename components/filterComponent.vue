@@ -67,11 +67,11 @@
               <b-icon icon="search"></b-icon>
             </button>
           </div>
-          <div class="mx-2 bg-yellow-400 py-2 px-4">
-            <button>Add students</button>
-          </div>
+          <!-- <div class="mx-2 bg-yellow-400 py-2 px-4">
+            <slot></slot>
+          </div> -->
 
-          <!-- <div class="mx-5">
+          <div>
             <slot name="besideFilterButton"></slot>
           </div>
           <div id="filters-container" class="filters-container d-none">
@@ -89,7 +89,7 @@
                 />
               </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
       <hr />

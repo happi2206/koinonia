@@ -130,61 +130,97 @@
             v-show="currentTab == 0"
             :class="{ 'fade show': currentTab == 0 }"
           >
-           <course-overview :courseDetail="courseDetail"></course-overview>
+            <course-overview :courseDetail="courseDetail"></course-overview>
           </div>
           <div
             v-show="currentTab == 1"
             :class="{ 'fade show': currentTab == 1 }"
           >
             <filter-component>
-            <template #default="{ visualization }">
-              <table-component
-                :items="courses"
-                v-if="visualization === 'list'"
-                :fields="fields"
-                :dropdownItem="dropdownItem"
-                @row-clicked="onRowClicked"
-                @Edit="handleEdit"
-                @Delete="handleDelete"
-              />
+              <template #besideFilterButton>
+                <div class="ml-5">
+                  <button
+                    class="btn py-2 mainbtndashboard medbrownparagraph"
+                    v-b-modal.addInstructor
+                  >
+                    Add Instructor
+                  </button>
+                  <b-modal id="addInstructor" centered hide-header hide-footer>
+                    <h2 class="brownparagraph bold700 text-center my-3">
+                      Add Instructor
+                    </h2>
 
-              <div class="row" v-else>
-                <grid-component
-                  :data="courses"
-                  v-for="(courses, index) in courses"
-                  :key="index"
-                  @grid-clicked="onGridClicked"
-                ></grid-component>
-              </div>
-            </template>
-          </filter-component>
+                    <div class="content px-md-5 my-2">
+                      <div class="my-3">
+                        <label class="medbrownparagraph">Instructor Name</label>
+                        <v-select
+                          :options="instructors"
+                          v-model="addInstructor.id"
+                          label="other_name"
+                          :reduce="(option) => option.id"
+                          @input="sendLinkInput"
+                        ></v-select>
+                      </div>
+                      <div class="my-3">
+                        <label class="medbrownparagraph">Designation</label>
+                        <v-select
+                          :options="designations"
+                          @input="sendLinkInput"
+                        ></v-select>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mx-5 my-3">
+                      <button class="btn mainbtndashboard">
+                        Add Instructor
+                      </button>
+                    </div>
+                  </b-modal>
+                </div>
+              </template>
+              <template #default="{ visualization }">
+                <table-component
+                  :items="instructors"
+                  v-if="visualization === 'list'"
+                  :fields="fields"
+                />
+
+                <div class="row" v-else>
+                  <grid-component
+                    :data="instructors"
+                    v-for="(instructor, index) in instructors"
+                    :key="index"
+                  ></grid-component>
+                </div>
+              </template>
+            </filter-component>
           </div>
           <div
             v-show="currentTab == 2"
             :class="{ 'fade show': currentTab == 2 }"
           >
-             <filter-component>
-            <template #default="{ visualization }">
-              <table-component
-                :items="courses"
-                v-if="visualization === 'list'"
-                :fields="fields"
-                :dropdownItem="dropdownItem"
-                @row-clicked="onRowClicked"
-                @Edit="handleEdit"
-                @Delete="handleDelete"
-              />
+            <filter-component>
+              <template #default="{ visualization }">
+                <table-component
+                  :items="courses"
+                  v-if="visualization === 'list'"
+                  :fields="fields"
+                  :dropdownItem="dropdownItem"
+                  @row-clicked="onRowClicked"
+                  @Edit="handleEdit"
+                  @Delete="handleDelete"
+                />
 
-              <div class="row" v-else>
-                <grid-component
-                  :data="courses"
-                  v-for="(courses, index) in courses"
-                  :key="index"
-                  @grid-clicked="onGridClicked"
-                ></grid-component>
-              </div>
-            </template>
-          </filter-component>
+                <div class="row" v-else>
+                  <grid-component
+                    :data="courses"
+                    v-for="(courses, index) in courses"
+                    :key="index"
+                    @grid-clicked="onGridClicked"
+                  ></grid-component>
+                </div>
+              </template>
+            </filter-component>
           </div>
           <div
             v-show="currentTab == 3"
@@ -194,66 +230,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="card mt-3">
-        <b-tabs content-class="mt-3" class="custom-tabs">
-          <div class="">
-            <b-tab title="Course Overiew" active>
-             
-            </b-tab>
-            <b-tab title="Instructors" class="">
-              <div class="mx-3">
-                <filter-component>
-                  <template #besideFilterButton>
-                    <div>
-                      <button
-                        class="btn py-3 mainbtndashboard medbrownparagraph"
-                        v-b-modal.addinstructor
-                      >
-                        Add Instructor
-                      </button>
-
-                      <b-modal
-                        id="addinstructor"
-                        centered
-                        hide-header
-                        hide-footer
-                      >
-                        <h2 class="brownparagraph bold700 text-center my-3">
-                          Add Instructor
-                        </h2>
-                        <div class="content px-5">
-                          <v-select :options="options"></v-select>
-                        </div>
-
-                        <div class="d-flex justify-content-center mx-5 my-3">
-                          <button class="btn mainbtndashboard">
-                            Add Instructor
-                          </button>
-                        </div>
-                      </b-modal>
-                    </div>
-                  </template>
-                </filter-component>
-
-                <table-component
-                  :items="courses"
-                  :fields="fields"
-                  :dropdownItem="dropdownItem"
-                  @row-clicked="onRowClicked"
-                  @Edit="handleEdit"
-                  @Delete="handleDelete"
-                />
-              </div>
-            </b-tab>
-            <b-tab title="Students" class=""> </b-tab>
-            <b-tab title="Assignment" class=""> </b-tab>
-            <b-tab title="Grade book" class=""> </b-tab>
-            <b-tab title="Praticum" class=""> </b-tab>
-            <b-tab title="Attendance" class=""> </b-tab>
-          </div>
-        </b-tabs>
-      </div> -->
     </div>
   </div>
 </template>
@@ -268,6 +244,9 @@ export default {
       schemeOfWork: [{ title: '', objective: 'objective' }],
       options: ['foo', 'bar', 'baz'],
       currentTab: 0,
+      instructors: [],
+      designations: ['Lead Instructor', 'Teacher'],
+      addInstructor: [{ id: [] }],
     }
   },
 
@@ -288,7 +267,10 @@ export default {
       const instructors = await this.$axios.$get(
         `instructors-v/get-all-instructors?page=1&size=50`
       )
-      console.log(instructors)
+
+      // console.log('here', instructors.items)
+
+      this.instructors.push(...instructors.items)
     } catch (e) {
       console.log(e)
     }
