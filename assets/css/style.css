@@ -275,9 +275,9 @@ input.subscribebtn {
   border-radius: 0;
 }
 .subscribebtn:hover {
-  border: #0734aa;
-  color: #0734aa;
-  background: transparent;
+  /* border: #0734aa; */
+  color: black;
+  background: #ffcd06;
 }
 button.subscribebtn {
   background-color: #0734aa;
@@ -1019,15 +1019,16 @@ button.loginbtn {
   border-radius: 50%;
 }
 .absolutecontainer.absolutes.absolute1 {
-  top: 40px;
-  left: 40px;
+  top: 150px;
+  left: 200px;
+  z-index: 20;
 }
 .absolutecontainer.absolutes.absolute1 img {
   height: 133px;
   width: 133px;
 }
 .absolutecontainer.absolutes.absolute2 {
-  top: 80px;
+  top: 150px;
   right: 180px;
 }
 .absolutecontainer.absolutes.absolute2 img {
@@ -1036,15 +1037,15 @@ button.loginbtn {
 }
 .absolutecontainer.absolutes.absolute3 {
   top: 200px;
-  left: 200px;
+  left: 250px;
 }
 .absolutecontainer.absolutes.absolute3 img {
   height: 250px;
   width: 250px;
 }
 .absolutecontainer.absolutes.absolute4 {
-  top: 500px;
-  left: 100px;
+  top: 400px;
+  left: 350px;
 }
 .absolutecontainer.absolutes.absolute4 img {
   height: 200px;

@@ -79,6 +79,10 @@ export default {
   axios: {
     baseURL: process.env.BASE_URL,
   },
+  loading: {
+    color: '#ffcd06',
+    height: '5px',
+  },
 
   env: {
     BASE_URL: process.env.BASE_URL,

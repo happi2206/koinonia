@@ -15,7 +15,7 @@
           <div class="content px-md-5 my-2">
             <v-select
               :options="alluserdetails"
-              label="other_name"
+              label="other_name surname"
               :reduce="(option) => option.id"
               @input="sendLinkInput"
             ></v-select>

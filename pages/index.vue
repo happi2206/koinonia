@@ -38,17 +38,13 @@
           <div class="row mt-4">
             <div class="col-lg-6 my-3 my-lg-0" :key="index" v-for="(course, index) in courses">
               <div class="bg-white rounded">
-                <div class="p-2 d-flex flex-sm-row flex-column">
-                  <div class="coursewidth1 d-flex align-items-center">
-                    <img
-                      src="~/assets/images/man1.png"
-                      alt=""
-                      class="img-fluid"
-                    />
+                <div class="p-2 flex gap-2">
+                  <div class="d-flex align-items-center">
+                  <b-avatar square :size="200"></b-avatar>
                   </div>
 
-                  <div class="p-3 coursewidth2">
-                    <h1 class="largebrownparagraph bold700 text-capitalize">
+                  <div class="p-3">
+                    <h1 class="text-3xl bold700 text-capitalize">
                       {{course.title}}
                     </h1>
                     <div class="my-2 row">
@@ -65,11 +61,9 @@
                         </p>
                       </div>
                     </div>
-                    <p class="my-2 medbrownparagraph">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,it
-                      esse cillum dolore eu fugiat nulla pariatur....
+                    <p class="my-2 medbrownparagraph" v-html="$options.filters.shortTextFilter(course.long_description)">
                     </p>
-                    <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p>
+                    <!-- <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p> -->
                   </div>
                 </div>
               </div>

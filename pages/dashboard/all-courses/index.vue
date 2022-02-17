@@ -15,7 +15,7 @@
       <b-modal id="addcourse" title="Add Course" hide-footer>
         <div class="modacontent">
           <form class="modabody" @submit.prevent="addCourse">
-            <div class="my-2">
+            <!-- <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Code
               </label>
@@ -26,7 +26,7 @@
                 placeholder="e.g ECO23"
                 class="forminputs"
               />
-            </div>
+            </div> -->
             <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Name
@@ -107,6 +107,8 @@
               </p>
             </div>
 
+          
+
             <!-- <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
@@ -122,7 +124,8 @@
               </div>
             </div> -->
             <div class="my-4">
-              <div class="d-flex justify-content-center">
+              <div class="flex gap-3 justify-content-center">
+                  <upload-file v-model="courseData.feature_image"/>
                 <button
                   class="
                     btn
@@ -312,13 +315,11 @@
             >All Status</a
           >
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
           <a
             @click.prevent="currentTab = 1"
             class="
-              <!--
-              nav-link
-              -->
+             
               block
               font-medium
               text-xs
@@ -384,7 +385,7 @@
             :class="{ active: currentTab == 3 }"
             >Archived</a
           >
-        </li>
+        </li> -->
       </ul>
       <div>
         <div v-show="currentTab == 0" :class="{ 'fade show': currentTab == 0 }">
@@ -446,6 +447,7 @@ export default {
         feature_image: '',
         start_date: '',
         end_date: '',
+        feature_image:''
       },
       fields: [
         { key: 'check', label: '', sortable: true },
@@ -507,7 +509,7 @@ export default {
           'course-v/get-all-course?page=1&size=50&search=hello'
         : 'course-v/get-current-instructor-courses?page=1&size=50&search=Tanya'
       const courses = await this.$axios.$get(uri)
-
+      courses.items = courses.items.reverse()
       this.courses = courses.items.map((e, i) => ({
         serial: i,
         check: '',
