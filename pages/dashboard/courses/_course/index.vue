@@ -459,7 +459,7 @@ export default {
       console.log(e)
     }
     try {
-      const students = await this.$axios.$get(
+      const students = await this.$axios.$post(
         `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`,
         this.student
       )
