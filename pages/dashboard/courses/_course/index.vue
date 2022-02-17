@@ -130,9 +130,7 @@
             v-show="currentTab == 0"
             :class="{ 'fade show': currentTab == 0 }"
           >
-            <Coursecourse-overview
-              :courseDetail="courseDetail"
-            ></Coursecourse-overview>
+            <course-overview :courseDetail="courseDetail"></course-overview>
           </div>
           <div
             v-show="currentTab == 1"
