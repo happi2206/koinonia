@@ -108,9 +108,9 @@
         <!-- <b-button size="sm"> extra_icons </b-button> -->
       </template>
       <template #cell(dots)="row">
-        <b-dropdown variant="link" toggle-class="text-decoration-none" no-caret>
-          <template #button-content>
-            <b-icon icon="three-dots-vertical"></b-icon>
+        <b-dropdown variant="link" toggle-class="text-decoration-none text-center" no-caret>
+          <template class="p-0 mx-auto text-center" #button-content>
+            <b-icon icon="three-dots"></b-icon>
           </template>
           <template v-if="dropdownItem.length > 0">
             <b-dropdown-item

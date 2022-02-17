@@ -239,10 +239,10 @@
 
               <div>
                 <b-modal id="link" centered hide-header hide-footer>
-                  <h2 class="brownparagraph bold700 text-center my-3">
+                  <h2 class="brownparagraph bold700 my-3">
                     Link as {{ titlecontent }}
                   </h2>
-                  <div class="content px-5">
+                  <div class="content px-1">
                     <input
                       type="text"
                       class="forminputs"
@@ -250,8 +250,8 @@
                     />
                   </div>
 
-                  <div class="d-flex justify-content-center mx-5 my-3">
-                    <button class="btn subscribebtn">Link</button>
+                  <div class="d-flex justify-content-center w-full  my-2">
+                    <button class="btn py-2 rounded subscribebtn">Link</button>
                   </div>
                 </b-modal>
               </div>

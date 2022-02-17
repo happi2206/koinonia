@@ -55,22 +55,20 @@
             mb-1 mb-md-0
           "
         >
-          <div class="searchbar my-2 my-md-0 d-flex flwidth">
+          <div class="flex">
             <input
               type="text"
-              name=""
-              id=""
               required
               placeholder="Search "
-              class="forminputs searchbar text-dark"
+              class="px-3 py-2 border"
             />
 
-            <button class="btn searchbtninside">
+            <button class="bg-yellow-400 py-2 px-3">
               <b-icon icon="search"></b-icon>
             </button>
           </div>
 
-          <div class="mx-5">
+          <!-- <div class="mx-5">
             <slot name="besideFilterButton"></slot>
           </div>
           <div id="filters-container" class="filters-container d-none">
@@ -88,7 +86,7 @@
                 />
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <hr />
