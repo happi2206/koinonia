@@ -105,14 +105,13 @@
               @click.prevent="currentTab = 3"
               class="
                 nav-link
-                pointer-events-none
                 block
-                text-black
                 font-medium
                 text-xs
                 leading-tight
                 cursor-pointer
                 uppercase
+                text-black
                 border-x-0 border-t-0 border-b-2 border-transparent
                 px-6
                 py-3
@@ -124,6 +123,7 @@
               >Attendance</a
             >
           </li>
+       
         </ul>
         <div>
           <div

@@ -10,7 +10,7 @@
           justify-content-center
         "
       >
-        <b-avatar class="w-100 h-100" square></b-avatar>
+        <b-avatar :size="150" :src="courseDetail.feature_image" square></b-avatar>
         <!-- <img src="~/assets/images/man1.png" alt="" class="img-fluid" /> -->
       </div>
 
@@ -23,7 +23,7 @@
             justify-content-between
           "
         >
-          <h2 class="brownparagraph py-3 bold700 text-capitalize mb-0">
+          <h2 class="text-3xl py-3 bold700 text-capitalize mb-0">
             {{ courseDetail.title }}
           </h2>
           <!-- <div class="dropdown account-dropdown">
@@ -70,7 +70,7 @@
               {{ courseDetail.start_date | DateFormat }}
             </p>
           </div>
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <p class="my-2 text-md">
               <span class="lightgraytext"> No of student:</span>
               2
