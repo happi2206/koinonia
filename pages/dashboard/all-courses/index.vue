@@ -504,8 +504,10 @@ export default {
     },
     async getAllCourses() {
       let uri = this.user.is_administrator
-        ? 'course-v/get-all-course?page=1&size=50'
-        : 'course-v/get-current-instructor-courses?page=1&size=50'
+        ? //  get-all-course-instructors?course_id=4&search=r&page=1&size=50
+
+          'course-v/get-all-course?page=1&size=50&search=hello'
+        : 'course-v/get-current-instructor-courses?page=1&size=50&search=Tanya'
       const courses = await this.$axios.$get(uri)
       courses.items = courses.items.reverse()
       this.courses = courses.items.map((e, i) => ({
