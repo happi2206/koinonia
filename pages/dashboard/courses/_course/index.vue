@@ -5,7 +5,7 @@
         <a
           href="#"
           @click.prevent="$router.go(-1)"
-          class="text-xl mainbluecolor"
+          class="brownparagraph bold700 mainbluecolor"
         >
           <b-icon icon="arrow-left"></b-icon>
           Courses
@@ -199,23 +199,54 @@
             :class="{ 'fade show': currentTab == 2 }"
           >
             <filter-component>
+              <template #besideFilterButton>
+                <div class="ml-5">
+                  <button
+                    class="btn py-2 mainbtndashboard medbrownparagraph"
+                    v-b-modal.addStudent
+                  >
+                    Add Student
+                  </button>
+                  <b-modal id="addStudent" centered hide-header hide-footer>
+                    <h2 class="brownparagraph bold700 text-center my-3">
+                      Add Student
+                    </h2>
+
+                    <div class="content px-md-5 my-2">
+                      <div class="my-3">
+                        <label class="medbrownparagraph">Student Name</label>
+                        <v-select
+                          :options="students"
+                          v-model="addStudent"
+                          label="other_name"
+                          :reduce="(option) => option.id"
+                        ></v-select>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mx-5 my-3">
+                      <button
+                        class="btn mainbtndashboard"
+                        @click="addStudenttoCourse"
+                      >
+                        Add Student
+                      </button>
+                    </div>
+                  </b-modal>
+                </div>
+              </template>
               <template #default="{ visualization }">
                 <table-component
-                  :items="courses"
+                  :items="students"
                   v-if="visualization === 'list'"
                   :fields="fields"
-                  :dropdownItem="dropdownItem"
-                  @row-clicked="onRowClicked"
-                  @Edit="handleEdit"
-                  @Delete="handleDelete"
                 />
 
                 <div class="row" v-else>
                   <grid-component
-                    :data="courses"
-                    v-for="(courses, index) in courses"
+                    :data="students"
+                    v-for="(student, index) in students"
                     :key="index"
-                    @grid-clicked="onGridClicked"
                   ></grid-component>
                 </div>
               </template>
@@ -244,8 +275,10 @@ export default {
       options: ['foo', 'bar', 'baz'],
       currentTab: 0,
       instructors: [],
+      students: [],
       designations: ['Lead Instructor', 'Teacher'],
       addInstructor: '',
+      addStudent: '',
     }
   },
 
@@ -267,16 +300,20 @@ export default {
         `instructors-v/get-all-instructors?page=1&size=50`
       )
 
-      // console.log('here', instructors.items)
-
       this.instructors.push(...instructors.items)
     } catch (e) {
       console.log(e)
     }
+    try {
+      const students = await this.$axios.$get(
+        `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
+      )
 
-    // console.log('instructors', instructors)
-
-    console.log(courses)
+      console.log(students)
+      this.students.push(...students.items)
+    } catch (e) {
+      console.log(e)
+    }
   },
 
   methods: {
@@ -290,6 +327,20 @@ export default {
         )
 
         this.$toast.success('Instructor added Successfully')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async addStudenttoCourse() {
+      try {
+        await this.$axios.$post(
+          `course-v/add-students-to-a-course?course_id=${this.$route.params.course}`,
+          {
+            ids: [`${this.addStudent}`],
+          }
+        )
+
+        this.$toast.success('Student added Successfully')
       } catch (e) {
         console.log(e)
       }
