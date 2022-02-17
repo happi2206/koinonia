@@ -238,9 +238,9 @@ a.loginbtndashboard {
   color: #0734aa;
 } */
 
-/* .nuxt-link-exact-active .nuxt-link-active{
-  outline: none;
-  text-decoration: none;
+/* .nuxt-link-exact-active {
+  background: #ffcd0624;
+  margin: 10px 10px;
 } */
 a:hover {
   text-decoration: none;
@@ -752,6 +752,7 @@ button.loginbtn {
   background: #ffcd0624;
   margin: 0px 10px;
 }
+
 .sidebar-wrapper .sidebar-menu a {
   text-decoration: none;
 }

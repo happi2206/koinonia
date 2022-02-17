@@ -408,18 +408,21 @@ export default {
   },
 
   async fetch() {
-    let uri = this.user.is_administrator
-      ? 'course-v/get-all-course?page=1&size=50'
-      : 'course-v/get-current-instructor-courses?page=1&size=50'
-    const courses = await this.$axios.$get(uri)
+    try {
+      let uri = this.user.is_administrator
+        ? 'course-v/get-all-course?page=1&size=50'
+        : 'course-v/get-current-instructor-courses?page=1&size=50'
+      const courses = await this.$axios.$get(uri)
 
-    this.courses = courses.items.map((e, i) => ({
-      serial: i,
-      check: '',
-      dots: '',
-      ...e,
-    }))
-
+      this.courses = courses.items.map((e, i) => ({
+        serial: i,
+        check: '',
+        dots: '',
+        ...e,
+      }))
+    } catch (e) {
+      console.log(e)
+    }
     console.log(this.courses)
   },
 

@@ -33,6 +33,10 @@ export default {
     '~/plugins/luxon.js',
   ],
 
+  // router: {
+  //   linkExactActiveClass: 'nuxtlinkactive',
+  // },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 

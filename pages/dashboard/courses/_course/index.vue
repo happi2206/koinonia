@@ -11,101 +11,27 @@
           Courses
         </a>
       </div>
+
+      <!-- header card component -->
       <header-card :courseDetail="courseDetail" />
 
       <div class="card mt-3">
         <b-tabs content-class="mt-3" class="custom-tabs">
-          <div class="">
-            <b-tab title="Course Overiew" active>
-              <div class="border-bottom py-4 px-md-5 px-3">
-                <h2 class="brown24 my-3 graytext">Description</h2>
-                <div
-                  class="brownparagraph darktext"
-                  v-html="courseDetail.long_description"
-                ></div>
-              </div>
-
-              <div class="px-md-5 px-3 pb-5">
-                <h2 class="brown24 my-3 graytext">Scheme of work</h2>
-
-                <p
-                  class="
-                    lightgraytext
-                    medbrownparagraph
-                    d-flex
-                    align-items-center
-                  "
-                >
-                  <span
-                    class="iconify"
-                    data-icon="dashicons:info"
-                    data-width="20"
-                    data-height="20"
-                  ></span>
-
-                  <span class="mx-2">
-                    Here’s where you add course content—like lectures, course
-                    sections, assignments, and more. Click a + icon on the left
-                    to get started.</span
-                  >
-                </p>
-                <div>
-                  <b-icon icon="plus-square" @click="addScheme"></b-icon>
-
-                  <div class="fullborder p-5 my-2"></div>
-                </div></div
-            ></b-tab>
-            <b-tab title="Instructors" class="">
-              <div class="mx-3">
-                <filter-component>
-                  <template #besideFilterButton>
-                    <div>
-                      <button
-                        class="btn py-3 mainbtndashboard medbrownparagraph"
-                        v-b-modal.addinstructor
-                      >
-                        Add Instructor
-                      </button>
-
-                      <b-modal
-                        id="addinstructor"
-                        centered
-                        hide-header
-                        hide-footer
-                      >
-                        <h2 class="brownparagraph bold700 text-center my-3">
-                          Add Instructor
-                        </h2>
-                        <div class="content px-5">
-                          <v-select :options="options"></v-select>
-                        </div>
-
-                        <div class="d-flex justify-content-center mx-5 my-3">
-                          <button class="btn mainbtndashboard">
-                            Add Instructor
-                          </button>
-                        </div>
-                      </b-modal>
-                    </div>
-                  </template>
-                </filter-component>
-
-                <table-component
-                  :items="courses"
-                  :fields="fields"
-                  :dropdownItem="dropdownItem"
-                  @row-clicked="onRowClicked"
-                  @Edit="handleEdit"
-                  @Delete="handleDelete"
-                />
-              </div>
-            </b-tab>
-            <b-tab title="Students" class=""> </b-tab>
-            <b-tab title="Assignment" class=""> </b-tab>
-            <b-tab title="Grade book" class=""> </b-tab>
-            <b-tab title="Praticum" class=""> </b-tab>
-            <b-tab title="Attendance" class=""> </b-tab>
-          </div>
+          <b-tab title="Course Overiew" active>
+            <CourseDescription :courseDetail="courseDetail" />
+          </b-tab>
+          <b-tab title="Instructors" class="">
+            <!-- <CourseInstructors /> -->
+          </b-tab>
+          <b-tab title="Students" class="">
+            <CourseStudent />
+          </b-tab>
+          <b-tab title="Assignment" class=""> coming soon </b-tab>
+          <b-tab title="Grade book" class=""> coming soon </b-tab>
+          <b-tab title="Praticum" class=""> coming soon </b-tab>
+          <b-tab title="Attendance" class="">
+            <CourseAttendance @postEvent="addEvent" :allevents="allevents" />
+          </b-tab>
         </b-tabs>
       </div>
     </div>
@@ -119,44 +45,59 @@ export default {
   data() {
     return {
       courseDetail: {},
-      schemeOfWork: [{ title: '', objective: 'objective' }],
+      allevents: [],
+
       options: ['foo', 'bar', 'baz'],
+      instructorsInfo: {},
+      students: [],
     }
   },
 
   async fetch() {
-    // console.log(this.$route.params.course)
-
     try {
       const courses = await this.$axios.$get(
         `course-v/get-a-course?course_id=${this.$route.params.course}`
       )
       this.courseDetail = courses
       console.log(this.courseDetail)
+
+      // this.$toast.success('courses')
     } catch (e) {
       console.log(e)
     }
 
     try {
-      const instructors = await this.$axios.$get(
-        `instructors-v/get-all-instructors?page=1&size=50`
+      const students = await this.$axios.$get(
+        `course-v/get-all-course-student?course_id=${this.$route.params.course}&page=1&size=50`
       )
-      console.log(instructors)
+      console.log('students from main are', students)
+      this.students = students
     } catch (e) {
       console.log(e)
     }
 
-    // console.log('instructors', instructors)
-
-    console.log(courses)
+    try {
+      const events = await this.$axios.$get(
+        `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
+      )
+      console.log('students from main are', events)
+      this.allevents.push(events)
+    } catch (e) {
+      console.log(e)
+    }
   },
 
   methods: {
-    addScheme() {
-      this.schemeOfWork.push({
-        title: '',
-        objective: '',
-      })
+    async addEvent() {
+      try {
+        await this.$axios.$post(
+          `course-v/add-course-event?course_id=${this.$route.params.course}`
+        )
+
+        this.$toast.success('Event Added Successfully')
+      } catch (e) {
+        console.log(e)
+      }
     },
   },
 }

@@ -55,7 +55,10 @@
             mb-1 mb-md-0
           "
         >
-          <div class="searchbar my-2 my-md-0 d-flex flwidth">
+          <div
+            class="searchbar my-2 my-md-0 d-flex flwidth"
+            v-show="!issearchdisabled"
+          >
             <input
               type="text"
               name=""
@@ -91,6 +94,9 @@
           </div>
         </div>
       </div>
+
+      <slot name="belowFilterButton"></slot>
+
       <hr />
       <slot :visualization="visualization"></slot>
     </div>
