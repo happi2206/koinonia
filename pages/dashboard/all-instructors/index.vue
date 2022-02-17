@@ -1,7 +1,31 @@
 <template>
   <div class="mt-5 horizontalspacing pt-md-5">
     <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
-      <h2 class="text-4xl mb-0">Instructors</h2>
+      <h2 class="largebrownparagraph bold700 mb-0">Instructors</h2>
+      <div>
+        <button class="btn mainbtn py-2" v-b-modal.addInstructor>
+          Add Instructor
+        </button>
+
+        <b-modal id="addInstructor" centered hide-header hide-footer>
+          <h2 class="brownparagraph bold700 text-center my-3">
+            Add Instructor
+          </h2>
+
+          <div class="content px-md-5 my-2">
+            <v-select
+              :options="alluserdetails"
+              label="email"
+              :reduce="(option) => option.id"
+              @input="shareLinkCode"
+            ></v-select>
+          </div>
+
+          <div class="d-flex justify-content-center mx-5 my-3">
+            <button class="btn mainbtndashboard">Add Instructor</button>
+          </div>
+        </b-modal>
+      </div>
     </div>
 
     <div class="mt-2">
@@ -33,11 +57,14 @@ export default {
         { key: 'dots', label: 'Action', sortable: true },
       ],
       userdetails: [],
+      alluserdetails: [],
+      user: ['sample', 'no'],
     }
   },
 
   mounted() {
     this.getUsers()
+    this.getAllUsers()
   },
 
   methods: {
@@ -60,6 +87,14 @@ export default {
       )
 
       this.userdetails.push(...users.items)
+      console.log('users', users.items)
+    },
+    async getAllUsers() {
+      const users = await this.$axios.$get(
+        `admin-v/get-all-register-users?page=1&size=50`
+      )
+
+      this.alluserdetails.push(...users.items)
       console.log('users', users.items)
     },
   },

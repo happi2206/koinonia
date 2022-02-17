@@ -89,7 +89,7 @@
                   >Courses</nuxt-link
                 >
               </li>
-              <li class="relative">
+              <!-- <li class="relative">
                 <nuxt-link
                   to="/dashboard/all-users"
                   class="
@@ -113,7 +113,7 @@
                   data-mdb-ripple-color="dark"
                   >Users</nuxt-link
                 >
-              </li>
+              </li> -->
               <li class="relative">
                 <nuxt-link
                   to="/dashboard/all-instructors"
@@ -224,10 +224,9 @@
                   >Courses</nuxt-link
                 >
               </li>
-              
             </ul>
           </li>
-            <hr class="my-2">
+          <hr class="my-2" />
           <li class="relative" id="sidenavEx3">
             <a
               @click.prevent="setCurrentMenu('courses')"
@@ -379,8 +378,9 @@ export default {
   },
   methods: {
     setCurrentMenu(payload) {
-      this.currentMenu == payload?this.currentMenu = null: this.currentMenu = payload
-      
+      this.currentMenu == payload
+        ? (this.currentMenu = null)
+        : (this.currentMenu = payload)
     },
   },
   mounted() {
