@@ -5,7 +5,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Space Grotesk' !important;
-  font-weight: 400;
+
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
 html {
@@ -131,7 +138,7 @@ html body main {
 
 button.mainbtn {
   background-color: #ffcd06;
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -143,7 +150,7 @@ button.mainbtn {
 
 button.tertiarybtn {
   background-color: #00b2ff;
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;

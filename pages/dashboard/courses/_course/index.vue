@@ -130,7 +130,9 @@
             v-show="currentTab == 0"
             :class="{ 'fade show': currentTab == 0 }"
           >
-            <course-overview :courseDetail="courseDetail"></course-overview>
+            <Coursecourse-overview
+              :courseDetail="courseDetail"
+            ></Coursecourse-overview>
           </div>
           <div
             v-show="currentTab == 1"
@@ -181,7 +183,6 @@
                 <table-component
                   :items="instructors"
                   v-if="visualization === 'list'"
-                  :fields="fields"
                 />
 
                 <div class="row" v-else>
@@ -239,7 +240,6 @@
                 <table-component
                   :items="students"
                   v-if="visualization === 'list'"
-                  :fields="fields"
                 />
 
                 <div class="row" v-else>
@@ -256,7 +256,7 @@
             v-show="currentTab == 3"
             :class="{ 'fade show': currentTab == 3 }"
           >
-            Tab 4 content
+            Tab 4 content ii
           </div>
         </div>
       </div>
