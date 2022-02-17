@@ -57,7 +57,7 @@ export default {
       const students = await this.$axios.$get(
         `course-v/get-all-course-student?course_id=${this.$route.params.course}&page=1&size=50`
       )
-      console.log('students are', students)
+      console.log('students from component are', students)
 
       // this.$toast.success('courses')
     } catch (e) {
