@@ -155,23 +155,22 @@
                         <label class="medbrownparagraph">Instructor Name</label>
                         <v-select
                           :options="instructors"
-                          v-model="addInstructor.id"
+                          v-model="addInstructor"
                           label="other_name"
                           :reduce="(option) => option.id"
-                          @input="sendLinkInput"
                         ></v-select>
                       </div>
                       <div class="my-3">
                         <label class="medbrownparagraph">Designation</label>
-                        <v-select
-                          :options="designations"
-                          @input="sendLinkInput"
-                        ></v-select>
+                        <v-select :options="designations"></v-select>
                       </div>
                     </div>
 
                     <div class="d-flex justify-content-center mx-5 my-3">
-                      <button class="btn mainbtndashboard">
+                      <button
+                        class="btn mainbtndashboard"
+                        @click="addInstructortoCourse"
+                      >
                         Add Instructor
                       </button>
                     </div>
@@ -246,7 +245,7 @@ export default {
       currentTab: 0,
       instructors: [],
       designations: ['Lead Instructor', 'Teacher'],
-      addInstructor: [{ id: [] }],
+      addInstructor: '',
     }
   },
 
@@ -281,6 +280,20 @@ export default {
   },
 
   methods: {
+    async addInstructortoCourse() {
+      try {
+        await this.$axios.$post(
+          `course-v/add-instructor-to-a-course?course_id=${this.$route.params.course}`,
+          {
+            ids: [`${this.addInstructor}`],
+          }
+        )
+
+        this.$toast.success('Instructor added Successfully')
+      } catch (e) {
+        console.log(e)
+      }
+    },
     addScheme() {
       this.schemeOfWork.push({
         title: '',
