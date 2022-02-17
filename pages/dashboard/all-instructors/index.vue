@@ -15,9 +15,9 @@
           <div class="content px-md-5 my-2">
             <v-select
               :options="alluserdetails"
-              label="email"
+              label="other_name"
               :reduce="(option) => option.id"
-              @input="shareLinkCode"
+              @input="sendLinkInput"
             ></v-select>
           </div>
 
@@ -35,6 +35,7 @@
           :fields="fields"
           :dropdownItem="dropdownItem"
           @Share_Link_Code="shareLinkCode"
+          @Delete_Instructor="handleDelete"
         />
       </div>
     </div>
@@ -48,7 +49,7 @@ export default {
 
   data() {
     return {
-      dropdownItem: ['Share_Link_Code'],
+      dropdownItem: ['Share_Link_Code', 'Delete_Instructor'],
       fields: [
         // { key: 'id', sortable: true },
         { key: 'other_name', sortable: true },
@@ -68,7 +69,29 @@ export default {
   },
 
   methods: {
+    async sendLinkInput(e) {
+      console.log('on change', e)
+      try {
+        await this.$axios.$post(
+          `admin-v/generate-instructor-invite-code?user_id=${e}`
+        )
+
+        this.$toast.success('Linked Successfully')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async handleDelete(e) {
+      try {
+        await this.$axios.delete(`admin-v/delete-user?user_id=${e.id}`)
+        this.$fetch()
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
     async shareLinkCode(e) {
+      console.log('on change', e)
       try {
         await this.$axios.$post(
           `admin-v/generate-instructor-invite-code?user_id=${e.id}`
