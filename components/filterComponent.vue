@@ -67,7 +67,7 @@
               <b-icon icon="search"></b-icon>
             </button>
           </div>
-          <div>
+          <div class="mx-2 bg-yellow-400 py-2 px-4">
             <button>Add students</button>
           </div>
 
