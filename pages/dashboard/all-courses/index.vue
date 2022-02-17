@@ -1,7 +1,7 @@
 <template>
   <div class="mt-5 horizontalspacing pt-md-5">
     <div class="flex items-center pt-5 justify-between mb-4">
-      <h2 class="text-4xl mb-0">All Courses</h2>
+      <h2 class="largebrownparagraph bold700 mb-0">All Courses</h2>
       <button
         class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
         data-toggle="modal"
@@ -93,7 +93,7 @@
             </div>
             <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
-                >Course Subtitle
+                >Course Description
               </label>
               <VueEditor v-model="courseData.long_description" required>
               </VueEditor>
@@ -487,11 +487,13 @@ export default {
 
         let end_date = new Date(this.courseData.end_date)
         this.courseData.end_date = end_date.toISOString()
-
+        this.$bvModal.hide('addcourse')
         const response = await this.$axios.$post(
           `course-v/add-course`,
           this.courseData
         )
+
+        this.$fetch()
 
         console.log(response)
       } catch (e) {

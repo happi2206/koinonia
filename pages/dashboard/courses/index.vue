@@ -1,7 +1,7 @@
 <template>
   <div class="mt-5 horizontalspacing pt-md-5">
     <div class="flex items-center pt-5 justify-between mb-4">
-      <h2 class="text-4xl mb-0">Courses</h2>
+      <h2 class="largebrownparagraph bold700 mb-0">Courses</h2>
       <!-- <button
         class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
         data-toggle="modal"
@@ -499,7 +499,7 @@ export default {
       }
     },
     async getAllCourses() {
-      let uri =  `course-v/get-current-instructor-courses?page=1&size=50&searh=${null}`
+      let uri = `course-v/get-current-instructor-courses?page=1&size=50&searh=${null}`
       const courses = await this.$axios.$get(uri)
 
       this.courses = courses.items.map((e, i) => ({
