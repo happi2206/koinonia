@@ -10,82 +10,117 @@
             Add Student
           </button>
 
+          student: { other_name: '', avater: '', surname: '', status: '',
+          gender: '', phone: '', salutation: '', send_latest_updates: false,
+          user_type: { user_type: 'flat_user', link_code: 'string', email:
+          'user@example.com', type: 'student', }, },
+
           <b-modal id="addStudent" centered hide-header hide-footer>
             <h2 class="largebrownparagraph bold700 my-3">Create Event</h2>
-            <form class="modabody" @submit.prevent="addEvent">
+            <form class="modabody" @submit.prevent="addStudent">
               <div class="my-4">
                 <label for="" class="d-block medbrownparagraph graytext"
-                  >Event Name
+                  >Student Name
                 </label>
 
                 <input
                   type="text"
-                  v-model="events.name"
+                  v-model="student.other_name"
                   required
-                  placeholder="Event title"
+                  placeholder="Name of student"
                   class="forminputs text-dark"
                 />
               </div>
               <div class="my-4">
                 <label for="" class="d-block medbrownparagraph graytext"
-                  >Description
+                  >Last Name
                 </label>
                 <input
                   type="text"
-                  v-model="events.description"
-                  placeholder="Description"
+                  v-model="student.surname"
+                  placeholder="Surname"
                   class="forminputs text-dark"
                 />
               </div>
               <div class="my-4">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >Start Date
-                    </label>
+                <div class="">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Marital status
+                  </label>
+
+                  <div class="form-check form-check-inline">
                     <input
-                      type="date"
-                      v-model="events.start_date"
-                      required
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
+                      class="form-check-input"
+                      type="radio"
+                      name="marital-status"
+                      v-model="student.status"
+                      value="single"
                     />
+                    <label class="form-check-label" for="single">Single</label>
                   </div>
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >Start Time
-                    </label>
+                  <div class="form-check form-check-inline">
                     <input
-                      type="time"
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
+                      class="form-check-input"
+                      type="radio"
+                      name="marital-status"
+                      v-model="student.status"
+                      value="married"
                     />
+                    <label class="form-check-label" for="married"
+                      >Married</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="marital-status"
+                      v-model="student.status"
+                      value="divorced"
+                    />
+                    <label class="form-check-label" for="divorced"
+                      >Divorced</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="marital-status"
+                      v-model="student.status"
+                      value="widowed"
+                    />
+                    <label class="form-check-label" for="widowed"
+                      >Widowed</label
+                    >
                   </div>
                 </div>
               </div>
               <div class="my-4">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >End Date
-                    </label>
+                <div class="">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Gender
+                  </label>
+
+                  <div class="form-check form-check-inline">
                     <input
-                      type="date"
-                      v-model="events.end_date"
-                      required
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
+                      class="form-check-input"
+                      type="radio"
+                      name="Male"
+                      v-model="student.gender"
+                      value="single"
                     />
+                    <label class="form-check-label" for="single">Male</label>
                   </div>
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >End Time
-                    </label>
+                  <div class="form-check form-check-inline">
                     <input
-                      type="time"
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
+                      class="form-check-input"
+                      type="radio"
+                      name="Female"
+                      v-model="student.gender"
+                      value="Female"
                     />
+                    <label class="form-check-label" for="single">Female</label>
                   </div>
                 </div>
               </div>
@@ -100,9 +135,8 @@
                       mainbtndashboard
                       medbrownparagraph
                     "
-                    @click="sendEvent"
                   >
-                    Add Event
+                    Add Student
                   </button>
                 </div>
               </div>
@@ -137,7 +171,13 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      student: {
+        other_name: '',
+        surname: '',
+        status: '',
+      },
+    }
   },
 
   async fetch() {
