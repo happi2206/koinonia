@@ -52,6 +52,12 @@ export default {
       type: Object,
       default: () => {},
     },
+    courseid: {
+      type: String,
+    },
+    eventid: {
+      type: String,
+    },
   },
 
   data() {
@@ -61,12 +67,26 @@ export default {
     }
   },
 
+  async fetch() {
+    console.log('courseid', this.courseid)
+    try {
+      const student = await this.$axios.$get(
+        `course-v/get-a-student-event-record?course_id=${this.courseid}&student_id=${this.eventid}`
+      )
+
+      console.log(student)
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
   mounted() {
     if (this.eventDetail.students) {
       this.eventDetail.students.forEach((element) => {
         console.log(element)
         this.studentid = element.id
       })
+
       console.log('student', this.eventDetail.students)
     }
   },

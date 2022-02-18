@@ -11,7 +11,11 @@
           Event
         </a>
       </div>
-      <events-header-card :eventDetail="eventDetail" />
+      <events-header-card
+        :eventDetail="eventDetail"
+        :courseid="courseid"
+        :eventid="eventid"
+      />
     </div>
   </div>
 </template>
@@ -23,6 +27,8 @@ export default {
   data() {
     return {
       eventDetail: {},
+      courseid: '',
+      eventid: '',
     }
   },
 
@@ -32,6 +38,8 @@ export default {
       const events = await this.$axios.$get(
         `course-v/get-course-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
       )
+      this.courseid = this.$route.params.event
+      this.eventid = this.$route.params.eventclicked
       console.log(events)
       this.eventDetail = events
       console.log(this.eventDetail)
