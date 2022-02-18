@@ -549,14 +549,14 @@
               </template>
               <template #default="{ visualization }">
                 <table-component
-                  :items="instructors"
+                  :items="allEvents"
                   v-if="visualization === 'list'"
                 />
 
                 <div class="row" v-else>
                   <grid-component
-                    :data="instructors"
-                    v-for="(instructor, index) in instructors"
+                    :data="allEvents"
+                    v-for="(event, index) in instructors"
                     :key="index"
                   ></grid-component>
                 </div>
