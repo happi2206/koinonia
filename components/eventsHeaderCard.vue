@@ -79,7 +79,7 @@ export default {
         { key: 'end_date', label: 'Gender', sortable: true },
         { key: '', label: 'date/Time in', sortable: true },
         { key: '', label: 'Check in Method', sortable: true },
-        { key: 'state', label: 'status', sortable: true },
+        { key: 'state', sortable: true },
       ],
     }
   },
