@@ -33,6 +33,7 @@
         <table-component
           :items="userdetails"
           :fields="fields"
+          :busy="busy"
           :dropdownItem="dropdownItem"
           @Share_Link_Code="shareLinkCode"
           @Delete_Instructor="handleDelete"
@@ -60,6 +61,7 @@ export default {
       userdetails: [],
       alluserdetails: [],
       user: ['sample', 'no'],
+      busy: true,
     }
   },
 
@@ -105,12 +107,14 @@ export default {
       console.log(e)
     },
     async getUsers() {
+      this.busy = true
       const users = await this.$axios.$get(
         `instructors-v/get-all-instructors?page=1&size=50`
       )
 
       this.userdetails.push(...users.items)
       console.log('users', users.items)
+      this.busy = false
     },
     async getAllUsers() {
       const users = await this.$axios.$get(
