@@ -37,7 +37,7 @@
     <div class="bg-white rounded p-3 my-2">
       <filter-component>
         <template #state="{ data }">
-          <toggleButton :value="data.value === 'published' ? true : false" />
+          <toggleButton :value="data.value === 'status' ? true : false" />
         </template>
         <template #default="{ visualization }">
           <table-component
@@ -77,9 +77,9 @@ export default {
         { key: 'name', label: 'Surname', sortable: true },
         { key: 'start_date', label: 'Other Name', sortable: true },
         { key: 'end_date', label: 'Gender', sortable: true },
-        { key: '', label: 'date/Time in', sortable: true },
+        { key: 'check_in', label: 'date/Time in', sortable: true },
         { key: '', label: 'Check in Method', sortable: true },
-        { key: 'state', sortable: true },
+        { key: 'status', label: 'Status', sortable: true },
       ],
     }
   },
