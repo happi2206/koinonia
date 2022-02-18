@@ -392,6 +392,7 @@
               <table-component
                 :items="courses"
                 v-if="visualization === 'list'"
+                :busy="busy"
                 :fields="fields"
                 :dropdownItem="dropdownItem"
                 @row-clicked="onRowClicked"
@@ -435,6 +436,7 @@ export default {
   components: { VueEditor },
   data() {
     return {
+      busy: false,
       dropdownItem: ['Edit', 'Delete'],
       currentCourse: {
         title: '',
@@ -501,6 +503,7 @@ export default {
       }
     },
     async getAllCourses() {
+      this.busy = true
       let uri = this.user.is_administrator
         ? //  get-all-course-instructors?course_id=4&search=r&page=1&size=50
 
@@ -514,6 +517,7 @@ export default {
         dots: '',
         ...e,
       }))
+      this.busy = false
     },
 
     handlefileupload(event) {

@@ -2,6 +2,13 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  loadingIndicator: {
+    name: 'three-bounce',
+    color: '#ffcd06',
+    background: 'white'
+  },
+  
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'koinonia',
@@ -79,10 +86,10 @@ export default {
   axios: {
     baseURL: process.env.BASE_URL,
   },
-  loading: {
-    color: '#ffcd06',
-    height: '5px',
-  },
+  // loading: {
+  //   color: '#ffcd06',
+  //   height: '5px',
+  // },
 
   env: {
     BASE_URL: process.env.BASE_URL,
