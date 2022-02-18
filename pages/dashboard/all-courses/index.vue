@@ -150,7 +150,6 @@
                 >Course Code
               </label>
 
-              <pre>{{ currentCourse }}</pre>
               <input
                 type="text"
                 v-model="currentCourse.course_code"
@@ -239,7 +238,6 @@
               </p>
             </div>
 
-            <pre>{{ imagedetail }}</pre>
             <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
