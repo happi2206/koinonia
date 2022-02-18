@@ -21,11 +21,11 @@
         <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> End Date:</span>
           <span class=""> </span>
-          2
+          {{ eventDetail.end_date }}
         </p>
         <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> No in class:</span>
-          <span class=""> </span>
+          <span class=""> {{ eventDetail.student }}</span>
         </p>
         <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> Student Absent:</span>
@@ -36,7 +36,7 @@
     <div class="bg-white rounded p-3 my-2">
       <filter-component :disablevisualization="true">
         <table-component
-          :items="events"
+          :items="eventDetail"
           v-if="visualization === 'list'"
           :fields="fields"
         />
@@ -52,6 +52,23 @@ export default {
       type: Object,
       default: () => {},
     },
+  },
+
+  data() {
+    return {
+      students: [],
+      studentid: '',
+    }
+  },
+
+  mounted() {
+    if (this.eventDetail.students) {
+      this.eventDetail.students.forEach((element) => {
+        console.log(element)
+        this.studentid = element.id
+      })
+      console.log('student', this.eventDetail.students)
+    }
   },
 }
 </script>
