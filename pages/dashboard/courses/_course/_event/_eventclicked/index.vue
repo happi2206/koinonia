@@ -11,7 +11,7 @@
           Event
         </a>
       </div>
-      <events-header-card />
+      <events-header-card :eventDetail="eventDetail" />
     </div>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
     console.log('routes are', this.$route.params)
     try {
       const events = await this.$axios.$get(
-        `course-v/get-a-course-event?course_id=${this.$route.params.eventclicked}&event_id=${this.$route.params.event}`
+        `course-v/get-course-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
       )
       console.log(events)
       this.eventDetail = events
