@@ -588,12 +588,15 @@
                 <table-component
                   :items="events"
                   v-if="visualization === 'list'"
+                  :fields="fields"
+                  :dropdownItem="dropdownItem"
+                  @row-clicked="onRowClicked"
                 />
 
                 <div class="row" v-else>
                   <grid-component
-                    :data="students"
-                    v-for="(student, index) in students"
+                    :data="events"
+                    v-for="(event, index) in events"
                     :key="index"
                   ></grid-component>
                 </div>
@@ -618,6 +621,22 @@ export default {
       currentTab: 0,
       instructors: [],
       students: [],
+      dropdownItem: [
+        'Print_QR_Code',
+        'Edit',
+        'Download_As_PDF',
+        'Download_As_XLS',
+        'Download_As_CSV',
+      ],
+      fields: [
+        { key: 'Name', sortable: true },
+        { key: 'Start Date', sortable: true },
+        { key: 'End Date', sortable: true },
+        { key: 'No of Students', sortable: true },
+        { key: 'Progress', label: '', sortable: true },
+        { key: 'dots', label: '', sortable: true },
+      ],
+
       student: {
         other_name: '',
         surname: '',
@@ -677,6 +696,7 @@ export default {
       const events = await this.$axios.$get(
         `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
       )
+      console.log('event is', events)
       this.events = events.items.map((e, i) => {
         let filterstudent = e.students.filter((i) => {
           return i.status == true
@@ -743,6 +763,10 @@ export default {
         title: '',
         objective: '',
       })
+    },
+    onRowClicked(e) {
+      console.log(e)
+      this.$router.push(`event/${e.Name}`)
     },
   },
 }
