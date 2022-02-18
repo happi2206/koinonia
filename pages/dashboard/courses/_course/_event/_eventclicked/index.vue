@@ -17,6 +17,22 @@
         :courseid="courseid"
         :eventid="eventid"
       />
+
+      <div class="bg-white rounded p-3 my-2">
+        <filter-component>
+          <template #status="{ data }">
+            <toggleButton :value="data.value === 'status' ? true : false" />
+          </template>
+          <template #default="{ visualization }">
+            <table-component
+              :items="studentsInCourse"
+              v-if="visualization === 'list'"
+              :fields="fields"
+              @row-clicked="onRowClicked"
+            />
+          </template>
+        </filter-component>
+      </div>
     </div>
   </div>
 </template>
@@ -28,8 +44,16 @@ export default {
   data() {
     return {
       eventDetail: {},
-      courseid: '',
-      eventid: '',
+      students: [],
+      studentelement: [],
+      studentsInCourse: [],
+      fields: [
+        { key: 'other_name', label: 'Other Name', sortable: true },
+        { key: 'surname', label: 'Surname', sortable: true },
+        { key: 'check_in', label: 'date/Time in', sortable: true },
+        { key: '', label: 'Check in Method', sortable: true },
+        { key: 'status', label: 'Status', sortable: true },
+      ],
     }
   },
 
@@ -47,6 +71,37 @@ export default {
     } catch (e) {
       console.log(e)
     }
+
+    try {
+      const student = await this.$axios.$get(
+        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
+      )
+
+      const obj = student
+      obj.items.map((el) => {
+        console.log('el', el)
+        this.studentsInCourse.push({
+          status: el.status,
+          by: el.by,
+          check_in: el.check_in,
+          other_name: el.student.other_name,
+          surname: el.student.surname,
+          email: el.student.email,
+          id: el.student.id,
+        })
+      })
+      console.log('ob is', obj)
+
+      console.log(this.studentsInCourse)
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  methods: {
+    onRowClicked(e) {
+      this.$router.push(`student/${e.id}`)
+    },
   },
 }
 </script>
