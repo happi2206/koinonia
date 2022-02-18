@@ -63,9 +63,7 @@ export default {
   data() {
     return {
       students: [],
-      studentid: '',
-      courseid: this.courseid,
-      eventid: this.eventid,
+      studentelement: [],
     }
   },
 
@@ -83,9 +81,10 @@ export default {
 
   mounted() {
     if (this.eventDetail.students) {
+      console.log('mounted', this.eventDetail.students)
       this.eventDetail.students.forEach((element) => {
-        console.log(element)
-        this.studentid = element.id
+        this.studentelement.push(element)
+        console.log(this.studentelement)
       })
 
       console.log('student', this.eventDetail.students)
