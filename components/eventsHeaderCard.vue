@@ -36,9 +36,12 @@
     </div>
     <div class="bg-white rounded p-3 my-2">
       <filter-component>
+        <template #state="{ data }">
+          <toggleButton :value="data.value === 'published' ? true : false" />
+        </template>
         <template #default="{ visualization }">
           <table-component
-            :items="studentsTable"
+            :items="studentsInCourse"
             v-if="visualization === 'list'"
             :fields="fields"
           />
@@ -67,8 +70,17 @@ export default {
     return {
       students: [],
       studentelement: [],
-      studentsInCourse: {},
+      studentsInCourse: [],
       studentsTable: [],
+      test: 'hey',
+      fields: [
+        { key: 'name', label: 'Surname', sortable: true },
+        { key: 'start_date', label: 'Other Name', sortable: true },
+        { key: 'end_date', label: 'Gender', sortable: true },
+        { key: '', label: 'date/Time in', sortable: true },
+        { key: '', label: 'Check in Method', sortable: true },
+        { key: 'state', label: 'status', sortable: true },
+      ],
     }
   },
 
@@ -80,9 +92,7 @@ export default {
       )
       const temp = []
       temp.push(...student.items)
-      temp.forEach((el) => (this.studentsInCourse = el))
-
-      this.studentsTable = Object.keys(this.studentsInCourse)
+      temp.forEach((el) => this.studentsInCourse.push(el))
 
       console.log(this.studentsInCourse)
     } catch (e) {

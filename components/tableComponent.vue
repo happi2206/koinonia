@@ -94,6 +94,17 @@
           ></b-progress-bar>
         </b-progress>
       </template>
+      <template #cell(check)="row">
+        <span>
+          <div>
+            <b-form-checkbox
+              v-model="row.rowSelected"
+              @change="row.toggleDetails"
+            >
+            </b-form-checkbox>
+          </div>
+        </span>
+      </template>
       <template #cell(actions)="row">
         <div class="text-left w-auto">
           <button
@@ -111,13 +122,6 @@
             <span class="iconify text-danger" data-icon="mi:delete"></span>
           </button>
         </div>
-
-        <!-- <button class="btn">
-          <span class="iconify text-danger" data-icon="mi:delete"></span>
-        </button> -->
-
-        <!-- <b-button size="sm" class="mr-1"> Info modal </b-button> -->
-        <!-- <b-button size="sm"> extra_icons </b-button> -->
       </template>
       <template #cell(dots)="row">
         <b-dropdown

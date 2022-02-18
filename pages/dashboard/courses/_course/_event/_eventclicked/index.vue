@@ -11,6 +11,7 @@
           Event
         </a>
       </div>
+
       <events-header-card
         :eventDetail="eventDetail"
         :courseid="courseid"
