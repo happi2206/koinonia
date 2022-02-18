@@ -71,7 +71,7 @@ export default {
     console.log('courseid', this.courseid)
     try {
       const student = await this.$axios.$get(
-        `course-v/get-a-student-event-record?course_id=${this.courseid}&student_id=${this.eventid}`
+        `course-v/get-all-students-in-an-event-record?course_id=${this.courseid}&student_id=${this.eventid}`
       )
 
       console.log(student)
