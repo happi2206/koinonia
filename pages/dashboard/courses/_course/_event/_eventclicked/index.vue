@@ -20,7 +20,7 @@
 
       <div class="bg-white rounded p-3 my-2">
         <filter-component>
-          <template #status="{ data }">
+          <template #status>
             <toggleButton :value="data.value === 'status' ? true : false" />
           </template>
           <template #default="{ visualization }">
@@ -52,7 +52,7 @@ export default {
         { key: 'surname', label: 'Surname', sortable: true },
         { key: 'check_in', label: 'date/Time in', sortable: true },
         { key: '', label: 'Check in Method', sortable: true },
-        { key: 'status', label: 'Status', sortable: true },
+        { key: 'status', label: 'Status', sortable: false },
       ],
     }
   },
