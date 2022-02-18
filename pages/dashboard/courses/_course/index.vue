@@ -123,7 +123,6 @@
               >Attendance</a
             >
           </li>
-       
         </ul>
         <div>
           <div
@@ -394,7 +393,175 @@
             v-show="currentTab == 3"
             :class="{ 'fade show': currentTab == 3 }"
           >
-            Tab 4 content ii
+            <filter-component>
+              <template #belowFilterButton>
+                <div
+                  class="d-flex align-items-center justify-content-between my-4"
+                >
+                  <div class="records-count">
+                    <span> Month: </span>
+                    <select class="records-count">
+                      <option value="Januray">Janurary</option>
+                    </select>
+                  </div>
+
+                  <div class="d-flex justify-content-end">
+                    <div class="col-lg-4">
+                      <label for="" class="d-block medbrownparagraph graytext"
+                        >From
+                      </label>
+                      <input
+                        type="date"
+                        placeholder="e.g DD/MM/YYYY"
+                        class="forminputs text-dark py-2"
+                      />
+                    </div>
+                    <div class="col-lg-4">
+                      <label for="" class="d-block medbrownparagraph graytext"
+                        >From
+                      </label>
+                      <input
+                        type="date"
+                        placeholder="e.g DD/MM/YYYY"
+                        class="forminputs text-dark py-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </template>
+              <template #besideFilterButton>
+                <div class="ml-5">
+                  <button
+                    class="btn py-2 mainbtndashboard medbrownparagraph"
+                    v-b-modal.addEvent
+                  >
+                    Add Events
+                  </button>
+                  <b-modal id="addEvent" centered hide-header hide-footer>
+                    <h2 class="largebrownparagraph bold700 my-3">
+                      Create Event
+                    </h2>
+                    <form class="modabody" @click.prevent="createEvent">
+                      <div class="my-4">
+                        <label for="" class="d-block medbrownparagraph graytext"
+                          >Event Name
+                        </label>
+
+                        <input
+                          type="text"
+                          v-model="events.name"
+                          required
+                          placeholder="Event title"
+                          class="forminputs text-dark"
+                        />
+                      </div>
+                      <div class="my-4">
+                        <label for="" class="d-block medbrownparagraph graytext"
+                          >Description
+                        </label>
+                        <input
+                          type="text"
+                          v-model="events.description"
+                          placeholder="Description"
+                          class="forminputs text-dark"
+                        />
+                      </div>
+                      <div class="my-4">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Start Date
+                            </label>
+                            <input
+                              type="date"
+                              v-model="events.start_date"
+                              required
+                              placeholder="e.g DD/MM/YYYY"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Start Time
+                            </label>
+                            <input
+                              type="time"
+                              placeholder="e.g DD/MM/YYYY"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="my-4">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >End Date
+                            </label>
+                            <input
+                              type="date"
+                              v-model="events.end_date"
+                              required
+                              placeholder="e.g DD/MM/YYYY"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                          <div class="col-md-6">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >End Time
+                            </label>
+                            <input
+                              type="time"
+                              placeholder="e.g DD/MM/YYYY"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="my-4">
+                        <div class="d-flex justify-content-center">
+                          <button
+                            class="
+                              btn
+                              px-md-4 px-3
+                              py-2
+                              mainbtndashboard
+                              medbrownparagraph
+                            "
+                            @click="createEvent"
+                          >
+                            Add Event
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </b-modal>
+                </div>
+              </template>
+              <template #default="{ visualization }">
+                <table-component
+                  :items="instructors"
+                  v-if="visualization === 'list'"
+                />
+
+                <div class="row" v-else>
+                  <grid-component
+                    :data="instructors"
+                    v-for="(instructor, index) in instructors"
+                    :key="index"
+                  ></grid-component>
+                </div>
+              </template>
+            </filter-component>
           </div>
         </div>
       </div>
@@ -433,6 +600,13 @@ export default {
       designations: ['Lead Instructor', 'Teacher'],
       addInstructor: '',
       addStudent: '',
+      events: {
+        name: '',
+        description: '',
+        start_date: '',
+        end_date: '',
+      },
+      getEvents: {},
     }
   },
 
@@ -459,13 +633,23 @@ export default {
       console.log(e)
     }
     try {
-      const students = await this.$axios.$post(
-        `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`,
-        this.student
+      const students = await this.$axios.$get(
+        `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
       )
 
       console.log(students)
       this.students.push(...students.items)
+    } catch (e) {
+      console.log(e)
+    }
+
+    try {
+      const events = await this.$axios.$get(
+        `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
+      )
+      console.log('events are are', events)
+      this.allEvents = events
+      this.$toast.success('courses')
     } catch (e) {
       console.log(e)
     }
@@ -489,10 +673,23 @@ export default {
     async createStudent() {
       try {
         await this.$axios.$post(
-          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`
+          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course},`,
+          this.student
         )
 
         this.$toast.success('Student added Successfully')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async createEvent() {
+      try {
+        await this.$axios.$post(
+          `course-v/add-course-event?course_id=${this.$route.params.course}`,
+          this.event
+        )
+
+        this.$toast.success('event added Successfully')
       } catch (e) {
         console.log(e)
       }

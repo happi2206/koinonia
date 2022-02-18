@@ -107,8 +107,6 @@
               </p>
             </div>
 
-          
-
             <!-- <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
@@ -125,7 +123,7 @@
             </div> -->
             <div class="my-4">
               <div class="flex gap-3 justify-content-center">
-                  <upload-file v-model="courseData.feature_image"/>
+                <upload-file v-model="courseData.feature_image" />
                 <button
                   class="
                     btn
@@ -419,7 +417,7 @@
           Tab 3 content
         </div>
         <div v-show="currentTab == 3" :class="{ 'fade show': currentTab == 3 }">
-          Tab 4 content
+          a
         </div>
       </div>
     </div>
@@ -447,7 +445,7 @@ export default {
         feature_image: '',
         start_date: '',
         end_date: '',
-        feature_image:''
+        feature_image: '',
       },
       fields: [
         { key: 'check', label: '', sortable: true },
