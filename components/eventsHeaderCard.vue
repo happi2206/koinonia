@@ -64,6 +64,8 @@ export default {
     return {
       students: [],
       studentid: '',
+      courseid: this.courseid,
+      eventid: this.eventid,
     }
   },
 
