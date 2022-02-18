@@ -123,7 +123,6 @@
               >Attendance</a
             >
           </li>
-       
         </ul>
         <div>
           <div
@@ -395,7 +394,7 @@
             v-show="currentTab == 3"
             :class="{ 'fade show': currentTab == 3 }"
           >
-           <filter-component>
+            <filter-component>
               <template #besideFilterButton>
                 <div class="ml-5">
                   <button
@@ -678,13 +677,20 @@ export default {
       const events = await this.$axios.$get(
         `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
       )
-this.events = events.items.map((e, i) => ({
-        Name: e.name,
+this.events = events.items.map((e, i) => {
+  let filterstudent = e.students.filter(i=>{
+    return i.status == true
+  })
+  let number = e.students.length - filterstudent
+  console.log(number);
+        return{
+          Name: e.name,
         'Start Date': e.start_date,
         'End Date': e.end_date,
         'No of Students': e.students.length,
-        Progress: 5
-      }))
+        Progress: number
+        }
+})
 
       
     } catch (e) {
