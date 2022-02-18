@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="bg-white rounded p-3 my-2">
-      <pre>{{ eventDetail }}</pre>
+      <pre>{{ studentsInCourse }}</pre>
+      <pre>{{ studentsTable }}</pre>
       <div
         class="border-bottom d-flex align-items-center justify-content-between"
       >
@@ -34,12 +35,14 @@
       </div>
     </div>
     <div class="bg-white rounded p-3 my-2">
-      <filter-component :disablevisualization="true">
-        <table-component
-          :items="eventDetail"
-          v-if="visualization === 'list'"
-          :fields="fields"
-        />
+      <filter-component>
+        <template #default="{ visualization }">
+          <table-component
+            :items="studentsTable"
+            v-if="visualization === 'list'"
+            :fields="fields"
+          />
+        </template>
       </filter-component>
     </div>
   </div>
@@ -63,31 +66,39 @@ export default {
   data() {
     return {
       students: [],
-      studentid: '',
+      studentelement: [],
+      studentsInCourse: {},
+      studentsTable: [],
     }
   },
 
   async fetch() {
+    console.log(this.courseid)
     try {
       const student = await this.$axios.$get(
         `course-v/get-all-students-in-an-event?course_id=${this.courseid}&event_id=${this.eventid}&page=1&size=50`
       )
+      const temp = []
+      temp.push(...student.items)
+      temp.forEach((el) => (this.studentsInCourse = el))
 
-      console.log(student)
+      this.studentsTable = Object.keys(this.studentsInCourse)
+
+      console.log(this.studentsInCourse)
     } catch (e) {
       console.log(e)
     }
   },
 
   mounted() {
-    if (this.eventDetail.students) {
-      this.eventDetail.students.forEach((element) => {
-        console.log(element)
-        this.studentid = element.id
-      })
-
-      console.log('student', this.eventDetail.students)
-    }
+    // if (this.eventDetail.students) {
+    //   console.log('mounted', this.eventDetail.students)
+    //   this.eventDetail.students.forEach((element) => {
+    //     this.studentelement.push(element)
+    //     console.log(this.studentelement)
+    //   })
+    //   console.log('student', this.eventDetail.students)
+    // }
   },
 }
 </script>
