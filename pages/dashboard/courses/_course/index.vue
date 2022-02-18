@@ -242,12 +242,13 @@
                         </label>
                         <input
                           type="text"
+                          required
                           v-model="student.surname"
                           placeholder="Surname"
                           class="forminputs text-dark"
                         />
                       </div>
-                      <div class="my-4">
+                      <!-- <div class="my-4">
                         <div class="">
                           <label
                             for=""
@@ -338,7 +339,7 @@
                             >
                           </div>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="my-4">
                         <div class="form-check">
@@ -394,54 +395,19 @@
             :class="{ 'fade show': currentTab == 3 }"
           >
             <filter-component>
-              <template #belowFilterButton>
-                <div
-                  class="d-flex align-items-center justify-content-between my-4"
-                >
-                  <div class="records-count">
-                    <span> Month: </span>
-                    <select class="records-count">
-                      <option value="Januray">Janurary</option>
-                    </select>
-                  </div>
-
-                  <div class="d-flex justify-content-end">
-                    <div class="col-lg-4">
-                      <label for="" class="d-block medbrownparagraph graytext"
-                        >From
-                      </label>
-                      <input
-                        type="date"
-                        placeholder="e.g DD/MM/YYYY"
-                        class="forminputs text-dark py-2"
-                      />
-                    </div>
-                    <div class="col-lg-4">
-                      <label for="" class="d-block medbrownparagraph graytext"
-                        >From
-                      </label>
-                      <input
-                        type="date"
-                        placeholder="e.g DD/MM/YYYY"
-                        class="forminputs text-dark py-2"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </template>
               <template #besideFilterButton>
                 <div class="ml-5">
                   <button
                     class="btn py-2 mainbtndashboard medbrownparagraph"
                     v-b-modal.addEvent
                   >
-                    Add Events
+                    Add Event
                   </button>
                   <b-modal id="addEvent" centered hide-header hide-footer>
                     <h2 class="largebrownparagraph bold700 my-3">
                       Create Event
                     </h2>
-                    <form class="modabody" @click.prevent="createEvent">
+                    <form class="modabody" @submit.prevent="createEvent">
                       <div class="my-4">
                         <label for="" class="d-block medbrownparagraph graytext"
                           >Event Name
@@ -449,83 +415,155 @@
 
                         <input
                           type="text"
-                          v-model="events.name"
+                          v-model="event.name"
                           required
-                          placeholder="Event title"
+                          placeholder="Event Name"
                           class="forminputs text-dark"
                         />
                       </div>
                       <div class="my-4">
                         <label for="" class="d-block medbrownparagraph graytext"
-                          >Description
+                          >Event Description
                         </label>
+
                         <input
                           type="text"
-                          v-model="events.description"
-                          placeholder="Description"
+                          v-model="event.description"
+                          required
+                          placeholder="Event Description"
                           class="forminputs text-dark"
                         />
                       </div>
                       <div class="my-4">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <label
-                              for=""
-                              class="d-block medbrownparagraph graytext"
-                              >Start Date
-                            </label>
+                        <label for="" class="d-block medbrownparagraph graytext"
+                          >Start Date
+                        </label>
+                        <input
+                          type="date"
+                          required
+                          v-model="event.start_date"
+                          placeholder="Start Date"
+                          class="forminputs text-dark"
+                        />
+                      </div>
+                      <div class="my-4">
+                        <label for="" class="d-block medbrownparagraph graytext"
+                          >End Date
+                        </label>
+                        <input
+                          type="date"
+                          required
+                          v-model="event.end_date"
+                          placeholder="End Date"
+                          class="forminputs text-dark"
+                        />
+                      </div>
+                      <!-- <div class="my-4">
+                        <div class="">
+                          <label
+                            for=""
+                            class="d-block medbrownparagraph graytext"
+                            >Marital status
+                          </label>
+
+                          <div class="form-check form-check-inline">
                             <input
-                              type="date"
-                              v-model="events.start_date"
-                              required
-                              placeholder="e.g DD/MM/YYYY"
-                              class="forminputs text-dark"
+                              class="form-check-input"
+                              type="radio"
+                              name="marital-status"
+                              v-model="student.status"
+                              value="single"
                             />
+                            <label class="form-check-label" for="single"
+                              >Single</label
+                            >
                           </div>
-                          <div class="col-md-6">
-                            <label
-                              for=""
-                              class="d-block medbrownparagraph graytext"
-                              >Start Time
-                            </label>
+                          <div class="form-check form-check-inline">
                             <input
-                              type="time"
-                              placeholder="e.g DD/MM/YYYY"
-                              class="forminputs text-dark"
+                              class="form-check-input"
+                              type="radio"
+                              name="marital-status"
+                              v-model="student.status"
+                              value="married"
                             />
+                            <label class="form-check-label" for="married"
+                              >Married</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="marital-status"
+                              v-model="student.status"
+                              value="divorced"
+                            />
+                            <label class="form-check-label" for="divorced"
+                              >Divorced</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="marital-status"
+                              v-model="student.status"
+                              value="widowed"
+                            />
+                            <label class="form-check-label" for="widowed"
+                              >Widowed</label
+                            >
                           </div>
                         </div>
                       </div>
                       <div class="my-4">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <label
-                              for=""
-                              class="d-block medbrownparagraph graytext"
-                              >End Date
-                            </label>
+                        <div class="">
+                          <label
+                            for=""
+                            class="d-block medbrownparagraph graytext"
+                            >Gender
+                          </label>
+
+                          <div class="form-check form-check-inline">
                             <input
-                              type="date"
-                              v-model="events.end_date"
-                              required
-                              placeholder="e.g DD/MM/YYYY"
-                              class="forminputs text-dark"
+                              class="form-check-input"
+                              type="radio"
+                              name="Male"
+                              v-model="student.gender"
+                              value="single"
                             />
+                            <label class="form-check-label" for="single"
+                              >Male</label
+                            >
                           </div>
-                          <div class="col-md-6">
-                            <label
-                              for=""
-                              class="d-block medbrownparagraph graytext"
-                              >End Time
-                            </label>
+                          <div class="form-check form-check-inline">
                             <input
-                              type="time"
-                              placeholder="e.g DD/MM/YYYY"
-                              class="forminputs text-dark"
+                              class="form-check-input"
+                              type="radio"
+                              name="Female"
+                              v-model="student.gender"
+                              value="Female"
                             />
+                            <label class="form-check-label" for="single"
+                              >Female</label
+                            >
                           </div>
                         </div>
-                      </div>
+                      </div> -->
+
+                      <!-- <div class="my-4">
+                        <div class="form-check">
+                          <label class="form-check-label medbrownparagraph">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              required
+                              v-model="student.send_lastest_updates"
+                            />
+                            I agree to recieve latest updates
+                          </label>
+                        </div>
+                      </div> -->
 
                       <div class="my-4">
                         <div class="d-flex justify-content-center">
@@ -537,7 +575,6 @@
                               mainbtndashboard
                               medbrownparagraph
                             "
-                            @click="createEvent"
                           >
                             Add Event
                           </button>
@@ -549,14 +586,14 @@
               </template>
               <template #default="{ visualization }">
                 <table-component
-                  :items="allEvents"
+                  :items="events"
                   v-if="visualization === 'list'"
                 />
 
                 <div class="row" v-else>
                   <grid-component
-                    :data="allEvents"
-                    v-for="(event, index) in instructors"
+                    :data="students"
+                    v-for="(student, index) in students"
                     :key="index"
                   ></grid-component>
                 </div>
@@ -583,16 +620,11 @@ export default {
       students: [],
       student: {
         other_name: '',
-        avater: '',
         surname: '',
-        status: '',
-        gender: '',
-        phone: '',
-        salutation: '',
         send_latest_updates: false,
         user_type: {
           user_type: 'flat_user',
-          link_code: 'string',
+          link_code: '',
           email: '',
           type: 'student',
         },
@@ -600,13 +632,13 @@ export default {
       designations: ['Lead Instructor', 'Teacher'],
       addInstructor: '',
       addStudent: '',
-      events: {
+      event: {
         name: '',
         description: '',
         start_date: '',
         end_date: '',
       },
-      getEvents: {},
+      events: [],
     }
   },
 
@@ -637,19 +669,28 @@ export default {
         `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
       )
 
-      console.log(students)
       this.students.push(...students.items)
     } catch (e) {
       console.log(e)
     }
-
     try {
       const events = await this.$axios.$get(
         `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
       )
-      console.log('events are are', events)
-      this.allEvents = events
-      this.$toast.success('courses')
+      this.events = events.items.map((e, i) => {
+        let filterstudent = e.students.filter((i) => {
+          return i.status == true
+        })
+        let number = e.students.length - filterstudent
+        console.log(number)
+        return {
+          Name: e.name,
+          'Start Date': e.start_date,
+          'End Date': e.end_date,
+          'No of Students': e.students.length,
+          Progress: number,
+        }
+      })
     } catch (e) {
       console.log(e)
     }
@@ -672,11 +713,12 @@ export default {
     },
     async createStudent() {
       try {
+        console.log(this.student)
+
         await this.$axios.$post(
-          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course},`,
+          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
           this.student
         )
-
         this.$toast.success('Student added Successfully')
       } catch (e) {
         console.log(e)
@@ -684,14 +726,16 @@ export default {
     },
     async createEvent() {
       try {
+        console.log(this.event.end_date, this.event.start_date)
+
         await this.$axios.$post(
           `course-v/add-course-event?course_id=${this.$route.params.course}`,
           this.event
         )
-
-        this.$toast.success('event added Successfully')
+        this.$bvModal.hide('addEvent')
+        this.$toast.success('Event added Successfully')
       } catch (e) {
-        console.log(e)
+        this.$toast.error(e.data.detail.message)
       }
     },
     addScheme() {

@@ -39,7 +39,7 @@
             </div>
           </div>
         </div>
-        <form @submit.prevent="" class="forminputpadding">
+        <form @submit.prevent="updatePublicProfile" class="forminputpadding">
           <div class="my-2">
             <label for="" class="d-block medbrownparagraph graytext"
               >Other Name
@@ -128,7 +128,7 @@ export default {
   data() {
     return {
       public_detail: {
-        surname: 'Other',
+        surname: '',
         other_name: '',
         profile_picture: '',
         headline: '',
@@ -144,7 +144,7 @@ export default {
           `user-v/get-user-public-profile`
         )
         if (Object.keys(userprofile).length > 0) {
-          this.public = userprofile
+          this.public_detail = userprofile
         }
       } catch (error) {
         this.$toast.error(error)
@@ -169,6 +169,15 @@ export default {
       this.public_detail.profile_picture  = url
     },
     async updatePublicProfile(){
+        try {
+        const userprofile = await this.$axios.$patch(
+          `user-v/update-user-public-profile`,this.public_detail
+        )
+        console.log(userprofile)
+        this.getUserProfile()
+      } catch (error) {
+        this.$toast.error(error)
+      }
 
     }
   },

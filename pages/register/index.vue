@@ -38,7 +38,7 @@
             </div> -->
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-5">
             <div class="">
               <div class="mt-5">
                 <h2 class="brownheader text-center">

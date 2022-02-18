@@ -6,7 +6,7 @@
     <div class="sidebar-menu my-2">
       <div class="w-60 h-full bg-white px-1 absolute" id="sidenavExample">
         <ul class="relative">
-          <li class="relative" id="sidenavEx1" v-show="isAdministrator">
+          <li class="relative" id="sidenavEx1" v-show="isAdministrator || isInstructor">
             <a
               @click.prevent="setCurrentMenu('admin')"
               class="
@@ -70,7 +70,7 @@
                   class="
                     flex
                     items-center
-                    text-xs
+                    text-sm
                     py-4
                     pl-12
                     pr-6
@@ -120,7 +120,7 @@
                   class="
                     flex
                     items-center
-                    text-xs
+                    text-sm
                     py-4
                     pl-12
                     pr-6
@@ -141,7 +141,7 @@
               </li>
             </ul>
           </li>
-          <li class="relative" id="sidenavEx2" v-show="isInstructor">
+          <!-- <li class="relative" id="sidenavEx2" v-show="isInstructor">
             <a
               @click.prevent="setCurrentMenu('instructor')"
               class="
@@ -225,9 +225,9 @@
                 >
               </li>
             </ul>
-          </li>
-          <hr class="my-2" />
-          <li class="relative" id="sidenavEx3">
+          </li> -->
+          <!-- <hr class="my-2" /> -->
+          <!-- <li class="relative" id="sidenavEx3">
             <a
               @click.prevent="setCurrentMenu('courses')"
               class="
@@ -336,7 +336,7 @@
                 >
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="relative" id="sidenavEx3">
             <nuxt-link
               to="/dashboard/profile-settings"

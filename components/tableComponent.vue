@@ -82,6 +82,13 @@
       <template #cell(end_date)="data">
         <span>{{ data.item.end_date | DateFormat }}</span>
       </template>
+      <template #cell(progress)="data">
+      
+          <b-progress class="mt-2" :max="10" >
+      <b-progress-bar :value="data.item.Progress" variant="success"></b-progress-bar>
+      <b-progress-bar :value="10-data.item.Progress" variant="danger"></b-progress-bar>
+    </b-progress>
+      </template>
       <template #cell(actions)="row">
         <div class="text-left w-auto">
           <button
