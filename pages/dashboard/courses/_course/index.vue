@@ -772,7 +772,7 @@ export default {
     onRowClicked(e) {
       console.log(e)
 
-      this.$router.push(`courses/${this.$route.params.course}${e.id}`)
+      this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
     },
   },
 }
