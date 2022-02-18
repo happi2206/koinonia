@@ -11,8 +11,7 @@
           Event
         </a>
       </div>
-
-      <events-header-card></events-header-card>
+      <events-header-card />
     </div>
   </div>
 </template>
@@ -20,6 +19,26 @@
 <script>
 export default {
   layout: 'dashboard',
+
+  data() {
+    return {
+      eventDetail: {},
+    }
+  },
+
+  async fetch() {
+    console.log(this.$route.params)
+    try {
+      const events = await this.$axios.$get(
+        `course-v/get-a-course-event?course_id=${this.$route.params.courses}&event_id=${this.$route.params.event}`
+      )
+      console.log(events)
+      this.eventDetail = events
+      console.log(this.eventDetail)
+    } catch (e) {
+      console.log(e)
+    }
+  },
 }
 </script>
 

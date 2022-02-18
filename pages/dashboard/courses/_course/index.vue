@@ -617,7 +617,6 @@ export default {
     return {
       courseDetail: {},
       schemeOfWork: [{ title: '', objective: 'objective' }],
-      options: ['foo', 'bar', 'baz'],
       currentTab: 0,
       instructors: [],
       students: [],
@@ -633,7 +632,12 @@ export default {
         { key: 'Start Date', sortable: true },
         { key: 'End Date', sortable: true },
         { key: 'No of Students', sortable: true },
-        { key: 'Progress', label: '', sortable: true },
+        {
+          key: 'Progress',
+          label: '',
+          sortable: true,
+          thStyle: { width: '200px' },
+        },
         { key: 'dots', label: '', sortable: true },
       ],
 
@@ -709,6 +713,7 @@ export default {
           'End Date': e.end_date,
           'No of Students': e.students.length,
           Progress: number,
+          id: e.id,
         }
       })
     } catch (e) {
@@ -766,11 +771,15 @@ export default {
     },
     onRowClicked(e) {
       console.log(e)
-      this.$router.push(`event/${e.Name}`)
+
+      this.$router.push(`courses/${this.$route.params.course}${e.id}`)
     },
   },
 }
 </script>
 
 <style>
+.classwidth {
+  max-width: 300px !important;
+}
 </style>
