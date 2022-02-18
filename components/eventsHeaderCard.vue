@@ -68,10 +68,9 @@ export default {
   },
 
   async fetch() {
-    console.log('courseid', this.courseid)
     try {
       const student = await this.$axios.$get(
-        `course-v/get-a-student-event-record?course_id=${this.courseid}&student_id=${this.eventid}`
+        `course-v/get-all-students-in-an-event?course_id=${this.courseid}&event_id=${this.eventid}&page=1&size=50`
       )
 
       console.log(student)
