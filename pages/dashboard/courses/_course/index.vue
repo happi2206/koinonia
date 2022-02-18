@@ -702,7 +702,6 @@ export default {
           return i.status == true
         })
         let number = e.students.length - filterstudent
-        console.log(number)
         return {
           Name: e.name,
           'Start Date': e.start_date,
