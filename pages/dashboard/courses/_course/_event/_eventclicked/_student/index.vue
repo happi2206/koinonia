@@ -11,7 +11,7 @@
           Student
         </a>
       </div>
-      <header-card />
+      <!-- <header-card /> -->
     </div>
   </div>
 </template>
