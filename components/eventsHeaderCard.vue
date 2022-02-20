@@ -43,7 +43,7 @@
           >
             <template #status="{ data }">
               <b-form-checkbox
-              button-variant="success"
+              :button-variant="'success'"
                 v-model="data.value"
                 @change="updateAttendance(data.item.student.id, $event)"
                 size="lg"

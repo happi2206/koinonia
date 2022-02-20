@@ -24,8 +24,8 @@ Vue.filter('TextFilter', (value) => {
 Vue.filter('shortTextFilter', (value) => {
     if (!value) return ''
     value = value.toString()
-    if (value.length > 100) {
-        return value.slice(0, 100) + '...'
+    if (value.length > 200) {
+        return value.slice(0, 200) + '...'
     } else {
         return value
     }

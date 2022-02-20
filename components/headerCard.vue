@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-3 px-0 pl-md-2">
         <div class="border rounded">
-          <img :src="courseDetail.feature_image" alt="" class="img-fluid" />
+          <img :src="courseDetail.feature_image" alt="" class="img-fluid rounded" />
         </div>
       </div>
       <!-- <b-avatar :size="150" rounded="lg" :src="courseDetail.feature_image"></b-avatar> -->
@@ -76,7 +76,7 @@
           </div>
           <div class="col-lg-12 col-12">
             <p class="my-2 medbrownparagraph">
-              {{ courseDetail.short_description }}
+              {{ courseDetail.short_description | shortTextFilter }}
             </p>
           </div>
         </div>
