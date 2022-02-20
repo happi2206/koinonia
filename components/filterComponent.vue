@@ -33,25 +33,25 @@
             </div>
           </div>
           <div v-if="!disablePagination" class="records-count">
-            <span>View by: </span>
+            <span class="medbrownparagraph">View by: </span>
             <select
               class="records-count"
               @change="$emit('view-by', $event.target.value)"
             >
-              <option value="10">10 Records</option>
-              <option value="20">20 Records</option>
-              <option value="25">25 Records</option>
-              <option value="50">50 Records</option>
-              <option value="100">100 Records</option>
+              <option class="medbrownparagraph" value="10">10 Records</option>
+              <option class="medbrownparagraph" value="20">20 Records</option>
+              <option class="medbrownparagraph" value="25">25 Records</option>
+              <option class="medbrownparagraph" value="50">50 Records</option>
+              <option class="medbrownparagraph" value="100">100 Records</option>
             </select>
           </div>
         </div>
         <div
           class="
             d-flex
-            align-items-center
+            align-items-md-center
             justify-content-between justify-content-md-end
-            flex-wrap
+            flex-md-row flex-column
             mb-1 mb-md-0
           "
         >
@@ -60,7 +60,7 @@
               type="text"
               required
               placeholder="Search "
-              class="px-3 py-2 border rounded"
+              class="px-md-3 px-2 py-2 border rounded"
             />
 
             <button class="bg-yellow-400 py-2 px-3">
@@ -71,7 +71,7 @@
             <slot></slot>
           </div> -->
 
-          <div>
+          <div class="my-md-0 my-3 d-flex justify-content-end align-items-end">
             <slot name="besideFilterButton"></slot>
           </div>
           <div id="filters-container" class="filters-container d-none">

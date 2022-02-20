@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 horizontalspacing pt-md-5">
+  <div class="mt-md-5 horizontalspacing pt-md-5">
     <div class="flex items-center pt-5 justify-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">All Courses</h2>
       <button
@@ -15,9 +15,8 @@
       <b-modal id="addcourse" title="Add Course" hide-footer>
         <div class="modacontent">
           <form class="modabody px-4" @submit.prevent="addCourses">
- 
             <div class="my-4">
-              <label  class="d-block medbrownparagraph graytext"
+              <label class="d-block medbrownparagraph graytext"
                 >Course Name
               </label>
               <input
@@ -96,18 +95,20 @@
               </p>
             </div>
 
-          
             <div class="my-4">
               <div class="flex gap-3 justify-content-center">
                 <upload-file v-model="courseData.feature_image" />
-                <input  class="
+                <input
+                  class="
                     btn
                     px-md-4 px-3
                     py-2
                     mainbtndashboard
                     medbrownparagraph
-                  " type="submit" value="Create Course">
-               
+                  "
+                  type="submit"
+                  value="Create Course"
+                />
               </div>
             </div>
           </form>
@@ -245,13 +246,14 @@
       </b-modal>
     </div>
 
-    <div class="bg-white p-5">
+    <div class="bg-white p-md-5">
       <ul
         class="
           nav nav-tabs
           flex flex-col
           md:flex-row
           flex-wrap
+          medbrownparagraph
           list-none
           border-b-0
           pl-0
@@ -266,8 +268,7 @@
             class="
               nav-link
               block
-              font-medium
-              text-xs
+              medbrownparagraph
               leading-tight
               uppercase
               text-black
@@ -289,8 +290,8 @@
             class="
              
               block
-              font-medium
-              text-xs
+              
+              medbrownparagraph
               leading-tight
               uppercase
               cursor-pointer
@@ -312,8 +313,8 @@
             class="
               nav-link
               block
-              font-medium
-              text-xs
+              
+              medbrownparagraph
               leading-tight
               cursor-pointer
               uppercase
@@ -338,8 +339,8 @@
               pointer-events-none
               block
               text-black
-              font-medium
-              text-xs
+              
+              medbrownparagraph
               leading-tight
               cursor-pointer
               uppercase
@@ -455,25 +456,22 @@ export default {
     },
     async addCourses() {
       try {
-         this.$nuxt.$loading.start()
+        this.$nuxt.$loading.start()
         const response = await this.$axios.$post(
           `course-v/add-course`,
           this.courseData
         )
-        
 
-        if(response.message){
+        if (response.message) {
           this.getAllCourses()
           this.$bvModal.hide('addcourse')
-          Object.keys(this.courseData).forEach(i=>{
-            this.courseData[i] ="";
+          Object.keys(this.courseData).forEach((i) => {
+            this.courseData[i] = ''
           })
         }
-
-
       } catch (e) {
         this.$toast.error(e)
-      }finally{
+      } finally {
         this.$nuxt.$loading.finish()
       }
     },

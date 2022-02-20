@@ -1,24 +1,14 @@
 <template>
-  <div v-if="Object.keys(courseDetail)" class="bg-white rounded py-3">
-    <div class="grid grid-cols-5 gap-4">
-      <div
-        class="
-          col-span-1
-          courseplaceholder
-          d-flex
-          align-items-center
-          px-3
-          justify-content-center
-        "
-      >
-<div class="w-64 h-48 border rounded">
- <img :src="courseDetail.feature_image" alt="" class="w-full h-full" />
-</div>
-        <!-- <b-avatar :size="150" rounded="lg" :src="courseDetail.feature_image"></b-avatar> -->
-       
+  <div v-if="Object.keys(courseDetail)" class="bg-white rounded p-3">
+    <div class="row">
+      <div class="col-md-3 px-0 pl-md-2">
+        <div class="border rounded">
+          <img :src="courseDetail.feature_image" alt="" class="img-fluid" />
+        </div>
       </div>
+      <!-- <b-avatar :size="150" rounded="lg" :src="courseDetail.feature_image"></b-avatar> -->
 
-      <div class="col-span-4">
+      <div class="col-md-9">
         <div
           class="
             border-bottom
@@ -27,7 +17,7 @@
             justify-content-between
           "
         >
-          <h2 class="text-xl py-3 bold700 text-capitalize mb-0">
+          <h2 class="largebrownparagraph py-3 bold700 text-capitalize mb-0">
             {{ courseDetail.title }}
           </h2>
           <!-- <div class="dropdown account-dropdown">
@@ -64,29 +54,28 @@
         </div>
         <div class="my-2 row">
           <div class="col-lg-4 col-12">
-            <p class="my-2 text-md">
+            <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> Class code:</span>
               {{ courseDetail.course_code }}
             </p>
-            <p class="my-2 text-md">
+            <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> Start Date:</span>
 
               {{ courseDetail.start_date | DateFormat }}
             </p>
           </div>
           <div class="col-lg-4 col-6">
-            <p class="my-2 text-md">
+            <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> No of student:</span>
-              {{ courseDetail.no_of_students}}
+              {{ courseDetail.no_of_students }}
             </p>
-            <p class="my-2 text-md">
+            <p class="my-2 medbrownparagraph">
               <span class="lightgraytext"> End Date:</span>
               {{ courseDetail.end_date | DateFormat }}
             </p>
           </div>
           <div class="col-lg-12 col-12">
-            
-            <p class="my-2 text-md">
+            <p class="my-2 medbrownparagraph">
               {{ courseDetail.short_description }}
             </p>
           </div>

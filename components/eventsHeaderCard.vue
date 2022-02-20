@@ -8,7 +8,7 @@
           {{ eventDetail.name }}
         </h2>
       </div>
-      <div class="my-2 d-flex">
+      <div class="my-2 d-flex flex-md-row flex-column">
         <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> Start Date:</span>
           <span class=""> {{ eventDetail.start_date | DateFormat}} </span>
@@ -23,25 +23,27 @@
           <span class=""> {{ eventDetail.students.length }}</span>
         </p>
         <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
-          <span class="lightgraytext"> Student Absent: {{ eventDetail.students.length }}</span>
+          <span class="lightgraytext"> Student Present: {{  present }}</span>
           <span class=""> </span>
         </p>
         <p  v-if="eventDetail.students" class="my-2 medparagraph mx-3">
-          <span class="lightgraytext"> Student Absent: {{ eventDetail.students.length - eventDetail.students.length  }}</span>
+          <span class="lightgraytext"> Student Absent: {{ eventDetail.students.length - present  }}</span>
           <span class=""> </span>
         </p>
       </div>
     </div>
-    <div class="bg-white rounded p-3 my-2">
+    <div class="bg-white rounded p-md-3 my-2">
       <filter-component>
         <template #default="{ visualization }">
           <table-component
+          :busy="busy"
             :items="studentArray"
             v-if="visualization === 'list'"
             :fields="fields"
           >
             <template #status="{ data }">
               <b-form-checkbox
+              button-variant="success"
                 v-model="data.value"
                 @change="updateAttendance(data.item.student.id, $event)"
                 size="lg"
@@ -72,6 +74,7 @@ export default {
 
   data() {
     return {
+      busy: false,
       students: [],
       studentelement: [],
       studentsInCourse: {},
@@ -91,20 +94,17 @@ export default {
 
   async fetch() {
     try {
+      this.busy = true;
       const student = await this.$axios.$get(
         `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
       )
 
       this.studentArray = student.items
-      // const temp = []
-      // temp.push(...student.items)
-      // temp.forEach((el) => (this.studentsInCourse = el))
-
-      // this.studentsTable = Object.keys(this.studentsInCourse)
-
-      // console.log(this.studentsInCourse)
+    
     } catch (e) {
       console.log(e)
+    }finally{
+      this.busy = false
     }
   },
   methods: {
@@ -115,18 +115,24 @@ export default {
       try {
         await this.$axios.$patch(
           `${url}?student_id=${student}&event_id=${this.$route.params.eventclicked}&course_id=${this.$route.params.event}`,
-          {
-            // params: {
-            //   student_id: student,
-            //   event_id: this.$route.params.eventclicked,
-            //   course_id: this.$route.params.course,
-            // },
-          }
+         
         )
+          this.$fetch()
       } catch (error) {
         console.log(error)
       }
     },
+  },
+  computed: {
+       present(){
+        if(!this.busy){
+           let students =  this.eventDetail.students.filter(i=>{
+           return i.status
+         });
+
+         return students.length
+        }
+       }
   },
 
   mounted() {},

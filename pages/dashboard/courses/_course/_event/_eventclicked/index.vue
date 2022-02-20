@@ -8,7 +8,7 @@
           class="brownparagraph bold700 mainbluecolor"
         >
           <b-icon icon="arrow-left"></b-icon>
-          Event
+          {{eventDetail.name}}
         </a>
       </div>
       <events-header-card
@@ -33,16 +33,13 @@ export default {
   },
 
   async fetch() {
-    console.log('routes are', this.$route.params)
     try {
       const events = await this.$axios.$get(
         `course-v/get-course-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
       )
       this.courseid = this.$route.params.event
       this.eventid = this.$route.params.eventclicked
-      console.log(events)
       this.eventDetail = events
-      console.log(this.eventDetail)
     } catch (e) {
       console.log(e)
     }

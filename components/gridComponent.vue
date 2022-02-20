@@ -52,15 +52,6 @@
               ></span>
             </div>
           </div>
-
-          <div>
-            <a
-              href="#"
-              class="brownparagraph mainbluecolor text-md-left text-center"
-            >
-              <u> See More</u></a
-            >
-          </div>
         </div>
       </div>
     </div>

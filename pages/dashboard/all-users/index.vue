@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 horizontalspacing pt-md-5">
+  <div class="mt-md-5 horizontalspacing pt-md-5">
     <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
       <h2 class="text-4xl mb-0">Users</h2>
     </div>

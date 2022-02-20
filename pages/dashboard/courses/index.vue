@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 horizontalspacing pt-md-5">
+  <div class="mt-md-5 horizontalspacing pt-md-5">
     <div class="flex items-center pt-5 justify-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">Courses</h2>
       <!-- <button
@@ -272,7 +272,7 @@
       </b-modal>
     </div>
 
-    <div class="bg-white p-5">
+    <div class="bg-white p-md-5">
       <ul
         class="
           nav nav-tabs

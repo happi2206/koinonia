@@ -1,7 +1,7 @@
 <template>
   <div class="bodylightgray">
-    <div class="mt-5 pt-md-5 horizontalspacing">
-      <div class="my-4">
+    <div class="mt-md-5 mt-4 pt-md-5 horizontalspacing">
+      <div class="my-md-4">
         <a
           href="#"
           @click.prevent="$router.go(-1)"
@@ -14,7 +14,7 @@
       <header-card :courseDetail="courseDetail" />
 
       <!-- tabs -->
-      <div class="bg-white p-5 mt-4">
+      <div class="bg-white p-md-5 mt-4">
         <ul
           class="
             nav nav-tabs
@@ -36,14 +36,14 @@
                 nav-link
                 block
                 font-medium
-                text-xs
+                medbrownparagraph
                 leading-tight
                 uppercase
                 text-black
                 cursor-pointer
                 border-x-0 border-t-0 border-b-2 border-transparent
-                px-6
-                py-3
+                px-md-4 px-0
+                py-md-3 py-0 py-3
                 my-2
                 hover:border-transparent hover:bg-gray-100
                 focus:border-transparent
@@ -61,13 +61,13 @@
                 -->
                 block
                 font-medium
-                text-xs
+                medbrownparagraph
                 leading-tight
                 uppercase
                 cursor-pointer
                 border-x-0 border-t-0 border-transparent
-                px-6
-                py-3
+                px-md-4 px-0
+                py-md-3 py-0 py-3
                 my-2
                 text-black
                 hover:border-transparent hover:bg-gray-100
@@ -84,14 +84,14 @@
                 nav-link
                 block
                 font-medium
-                text-xs
+                medbrownparagraph
                 leading-tight
                 cursor-pointer
                 uppercase
                 text-black
                 border-x-0 border-t-0 border-b-2 border-transparent
-                px-6
-                py-3
+                px-md-4 px-0
+                py-md-3 py-0 py-3
                 my-2
                 hover:border-transparent hover:bg-gray-100
                 focus:border-transparent
@@ -107,14 +107,14 @@
                 nav-link
                 block
                 font-medium
-                text-xs
+                medbrownparagraph
                 leading-tight
                 cursor-pointer
                 uppercase
                 text-black
                 border-x-0 border-t-0 border-b-2 border-transparent
-                px-6
-                py-3
+                px-md-4 px-0
+                py-md-3 py-0 py-3
                 my-2
                 hover:border-transparent hover:bg-gray-100
                 focus:border-transparent
@@ -688,6 +688,7 @@ export default {
           `course-v/add-course-event?course_id=${this.$route.params.course}`,
           this.event
         )
+        this.$fetch()
         this.$bvModal.hide('addEvent')
         this.$toast.success('Event added Successfully')
       } catch (e) {

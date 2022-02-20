@@ -16,14 +16,17 @@
     "
   >
     <div>
-      <b-navbar-toggle target="nav-collapse" class="text-white">
-        <!-- <Icon icon="bytesize:menu"/> -->
+      <b-navbar-toggle
+        target="nav-collapse"
+        class="text-white border-none p-0 border-0"
+      >
+        <b-icon icon="list" class="text-white"></b-icon>
       </b-navbar-toggle>
     </div>
     <div class="d-flex justify-content-between width100">
       <div class="d-block d-md-none">
         <div class="d-flex align-items-center">
-          <nuxt-link to="/" class="navbar-brand logo-icon-mobile pr-2 mr-2" >
+          <nuxt-link to="/" class="navbar-brand logo-icon-mobile pr-2 mr-2">
             <img
               src="~assets/images/blueyellologo.png"
               alt=""
@@ -65,6 +68,92 @@
       </div>
     </div>
 
+    <div class="" v-if="authenticated">
+      <div class="relativecontainer d-block d-md-none">
+        <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
+        <div class="absolutecontainer online">
+          <span class="mainyellowcolor"><b-icon icon="dot"></b-icon></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-block d-md-none ml-2" v-if="authenticated">
+      <div class="d-md-flex align-items-md-center">
+        <b-dropdown
+          size="lg"
+          variant="link"
+          toggle-class="text-decoration-none"
+          class="p-0"
+          no-caret
+        >
+          <template #button-content>
+            <div class="d-flex align-items-center medbrownparagraph">
+              <div class="profimgfull d-none d-md-block">
+                <b-avatar variant="success"></b-avatar>
+              </div>
+              <div>
+                <span class="mx-2 medbrownparagraph text-white">
+                  {{ user.other_name }}
+                  {{ user.surname }}
+                </span>
+              </div>
+              <b-icon icon="chevron-compact-down" class="text-white"></b-icon>
+            </div>
+          </template>
+          <b-dropdown-item href="#" class="medbrownparagraph">
+            <nuxt-link to="/dashboard/accountsettings"> profile </nuxt-link>
+          </b-dropdown-item>
+          <b-dropdown-item href="#" class="medbrownparagraph">
+            <nuxt-link to="/dashboard/accountsettings">
+              Account Settings
+            </nuxt-link>
+          </b-dropdown-item>
+          <b-dropdown-item
+            href="#"
+            class="medbrownparagraph"
+            v-if="!user.is_instructor"
+            @click.prevent="linkToContent"
+          >
+            Link as Instructor
+          </b-dropdown-item>
+          <b-dropdown-item
+            href="#"
+            class="medbrownparagraph"
+            v-if="!user.is_administrator"
+            @click.prevent="linkToContent"
+          >
+            Link as Administrator
+          </b-dropdown-item>
+          <b-dropdown-item
+            href="#"
+            class="medbrownparagraph"
+            @click.prevent="linkToContent"
+            v-else
+          >
+            Link as Courses
+          </b-dropdown-item>
+          <b-dropdown-item @click="signOut" href="#" class="medbrownparagraph">
+            Logout
+          </b-dropdown-item>
+        </b-dropdown>
+
+        <div>
+          <b-modal id="link" centered hide-header hide-footer>
+            <h2 class="brownparagraph bold700 my-3">
+              Link as {{ titlecontent }}
+            </h2>
+            <div class="content px-1">
+              <input type="text" class="forminputs" placeholder="enter code" />
+            </div>
+
+            <div class="d-flex justify-content-center w-full my-2">
+              <button class="btn py-2 rounded subscribebtn">Link</button>
+            </div>
+          </b-modal>
+        </div>
+      </div>
+    </div>
+
     <b-collapse id="nav-collapse" is-nav class="horizontalspacing my-3">
       <div
         class="
@@ -78,8 +167,12 @@
         "
       >
         <div class="firstcontent d-none d-md-block">
-          <div class="d-flex align-items-center">
-            <nuxt-link to="/" class="navbar-brand logo-icon-mobile pr-2 mr-2" href="#">
+          <div class="d-flex flex-column flex-md-row align-items-center">
+            <nuxt-link
+              to="/"
+              class="navbar-brand logo-icon-mobile pr-2 mr-2"
+              href="#"
+            >
               <img
                 src="~/assets/images/blueyellologo.png"
                 alt=""
@@ -89,7 +182,7 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex flex-column flex-md-row align-items-center">
           <ul
             class="
               thirdcontent
@@ -163,7 +256,7 @@
           </ul>
 
           <div class="" v-if="authenticated">
-            <div class="relativecontainer">
+            <div class="relativecontainer d-none d-md-block">
               <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
               <div class="absolutecontainer online">
                 <span class="mainyellowcolor"
@@ -173,7 +266,7 @@
             </div>
           </div>
 
-          <div class="ml-2" v-if="authenticated">
+          <div class="d-none d-md-block ml-2" v-if="authenticated">
             <div class="d-md-flex align-items-md-center">
               <b-dropdown
                 size="lg"
@@ -255,7 +348,7 @@
                     />
                   </div>
 
-                  <div class="d-flex justify-content-center w-full  my-2">
+                  <div class="d-flex justify-content-center w-full my-2">
                     <button class="btn py-2 rounded subscribebtn">Link</button>
                   </div>
                 </b-modal>

@@ -82,6 +82,9 @@
       <template #cell(start_date)="data">
         <span>{{ data.item.start_date | DateFormat }}</span>
       </template>
+      <template #cell(check_in)="data">
+        <span>{{ data.item.check_in | DateFormat }}</span>
+      </template>
       <template #cell(end_date)="data">
         <span>{{ data.item.end_date | DateFormat }}</span>
       </template>
