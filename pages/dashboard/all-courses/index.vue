@@ -123,7 +123,6 @@
                 >Course Code
               </label>
 
-              <pre>{{ currentCourse }}</pre>
               <input
                 type="text"
                 v-model="currentCourse.course_code"

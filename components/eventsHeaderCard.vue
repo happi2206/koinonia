@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="bg-white rounded p-3 my-2">
-      <pre>{{ studentsInCourse }}</pre>
-      <pre>{{ studentsTable }}</pre>
       <div
         class="border-bottom d-flex align-items-center justify-content-between"
       >
@@ -38,10 +36,19 @@
       <filter-component>
         <template #default="{ visualization }">
           <table-component
-            :items="studentsTable"
+            :items="studentArray"
             v-if="visualization === 'list'"
             :fields="fields"
-          />
+          >
+            <template #status="{ data }">
+              <b-form-checkbox
+                v-model="data.value"
+                @change="updateAttendance(data.item.student.id, $event)"
+                size="lg"
+                switch
+              ></b-form-checkbox>
+            </template>
+          </table-component>
         </template>
       </filter-component>
     </div>
@@ -69,6 +76,16 @@ export default {
       studentelement: [],
       studentsInCourse: {},
       studentsTable: [],
+      studentArray: [],
+      fields: [
+        // { key: 'id', sortable: true },
+        { key: 'student.surname', label: 'Surname', sortable: true },
+        { key: 'student.other_name', label: 'Other Name', sortable: true },
+        { key: 'student.email', label: 'Email', sortable: true },
+        { key: 'check_in', label: 'Date/Time in', sortable: true },
+        { key: 'by', label: 'Check in Method', sortable: true },
+        { key: 'status', label: 'Status', sortable: true },
+      ],
     }
   },
 
@@ -77,30 +94,43 @@ export default {
       const student = await this.$axios.$get(
         `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
       )
-      const temp = []
-      temp.push(...student.items)
-      temp.forEach((el) => (this.studentsInCourse = el))
 
-      this.studentsTable = Object.keys(this.studentsInCourse)
+      this.studentArray = student.items
+      // const temp = []
+      // temp.push(...student.items)
+      // temp.forEach((el) => (this.studentsInCourse = el))
 
-      console.log(this.studentsInCourse)
+      // this.studentsTable = Object.keys(this.studentsInCourse)
+
+      // console.log(this.studentsInCourse)
     } catch (e) {
       console.log(e)
     }
   },
-
-  mounted() {
-    // if (this.eventDetail.students) {
-    //   console.log('mounted', this.eventDetail.students)
-    //   this.eventDetail.students.forEach((element) => {
-    //     this.studentelement.push(element)
-    //     console.log(this.studentelement)
-    //   })
-    //   console.log('student', this.eventDetail.students)
-    // }
+  methods: {
+    async updateAttendance(student, status) {
+      let url = status
+        ? 'course-v/mark-attendance-event'
+        : 'course-v/un-mark-attendance-event'
+      try {
+        await this.$axios.$patch(
+          `${url}?student_id=${student}&event_id=${this.$route.params.eventclicked}&course_id=${this.$route.params.event}`,
+          {
+            // params: {
+            //   student_id: student,
+            //   event_id: this.$route.params.eventclicked,
+            //   course_id: this.$route.params.course,
+            // },
+          }
+        )
+      } catch (error) {
+        console.log(error)
+      }
+    },
   },
+
+  mounted() {},
 }
 </script>
 
-<style>
-</style>
+<style></style>

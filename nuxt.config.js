@@ -102,6 +102,7 @@ export default {
 
   env: {
     BASE_URL: process.env.BASE_URL,
+    SCHOOL_ID: process.env.SCHOOL_ID,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
