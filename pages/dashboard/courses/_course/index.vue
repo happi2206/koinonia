@@ -1,7 +1,7 @@
 <template>
   <div class="bodylightgray">
-    <div class="mt-5 pt-md-5 horizontalspacing">
-      <div class="my-4">
+    <div class="mt-md-5 mt-4 pt-md-5 horizontalspacing">
+      <div class="my-md-4">
         <a
           href="#"
           @click.prevent="$router.go(-1)"
@@ -14,16 +14,40 @@
       <header-card :courseDetail="courseDetail" />
 
       <!-- tabs -->
-      <div class="bg-white p-5 mt-4">
+      <div class="bg-white p-md-5 mt-4">
         <ul
-          class="nav nav-tabs flex flex-col md:flex-row flex-wrap list-none border-b-0 pl-0 mb-4"
+          class="
+            nav nav-tabs
+            flex flex-col
+            md:flex-row
+            flex-wrap
+            list-none
+            border-b-0
+            pl-0
+            mb-4
+          "
           id="tabs-tab"
           role="tablist"
         >
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 0"
-              class="nav-link block font-medium text-xs leading-tight uppercase text-black cursor-pointer border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                nav-link
+                block
+                font-medium
+                medbrownparagraph
+                leading-tight
+                uppercase
+                text-black
+                cursor-pointer
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-md-4 px-0
+                py-md-3 py-0 py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 0 }"
               >Course Overview</a
             >
@@ -31,7 +55,24 @@
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 1"
-              class="<!-- nav-link --> block font-medium text-xs leading-tight uppercase cursor-pointer border-x-0 border-t-0 border-transparent px-6 py-3 my-2 text-black hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                <!--
+                nav-link
+                -->
+                block
+                font-medium
+                medbrownparagraph
+                leading-tight
+                uppercase
+                cursor-pointer
+                border-x-0 border-t-0 border-transparent
+                px-md-4 px-0
+                py-md-3 py-0 py-3
+                my-2
+                text-black
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 1 }"
               >Instructors</a
             >
@@ -39,7 +80,22 @@
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 2"
-              class="nav-link block font-medium text-xs leading-tight cursor-pointer uppercase text-black border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                nav-link
+                block
+                font-medium
+                medbrownparagraph
+                leading-tight
+                cursor-pointer
+                uppercase
+                text-black
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-md-4 px-0
+                py-md-3 py-0 py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 2 }"
               >Students</a
             >
@@ -47,7 +103,22 @@
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 3"
-              class="nav-link block font-medium text-xs leading-tight cursor-pointer uppercase text-black border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                nav-link
+                block
+                font-medium
+                medbrownparagraph
+                leading-tight
+                cursor-pointer
+                uppercase
+                text-black
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-md-4 px-0
+                py-md-3 py-0 py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 3 }"
               >Attendance</a
             >
@@ -211,7 +282,13 @@
                       <div class="my-4">
                         <div class="d-flex justify-content-center">
                           <button
-                            class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+                            class="
+                              btn
+                              px-md-4 px-3
+                              py-2
+                              mainbtndashboard
+                              medbrownparagraph
+                            "
                           >
                             Add Student
                           </button>
@@ -310,7 +387,13 @@
                       <div class="my-4">
                         <div class="d-flex justify-content-center">
                           <button
-                            class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+                            class="
+                              btn
+                              px-md-4 px-3
+                              py-2
+                              mainbtndashboard
+                              medbrownparagraph
+                            "
                           >
                             Add Event
                           </button>
@@ -514,13 +597,12 @@ export default {
       }
       console.log(new_array)
 
-       await this.$axios.$post(
-          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
-          new_array
-        )
-        this.$fetch()
-        this.$toast.success('Students added Successfully')
-      
+      await this.$axios.$post(
+        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+        new_array
+      )
+      this.$fetch()
+      this.$toast.success('Students added Successfully')
     },
     async addInstructortoCourse() {
       try {

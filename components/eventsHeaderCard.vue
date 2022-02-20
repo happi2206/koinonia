@@ -8,7 +8,7 @@
           {{ eventDetail.name }}
         </h2>
       </div>
-      <div class="my-2 d-flex">
+      <div class="my-2 d-flex flex-md-row flex-column">
         <p class="my-2 medparagraph mx-3">
           Description:
           <span class="lightgraytext"> {{ eventDetail.description }}</span>
@@ -32,7 +32,7 @@
         </p>
       </div>
     </div>
-    <div class="bg-white rounded p-3 my-2">
+    <div class="bg-white rounded p-md-3 my-2">
       <filter-component>
         <template #default="{ visualization }">
           <table-component

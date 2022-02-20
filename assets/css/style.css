@@ -635,6 +635,22 @@ button.loginbtn {
   line-height: 19px;
   letter-spacing: 0em;
 }
+td {
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+}
+th {
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+}
 
 .smallbrownparagraph {
   font-family: Brown;
@@ -1244,6 +1260,10 @@ button.loginbtn {
   }
 }
 @media (max-width: 768.5px) {
+  .sidebar-wrapper {
+    width: 60%;
+  }
+
   .flwidth {
     width: 100%;
   }

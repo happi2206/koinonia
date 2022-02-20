@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 horizontalspacing pt-md-5"></div>
+  <div class="mt-md-5 horizontalspacing pt-md-5"></div>
 </template>
 
 <script>

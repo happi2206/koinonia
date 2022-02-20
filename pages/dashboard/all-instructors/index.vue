@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 horizontalspacing pt-md-5">
+  <div class="mt-md-5 horizontalspacing pt-md-5">
     <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">Instructors</h2>
       <div>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="mt-2">
-      <div class="card p-5 bg-white rounded">
+      <div class="card p-md-5 bg-white rounded">
         <table-component
           :items="userdetails"
           :fields="fields"
