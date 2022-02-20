@@ -1,7 +1,6 @@
 <template>
   <div>
     <main class="">
-      <login-nav />
       <div class="row verticalspacing">
         <div class="col-lg-6">
           <div class="relativecontainer">
@@ -38,7 +37,7 @@
             </div> -->
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
           <div class="">
             <div class="mt-5">
               <h2 class="brownheader text-center">Log in</h2>
@@ -126,72 +125,70 @@
                     <div class="my-4 px-md-5">
                       <p class="medbrownparagraph text-center">Or</p>
 
-                      <div class="my-3 px-2">
-                        <div class="my-4">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Your email</label
-                          >
-                          <input
-                            type="email"
-                            v-model="loginInputs.email"
-                            name=""
-                            id=""
-                            placeholder="Email"
-                            class="forminputs"
-                          />
-                        </div>
-                        <div class="my-4 relativecontainer">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Choose a password</label
-                          >
-                          <input
-                            type="password"
-                            v-model="loginInputs.password"
-                            name=""
-                            id=""
-                            placeholder="********"
-                            class="forminputs"
-                          />
-                          <span
-                            toggle="#password-field"
-                            class="lightgraytext absolutecontainer eyeicon"
-                            ><span
-                              class="iconify"
-                              data-icon="el:eye-open"
-                              data-width="20"
-                              data-height="20"
-                            ></span
-                          ></span>
-                        </div>
-
-                        <div class="my-4">
-                          <div class="form-check">
-                            <label class="form-check-label medbrownparagraph">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                name=""
-                                id=""
-                                value="checkedValue"
-                                checked
-                              />
-
-                              Keep me signed in
-                            </label>
+                      <form @submit.prevent="loginUser">
+                        <div class="my-3 px-2">
+                          <div class="my-4">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Your email</label
+                            >
+                            <input
+                              type="email"
+                              v-model="loginInputs.username"
+                              required
+                              placeholder="Email"
+                              class="forminputs"
+                            />
                           </div>
-                        </div>
+                          <div class="my-4 relativecontainer">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Choose a password</label
+                            >
+                            <input
+                              type="password"
+                              v-model="loginInputs.password"
+                              required
+                              placeholder="********"
+                              class="forminputs"
+                            />
+                            <span
+                              toggle="#password-field"
+                              class="lightgraytext absolutecontainer eyeicon"
+                            >
+                              <!-- <Icon
+                                  icon="el:eye-open"
+                                  width="20"
+                                  height="20"
+                              /> -->
+                            </span>
+                          </div>
 
-                        <button
-                          class="subscribebtn rad6 btn mt-3 py-3"
-                          @click="loginUser"
-                        >
-                          Login
-                        </button>
-                      </div>
+                          <div class="my-4">
+                            <div class="form-check">
+                              <label class="form-check-label medbrownparagraph">
+                                <input
+                                  type="checkbox"
+                                  required
+                                  class="form-check-input"
+                                  value="checkedValue"
+                                  checked
+                                />
+
+                                Keep me signed in
+                              </label>
+                            </div>
+                          </div>
+
+                          <input
+                            class="subscribebtn btn rad6 btn mt-3 py-3"
+                            type="submit"
+                            value="Login"
+                          />
+                        </div>
+                      </form>
 
                       <div class="my-4 d-flex justify-content-center">
                         <nuxt-link
@@ -204,7 +201,7 @@
                       <div class="my-4 d-flex justify-content-center">
                         <p class="medparagraph mx-2">
                           Don’t have an account?
-                          <nuxt-link to="/" class="mb-0">
+                          <nuxt-link to="/register" class="mb-0">
                             <u>Sign up</u>
                           </nuxt-link>
                         </p>
@@ -222,23 +219,38 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
+  name: 'login',
+  middleware: 'login_auth',
   data() {
     return {
       loginInputs: {
-        email: '',
+        username: '',
         password: '',
-        checked: false,
+        // checkedValue: false,
       },
     }
   },
 
   methods: {
+    ...mapActions({
+      login: 'auth/loginUser',
+    }),
     async loginUser() {
       try {
-        const response = await this.$axios.$post('/', loginInputs)
+        // show preloader
+        this.$nuxt.$loading.start()
+        // call login function
+        await this.login(this.loginInputs)
+        // redirect user
+        this.$router.push('/')
       } catch (e) {
-        console.log(e)
+        // show error
+        this.$toast.error(e.data.detail)
+      } finally {
+        // hide preloader
+        this.$nuxt.$loading.finish()
       }
     },
   },

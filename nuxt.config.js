@@ -2,6 +2,13 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  loadingIndicator: {
+    name: 'three-bounce',
+    color: '#ffcd06',
+    background: 'white'
+  },
+  
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'koinonia',
@@ -14,14 +21,47 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap'
+      },
+      {
+        rel: 'stylesheet',
+        href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      },
+    ],
+    script: [
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js",
+      },
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js",
+      },
+
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/css/style.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+
+  plugins: [
+    '~/plugins/axios',
+    '~/plugins/store_initializer',
+    '~/plugins/filter',
+    // '~/plugins/iconify.js',
+    '~/plugins/vue-select.js',
+    '~/plugins/bootstrap-icon.js',
+    '~/plugins/vue-editor.js',
+    '~/plugins/luxon.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -30,7 +70,40 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['bootstrap-vue/nuxt'],
+  modules: [
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/toast',
+    'vue2-editor/nuxt',
+  ],
+  toast: {
+    position: 'bottom-right',
+    singleton: true,
+    duration: 5000,
+    register: [
+      // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error',
+        },
+      },
+    ],
+  },
+  axios: {
+    baseURL: process.env.BASE_URL,
+  },
+  // loading: {
+  //   color: '#ffcd06',
+  //   height: '5px',
+  // },
+
+  env: {
+    BASE_URL: process.env.BASE_URL,
+    SCHOOL_ID: process.env.SCHOOL_ID,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

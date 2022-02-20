@@ -29,46 +29,87 @@
         </div>
       </div>
     </section>
-    <section
-      class="mt-3 horizontalspacing"
-      v-if="false"
-    >
+
+    <section class="mt-3 horizontalspacing">
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Courses" active>
           <div class="row mt-4">
-            <div class="col-lg-6 my-3 my-lg-0" :key="index" v-for="(course, index) in courses">
+            <div class="col-lg-6 my-3 my-lg-0">
               <div class="bg-white rounded">
-                <div class="p-2 flex gap-2">
-                  <div class="d-flex align-items-center">
-                  <b-avatar square :size="200"></b-avatar>
+                <div class="p-2 d-flex flex-sm-row flex-column">
+                  <div class="coursewidth1 d-flex align-items-center">
+                    <img
+                      src="~/assets/images/man1.png"
+                      alt=""
+                      class="img-fluid"
+                    />
                   </div>
 
-                  <div class="p-3">
-                    <h1 class="text-3xl bold700 text-capitalize">
-                      {{course.title}}
+                  <div class="p-3 coursewidth2">
+                    <h1 class="largebrownparagraph bold700 text-capitalize">
+                      concepts of fellowship, joint participation
                     </h1>
                     <div class="my-2 row">
                       <div class="col-12">
                         <p class="my-2 medbrownparagraph">
-                          <span class="lightgraytext"> Start Date: </span>
-                         {{course.start_date | DateFormat}}
+                          <span class="lightgraytext"> Start Date:</span>
+                          01/01/2022
                         </p>
                       </div>
                       <div class="col-12">
                         <p class="my-2 medbrownparagraph">
                           <span class="lightgraytext"> End Date:</span>
-                        {{course.end_date | DateFormat}}
+                          01/01/2022
                         </p>
                       </div>
                     </div>
-                    <p class="my-2 medbrownparagraph" v-html="$options.filters.shortTextFilter(course.long_description)">
+                    <p class="my-2 medbrownparagraph">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,it
+                      esse cillum dolore eu fugiat nulla pariatur....
                     </p>
-                    <!-- <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p> -->
+                    <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p>
                   </div>
                 </div>
               </div>
             </div>
-           
+            <div class="col-lg-6 my-3 my-lg-0">
+              <div class="bg-white rounded">
+                <div class="p-2 d-flex flex-sm-row flex-column">
+                  <div class="coursewidth1 d-flex align-items-center">
+                    <img
+                      src="~/assets/images/man1.png"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+
+                  <div class="p-3 coursewidth2">
+                    <h1 class="largebrownparagraph bold700 text-capitalize">
+                      concepts of fellowship, joint participation
+                    </h1>
+                    <div class="my-2 row">
+                      <div class="col-12">
+                        <p class="my-2 medbrownparagraph">
+                          <span class="lightgraytext"> Start Date:</span>
+                          01/01/2022
+                        </p>
+                      </div>
+                      <div class="col-12">
+                        <p class="my-2 medbrownparagraph">
+                          <span class="lightgraytext"> End Date:</span>
+                          01/01/2022
+                        </p>
+                      </div>
+                    </div>
+                    <p class="my-2 medbrownparagraph">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,it
+                      esse cillum dolore eu fugiat nulla pariatur....
+                    </p>
+                    <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div></b-tab
         >
         <b-tab title="On-going" class=""><p>I'm the second tab</p></b-tab>
@@ -77,8 +118,7 @@
       </b-tabs>
     </section>
 
-<!-- top -->
-    <section class="horizontalspacing mt-5" v-if="false">
+    <section class="horizontalspacing mt-5">
       <div>
         <h1 class="brown28 text-center mainbluecolor">Top Featured Courses</h1>
         <p class="mt-3 brownparagraph horizontalspacing text-center graytext">
@@ -126,10 +166,10 @@
                     </button>
 
                     <div>
-                      <!-- <Icon
+                      <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      /> -->
+                      />
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -174,10 +214,10 @@
                     </button>
 
                     <div>
-                      <!-- <Icon
+                      <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      /> -->
+                      />
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -222,10 +262,10 @@
                     </button>
 
                     <div>
-                      <!-- <Icon
+                      <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      /> -->
+                      />
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -270,10 +310,10 @@
                     </button>
 
                     <div>
-                      <!-- <Icon
+                      <Icon
                         icon="bi:bookmark-star-fill"
                         class="mainyellowcolor"
-                      /> -->
+                      />
                       <span class="medbrownparagraph mb-0">Save</span>
                     </div>
                   </div>
@@ -284,8 +324,8 @@
         </div>
       </div>
     </section>
-<!-- two -->
-    <section class="my-5" v-if="false">
+
+    <section class="my-5">
       <div class="horizontalspacing">
         <div>
           <h1 class="brown28 text-center mainbluecolor">Top Tutors</h1>
@@ -311,11 +351,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -332,11 +372,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -353,11 +393,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -374,11 +414,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -394,11 +434,11 @@
                       />
 
                       <h3
-                        class="mainparagraph text-center my-3 mainparagraph18"
+                        class="brownparagraph text-center my-3 brownparagraph18"
                       >
                         John S. Sergent 1
                       </h3>
-                      <p class="mainparagraph text-center graytext">
+                      <p class="brownparagraph text-center graytext">
                         Lorem ipsum
                       </p>
                     </div>
@@ -408,12 +448,12 @@
             </div>
 
             <div class="customarrows">
-              <span @click="previous()" class="customarrowleft">
-                <!-- <Icon icon="la:long-arrow-alt-left" width="60" height="60"/> -->
-              </span>
-              <span @click="next()" class="customarrowright">
-                <!-- <Icon icon="la:long-arrow-alt-right" width="60" height="60"/> -->
-              </span>
+              <span @click="previous()" class="customarrowleft"
+                ><Icon icon="la:long-arrow-alt-left" width="60" height="60"
+              /></span>
+              <span @click="next()" class="customarrowright"
+                ><Icon icon="la:long-arrow-alt-right" width="60" height="60"
+              /></span>
             </div>
           </div>
         </div>
@@ -472,7 +512,7 @@
                     <div class="col-lg-9">
                       <h3 class="roboto32">Emilet Jonas</h3>
 
-                      <p class="mainparagraph graytext mt-md-5 mt-3">
+                      <p class="brownparagraph graytext mt-md-5 mt-3">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -524,7 +564,7 @@
                     <div class="col-lg-9">
                       <h3 class="roboto32">Emilet Jonas</h3>
 
-                      <p class="mainparagraph graytext mt-md-5 mt-3">
+                      <p class="brownparagraph graytext mt-md-5 mt-3">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -594,21 +634,17 @@ export default {
     return {
       flickityOptions: {
         initialIndex: 3,
-        prevNextButtons: false,
-        pageDots: false,
+        prevNextButtons: true,
+        pageDots: true,
         wrapAround: true,
+        autoPlay: true,
 
         // any options from Flickity can be used
       },
-      courses: [],
     }
   },
   computed: {
-    ...mapGetters({
-      authenticated: 'auth/authenticated',
-      user: 'auth/user',
-      token: 'auth/token',
-    }),
+    ...mapGetters(['isAuthenticated', 'loggedIn']),
   },
 
   methods: {
@@ -619,36 +655,6 @@ export default {
     previous() {
       this.$refs.flickity.previous()
     },
-    async get_all() {
-      try {
-        if(this.authenticated){
-// set custom hear
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`,
-        }
-        // make axios request for all courses
-        const { items } = await this.$axios.$get(
-          `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=2`,
-          {
-            headers: headers,
-          }
-        )
-        // assign response to coures
-        this.courses = items
-        }
-        
-      } catch (e) {
-        this.$toast.error(e.data.detail)
-      }
-    },
-  },
-  mounted() {
-    this.$nextTick(async () => {
-      this.$nuxt.$loading.start()
-      await this.get_all()
-      this.$nuxt.$loading.finish()
-    })
   },
 }
 </script>
@@ -676,4 +682,5 @@ export default {
   width: 50px;
   height: 50px;
 }
+</style>>
 </style>

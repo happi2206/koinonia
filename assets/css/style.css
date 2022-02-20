@@ -160,6 +160,9 @@ html body main {
 .bodygray {
   background-color: #e5e5e5;
 }
+.bodylightgray {
+  background-color: #f5f6f7;
+}
 
 .borderrounded {
   border-radius: 3px;
@@ -190,7 +193,7 @@ html body main {
 
 button.mainbtn {
   background-color: #ffcd06;
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -202,7 +205,7 @@ button.mainbtn {
 
 button.tertiarybtn {
   background-color: #00b2ff;
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -222,6 +225,53 @@ button.tertiarybtn {
   text-align: left;
 }
 
+a.loginbtndashboard {
+  background-color: none;
+  border: 1px solid #fff;
+  color: #fff;
+
+  text-decoration: none;
+  outline: none;
+}
+/* a.loginbtndashboard:hover {
+  background-color: white;
+  color: #0734aa;
+} */
+
+/* .nuxt-link-exact-active {
+  background: #ffcd0624;
+  margin: 10px 10px;
+} */
+a:hover {
+  text-decoration: none;
+}
+
+a.mainbtndashboard {
+  background-color: #ffcd06;
+  color: black;
+
+  text-align: left;
+  text-decoration: none;
+  outline: none;
+}
+a.mainbtndashboard:hover {
+  background-color: 10203f;
+  color: black;
+}
+
+button.mainbtndashboard {
+  background-color: #ffcd06;
+  color: black;
+
+  text-align: left;
+  text-decoration: none;
+  outline: none;
+}
+button.mainbtndashboard:hover {
+  background-color: 10203f;
+  color: black;
+}
+
 button.loginbtndashboard {
   background-color: none;
   border-radius: 10px;
@@ -236,7 +286,7 @@ button.loginbtndashboard {
   text-align: left;
 }
 
-button.mainbtndashboard {
+input.mainbtndashboard {
   background-color: #ffcd06;
   font-family: Brown;
   font-size: 14px;
@@ -246,6 +296,10 @@ button.mainbtndashboard {
   letter-spacing: 0em;
   text-align: left;
   border-radius: 10px;
+}
+
+.gap {
+  gap: 10px;
 }
 
 button.searchbtninside {
@@ -261,10 +315,10 @@ button.searchbtninside {
   border-bottom-left-radius: 0;
 }
 
-button.subscribebtn {
+input.subscribebtn {
   background-color: #0734aa;
   color: #fff;
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -275,12 +329,36 @@ button.subscribebtn {
   text-align: center;
   border-radius: 0;
 }
+.subscribebtn:hover {
+  border: #0734aa;
+  color: #0734aa;
+  background: transparent;
+}
+button.subscribebtn {
+  background-color: #0734aa;
+  color: #fff;
+  font-family: 'Brown';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 100%;
+  text-align: center;
+  border-radius: 0;
+}
+button.subscribebtn:hover {
+  border: 1px solid #0734aa;
+  color: #0734aa;
+  background: transparent;
+}
 button.subscribebtn.rad6 {
   border-radius: 6px;
 }
 
 button.loginbtn {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -291,7 +369,7 @@ button.loginbtn {
 }
 
 .header {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
@@ -301,7 +379,7 @@ button.loginbtn {
 }
 
 .header2 {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -311,7 +389,7 @@ button.loginbtn {
 }
 
 .mainparagraph {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -321,7 +399,7 @@ button.loginbtn {
 }
 
 .mainparagraph18 {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -331,7 +409,7 @@ button.loginbtn {
 }
 
 .biggerparagraph {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -341,7 +419,7 @@ button.loginbtn {
 }
 
 .roboto24 {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 24px;
   font-style: normal;
   line-height: 28px;
@@ -350,7 +428,7 @@ button.loginbtn {
 }
 
 .roboto22 {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 22px;
   font-style: normal;
   line-height: 22px;
@@ -359,7 +437,7 @@ button.loginbtn {
 }
 
 .medparagraph {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -379,7 +457,7 @@ button.loginbtn {
 }
 
 .rubikheader {
-  font-family: Rubik;
+  font-family: 'Brown';
   font-size: 49px;
   font-style: normal;
   font-weight: 400;
@@ -389,7 +467,7 @@ button.loginbtn {
 }
 
 .rubikheader2 {
-  font-family: Rubik;
+  font-family: 'Brown';
   font-size: 25px;
   font-style: normal;
   font-weight: 400;
@@ -399,7 +477,7 @@ button.loginbtn {
 }
 
 .roboto32 {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -409,7 +487,7 @@ button.loginbtn {
 }
 
 .roboto12 {
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -433,7 +511,7 @@ button.loginbtn {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .newsletterinputs::placeholder {
-  font-family: Rubik;
+  font-family: 'Brown';
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -455,7 +533,7 @@ button.loginbtn {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #aeb5bc;
+
   border-radius: 6px;
   background-color: transparent;
   background-clip: padding-box;
@@ -463,7 +541,7 @@ button.loginbtn {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .forminputs::placeholder {
-  font-family: Rubik;
+  font-family: 'Brown';
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -501,7 +579,7 @@ button.loginbtn {
 }
 
 .footerbottom {
-  font-family: Rubik;
+  font-family: 'Brown';
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -529,6 +607,16 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 
+.brownheaderlarge {
+  font-family: Brown;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 60px;
+  letter-spacing: 0.002em;
+  text-align: left;
+}
+
 .brownparagraph {
   font-family: Brown;
   font-size: 16px;
@@ -544,6 +632,22 @@ button.loginbtn {
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+}
+td {
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+}
+th {
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
   line-height: 19px;
   letter-spacing: 0em;
 }
@@ -597,6 +701,15 @@ button.loginbtn {
   letter-spacing: 0em;
   text-align: left;
 }
+.brown28 {
+  font-family: Brown;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+}
 
 .navz {
   z-index: 1000;
@@ -606,7 +719,7 @@ button.loginbtn {
 
 .thirdcontent {
   list-style-type: none;
-  font-family: Roboto;
+  font-family: 'Brown';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -655,6 +768,7 @@ button.loginbtn {
   background: #ffcd0624;
   margin: 0px 10px;
 }
+
 .sidebar-wrapper .sidebar-menu a {
   text-decoration: none;
 }
@@ -662,6 +776,7 @@ button.loginbtn {
 .page-content {
   margin-left: 250px;
   margin-top: 60px;
+  background-color: #f5f6f7;
 }
 
 .icontoggle {
@@ -688,12 +803,26 @@ button.loginbtn {
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100vw;
+
   height: 70vh;
+  background: #28438724;
 }
 .imagesection img {
   width: 100%;
   object-fit: cover;
+}
+
+.svgplaceholderimages {
+  position: absolute;
+  top: 180px;
+}
+
+.coursewidth1 {
+  width: 40%;
+}
+
+.coursewidth2 {
+  width: 60%;
 }
 
 .profimgfull img {
@@ -860,7 +989,7 @@ button.loginbtn {
   border-radius: 5px;
 }
 
-.imagesection:before {
+/* .imagesection:before {
   content: '';
   display: block;
   position: absolute;
@@ -875,12 +1004,13 @@ button.loginbtn {
     rgba(0, 13, 49, 0.5) 0%,
     rgba(4, 43, 164, 0.335) 100%
   );
-}
+} */
 
 .textsection {
   position: absolute;
   top: 100px;
-  left: 50px;
+  /* left: 50px; */
+  width: 60%;
 }
 
 .midrelsection {
@@ -1027,12 +1157,39 @@ button.loginbtn {
   border-bottom: 0.2px solid #828282;
   width: 100%;
 }
+
+.custom-tabs .nav-tabs .nav-link {
+  border-left: none !important;
+  border-radius: 0 !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+
 .custom-tabs .nav-link {
   color: #333333;
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 .custom-tabs .nav-link.active {
   border-bottom: 7px solid #ffce31;
   color: #0734aa;
+  font-family: Brown;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.custom-tabs .nav-tabs {
+  background-color: #fff !important;
+  border-radius: 5px;
 }
 
 @media (max-width: 1200.5px) {
@@ -1083,10 +1240,10 @@ button.loginbtn {
     width: 80%;
   }
 
-  .textsection {
+  /* .textsection {
     left: 20px;
     top: 140px;
-  }
+  } */
 
   .header {
     font-size: 28px;
@@ -1103,6 +1260,10 @@ button.loginbtn {
   }
 }
 @media (max-width: 768.5px) {
+  .sidebar-wrapper {
+    width: 60%;
+  }
+
   .flwidth {
     width: 100%;
   }
@@ -1128,7 +1289,7 @@ button.loginbtn {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
   .forminputs::placeholder {
-    font-family: Rubik;
+    font-family: 'Brown';
     font-weight: 300;
     font-size: 10px !important;
     font-size: 16px;
@@ -1210,9 +1371,9 @@ button.loginbtn {
     margin-right: 20px;
   }
 
-  .textsection {
+  /* .textsection {
     left: 10px;
-  }
+  } */
 
   .forminputpadding {
     padding-left: 50px;
@@ -1228,13 +1389,9 @@ button.loginbtn {
     width: 90%;
   }
 
-  .imagesection {
+  /* .imagesection {
     height: 50vh;
-  }
-
-  button.loginbtndashboard {
-    font-size: 12px !important;
-  }
+  } */
 
   button.mainbtndashboard {
     font-size: 12px !important;
@@ -1246,6 +1403,15 @@ button.loginbtn {
 
   button.loginbtn {
     font-size: 12px !important;
+  }
+}
+@media (max-width: 576.5px) {
+  .coursewidth1 {
+    width: 100%;
+  }
+
+  .coursewidth2 {
+    width: 100%;
   }
 }
 @media (max-width: 500.5px) {
