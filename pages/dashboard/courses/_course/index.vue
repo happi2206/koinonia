@@ -144,11 +144,12 @@
                   >
                     Add Instructor
                   </button>
-                  <b-modal id="addInstructor" centered hide-header hide-footer>
-                    <h2 class="brownparagraph bold700 text-center my-3">
-                      Add Instructor
-                    </h2>
-
+                  <b-modal
+                    id="addInstructor"
+                    centered
+                    title="Add Instructor"
+                    hide-footer
+                  >
                     <div class="content px-md-5 my-2">
                       <div class="my-3">
                         <label class="medbrownparagraph">Instructor Name</label>
@@ -179,6 +180,7 @@
               <template #default="{ visualization }">
                 <table-component
                   :items="instructors"
+                  :fields="instructorfields"
                   v-if="visualization === 'list'"
                 />
 
@@ -205,12 +207,27 @@
                   >
                     Add Student
                   </button>
-                  <b-modal id="addStudent" centered hide-header hide-footer>
-                    <h2 class="largebrownparagraph bold700 my-3">
-                      Create Student
-                    </h2>
-                    <form class="modabody" @submit.prevent="createStudent">
-                      <div class="my-4">
+                  <input
+                    @change="uploadStudents"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    ref="uploadcsv"
+                    type="file"
+                    class="hidden"
+                  />
+                  <button
+                    @click.prevent="$refs.uploadcsv.click()"
+                    class="btn py-2 mainbtndashboard medbrownparagraph"
+                  >
+                    upload students
+                  </button>
+                  <b-modal
+                    id="addStudent"
+                    title="Create Student"
+                    centered
+                    hide-footer
+                  >
+                    <form class="modabody p-4" @submit.prevent="createStudent">
+                      <div>
                         <label for="" class="d-block medbrownparagraph graytext"
                           >Student Email
                         </label>
@@ -248,100 +265,8 @@
                           class="forminputs text-dark"
                         />
                       </div>
+
                       <!-- <div class="my-4">
-                        <div class="">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Marital status
-                          </label>
-
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="single"
-                            />
-                            <label class="form-check-label" for="single"
-                              >Single</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="married"
-                            />
-                            <label class="form-check-label" for="married"
-                              >Married</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="divorced"
-                            />
-                            <label class="form-check-label" for="divorced"
-                              >Divorced</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="widowed"
-                            />
-                            <label class="form-check-label" for="widowed"
-                              >Widowed</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="my-4">
-                        <div class="">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Gender
-                          </label>
-
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="Male"
-                              v-model="student.gender"
-                              value="single"
-                            />
-                            <label class="form-check-label" for="single"
-                              >Male</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="Female"
-                              v-model="student.gender"
-                              value="Female"
-                            />
-                            <label class="form-check-label" for="single"
-                              >Female</label
-                            >
-                          </div>
-                        </div>
-                      </div> -->
-
-                      <div class="my-4">
                         <div class="form-check">
                           <label class="form-check-label medbrownparagraph">
                             <input
@@ -350,10 +275,9 @@
                               required
                               v-model="student.send_lastest_updates"
                             />
-                            I agree to recieve latest updates
                           </label>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="my-4">
                         <div class="d-flex justify-content-center">
@@ -377,6 +301,7 @@
               <template #default="{ visualization }">
                 <table-component
                   :items="students"
+                  :fields="studentfields"
                   v-if="visualization === 'list'"
                 />
 
@@ -458,112 +383,6 @@
                           class="forminputs text-dark"
                         />
                       </div>
-                      <!-- <div class="my-4">
-                        <div class="">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Marital status
-                          </label>
-
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="single"
-                            />
-                            <label class="form-check-label" for="single"
-                              >Single</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="married"
-                            />
-                            <label class="form-check-label" for="married"
-                              >Married</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="divorced"
-                            />
-                            <label class="form-check-label" for="divorced"
-                              >Divorced</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="marital-status"
-                              v-model="student.status"
-                              value="widowed"
-                            />
-                            <label class="form-check-label" for="widowed"
-                              >Widowed</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="my-4">
-                        <div class="">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >Gender
-                          </label>
-
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="Male"
-                              v-model="student.gender"
-                              value="single"
-                            />
-                            <label class="form-check-label" for="single"
-                              >Male</label
-                            >
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="Female"
-                              v-model="student.gender"
-                              value="Female"
-                            />
-                            <label class="form-check-label" for="single"
-                              >Female</label
-                            >
-                          </div>
-                        </div>
-                      </div> -->
-
-                      <!-- <div class="my-4">
-                        <div class="form-check">
-                          <label class="form-check-label medbrownparagraph">
-                            <input
-                              type="checkbox"
-                              class="form-check-input"
-                              required
-                              v-model="student.send_lastest_updates"
-                            />
-                            I agree to recieve latest updates
-                          </label>
-                        </div>
-                      </div> -->
 
                       <div class="my-4">
                         <div class="d-flex justify-content-center">
@@ -591,6 +410,8 @@
                   :fields="fields"
                   :dropdownItem="dropdownItem"
                   @row-clicked="onRowClicked"
+                  @Edit="handleEdit"
+                  @Delete="handleDelete"
                 />
 
                 <div class="row" v-else>
@@ -610,23 +431,26 @@
 </template>
 
 <script>
+import { json2csv, csv2json } from 'json-2-csv'
+var csv = require('csvtojson')
 export default {
   layout: 'dashboard',
 
   data() {
     return {
+      dropdownItem: ['Delete'],
       courseDetail: {},
       schemeOfWork: [{ title: '', objective: 'objective' }],
       currentTab: 0,
       instructors: [],
       students: [],
-      dropdownItem: [
-        'Print_QR_Code',
-        'Edit',
-        'Download_As_PDF',
-        'Download_As_XLS',
-        'Download_As_CSV',
-      ],
+      // dropdownItem: [
+      //   // 'Print_QR_Code',
+      //   'Edit',
+      //   // 'Download_As_PDF',
+      //   // 'Download_As_XLS',
+      //   // 'Download_As_CSV',
+      // ],
       fields: [
         { key: 'Name', sortable: true },
         { key: 'Start Date', sortable: true },
@@ -639,6 +463,23 @@ export default {
           thStyle: { width: '200px' },
         },
         { key: 'dots', label: '', sortable: true },
+      ],
+      instructorfields: [
+        { key: 'surname', sortable: true },
+        { key: 'other_name', sortable: true },
+        { key: 'email', sortable: true },
+        { key: 'gender', sortable: true },
+        { key: 'phone no', sortable: true },
+        { key: 'designation', sortable: true },
+        { key: 'dots', label: 'Action', sortable: true },
+      ],
+      studentfields: [
+        { key: 'surname', sortable: true },
+        { key: 'other_name', sortable: true },
+        { key: 'email', sortable: true },
+        { key: 'gender', sortable: true },
+        { key: 'phone no', sortable: true },
+        { key: 'dots', label: 'Action', sortable: true },
       ],
 
       student: {
@@ -673,7 +514,6 @@ export default {
         `course-v/get-a-course?course_id=${this.$route.params.course}`
       )
       this.courseDetail = courses
-      console.log(this.courseDetail)
     } catch (e) {
       console.log(e)
     }
@@ -683,7 +523,9 @@ export default {
         `instructors-v/get-all-instructors?page=1&size=50`
       )
 
-      this.instructors.push(...instructors.items)
+      this.instructors = instructors.items
+
+      // this.instructors.push(...instructors.items)
     } catch (e) {
       console.log(e)
     }
@@ -692,7 +534,7 @@ export default {
         `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
       )
 
-      this.students.push(...students.items)
+      this.students = students.items
     } catch (e) {
       console.log(e)
     }
@@ -721,6 +563,49 @@ export default {
   },
 
   methods: {
+    async uploadStudents(e) {
+      let file = e.target.files[0]
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLSX.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLSX.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+
+      let new_array = []
+      for (const iterator of students) {
+        new_array.push({
+          other_name: iterator['First Name'],
+          surname: iterator['Surname'],
+          send_latest_updates: false,
+          registration_number: iterator['Registration Number'],
+          user_type: {
+            user_type: 'flat_user',
+            link_code: '',
+            type: 'student',
+          },
+        })
+      }
+      console.log(new_array)
+
+       await this.$axios.$post(
+          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+          new_array
+        )
+        this.$fetch()
+        this.$toast.success('Students added Successfully')
+      
+    },
     async addInstructortoCourse() {
       try {
         await this.$axios.$post(
@@ -737,12 +622,12 @@ export default {
     },
     async createStudent() {
       try {
-        console.log(this.student)
-
         await this.$axios.$post(
-          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+          `course-v/add-flat-student-to-a-course?course_id=${this.$route.params.course}`,
           this.student
         )
+        this.$fetch()
+        this.$bvModal.hide('addStudent')
         this.$toast.success('Student added Successfully')
       } catch (e) {
         console.log(e)
@@ -772,6 +657,31 @@ export default {
       console.log(e)
 
       this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
+    },
+    async editCourse() {
+      try {
+        const forSubmit = this.currentCourse
+        delete forSubmit.check
+        delete forSubmit.serial
+        delete forSubmit.dots
+
+        await this.$axios.$patch(
+          `course-v/edit-course?course_id=${forSubmit.id}`,
+          forSubmit
+        )
+        this.$fetch()
+        console.log(e)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async handleDelete(e) {
+      try {
+        await this.$axios.delete(`course-v/delete-course?course_id=${e.id}`)
+        this.$fetch()
+      } catch (e) {
+        console.log(e)
+      }
     },
   },
 }

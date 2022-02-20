@@ -14,21 +14,10 @@
       <!-- add course -->
       <b-modal id="addcourse" title="Add Course" hide-footer>
         <div class="modacontent">
-          <form class="modabody" @submit.prevent="addCourse">
-            <!-- <div class="my-2">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Course Code
-              </label>
-              <input
-                type="text"
-                v-model="courseData.course_code"
-                required
-                placeholder="e.g ECO23"
-                class="forminputs"
-              />
-            </div> -->
-            <div class="my-2">
-              <label for="" class="d-block medbrownparagraph graytext"
+          <form class="modabody px-4" @submit.prevent="addCourses">
+ 
+            <div class="my-4">
+              <label  class="d-block medbrownparagraph graytext"
                 >Course Name
               </label>
               <input
@@ -39,7 +28,7 @@
                 class="forminputs"
               />
             </div>
-            <div class="my-2">
+            <div class="my-4">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Subtitle
               </label>
@@ -51,7 +40,7 @@
                 class="forminputs"
               />
             </div>
-            <div class="my-2">
+            <div class="my-4">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Description
               </label>
@@ -63,14 +52,14 @@
                 class="forminputs"
               />
             </div>
-            <div class="my-2">
+            <div class="my-4">
               <div class="row">
                 <div class="col-md-6">
                   <label for="" class="d-block medbrownparagraph graytext"
                     >Start Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     v-model="courseData.start_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
@@ -79,10 +68,10 @@
                 </div>
                 <div class="col-md-6">
                   <label for="" class="d-block medbrownparagraph graytext"
-                    >Start Date
+                    >End Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     v-model="courseData.end_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
@@ -91,7 +80,7 @@
                 </div>
               </div>
             </div>
-            <div class="my-2">
+            <div class="my-4">
               <label for="" class="d-block medbrownparagraph graytext"
                 >Course Description
               </label>
@@ -99,7 +88,7 @@
               </VueEditor>
             </div>
 
-            <div class="my-2">
+            <div class="my-4">
               <p class="medbrownparagraph lightgraytext">
                 Upload your course image here. It must meet our course image
                 quality standards to be accepted. Important guidelines: 750x422
@@ -107,34 +96,18 @@
               </p>
             </div>
 
-            <!-- <div class="my-4 d-flex justify-content-end">
-              <div class="upload-btn-wrapper">
-                <button class="upbtn">Upload file</button>
-
-                <input
-                  type="file"
-                  name="myfile"
-                  multiple
-                  accept="image/png, image/gif, image/jpeg"
-                  ref="fileup"
-                  @change="handlefileupload($event)"
-                />
-              </div>
-            </div> -->
+          
             <div class="my-4">
               <div class="flex gap-3 justify-content-center">
                 <upload-file v-model="courseData.feature_image" />
-                <button
-                  class="
+                <input  class="
                     btn
                     px-md-4 px-3
                     py-2
                     mainbtndashboard
                     medbrownparagraph
-                  "
-                >
-                  Create Course
-                </button>
+                  " type="submit" value="Create Course">
+               
               </div>
             </div>
           </form>
@@ -239,14 +212,12 @@
               </p>
             </div>
 
-            <pre>{{ imagedetail }}</pre>
             <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
 
                 <input
                   type="file"
-                  name="myfile"
                   multiple
                   accept="image/png, image/gif, image/jpeg"
                   ref="fileup"
@@ -453,6 +424,7 @@ export default {
         { key: 'check', label: '', sortable: true },
         { key: 'title', label: 'Name', sortable: true },
         { key: 'course_code', sortable: true },
+        { key: 'no_of_students', sortable: true },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
         { key: 'dots', label: '', sortable: true },
@@ -482,24 +454,28 @@ export default {
       console.log(e)
       this.$router.push(`courses/${e.id}`)
     },
-    async addCourse() {
+    async addCourses() {
       try {
-        let start_date = new Date(this.courseData.start_date)
-        this.courseData.start_date = start_date.toISOString()
-
-        let end_date = new Date(this.courseData.end_date)
-        this.courseData.end_date = end_date.toISOString()
-        this.$bvModal.hide('addcourse')
+         this.$nuxt.$loading.start()
         const response = await this.$axios.$post(
           `course-v/add-course`,
           this.courseData
         )
+        
 
-        this.$fetch()
+        if(response.message){
+          this.getAllCourses()
+          this.$bvModal.hide('addcourse')
+          Object.keys(this.courseData).forEach(i=>{
+            this.courseData[i] ="";
+          })
+        }
 
-        console.log(response)
+
       } catch (e) {
-        console.log(e)
+        this.$toast.error(e)
+      }finally{
+        this.$nuxt.$loading.finish()
       }
     },
     async getAllCourses() {
@@ -567,7 +543,7 @@ export default {
     async handleDelete(e) {
       try {
         await this.$axios.delete(`course-v/delete-course?course_id=${e.id}`)
-        this.$fetch()
+        this.getAllCourses()
       } catch (e) {
         console.log(e)
       }

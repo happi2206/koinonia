@@ -31,7 +31,7 @@
     </section>
     <section
       class="mt-3 horizontalspacing"
-      v-if="authenticated && courses.length > 0"
+      v-if="false"
     >
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Courses" active>
@@ -77,7 +77,8 @@
       </b-tabs>
     </section>
 
-    <section class="horizontalspacing mt-5">
+<!-- top -->
+    <section class="horizontalspacing mt-5" v-if="false">
       <div>
         <h1 class="brown28 text-center mainbluecolor">Top Featured Courses</h1>
         <p class="mt-3 brownparagraph horizontalspacing text-center graytext">
@@ -283,8 +284,8 @@
         </div>
       </div>
     </section>
-
-    <section class="my-5">
+<!-- two -->
+    <section class="my-5" v-if="false">
       <div class="horizontalspacing">
         <div>
           <h1 class="brown28 text-center mainbluecolor">Top Tutors</h1>
@@ -620,7 +621,8 @@ export default {
     },
     async get_all() {
       try {
-        // set custom hear
+        if(this.authenticated){
+// set custom hear
         const headers = {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.token}`,
@@ -634,6 +636,8 @@ export default {
         )
         // assign response to coures
         this.courses = items
+        }
+        
       } catch (e) {
         this.$toast.error(e.data.detail)
       }

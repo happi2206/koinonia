@@ -36,6 +36,15 @@ export default {
         href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
       },
     ],
+    script: [
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js",
+      },
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js",
+      },
+
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

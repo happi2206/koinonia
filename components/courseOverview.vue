@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div class="border-bottom py-3 px-md-5 px-3">
+         <div class="py-3 px-md-5 px-3">
                 <h2 class="brown24 my-1 graytext">Description</h2>
                 <div
                   class="brownparagraph darktext"
@@ -8,7 +8,7 @@
                 ></div>
               </div>
 
-              <div class="px-md-5 px-3 pb-5">
+              <!-- <div class="px-md-5 px-3 pb-5">
                 <h2 class="brown24 my-3 graytext">Scheme of work</h2>
 
                 <p
@@ -37,7 +37,7 @@
 
                   <div class="fullborder p-5 my-2"></div>
                 </div>
-              </div>
+              </div> -->
     </div>
 </template>
 <script>

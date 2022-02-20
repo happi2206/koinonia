@@ -56,6 +56,9 @@
       <template #cell()="data">
         <span class="text-capitalize"> {{ data.value }}</span>
       </template>
+      <template #cell(check)="data">
+        <input type="checkbox" value="data.value">
+      </template>
 
       <template #cell(house)="data">
         <slot name="house" :data="data">{{ data.value }}</slot>
@@ -126,7 +129,7 @@
           no-caret
         >
           <template class="p-0 mx-auto text-center" #button-content>
-            <b-icon icon="three-dots"></b-icon>
+            <b-icon icon="three-dots-vertical"></b-icon>
           </template>
           <template v-if="dropdownItem.length > 0">
             <b-dropdown-item

@@ -70,7 +70,7 @@
                     >Start Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     v-model="courseData.start_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
@@ -82,7 +82,7 @@
                     >Start Date
                   </label>
                   <input
-                    type="datetime-local"
+                    type="date"
                     v-model="courseData.end_date"
                     required
                     placeholder="e.g DD/MM/YYYY"

@@ -60,7 +60,7 @@
               type="text"
               required
               placeholder="Search "
-              class="px-3 py-2 border"
+              class="px-3 py-2 border rounded"
             />
 
             <button class="bg-yellow-400 py-2 px-3">

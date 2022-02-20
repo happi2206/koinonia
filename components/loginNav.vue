@@ -23,13 +23,13 @@
     <div class="d-flex justify-content-between width100">
       <div class="d-block d-md-none">
         <div class="d-flex align-items-center">
-          <a class="navbar-brand logo-icon-mobile pr-2 mr-2" href="#">
+          <nuxt-link to="/" class="navbar-brand logo-icon-mobile pr-2 mr-2" >
             <img
               src="~assets/images/blueyellologo.png"
               alt=""
               class="img-fluid"
             />
-          </a>
+          </nuxt-link>
         </div>
       </div>
       <div class="d-md-none d-flex" v-if="!authenticated">
@@ -79,13 +79,13 @@
       >
         <div class="firstcontent d-none d-md-block">
           <div class="d-flex align-items-center">
-            <a class="navbar-brand logo-icon-mobile pr-2 mr-2" href="#">
+            <nuxt-link to="/" class="navbar-brand logo-icon-mobile pr-2 mr-2" href="#">
               <img
                 src="~/assets/images/blueyellologo.png"
                 alt=""
                 class="img-fluid"
               />
-            </a>
+            </nuxt-link>
           </div>
         </div>
 
@@ -102,7 +102,7 @@
             <div v-if="authenticated" class="d-flex">
               <li class="nav-item mb-0">
                 <nuxt-link
-                  to="/dashboard/courses"
+                  to="/dashboard/all-courses"
                   class="nav-link text-white dashboardlink mb-0"
                 >
                   My learning
@@ -114,7 +114,7 @@
                 v-if="user.is_instructor || user.is_administrator"
               >
                 <nuxt-link
-                  to="/dashboard/courses"
+                  to="/dashboard/all-courses"
                   class="nav-link text-white dashboardlink mb-0"
                 >
                   Instructors dashboard
@@ -201,7 +201,12 @@
                 </template>
                 <b-dropdown-item href="#" class="medbrownparagraph">
                   <nuxt-link to="/dashboard/accountsettings">
-                    Edit profile
+                    profile
+                  </nuxt-link>
+                </b-dropdown-item>
+                <b-dropdown-item href="#" class="medbrownparagraph">
+                  <nuxt-link to="/dashboard/accountsettings">
+                    Account Settings
                   </nuxt-link>
                 </b-dropdown-item>
                 <b-dropdown-item
