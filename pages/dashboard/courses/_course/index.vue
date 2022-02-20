@@ -16,14 +16,38 @@
       <!-- tabs -->
       <div class="bg-white p-5 mt-4">
         <ul
-          class="nav nav-tabs flex flex-col md:flex-row flex-wrap list-none border-b-0 pl-0 mb-4"
+          class="
+            nav nav-tabs
+            flex flex-col
+            md:flex-row
+            flex-wrap
+            list-none
+            border-b-0
+            pl-0
+            mb-4
+          "
           id="tabs-tab"
           role="tablist"
         >
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 0"
-              class="nav-link block font-medium text-xs leading-tight uppercase text-black cursor-pointer border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                text-black
+                cursor-pointer
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 0 }"
               >Course Overview</a
             >
@@ -31,7 +55,24 @@
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 1"
-              class="<!-- nav-link --> block font-medium text-xs leading-tight uppercase cursor-pointer border-x-0 border-t-0 border-transparent px-6 py-3 my-2 text-black hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                <!--
+                nav-link
+                -->
+                block
+                font-medium
+                text-xs
+                leading-tight
+                uppercase
+                cursor-pointer
+                border-x-0 border-t-0 border-transparent
+                px-6
+                py-3
+                my-2
+                text-black
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 1 }"
               >Instructors</a
             >
@@ -39,7 +80,22 @@
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 2"
-              class="nav-link block font-medium text-xs leading-tight cursor-pointer uppercase text-black border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                cursor-pointer
+                uppercase
+                text-black
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 2 }"
               >Students</a
             >
@@ -47,7 +103,22 @@
           <li class="nav-item" role="presentation">
             <a
               @click.prevent="currentTab = 3"
-              class="nav-link block font-medium text-xs leading-tight cursor-pointer uppercase text-black border-x-0 border-t-0 border-b-2 border-transparent px-6 py-3 my-2 hover:border-transparent hover:bg-gray-100 focus:border-transparent"
+              class="
+                nav-link
+                block
+                font-medium
+                text-xs
+                leading-tight
+                cursor-pointer
+                uppercase
+                text-black
+                border-x-0 border-t-0 border-b-2 border-transparent
+                px-6
+                py-3
+                my-2
+                hover:border-transparent hover:bg-gray-100
+                focus:border-transparent
+              "
               :class="{ active: currentTab == 3 }"
               >Attendance</a
             >
@@ -211,7 +282,13 @@
                       <div class="my-4">
                         <div class="d-flex justify-content-center">
                           <button
-                            class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+                            class="
+                              btn
+                              px-md-4 px-3
+                              py-2
+                              mainbtndashboard
+                              medbrownparagraph
+                            "
                           >
                             Add Student
                           </button>
@@ -251,71 +328,124 @@
                   >
                     Add Event
                   </button>
-                  <b-modal id="addEvent" centered hide-header hide-footer>
-                    <h2 class="largebrownparagraph bold700 my-3">
-                      Create Event
-                    </h2>
+                  <b-modal id="addEvent" centered title="Create Event" hide-footer>
+                    
                     <form class="modabody" @submit.prevent="createEvent">
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Event Name
-                        </label>
+                     <div class="row px-4">
 
-                        <input
-                          type="text"
-                          v-model="event.name"
-                          required
-                          placeholder="Event Name"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Event Description
-                        </label>
+                        <div class="col-12">
+                          <div class="my-2">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Event Name
+                            </label>
 
-                        <input
-                          type="text"
-                          v-model="event.description"
-                          required
-                          placeholder="Event Description"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Start Date
-                        </label>
-                        <input
-                          type="date"
-                          required
-                          v-model="event.start_date"
-                          placeholder="Start Date"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >End Date
-                        </label>
-                        <input
-                          type="date"
-                          required
-                          v-model="event.end_date"
-                          placeholder="End Date"
-                          class="forminputs text-dark"
-                        />
+                            <input
+                              type="text"
+                              v-model="event.name"
+                              required
+                              placeholder="Event Name"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+                      
+                      <div class="col-12">
+                        <div class="my-2">
+                          <label
+                            for=""
+                            class="medbrownparagraph graytext"
+                            >Event Description
+                          </label>
+
+                          <input
+                            type="text"
+                            v-model="event.description"
+                            required
+                            placeholder="Event Description"
+                            class="forminputs text-dark"
+                          />
+                        </div>
                       </div>
 
-                      <div class="my-4">
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label for="" class="medbrownparagraph graytext"
+                            >Start Date
+                          </label>
+                          <input
+                            type="date"
+                            required
+                            v-model="event.start_date"
+                            placeholder="Start Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label
+                            for=""
+                            class="medbrownparagraph graytext"
+                            >Start Time
+                          </label>
+                          <input
+                            type="time"
+                            required
+                            v-model="event.start_time"
+                            placeholder="End Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label for="" class="medbrownparagraph graytext"
+                            >End Date
+                          </label>
+                          <input
+                            type="date"
+                            required
+                            v-model="event.end_date"
+                            placeholder="Start Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label
+                            for=""
+                            class="d-block medbrownparagraph graytext"
+                            >End Time
+                          </label>
+                          <input
+                            type="time"
+                            required
+                            v-model="event.end_time"
+                            placeholder="End Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="my-4 col-12">
                         <div class="d-flex justify-content-center">
                           <button
-                            class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+                            class="
+                              btn
+                              px-md-4 px-3
+                              py-2
+                              mainbtndashboard
+                              medbrownparagraph
+                            "
                           >
                             Add Event
                           </button>
                         </div>
                       </div>
+                     </div>
                     </form>
                   </b-modal>
                 </div>
@@ -417,6 +547,8 @@ export default {
         description: '',
         start_date: '',
         end_date: '',
+        start_time: '',
+        end_time: '',
       },
       events: [],
     }
@@ -514,13 +646,12 @@ export default {
       }
       console.log(new_array)
 
-       await this.$axios.$post(
-          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
-          new_array
-        )
-        this.$fetch()
-        this.$toast.success('Students added Successfully')
-      
+      await this.$axios.$post(
+        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+        new_array
+      )
+      this.$fetch()
+      this.$toast.success('Students added Successfully')
     },
     async addInstructortoCourse() {
       try {

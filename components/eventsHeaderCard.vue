@@ -10,24 +10,24 @@
       </div>
       <div class="my-2 d-flex">
         <p class="my-2 medparagraph mx-3">
-          Description:
-          <span class="lightgraytext"> {{ eventDetail.description }}</span>
-        </p>
-        <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> Start Date:</span>
-          <span class=""> {{ eventDetail.start_date }} </span>
+          <span class=""> {{ eventDetail.start_date | DateFormat}} </span>
         </p>
         <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> End Date:</span>
           <span class=""> </span>
-          {{ eventDetail.end_date }}
+          {{ eventDetail.end_date | DateFormat }}
         </p>
-        <p class="my-2 medparagraph mx-3">
+        <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> No in class:</span>
-          <span class=""> {{ eventDetail.student }}</span>
+          <span class=""> {{ eventDetail.students.length }}</span>
         </p>
-        <p class="my-2 medparagraph mx-3">
-          <span class="lightgraytext"> Student Absent:</span>
+        <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <span class="lightgraytext"> Student Absent: {{ eventDetail.students.length }}</span>
+          <span class=""> </span>
+        </p>
+        <p  v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <span class="lightgraytext"> Student Absent: {{ eventDetail.students.length - eventDetail.students.length  }}</span>
           <span class=""> </span>
         </p>
       </div>
