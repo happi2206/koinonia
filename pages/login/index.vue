@@ -1,5 +1,6 @@
 <template>
   <div>
+    <preloader :show="is_login"/>
     <main class="">
       <div class="row verticalspacing">
         <div class="col-lg-6">

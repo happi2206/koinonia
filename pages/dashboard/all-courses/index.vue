@@ -1,4 +1,6 @@
 <template>
+<div>
+  
   <div class="mt-lg-5 horizontalspacing pt-lg-5">
     <div class="flex items-center pt-5 justify-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">All Courses</h2>
@@ -13,6 +15,7 @@
 
       <!-- add course -->
       <b-modal id="addcourse" title="Add Course" hide-footer>
+        <preloader :show="add_preloader"/>
         <div class="modacontent">
           <form class="modabody px-4" @submit.prevent="addCourses">
             <div class="my-4">
@@ -319,10 +322,14 @@
                 v-if="visualization === 'list'"
                 :busy="busy"
                 :fields="fields"
+                
                 :dropdownItem="dropdownItem"
                 @row-clicked="onRowClicked"
                 @Edit="handleEdit"
                 @Delete="handleDelete"
+                @page-changed = "handlePage"
+                :perPage="perPage"
+                :totalItems="totalItems"
               />
 
               <div class="row" v-else>
@@ -339,6 +346,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -350,6 +358,9 @@ export default {
   layout: 'dashboard',
   middleware: 'auth',
   components: { VueEditor },
+  computed:{
+
+  },
   data() {
     return {
       busy: false,
@@ -392,11 +403,19 @@ export default {
       courses: [],
       currentTab: 0,
       status:"",
-      search:""
+      search:"",
+      perPage:50,
+      totalItems:0,
+      currentPage:1,
+      add_preloader: false
     }
   },
 
   methods: {
+    handlePage(e){
+      this.currentPage = e
+      this.getAllCourses()
+    },
     onRowClicked(e) {
       console.log(e)
       this.$router.push(`courses/${e.id}`)
@@ -407,7 +426,7 @@ export default {
     },
     async addCourses() {
       try {
-        this.$nuxt.$loading.start()
+        this.add_preloader = true
         const response = await this.$axios.$post(
           `course-v/add-course`,
           this.courseData
@@ -423,12 +442,12 @@ export default {
       } catch (e) {
         this.$toast.error(e)
       } finally {
-        this.$nuxt.$loading.finish()
+        this.add_preloader = false
       }
     },
     async getAllCourses() {
       this.busy = true
-      let uri = 'course-v/get-all-course?page=1&size=50'
+      let uri = `course-v/get-all-course?page=${this.currentPage}&size=${this.perPage}`
       if(this.search){
           uri = uri + `&search=${this.search}`
         }
@@ -443,6 +462,9 @@ export default {
         dots: '',
         ...e,
       }))
+      this.perPage = courses.size
+      this.totalItems = courses.total
+      this.currentPage = courses.page
       this.busy = false
     },
     // setfilter
