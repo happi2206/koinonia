@@ -107,10 +107,10 @@ export default {
       dropdownItem: ['Share_Link_Code', 'Delete_Instructor'],
       fields: [
         // { key: 'id', sortable: true },
-        { key: 'other_name', sortable: true },
+        { key: 'other_name', label: 'First Name', sortable: true },
         { key: 'surname', sortable: true },
         { key: 'email', sortable: true },
-        { key: 'dots', label: 'Action', sortable: true },
+        { key: 'dots', label: 'Action', sortable: false },
       ],
       userdetails: [],
       alluserdetails: [],

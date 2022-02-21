@@ -95,19 +95,20 @@
               </p>
             </div>
 
-            <div class="my-4">
+            <div class="my-4 row">
               <div
                 class="
                   d-flex
                   align-items-center
                   justify-content-center
-                  w-50
-                  h-50
+                  col-md-4 col-12
                 "
               >
                 <img :src="courseData.feature_image" alt="" class="img-fluid" />
               </div>
-              <div class="flex gap-3 justify-content-center">
+              <div
+                class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
+              >
                 <upload-file v-model="courseData.feature_image" />
                 <input
                   class="
@@ -127,7 +128,7 @@
       </b-modal>
 
       <!-- edit course -->
-      <b-modal id="editmodal" title="Edit Courses" hide-footer>
+      <b-modal id="editmodal" title="Edit Course" hide-footer>
         <div class="modacontent">
           <form class="modabody" @submit.prevent="editCourse">
             <div class="my-4">
@@ -181,24 +182,24 @@
             </div>
             <div class="my-4">
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 my-2 my-md-0">
                   <label for="" class="d-block medbrownparagraph graytext"
                     >Start Date
                   </label>
                   <input
-                    type="text"
+                    type="date"
                     v-model="currentCourse.start_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
                     class="forminputs text-dark"
                   />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 my-2 my-md-0">
                   <label for="" class="d-block medbrownparagraph graytext"
-                    >Start Date
+                    >End Date
                   </label>
                   <input
-                    type="text"
+                    type="date"
                     v-model="currentCourse.end_date"
                     required
                     placeholder="e.g DD/MM/YYYY"
@@ -223,20 +224,28 @@
               </p>
             </div>
 
-            <div class="my-4 d-flex justify-content-end">
-              <div class="upload-btn-wrapper">
-                <button class="upbtn">Upload file</button>
-
-                <input
-                  type="file"
-                  multiple
-                  accept="image/png, image/gif, image/jpeg"
-                  ref="fileup"
-                  @change="handlefileupload($event)"
+            <div class="my-4 row">
+              <div
+                class="
+                  d-flex
+                  align-items-center
+                  justify-content-center
+                  col-md-4 col-12
+                "
+              >
+                <img
+                  :src="currentCourse.feature_image"
+                  alt=""
+                  class="img-fluid"
                 />
-                <!-- <input type="file" name="myfile" /> -->
+              </div>
+              <div
+                class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
+              >
+                <upload-file v-model="currentCourse.feature_image" />
               </div>
             </div>
+
             <div class="my-4">
               <div class="d-flex justify-content-center">
                 <button
@@ -248,7 +257,7 @@
                     medbrownparagraph
                   "
                 >
-                  Create Event
+                  Edit Event
                 </button>
               </div>
             </div>
@@ -487,6 +496,7 @@ export default {
     },
 
     handleEdit(e) {
+      console.log('do image here', e)
       const tds = e
       console.log(e)
       this.currentCourse = tds

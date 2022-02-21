@@ -30,22 +30,7 @@ export default {
       type: Object,
       required: true,
     },
-    hambugmenu: {
-      type: Boolean,
-      default: true,
-    },
-    image: {
-      type: String,
-      default: null,
-    },
   },
-
-  // data() {
-  //   return {
-  //     populateData: this.data,
-  //     test: 'test',
-  //   }
-  // },
 }
 </script>
 

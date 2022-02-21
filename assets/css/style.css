@@ -1,14 +1,12 @@
 /* Brown Font  */
 @font-face {
   font-family: 'Ancona';
-  src: url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf'),
-    url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf');
+  src: url('../font/Ancona-Ex-Regular.ttf') format('ttf');
+  font-style: normal;
   font-weight: normal;
-  font-style: italic;
-  font-display: swap;
 }
 /* @font-face {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   src: url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf'),
     url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf');
   font-weight: bold;
@@ -16,7 +14,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   src: url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf'),
     url('../font/brown/Brown-Regular.ttf') format('ttf');
   font-weight: normal;
@@ -24,7 +22,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   src: url('../font/brown/Brown-LightItalic.ttf') format('ttf'),
     url('../font/brown/Brown-LightItalic.ttf') format('ttf');
   font-weight: 300;
@@ -32,7 +30,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   src: url('../font/brown/Brown-BoldItalic.ttf') format('ttf'),
     url('../font/brown/Brown-BoldItalic.ttf') format('ttf');
   font-weight: bold;
@@ -41,7 +39,7 @@
 }
 
 @font-face {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   src: url('../font/brown/Brown-Thin.ttf') format('ttf'),
     url('../font/brown/Brown-Thin.ttf') format('ttf');
   font-weight: 100;
@@ -49,7 +47,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   src: url('../font/brown/Brown-Light.ttf') format('ttf'),
     url('../font/brown/Brown-Light.woff') format('woff');
   font-weight: 300;
@@ -57,7 +55,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   src: url('../font/brown/Brown-ThinItalic.ttf') format('ttf'),
     url('../font/brown/Brown-ThinItalic.woff') format('woff');
   font-weight: 100;
@@ -201,7 +199,7 @@ html body main {
 
 button.mainbtn {
   background-color: #d3a13b;
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -213,7 +211,7 @@ button.mainbtn {
 
 button.tertiarybtn {
   background-color: #00b2ff;
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -326,7 +324,7 @@ button.searchbtninside {
 input.subscribebtn {
   background-color: #000;
   color: #fff;
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -345,7 +343,7 @@ input.subscribebtn:hover {
 button.subscribebtn {
   background-color: #000;
   color: #fff;
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -366,7 +364,7 @@ button.subscribebtn.rad6 {
 }
 
 button.loginbtn {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -377,7 +375,7 @@ button.loginbtn {
 }
 
 .header {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
@@ -387,7 +385,7 @@ button.loginbtn {
 }
 
 .header2 {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -397,7 +395,7 @@ button.loginbtn {
 }
 
 .mainparagraph {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -407,7 +405,7 @@ button.loginbtn {
 }
 
 .mainparagraph18 {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -417,7 +415,7 @@ button.loginbtn {
 }
 
 .biggerparagraph {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -427,7 +425,7 @@ button.loginbtn {
 }
 
 .roboto24 {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 24px;
   font-style: normal;
   line-height: 28px;
@@ -436,7 +434,7 @@ button.loginbtn {
 }
 
 .roboto22 {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 22px;
   font-style: normal;
   line-height: 22px;
@@ -445,7 +443,7 @@ button.loginbtn {
 }
 
 .medparagraph {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -465,7 +463,7 @@ button.loginbtn {
 }
 
 .rubikheader {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 49px;
   font-style: normal;
   font-weight: 400;
@@ -475,7 +473,7 @@ button.loginbtn {
 }
 
 .rubikheader2 {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 25px;
   font-style: normal;
   font-weight: 400;
@@ -485,7 +483,7 @@ button.loginbtn {
 }
 
 .roboto32 {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -495,7 +493,7 @@ button.loginbtn {
 }
 
 .roboto12 {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -519,7 +517,7 @@ button.loginbtn {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .newsletterinputs::placeholder {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -549,7 +547,7 @@ button.loginbtn {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .forminputs::placeholder {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -594,7 +592,7 @@ button.loginbtn {
 }
 
 .footerbottom {
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -734,7 +732,7 @@ th {
 
 .thirdcontent {
   list-style-type: none;
-  font-family: 'Brown';
+  font-family: 'Ancona';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -1299,7 +1297,7 @@ th {
   }
 
   .svgplaceholderimages {
-    top: 230px;
+    top: 170px;
   }
 
   .sidebar-wrapper {
@@ -1327,7 +1325,7 @@ th {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
   .forminputs::placeholder {
-    font-family: 'Brown';
+    font-family: 'Ancona';
     font-weight: 300;
     font-size: 10px !important;
     font-size: 16px;
@@ -1451,9 +1449,9 @@ th {
     width: 100%;
   }
 
-  .svgplaceholderimages {
+  /* .svgplaceholderimages {
     top: 260px;
-  }
+  } */
 
   .coursewidth2 {
     width: 100%;
@@ -1467,6 +1465,10 @@ th {
 
   .carouselheight {
     height: 55vh;
+  }
+
+  .svgplaceholderimages {
+    top: 190px;
   }
 
   .horizontalspacing {

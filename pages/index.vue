@@ -7,7 +7,7 @@
       v-if="authenticated"
     >
       <div class="pt-5 px-3 icontogs">
-        <b-icon icon="list" class="text-dark pt-2 pb-4"></b-icon>
+        <b-icon icon="list" class="text-dark py-md-4 pt-2 pb-4"></b-icon>
       </div>
     </div>
 
@@ -586,7 +586,7 @@
       </div>
     </section> -->
 
-    <section class="lightbluebg">
+    <section class="">
       <div class="d-flex justify-content-center py-5 p-3">
         <div class="row">
           <div class="col-md-6 d-flex align-items-center">
@@ -709,7 +709,7 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 996;
-  background: RGBA(0, 0, 0, 0.1);
+  /* background: RGBA(0, 0, 0, 0.1); */
 }
 
 .customarrows {

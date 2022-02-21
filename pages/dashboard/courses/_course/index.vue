@@ -250,7 +250,7 @@
                           </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" v-if="eventDescriptionAdded">
                           <div class="my-2">
                             <label for="" class="medbrownparagraph graytext"
                               >Event Description
@@ -322,6 +322,22 @@
                               placeholder="End Date"
                               class="forminputs text-dark"
                             />
+                          </div>
+                        </div>
+
+                        <div class="col-12">
+                          <div
+                            class="d-flex justify-content-end"
+                            @click="addDescriptionField"
+                          >
+                            <p class="medbrownparagraph">
+                              <span v-if="!eventDescriptionAdded">
+                                Add an
+                              </span>
+
+                              <span v-else>Remove</span>
+                              event description
+                            </p>
                           </div>
                         </div>
 
@@ -445,6 +461,7 @@ export default {
         end_time: '',
       },
       events: [],
+      eventDescriptionAdded: false,
     }
   },
 
@@ -596,6 +613,9 @@ export default {
         title: '',
         objective: '',
       })
+    },
+    addDescriptionField() {
+      this.eventDescriptionAdded = !this.eventDescriptionAdded
     },
     onRowClicked(e) {
       console.log(e)
