@@ -67,7 +67,7 @@
               class="px-md-3 px-2 py-2 border rounded"
             />
 
-            <button class="bg-yellow-400 py-2 px-3">
+            <button class="accentcolorbg py-2 px-3">
               <b-icon icon="search"></b-icon>
             </button>
           </div>

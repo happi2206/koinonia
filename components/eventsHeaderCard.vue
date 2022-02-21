@@ -11,7 +11,7 @@
       <div class="my-2 d-flex flex-md-row flex-column">
         <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> Start Date:</span>
-          <span class=""> {{ eventDetail.start_date | DateFormat}} </span>
+          <span class=""> {{ eventDetail.start_date | DateFormat }} </span>
         </p>
         <p class="my-2 medparagraph mx-3">
           <span class="lightgraytext"> End Date:</span>
@@ -23,11 +23,13 @@
           <span class=""> {{ eventDetail.students.length }}</span>
         </p>
         <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
-          <span class="lightgraytext"> Student Present: {{  present }}</span>
+          <span class="lightgraytext"> Student Present: {{ present }}</span>
           <span class=""> </span>
         </p>
-        <p  v-if="eventDetail.students" class="my-2 medparagraph mx-3">
-          <span class="lightgraytext"> Student Absent: {{ eventDetail.students.length - present  }}</span>
+        <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <span class="lightgraytext">
+            Student Absent: {{ eventDetail.students.length - present }}</span
+          >
           <span class=""> </span>
         </p>
       </div>
@@ -36,14 +38,15 @@
       <filter-component>
         <template #default="{ visualization }">
           <table-component
-          :busy="busy"
+            :busy="busy"
             :items="studentArray"
             v-if="visualization === 'list'"
+            :dropdownItem="dropdownItem"
             :fields="fields"
           >
             <template #status="{ data }">
               <b-form-checkbox
-              :button-variant="'success'"
+                :button-variant="'success'"
                 v-model="data.value"
                 @change="updateAttendance(data.item.student.id, $event)"
                 size="lg"
@@ -80,30 +83,31 @@ export default {
       studentsInCourse: {},
       studentsTable: [],
       studentArray: [],
+      dropdownItem: ['Edit Event', 'Delete Event'],
       fields: [
         // { key: 'id', sortable: true },
+        { key: 'student.other_name', label: 'First Name', sortable: true },
         { key: 'student.surname', label: 'Surname', sortable: true },
-        { key: 'student.other_name', label: 'Other Name', sortable: true },
         { key: 'student.email', label: 'Email', sortable: true },
         { key: 'check_in', label: 'Date/Time in', sortable: true },
         { key: 'by', label: 'Check in Method', sortable: true },
         { key: 'status', label: 'Status', sortable: true },
+        { key: 'dots', label: 'Action', sortable: false },
       ],
     }
   },
 
   async fetch() {
     try {
-      this.busy = true;
+      this.busy = true
       const student = await this.$axios.$get(
         `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
       )
 
       this.studentArray = student.items
-    
     } catch (e) {
       console.log(e)
-    }finally{
+    } finally {
       this.busy = false
     }
   },
@@ -114,25 +118,24 @@ export default {
         : 'course-v/un-mark-attendance-event'
       try {
         await this.$axios.$patch(
-          `${url}?student_id=${student}&event_id=${this.$route.params.eventclicked}&course_id=${this.$route.params.event}`,
-         
+          `${url}?student_id=${student}&event_id=${this.$route.params.eventclicked}&course_id=${this.$route.params.event}`
         )
-          this.$fetch()
+        this.$fetch()
       } catch (error) {
         console.log(error)
       }
     },
   },
   computed: {
-       present(){
-        if(!this.busy){
-           let students =  this.eventDetail.students.filter(i=>{
-           return i.status
-         });
+    present() {
+      if (!this.busy) {
+        let students = this.eventDetail.students.filter((i) => {
+          return i.status
+        })
 
-         return students.length
-        }
-       }
+        return students.length
+      }
+    },
   },
 
   mounted() {},

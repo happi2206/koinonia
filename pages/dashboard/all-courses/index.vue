@@ -249,13 +249,12 @@
     <div class="bg-white p-md-5">
       <ul
         class="
-          nav nav-tabs
-          flex flex-col
-          md:flex-row
-          flex-wrap
+          nav
+          custom-tabs
+          nav-tabs
+          flex
           medbrownparagraph
           list-none
-          border-b-0
           pl-0
           mb-4
         "
@@ -264,23 +263,16 @@
       >
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="setCourseParams()"
+            @click.prevent="setCourseParams('status')"
             class="
               nav-link
-              block
               medbrownparagraph
               leading-tight
-              uppercase
               text-black
               cursor-pointer
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
               my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
-            :class="{ active: currentTab == 0 }"
+            :class="{ active: status }"
             >All Status</a
           >
         </li>
@@ -288,45 +280,22 @@
           <a
             @click.prevent="setCourseParams('open')"
             class="
-             
-              block
-              
+              nav-link
               medbrownparagraph
               leading-tight
-              uppercase
               cursor-pointer
-              border-x-0 border-t-0 border-transparent
-              px-6
-              py-3
               my-2
               text-black
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
-            :class="{ active: currentTab == 1 }"
+            :class="{ active: open }"
             >Open</a
           >
         </li>
         <li class="nav-item" role="presentation">
           <a
             @click.prevent="setCourseParams('on_going')"
-            class="
-              nav-link
-              block
-              
-              medbrownparagraph
-              leading-tight
-              cursor-pointer
-              uppercase
-              text-black
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
-              my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
-            "
-            :class="{ active: currentTab == 2 }"
+            class="nav-link medbrownparagraph leading-tight cursor-pointer my-2"
+            :class="{ active: on_going }"
             >On Going</a
           >
         </li>
@@ -335,6 +304,7 @@
             @click.prevent="setCourseParams('archived')"
             class="
               nav-link
+<<<<<<< HEAD
               block
               
               medbrownparagraph
@@ -345,9 +315,15 @@
               border-x-0 border-t-0 border-b-2 border-transparent
               px-6
               py-3
+=======
+              disabled
+              pointer-events-none
+              text-black
+              medbrownparagraph
+              leading-tight
+              cursor-pointer
+>>>>>>> 2864758f3e382e493cf677d8e90345901ff8f004
               my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
             :class="{ active: currentTab == 2 }"
             >Archived</a
@@ -381,7 +357,6 @@
             </template>
           </filter-component>
         </div>
-       
       </div>
     </div>
   </div>
@@ -411,6 +386,7 @@ export default {
         end_date: '',
         feature_image: '',
       },
+      active: true,
       fields: [
         { key: 'check', label: '', sortable: true },
         { key: 'title', label: 'Name', sortable: true },
@@ -420,6 +396,9 @@ export default {
         { key: 'end_date', sortable: true },
         { key: 'dots', label: '', sortable: true },
       ],
+      status: true,
+      on_going: false,
+      open: false,
       courseData: {
         title: '',
         short_description: '',
@@ -565,4 +544,8 @@ export default {
 </script>
 
 <style>
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  border-radius: none;
+}
 </style>
