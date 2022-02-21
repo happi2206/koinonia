@@ -12,21 +12,21 @@
         </a>
       </div>
 
-      <div v-if="$fetchState.pending">
+      <!-- <div >
         <PuSkeleton :count="3"> </PuSkeleton>
-      </div>
+      </div> -->
 
-      <div v-else>
+      <div>
         <header-card :courseDetail="courseDetail" />
       </div>
       <div class="card mt-3">
         <b-tabs content-class="mt-3" class="custom-tabs">
           <b-tab title="Course Overiew" active>
-            <div v-if="$fetchState.pending">
+            <div>
               <PuSkeleton :count="5" />
             </div>
 
-            <div v-else>
+            <div>
               <!-- <skeleton-loader-vue
                 type="circle"
                 :width="200"
@@ -36,8 +36,12 @@
               <course-overview :courseDetail="courseDetail"></course-overview>
             </div>
           </b-tab>
-          <b-tab title="Instructors" class="">
-            <filter-component>
+          <b-tab
+            title="Instructors"
+            @click="get_all_course_instructors"
+            class=""
+          >
+            <filter-component @search="searchInstructors">
               <template #besideFilterButton>
                 <div class="ml-md-5">
                   <button
@@ -52,20 +56,23 @@
                     title="Add Instructor"
                     hide-footer
                   >
-                    <div class="content px-md-5 my-2">
+                    <div class="content px-md-3 my-2">
                       <div class="my-3">
-                        <label class="medbrownparagraph">Instructor Name</label>
                         <v-select
                           :options="instructors"
                           v-model="addInstructor"
-                          label="other_name"
+                          placeholder="Select instructor"
                           :reduce="(option) => option.id"
-                        ></v-select>
+                        >
+                          <template #option="{ surname, other_name }">
+                            <span>{{ surname }} {{ other_name }}</span>
+                          </template>
+                        </v-select>
                       </div>
-                      <div class="my-3">
+                      <!-- <div class="my-3">
                         <label class="medbrownparagraph">Designation</label>
                         <v-select :options="designations"></v-select>
-                      </div>
+                      </div> -->
                     </div>
 
                     <div class="d-flex justify-content-center mx-5 my-3">
@@ -81,8 +88,9 @@
               </template>
               <template #default="{ visualization }">
                 <table-component
-                  :items="instructors"
+                  :items="course_instructors"
                   :fields="instructorfields"
+                  :busy="busy"
                   v-if="visualization === 'list'"
                 />
 
@@ -96,7 +104,7 @@
               </template>
             </filter-component>
           </b-tab>
-          <b-tab title="Students" class="">
+          <b-tab title="Students" @click="get_all_course_students" class="">
             <filter-component>
               <template #besideFilterButton>
                 <div class="ml-5">
@@ -201,6 +209,7 @@
                 <table-component
                   :items="students"
                   :fields="studentfields"
+                  :busy="busy"
                   v-if="visualization === 'list'"
                 />
 
@@ -468,64 +477,12 @@ export default {
       },
       events: [],
       eventDescriptionAdded: false,
-    }
-  },
-
-  async fetch() {
-    // console.log(this.$route.params.course)
-
-    try {
-      const courses = await this.$axios.$get(
-        `course-v/get-a-course?course_id=${this.$route.params.course}`
-      )
-      this.courseDetail = courses
-    } catch (e) {
-      console.log(e)
-    }
-
-    try {
-      const instructors = await this.$axios.$get(
-        `instructors-v/get-all-instructors?page=1&size=50`
-      )
-
-      this.instructors = instructors.items
-
-      console.log('instructor', this.instructors)
-
-      // this.instructors.push(...instructors.items)
-    } catch (e) {
-      console.log(e)
-    }
-    try {
-      const students = await this.$axios.$get(
-        `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
-      )
-
-      this.students = students.items
-    } catch (e) {
-      console.log(e)
-    }
-    try {
-      const events = await this.$axios.$get(
-        `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
-      )
-      console.log('event is', events)
-      this.events = events.items.map((e, i) => {
-        let filterstudent = e.students.filter((i) => {
-          return i.status == true
-        })
-        let number = e.students.length - filterstudent
-        return {
-          Name: e.name,
-          'Start Date': e.start_date,
-          'End Date': e.end_date,
-          'No of Students': e.students.length,
-          Progress: number,
-          id: e.id,
-        }
-      })
-    } catch (e) {
-      console.log(e)
+      busy: false,
+      course_instructors: [],
+      search_instructor: '',
+      instructorPerPage: 30,
+      instructorTotalItems: 0,
+      instructorCurrentPage: 1,
     }
   },
 
@@ -653,6 +610,92 @@ export default {
         console.log(e)
       }
     },
+    async get_a_course() {
+      try {
+        const courses = await this.$axios.$get(
+          `course-v/get-a-course?course_id=${this.$route.params.course}`
+        )
+        this.courseDetail = courses
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async get_all_instructors() {
+      try {
+        const instructors = await this.$axios.$get(
+          `instructors-v/get-all-instructors?page=1&size=50`
+        )
+
+        this.instructors = instructors.items
+      } catch (e) {
+        this.$toast.error(e)
+      }
+    },
+    async get_all_course_instructors() {
+      try {
+        this.busy = true
+        let uri = `course-v/get-all-course-instructors?course_id=${this.$route.params.course}&page=${this.instructorCurrentPage}&size=${this.instructorPerPage}`
+
+        if (this.search_instructor) {
+          uri = uri + `&search=${this.search_instructor}`
+        }
+        const instructors = await this.$axios.$get(uri)
+        this.course_instructors = instructors.items.reverse()
+        this.instructorPerPage = users.size
+        this.instructorTotalItems = users.total
+        this.instructorCurrentPage = users.page
+      } catch (e) {
+        this.$toast.error(e)
+      } finally {
+        this.busy = false
+      }
+    },
+    async get_all_course_students() {
+      try {
+        this.busy = true
+        const students = await this.$axios.$get(
+          `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
+        )
+
+        this.students = students.items
+      } catch (e) {
+        this.$toast.error(e)
+      } finally {
+        this.busy = false
+      }
+    },
+    async get_all_course_events() {
+      try {
+        const events = await this.$axios.$get(
+          `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
+        )
+        console.log('event is', events)
+        this.events = events.items.map((e, i) => {
+          let filterstudent = e.students.filter((i) => {
+            return i.status == true
+          })
+          let number = e.students.length - filterstudent
+          return {
+            Name: e.name,
+            'Start Date': e.start_date,
+            'End Date': e.end_date,
+            'No of Students': e.students.length,
+            Progress: number,
+            id: e.id,
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    searchInstructors(e) {
+      this.search_instructor = e
+      this.get_all_course_instructors()
+    },
+  },
+  mounted() {
+    this.get_a_course()
+    this.get_all_instructors()
   },
 }
 </script>
