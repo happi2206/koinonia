@@ -332,7 +332,7 @@ input.subscribebtn {
 .subscribebtn:hover {
   border: #0734aa;
   color: #0734aa;
-  background: transparent;
+  background: #ffcd06;
 }
 button.subscribebtn {
   background-color: #0734aa;
@@ -350,8 +350,8 @@ button.subscribebtn {
 }
 button.subscribebtn:hover {
   border: 1px solid #0734aa;
-  color: #0734aa;
-  background: transparent;
+  color: white;
+  background: #07307c;
 }
 button.subscribebtn.rad6 {
   border-radius: 6px;

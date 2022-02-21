@@ -264,7 +264,7 @@
       >
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 0"
+            @click.prevent="setCourseParams()"
             class="
               nav-link
               block
@@ -284,9 +284,9 @@
             >All Status</a
           >
         </li>
-        <!-- <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 1"
+            @click.prevent="setCourseParams('open')"
             class="
              
               block
@@ -309,7 +309,7 @@
         </li>
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 2"
+            @click.prevent="setCourseParams('on_going')"
             class="
               nav-link
               block
@@ -332,7 +332,7 @@
         </li>
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 3"
+            @click.prevent="setCourseParams('archived')"
             class="
               nav-link
               disabled
@@ -354,10 +354,10 @@
             :class="{ active: currentTab == 3 }"
             >Archived</a
           >
-        </li> -->
+        </li>
       </ul>
       <div>
-        <div v-show="currentTab == 0" :class="{ 'fade show': currentTab == 0 }">
+        <div  :class="{ 'fade show': currentTab == 0 }">
           <filter-component>
             <template #default="{ visualization }">
               <table-component
@@ -382,15 +382,7 @@
             </template>
           </filter-component>
         </div>
-        <div v-show="currentTab == 1" :class="{ 'fade show': currentTab == 1 }">
-          Tab 2 content
-        </div>
-        <div v-show="currentTab == 2" :class="{ 'fade show': currentTab == 2 }">
-          Tab 3 content
-        </div>
-        <div v-show="currentTab == 3" :class="{ 'fade show': currentTab == 3 }">
-          a
-        </div>
+       
       </div>
     </div>
   </div>
@@ -475,13 +467,12 @@ export default {
         this.$nuxt.$loading.finish()
       }
     },
-    async getAllCourses() {
+    async getAllCourses(payload = null) {
       this.busy = true
-      let uri = this.user.is_administrator
-        ? //  get-all-course-instructors?course_id=4&search=r&page=1&size=50
-
-          'course-v/get-all-course?page=1&size=50&search=hello'
-        : 'course-v/get-current-instructor-courses?page=1&size=50&search=Tanya'
+      let uri = 'course-v/get-all-course?page=1&size=50'
+      if(payload) {
+        uri = uri + payload
+      }
       const courses = await this.$axios.$get(uri)
       courses.items = courses.items.reverse()
       this.courses = courses.items.map((e, i) => ({
@@ -492,7 +483,14 @@ export default {
       }))
       this.busy = false
     },
-
+    // setfilter
+    setCourseParams(payload){
+        let params =  ""
+        if(payload){
+          params = `&status=${payload}`
+        }
+        this.getAllCourses(params)
+    },
     handlefileupload(event) {
       const filedetail = []
       filedetail.push(event.target.files)

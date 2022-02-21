@@ -60,6 +60,7 @@ export default {
     '~/plugins/vue-select.js',
     '~/plugins/bootstrap-icon.js',
     '~/plugins/vue-editor.js',
+    '~/plugins/global-filter.js',
     '~/plugins/luxon.js',
   ],
 
