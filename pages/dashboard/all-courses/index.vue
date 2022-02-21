@@ -302,16 +302,8 @@
         <li class="nav-item" role="presentation">
           <a
             @click.prevent="setCourseParams('archived')"
-            class="
-              nav-link
-              disabled
-              pointer-events-none
-              text-black
-              medbrownparagraph
-              leading-tight
-              cursor-pointer
-              my-2
-            "
+            class="nav-link medbrownparagraph leading-tight cursor-pointer my-2"
+            :class="{ active: archived }"
             >Archived</a
           >
         </li>
@@ -384,6 +376,7 @@ export default {
       status: true,
       on_going: false,
       open: false,
+      archived: false,
       courseData: {
         title: '',
         short_description: '',
@@ -455,6 +448,7 @@ export default {
         ;(this.status = false),
           (this.on_going = false),
           (this.open = false),
+          (this.archived = false),
           (this[payload] = !this[payload])
 
         console.log('payload is', payload)
