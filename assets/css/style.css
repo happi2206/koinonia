@@ -1283,6 +1283,11 @@ th {
     width: 100%;
   }
 
+  .b-avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
   .svgplaceholderimages {
     top: 230px;
   }
@@ -1450,6 +1455,11 @@ th {
 
   .carouselheight {
     height: 55vh;
+  }
+
+  .horizontalspacing {
+    margin-left: 5px;
+    margin-right: 5px;
   }
 }
 @media (max-width: 400.5px) {

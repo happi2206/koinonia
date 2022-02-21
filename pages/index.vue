@@ -1,8 +1,13 @@
 <template>
   <div class="bodylightgray">
-    <div class="d-block d-lg-none" @click="openSide" v-if="authenticated">
+    <div class="backdropfscreen" @click="openSide" v-show="isMobile"></div>
+    <div
+      class="d-block d-lg-none bg-white"
+      @click="openSide"
+      v-if="authenticated"
+    >
       <div class="pt-5 px-3 icontogs">
-        <b-icon icon="list" class="text-dark py-4"></b-icon>
+        <b-icon icon="list" class="text-dark pt-2 pb-4"></b-icon>
       </div>
     </div>
 
@@ -697,6 +702,16 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.backdropfscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 996;
+  background: RGBA(0, 0, 0, 0.1);
+}
+
 .customarrows {
   position: relative;
 }
