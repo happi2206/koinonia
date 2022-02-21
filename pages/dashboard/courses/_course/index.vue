@@ -22,17 +22,7 @@
       <div class="card mt-3">
         <b-tabs content-class="mt-3" class="custom-tabs">
           <b-tab title="Course Overiew" active>
-            <!-- <div v-if="">
-              <PuSkeleton :count="5" />
-            </div> -->
-
             <div>
-              <!-- <skeleton-loader-vue
-                type="circle"
-                :width="200"
-                :height="200"
-                animation="fade"
-              /> -->
               <course-overview :courseDetail="courseDetail"></course-overview>
             </div>
           </b-tab>
@@ -57,10 +47,8 @@
 
 <script>
 import { json2csv, csv2json } from 'json-2-csv'
-import studentInstructorsGrid from '~/components/studentInstructorsGrid.vue'
 var csv = require('csvtojson')
 export default {
-  components: { studentInstructorsGrid },
   layout: 'dashboard',
 
   data() {

@@ -114,6 +114,8 @@
 </template>
 
 <script>
+import { json2csv, csv2json } from 'json-2-csv'
+var csv = require('csvtojson')
 export default {
   props: {
     students: {
