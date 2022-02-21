@@ -7,6 +7,7 @@
       align-items-center
       navbar-expand-lg
       mobilenavigation
+      my-0
       pt-2
       pb-2
       pt-lg-0
@@ -154,7 +155,7 @@
       </div>
     </div>
 
-    <b-collapse id="nav-collapse" is-nav class="horizontalspacing my-3">
+    <b-collapse id="nav-collapse" is-nav class="horizontalspacing py-2">
       <div
         class="
           d-flex
@@ -176,7 +177,7 @@
               <img
                 src="~/assets/images/blueyellologo.png"
                 alt=""
-                class="img-fluid"
+                class="img-fluid logoimages"
               />
             </nuxt-link>
           </div>
