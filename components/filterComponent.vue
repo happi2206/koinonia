@@ -32,10 +32,13 @@
               </div>
             </div>
           </div>
-          <div v-if="!disablePagination" class="records-count">
+          <div
+            v-if="!disablePagination"
+            class="records-count medbrownparagraph"
+          >
             <span class="medbrownparagraph">View by: </span>
             <select
-              class="records-count"
+              class="records-count medbrownparagraph medbrownparagraph"
               @change="$emit('view-by', $event.target.value)"
             >
               <option class="medbrownparagraph" value="10">10 Records</option>

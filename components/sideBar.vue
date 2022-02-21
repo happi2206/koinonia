@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="backdropfscreen" @click="openSide" v-show="isMobile"></div>
-    <div class="d-block d-md-none" @click="openSide">
+    <div class="d-block d-lg-none" @click="openSide">
       <div class="pt-5 px-3 icontogs">
         <b-icon icon="list" class="text-dark"></b-icon>
       </div>
     </div>
-    <nav id="sidebar" class="sidebar-wrapper mt-md-5 pt-md-5" v-if="isMobile">
-      <div class="sidebar-menu my-md-2 bg-white">
+    <nav id="sidebar" class="sidebar-wrapper mt-lg-5 pt-lg-5" v-if="isMobile">
+      <div class="sidebar-menu my-lg-2 bg-white">
         <div class="h-full bg-white px-1 absolute" id="sidenavExample">
           <ul class="relative">
             <li class="relative" id="sidenavEx3">
@@ -103,7 +103,7 @@
         </div>
       </div>
     </nav>
-    <nav id="sidebar" class="sidebar-wrapper mt-md-5 pt-md-5 d-none d-md-block">
+    <nav id="sidebar" class="sidebar-wrapper mt-lg-5 pt-lg-5 d-none d-lg-block">
       <div class="sidebar-menu my-md-2 bg-white">
         <div class="h-full bg-white px-1 absolute" id="sidenavExample">
           <ul class="relative">
@@ -262,7 +262,8 @@ export default {
   background: #f5f5f524 !important;
 }
 
-.icontogs {
+/* .icontogs {
   z-index: 999;
-}
+  padding-top: 900px;
+} */
 </style>

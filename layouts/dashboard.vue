@@ -24,6 +24,6 @@ export default {
 
 <style>
 .height {
-  height: 150vh !important;
+  height: fit-content !important;
 }
 </style>

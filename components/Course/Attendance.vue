@@ -111,9 +111,9 @@
       </template>
       <template #belowFilterButton>
         <div class="d-flex align-items-center justify-content-between my-4">
-          <div class="records-count">
+          <div class="records-count medbrownparagraph">
             <span> Month: </span>
-            <select class="records-count">
+            <select class="records-count medbrownparagraph">
               <option value="Januray">Janurary</option>
             </select>
           </div>
@@ -175,7 +175,7 @@ export default {
         { key: 'descriptiom', sortable: true },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
-        { key: 'dots', label: '', sortable: true },
+        { key: 'dots', label: '', thStyle: { color: '#000' }, sortable: true },
       ],
       events: {
         name: '',

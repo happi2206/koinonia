@@ -1214,10 +1214,6 @@ th {
   }
 }
 @media (max-width: 991.5px) {
-  .sidebar-wrapper {
-    width: 7%;
-  }
-
   .customscroll .horizontalspacing {
     margin-left: 20px;
     margin-right: 20px;
@@ -1225,6 +1221,10 @@ th {
 
   .flwidth {
     width: 60%;
+  }
+
+  .page-content {
+    margin-top: 20px;
   }
 
   .forminputpadding {
@@ -1260,12 +1260,12 @@ th {
   }
 }
 @media (max-width: 768.5px) {
-  .sidebar-wrapper {
-    width: 60%;
-  }
-
   .flwidth {
     width: 100%;
+  }
+
+  .sidebar-wrapper {
+    width: 20%;
   }
 
   .carouselheight {
@@ -1318,10 +1318,6 @@ th {
     height: 112px;
     width: 151px;
     object-fit: cover;
-  }
-
-  .page-content {
-    margin-top: 20px;
   }
 
   .medparagraph,
@@ -1405,6 +1401,11 @@ th {
     font-size: 12px !important;
   }
 }
+@media (max-width: 691.5px) {
+  .sidebar-wrapper {
+    width: 30%;
+  }
+}
 @media (max-width: 576.5px) {
   .coursewidth1 {
     width: 100%;
@@ -1422,6 +1423,11 @@ th {
 
   .carouselheight {
     height: 55vh;
+  }
+}
+@media (max-width: 400.5px) {
+  .sidebar-wrapper {
+    width: 60%;
   }
 }
 

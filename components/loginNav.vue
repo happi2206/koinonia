@@ -1,16 +1,17 @@
 <template>
   <b-navbar
-    toggleable="md"
+    toggleable="lg"
     class="
       navz
       darkerbluebg
       align-items-center
-      navbar-expand-md
+      navbar-expand-lg
       mobilenavigation
+      my-0
       pt-2
       pb-2
-      pt-md-0
-      pb-md-1
+      pt-lg-0
+      pb-lg-1
       secondaryheader
       darkborderbottom
     "
@@ -24,7 +25,7 @@
       </b-navbar-toggle>
     </div>
     <div class="d-flex justify-content-between width100">
-      <div class="d-block d-md-none">
+      <div class="d-block d-lg-none">
         <div class="d-flex align-items-center">
           <nuxt-link to="/" class="navbar-brand logo-icon-mobile pr-2 mr-2">
             <img
@@ -35,16 +36,16 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="d-md-none d-flex" v-if="!authenticated">
+      <div class="d-lg-none d-flex" v-if="!authenticated">
         <button
           v-if="isSignIn"
           class="
             btn
             loginbtndashboard
-            px-md-4 px-3
-            py-md-2 py-1
+            px-lg-4 px-3
+            py-lg-2 py-1
             text-white
-            mx-md-2 mx-1
+            mx-lg-2 mx-1
           "
         >
           <nuxt-link
@@ -56,7 +57,7 @@
         </button>
         <button
           v-else
-          class="btn mainbtn px-md-4 px-3 py-md-2 py-1 mx-md-2 mx-1"
+          class="btn mainbtn px-lg-4 px-3 py-lg-2 py-1 mx-lg-2 mx-1"
         >
           <nuxt-link
             to="/register"
@@ -69,7 +70,7 @@
     </div>
 
     <div class="" v-if="authenticated">
-      <div class="relativecontainer d-block d-md-none">
+      <div class="relativecontainer d-block d-lg-none">
         <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
         <div class="absolutecontainer online">
           <span class="mainyellowcolor"><b-icon icon="dot"></b-icon></span>
@@ -77,8 +78,8 @@
       </div>
     </div>
 
-    <div class="d-block d-md-none ml-2" v-if="authenticated">
-      <div class="d-md-flex align-items-md-center">
+    <div class="d-block d-lg-none ml-2" v-if="authenticated">
+      <div class="d-lg-flex align-items-lg-center">
         <b-dropdown
           size="lg"
           variant="link"
@@ -88,7 +89,7 @@
         >
           <template #button-content>
             <div class="d-flex align-items-center medbrownparagraph">
-              <div class="profimgfull d-none d-md-block">
+              <div class="profimgfull d-none d-lg-block">
                 <b-avatar variant="success"></b-avatar>
               </div>
               <div>
@@ -154,20 +155,20 @@
       </div>
     </div>
 
-    <b-collapse id="nav-collapse" is-nav class="horizontalspacing my-3">
+    <b-collapse id="nav-collapse" is-nav class="horizontalspacing py-2">
       <div
         class="
           d-flex
           flex-column
           align-items-center
-          flex-md-row
-          justify-content-md-between
+          flex-lg-row
+          justify-content-lg-between
           w-100
           navigationflexspacing
         "
       >
-        <div class="firstcontent d-none d-md-block">
-          <div class="d-flex flex-column flex-md-row align-items-center">
+        <div class="firstcontent d-none d-lg-block">
+          <div class="d-flex flex-column flex-lg-row align-items-center">
             <nuxt-link
               to="/"
               class="navbar-brand logo-icon-mobile pr-2 mr-2"
@@ -176,18 +177,18 @@
               <img
                 src="~/assets/images/blueyellologo.png"
                 alt=""
-                class="img-fluid"
+                class="img-fluid logoimages"
               />
             </nuxt-link>
           </div>
         </div>
 
-        <div class="d-flex flex-column flex-md-row align-items-center">
+        <div class="d-flex flex-column flex-lg-row align-items-center">
           <ul
             class="
               thirdcontent
               d-flex
-              flex-md-row flex-column
+              flex-lg-row flex-column
               align-items-center
               mb-0
             "
@@ -225,7 +226,7 @@
                   py-2
                   text-white
                   mx-2
-                  d-none d-md-block
+                  d-none d-lg-block
                   mb-0
                   text-white
                   medbrownparagraph
@@ -243,7 +244,7 @@
                   px-4
                   py-2
                   mx-2
-                  d-none d-md-block
+                  d-none d-lg-block
                   text-white
                   mainbtndashboard
                   medbrownparagraph
@@ -256,7 +257,7 @@
           </ul>
 
           <div class="" v-if="authenticated">
-            <div class="relativecontainer d-none d-md-block">
+            <div class="relativecontainer d-none d-lg-block">
               <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
               <div class="absolutecontainer online">
                 <span class="mainyellowcolor"
@@ -266,8 +267,8 @@
             </div>
           </div>
 
-          <div class="d-none d-md-block ml-2" v-if="authenticated">
-            <div class="d-md-flex align-items-md-center">
+          <div class="d-none d-lg-block ml-2" v-if="authenticated">
+            <div class="d-lg-flex align-items-lg-center">
               <b-dropdown
                 size="lg"
                 variant="link"
@@ -277,7 +278,7 @@
               >
                 <template #button-content>
                   <div class="d-flex align-items-center medbrownparagraph">
-                    <div class="profimgfull d-none d-md-block">
+                    <div class="profimgfull d-none d-lg-block">
                       <b-avatar variant="success"></b-avatar>
                     </div>
                     <div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-md-5 horizontalspacing pt-md-5">
+  <div class="mt-lg-5 horizontalspacing pt-lg-5">
     <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">Instructors</h2>
       <div>
@@ -218,7 +218,7 @@ export default {
         `instructors-v/get-all-instructors?page=1&size=50`
       )
 
-      this.userdetails =  users.items
+      this.userdetails = users.items
       this.busy = false
     },
     async getAllUsers() {
