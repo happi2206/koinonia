@@ -64,7 +64,7 @@
               required
               placeholder="Search"
               @change="$emit('search', $event.target.value)"
-              class="px-md-3 px-2 py-2 border rounded"
+              class="px-md-3 px-2 py-2 border rounded widthfullsearch"
             />
 
             <button class="accentcolorbg py-2 px-3">
@@ -75,7 +75,7 @@
             <slot></slot>
           </div> -->
 
-          <div class="my-md-0 my-3 d-flex justify-content-end align-items-end">
+          <div class="my-md-0 my-3">
             <slot name="besideFilterButton"></slot>
           </div>
           <div id="filters-container" class="filters-container d-none">
@@ -120,7 +120,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      visualization: 'list'
+      visualization: 'list',
     }
   },
   methods: {
@@ -166,5 +166,11 @@ export default Vue.extend({
 }
 .display-toggle .icon-wrapper.active svg path {
   fill: #1070b7;
+}
+
+@media (max-width: 400.5px) {
+  .widthfullsearch {
+    width: 100%;
+  }
 }
 </style>

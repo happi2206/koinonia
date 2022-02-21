@@ -39,7 +39,7 @@
           <b-tab title="Instructors" class="">
             <filter-component>
               <template #besideFilterButton>
-                <div class="ml-5">
+                <div class="ml-md-5">
                   <button
                     class="btn py-2 mainbtndashboard medbrownparagraph"
                     v-b-modal.addInstructor

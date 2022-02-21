@@ -58,7 +58,7 @@
           </div> -->
           </div>
           <div class="my-2 row">
-            <div class="col-lg-4 col-12">
+            <div class="col-lg-4 col-6">
               <p class="my-2 medbrownparagraph">
                 <span class="lightgraytext"> Class code:</span>
                 {{ courseDetail.course_code }}
@@ -79,7 +79,7 @@
                 {{ courseDetail.end_date | DateFormat }}
               </p>
             </div>
-            <div class="col-lg-12 col-12">
+            <div class="col-lg-12 col-6">
               <p class="my-2 medbrownparagraph">
                 {{ courseDetail.short_description | shortTextFilter }}
               </p>
