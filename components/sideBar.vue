@@ -3,7 +3,7 @@
     <div class="backdropfscreen" @click="openSide" v-show="isMobile"></div>
     <div class="d-block d-lg-none" @click="openSide">
       <div class="pt-5 px-3 z1000">
-        <b-icon icon="list" class="text-dark py-4"></b-icon>
+        <b-icon icon="list" class="text-dark pt-2 pb-4"></b-icon>
       </div>
     </div>
     <nav id="sidebar" class="sidebar-wrapper mt-lg-5 pt-lg-5" v-if="isMobile">
@@ -16,7 +16,6 @@
             <li class="py-2 my-2">
               <nuxt-link
                 to="/dashboard/all-courses"
-                active-class="active"
                 class="flex items-center medbrownparagraph text-dark mx-3"
               >
                 <span
@@ -29,7 +28,6 @@
             <li class="py-2 my-2">
               <nuxt-link
                 to="/dashboard/all-instructors"
-                active-class="active"
                 class="flex items-center medbrownparagraph text-dark mx-3"
               >
                 <span class="iconify" data-icon="la:chalkboard-teacher"></span>
@@ -50,8 +48,7 @@
             <li class="py-2 my-2">
               <nuxt-link
                 to="/dashboard/all-courses"
-                active-class="active"
-                class="flex items-center medbrownparagraph text-dark mx-3"
+                class="flex items-center medbrownparagraph text-dark mx-3 px-3"
               >
                 <span
                   class="iconify"
@@ -63,8 +60,7 @@
             <li class="py-2 my-2">
               <nuxt-link
                 to="/dashboard/all-instructors"
-                active-class="active"
-                class="flex items-center medbrownparagraph text-dark mx-3"
+                class="flex items-center medbrownparagraph text-dark mx-3 px-3"
               >
                 <span class="iconify" data-icon="la:chalkboard-teacher"></span>
                 <span class="px-3">Instructors</span>
@@ -121,7 +117,7 @@ export default {
 <style scoped>
 .nuxt-link-active {
   background: #ffcd0624 !important;
-  padding: 10px 10px;
+  padding: 10px 0;
   border-radius: 5px;
 }
 

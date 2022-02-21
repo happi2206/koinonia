@@ -49,18 +49,6 @@
               <div class="row">
                 <div class="col-md-12">
                   <label for="" class="d-block medbrownparagraph graytext"
-                    >Password
-                  </label>
-                  <input
-                    type="password"
-                    v-model="instructor.password"
-                    required
-                    placeholder="e.g sample password"
-                    class="forminputs text-dark"
-                  />
-                </div>
-                <div class="col-md-12">
-                  <label for="" class="d-block medbrownparagraph graytext"
                     >Phone
                   </label>
                   <input

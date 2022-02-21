@@ -249,13 +249,12 @@
     <div class="bg-white p-md-5">
       <ul
         class="
-          nav nav-tabs
-          flex flex-col
-          md:flex-row
-          flex-wrap
+          nav
+          custom-tabs
+          nav-tabs
+          flex
           medbrownparagraph
           list-none
-          border-b-0
           pl-0
           mb-4
         "
@@ -264,23 +263,16 @@
       >
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="setCourseParams()"
+            @click.prevent="setCourseParams('status')"
             class="
               nav-link
-              block
               medbrownparagraph
               leading-tight
-              uppercase
               text-black
               cursor-pointer
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
               my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
-            :class="{ active: currentTab == 0 }"
+            :class="{ active: status }"
             >All Status</a
           >
         </li>
@@ -288,45 +280,22 @@
           <a
             @click.prevent="setCourseParams('open')"
             class="
-             
-              block
-              
+              nav-link
               medbrownparagraph
               leading-tight
-              uppercase
               cursor-pointer
-              border-x-0 border-t-0 border-transparent
-              px-6
-              py-3
               my-2
               text-black
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
-            :class="{ active: currentTab == 1 }"
+            :class="{ active: open }"
             >Open</a
           >
         </li>
         <li class="nav-item" role="presentation">
           <a
             @click.prevent="setCourseParams('on_going')"
-            class="
-              nav-link
-              block
-              
-              medbrownparagraph
-              leading-tight
-              cursor-pointer
-              uppercase
-              text-black
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
-              my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
-            "
-            :class="{ active: currentTab == 2 }"
+            class="nav-link medbrownparagraph leading-tight cursor-pointer my-2"
+            :class="{ active: on_going }"
             >On Going</a
           >
         </li>
@@ -337,27 +306,18 @@
               nav-link
               disabled
               pointer-events-none
-              block
               text-black
-              
               medbrownparagraph
               leading-tight
               cursor-pointer
-              uppercase
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
               my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
-            :class="{ active: currentTab == 3 }"
             >Archived</a
           >
         </li>
       </ul>
       <div>
-        <div  :class="{ 'fade show': currentTab == 0 }">
+        <div :class="{ 'fade show': currentTab == 0 }">
           <filter-component>
             <template #default="{ visualization }">
               <table-component
@@ -382,7 +342,6 @@
             </template>
           </filter-component>
         </div>
-       
       </div>
     </div>
   </div>
@@ -412,6 +371,7 @@ export default {
         end_date: '',
         feature_image: '',
       },
+      active: true,
       fields: [
         { key: 'check', label: '', sortable: true },
         { key: 'title', label: 'Name', sortable: true },
@@ -421,6 +381,9 @@ export default {
         { key: 'end_date', sortable: true },
         { key: 'dots', label: '', sortable: true },
       ],
+      status: true,
+      on_going: false,
+      open: false,
       courseData: {
         title: '',
         short_description: '',
@@ -470,7 +433,7 @@ export default {
     async getAllCourses(payload = null) {
       this.busy = true
       let uri = 'course-v/get-all-course?page=1&size=50'
-      if(payload) {
+      if (payload) {
         uri = uri + payload
       }
       const courses = await this.$axios.$get(uri)
@@ -484,12 +447,20 @@ export default {
       this.busy = false
     },
     // setfilter
-    setCourseParams(payload){
-        let params =  ""
-        if(payload){
-          params = `&status=${payload}`
-        }
-        this.getAllCourses(params)
+    setCourseParams(payload) {
+      let params = ''
+
+      if (payload) {
+        params = `&status=${payload}`
+        ;(this.status = false),
+          (this.on_going = false),
+          (this.open = false),
+          (this[payload] = !this[payload])
+
+        console.log('payload is', payload)
+      }
+
+      this.getAllCourses(params)
     },
     handlefileupload(event) {
       const filedetail = []
@@ -558,4 +529,8 @@ export default {
 </script>
 
 <style>
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  border-radius: none;
+}
 </style>
