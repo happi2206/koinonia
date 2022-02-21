@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="secondarybluebg">
+    <div class="blackbg">
       <div class="horizontalspacing pb-5">
         <div class="py-4">
           <img src="images/logotext.png" alt="" class="img-fluid my-4 mx-2" />

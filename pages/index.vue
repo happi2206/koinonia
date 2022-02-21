@@ -1,13 +1,47 @@
 <template>
   <div class="bodylightgray">
-    <section class="horizontalspacing">
+    <div class="d-block d-lg-none" @click="openSide" v-if="authenticated">
+      <div class="pt-5 px-3 icontogs">
+        <b-icon icon="list" class="text-dark py-4"></b-icon>
+      </div>
+    </div>
+
+    <div v-if="authenticated && isMobile">
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-menu bg-white">
+          <div class="h-full bg-white px-1 absolute" id="sidenavExample">
+            <div v-if="authenticated">
+              <li class="nav-item mb-0">
+                <nuxt-link
+                  to="/dashboard/all-courses"
+                  class="nav-link text-dark medbrownparagraph mb-0"
+                >
+                  My learning
+                </nuxt-link>
+              </li>
+
+              <li
+                class="nav-item mb-0"
+                v-if="user.is_instructor || user.is_administrator"
+              >
+                <nuxt-link
+                  to="/dashboard/all-courses"
+                  class="nav-link text-dark medbrownparagraph mb-0"
+                >
+                  Instructors dashboard
+                </nuxt-link>
+              </li>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <section class="">
       <div class="imagesection">
         <div class="textsection">
           <div class="d-flex justify-content-center">
             <div>
-              <h1 class="brownheaderlarge text-center mainbluecolor">
-                Welcome
-              </h1>
+              <h1 class="brownheaderlarge text-center">Welcome</h1>
               <p class="mt-4 mt-2 brownparagraph text-center">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -29,46 +63,52 @@
         </div>
       </div>
     </section>
-    <section
-      class="mt-3 horizontalspacing"
-      v-if="false"
-    >
+    <section class="mt-3 horizontalspacing" v-if="false">
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Courses" active>
           <div class="row mt-4">
-            <div class="col-lg-6 my-3 my-lg-0" :key="index" v-for="(course, index) in courses">
+            <div
+              class="col-lg-6 my-3 my-lg-0"
+              :key="index"
+              v-for="(course, index) in courses"
+            >
               <div class="bg-white rounded">
                 <div class="p-2 flex gap-2">
                   <div class="d-flex align-items-center">
-                  <b-avatar square :size="200"></b-avatar>
+                    <b-avatar square :size="200"></b-avatar>
                   </div>
 
                   <div class="p-3">
                     <h1 class="text-3xl bold700 text-capitalize">
-                      {{course.title}}
+                      {{ course.title }}
                     </h1>
                     <div class="my-2 row">
                       <div class="col-12">
                         <p class="my-2 medbrownparagraph">
                           <span class="lightgraytext"> Start Date: </span>
-                         {{course.start_date | DateFormat}}
+                          {{ course.start_date | DateFormat }}
                         </p>
                       </div>
                       <div class="col-12">
                         <p class="my-2 medbrownparagraph">
                           <span class="lightgraytext"> End Date:</span>
-                        {{course.end_date | DateFormat}}
+                          {{ course.end_date | DateFormat }}
                         </p>
                       </div>
                     </div>
-                    <p class="my-2 medbrownparagraph" v-html="$options.filters.shortTextFilter(course.long_description)">
-                    </p>
+                    <p
+                      class="my-2 medbrownparagraph"
+                      v-html="
+                        $options.filters.shortTextFilter(
+                          course.long_description
+                        )
+                      "
+                    ></p>
                     <!-- <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p> -->
                   </div>
                 </div>
               </div>
             </div>
-           
           </div></b-tab
         >
         <b-tab title="On-going" class=""><p>I'm the second tab</p></b-tab>
@@ -77,10 +117,10 @@
       </b-tabs>
     </section>
 
-<!-- top -->
+    <!-- top -->
     <section class="horizontalspacing mt-5" v-if="false">
       <div>
-        <h1 class="brown28 text-center mainbluecolor">Top Featured Courses</h1>
+        <h1 class="brown28 text-center">Top Featured Courses</h1>
         <p class="mt-3 brownparagraph horizontalspacing text-center graytext">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -284,7 +324,7 @@
         </div>
       </div>
     </section>
-<!-- two -->
+    <!-- two -->
     <section class="my-5" v-if="false">
       <div class="horizontalspacing">
         <div>
@@ -419,7 +459,7 @@
         </div>
       </div>
     </section>
-    <section class="my-5">
+    <!-- <section class="my-5">
       <div class="horizontalspacing">
         <div>
           <h1 class="brown28 text-center mainbluecolor">Testimonials</h1>
@@ -539,7 +579,7 @@
           </flickity>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section class="lightbluebg">
       <div class="d-flex justify-content-center py-5 p-3">
@@ -552,7 +592,7 @@
             />
           </div>
           <div class="col-md-6 mt-5">
-            <h2 class="rubikheader mainbluecolor col-lg-9 p-0">
+            <h2 class="rubikheader text-black col-lg-9 p-0">
               Get Regular Updates from
             </h2>
 
@@ -563,7 +603,7 @@
             />
 
             <div class="mt-3 px-2">
-              <label for="" class="d-block rubikheader2 mainbluecolor"
+              <label for="" class="d-block rubikheader2 text-black"
                 >Subscribe to Newsletter</label
               >
               <input
@@ -601,6 +641,7 @@ export default {
         // any options from Flickity can be used
       },
       courses: [],
+      isMobile: false,
     }
   },
   computed: {
@@ -612,6 +653,9 @@ export default {
   },
 
   methods: {
+    openSide() {
+      this.isMobile = !this.isMobile
+    },
     next() {
       this.$refs.flickity.next()
     },
@@ -621,23 +665,22 @@ export default {
     },
     async get_all() {
       try {
-        if(this.authenticated){
-// set custom hear
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`,
-        }
-        // make axios request for all courses
-        const { items } = await this.$axios.$get(
-          `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=2`,
-          {
-            headers: headers,
+        if (this.authenticated) {
+          // set custom hear
+          const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.token}`,
           }
-        )
-        // assign response to coures
-        this.courses = items
+          // make axios request for all courses
+          const { items } = await this.$axios.$get(
+            `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=2`,
+            {
+              headers: headers,
+            }
+          )
+          // assign response to coures
+          this.courses = items
         }
-        
       } catch (e) {
         this.$toast.error(e.data.detail)
       }
