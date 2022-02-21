@@ -87,11 +87,11 @@
                 />
 
                 <div class="row" v-else>
-                  <grid-component
+                  <student-instructors-grid
                     :data="instructors"
                     v-for="(instructor, index) in instructors"
                     :key="index"
-                  ></grid-component>
+                  ></student-instructors-grid>
                 </div>
               </template>
             </filter-component>
@@ -389,8 +389,10 @@
 
 <script>
 import { json2csv, csv2json } from 'json-2-csv'
+import studentInstructorsGrid from '~/components/studentInstructorsGrid.vue'
 var csv = require('csvtojson')
 export default {
+  components: { studentInstructorsGrid },
   layout: 'dashboard',
 
   data() {
@@ -426,8 +428,12 @@ export default {
         { key: 'surname', sortable: true },
 
         { key: 'email', sortable: true },
-        { key: 'phone no', sortable: true },
-        { key: 'dots', label: 'Action', sortable: true },
+        { key: 'phone', sortable: true },
+        {
+          key: 'link_code',
+          sortable: true,
+        },
+        // { key: 'dots', label: 'Action', sortable: true },
       ],
       studentfields: [
         { key: 'other_name', label: 'First name', sortable: true },
