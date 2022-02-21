@@ -304,21 +304,36 @@
             @click.prevent="setCourseParams('archived')"
             class="
               nav-link
+<<<<<<< HEAD
+              block
+              
+              medbrownparagraph
+              leading-tight
+              cursor-pointer
+              uppercase
+              text-black
+              border-x-0 border-t-0 border-b-2 border-transparent
+              px-6
+              py-3
+=======
               disabled
               pointer-events-none
               text-black
               medbrownparagraph
               leading-tight
               cursor-pointer
+>>>>>>> 2864758f3e382e493cf677d8e90345901ff8f004
               my-2
             "
+            :class="{ active: currentTab == 2 }"
             >Archived</a
           >
         </li>
+     
       </ul>
       <div>
-        <div :class="{ 'fade show': currentTab == 0 }">
-          <filter-component>
+        <div  :class="{ 'fade show': currentTab == 0 }">
+          <filter-component @search="searchTable">
             <template #default="{ visualization }">
               <table-component
                 :items="courses"
@@ -397,6 +412,8 @@ export default {
       imagedetail: [],
       courses: [],
       currentTab: 0,
+      status:"",
+      search:""
     }
   },
 
@@ -430,11 +447,14 @@ export default {
         this.$nuxt.$loading.finish()
       }
     },
-    async getAllCourses(payload = null) {
+    async getAllCourses() {
       this.busy = true
       let uri = 'course-v/get-all-course?page=1&size=50'
-      if (payload) {
-        uri = uri + payload
+      if(this.search){
+          uri = uri + `&search=${this.search}`
+        }
+      if(this.status) {
+        uri = uri + `&status=${this.status}`
       }
       const courses = await this.$axios.$get(uri)
       courses.items = courses.items.reverse()
@@ -447,20 +467,15 @@ export default {
       this.busy = false
     },
     // setfilter
-    setCourseParams(payload) {
-      let params = ''
+    setCourseParams(payload){
+      this.status = payload
+      this.getAllCourses()
+    },
 
-      if (payload) {
-        params = `&status=${payload}`
-        ;(this.status = false),
-          (this.on_going = false),
-          (this.open = false),
-          (this[payload] = !this[payload])
-
-        console.log('payload is', payload)
-      }
-
-      this.getAllCourses(params)
+    // searchtable
+    searchTable(payload){
+      this.search = payload
+        this.getAllCourses()
     },
     handlefileupload(event) {
       const filedetail = []
