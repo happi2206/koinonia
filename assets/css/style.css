@@ -1188,6 +1188,9 @@ th {
   color: #333333;
   font-family: Brown;
   font-size: 14px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
   font-style: normal;
   font-weight: 400;
   line-height: 19px;
@@ -1422,9 +1425,9 @@ th {
     width: 90%;
   }
 
-  /* .imagesection {
+  .imagesection {
     height: 50vh;
-  } */
+  }
 
   button.mainbtndashboard {
     font-size: 12px !important;
@@ -1449,7 +1452,7 @@ th {
   }
 
   .svgplaceholderimages {
-    top: 290px;
+    top: 260px;
   }
 
   .coursewidth2 {
@@ -1477,7 +1480,7 @@ th {
   }
 
   .svgplaceholderimages {
-    top: 310px;
+    top: 210px;
   }
 }
 

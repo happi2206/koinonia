@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="accentcolorbg">
+    <!-- <div class="accentcolorbg">
       <div class="horizontalspacing pb-5">
         <div class="py-4">
           <img src="images/logotext.png" alt="" class="img-fluid my-4 mx-2" />
@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="blackbg">
       <div class="horizontalspacing py-4">
         <p class="mb-0 footerbottom">All rights Reserved © i88HQ, 2021</p>
