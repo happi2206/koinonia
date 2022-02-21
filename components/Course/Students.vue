@@ -122,12 +122,76 @@ export default {
   },
   data() {
     return {
-      // student: {
-      //   other_name: '',
-      //   surname: '',
-      //   status: '',
-      // },
+      student: {
+        other_name: '',
+        surname: '',
+        send_latest_updates: false,
+        user_type: {
+          user_type: 'flat_user',
+          link_code: '',
+          email: '',
+          type: 'student',
+        },
+      },
     }
+  },
+
+  methods: {
+    async uploadStudents(e) {
+      let file = e.target.files[0]
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLSX.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLSX.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+
+      let new_array = []
+      for (const iterator of students) {
+        new_array.push({
+          other_name: iterator['First Name'],
+          surname: iterator['Surname'],
+          send_latest_updates: false,
+          registration_number: iterator['Registration Number'],
+          user_type: {
+            user_type: 'flat_user',
+            link_code: '',
+            type: 'student',
+          },
+        })
+      }
+      console.log(new_array)
+
+      await this.$axios.$post(
+        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+        new_array
+      )
+      this.$fetch()
+      this.$toast.success('Students added Successfully')
+    },
+    async createStudent() {
+      try {
+        await this.$axios.$post(
+          `course-v/add-flat-student-to-a-course?course_id=${this.$route.params.course}`,
+          this.student
+        )
+        this.$fetch()
+        this.$bvModal.hide('addStudent')
+        this.$toast.success('Student added Successfully')
+      } catch (e) {
+        console.log(e)
+      }
+    },
   },
 
   async fetch() {
