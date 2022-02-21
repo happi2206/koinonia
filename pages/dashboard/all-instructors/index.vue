@@ -7,23 +7,89 @@
           Add Instructor
         </button>
 
-        <b-modal id="addInstructor" centered hide-header hide-footer>
-          <h2 class="brownparagraph bold700 text-center my-3">
-            Add Instructor
-          </h2>
+        <b-modal id="addInstructor" centered title="Add Instructor" hide-footer>
+          <form class="modabody px-3" @submit.prevent="addInstructor">
+            <div class="my-2">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Instructors Other Name
+              </label>
+              <input
+                type="text"
+                v-model="instructor.other_name"
+                required
+                placeholder="e.g Name"
+                class="forminputs"
+              />
+            </div>
+            <div class="my-2">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Instructors Surname
+              </label>
+              <input
+                type="text"
+                v-model="instructor.surname"
+                required
+                placeholder="e.g Daniel"
+                class="forminputs"
+              />
+            </div>
+            <div class="my-2">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Email
+              </label>
+              <input
+                type="email"
+                v-model="instructor.email"
+                required
+                placeholder="e.g Alchemy"
+                class="forminputs"
+              />
+            </div>
+            <div class="my-2">
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Password
+                  </label>
+                  <input
+                    type="password"
+                    v-model="instructor.password"
+                    required
+                    placeholder="e.g sample password"
+                    class="forminputs text-dark"
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Phone
+                  </label>
+                  <input
+                    type="text"
+                    v-model="instructor.phone"
+                    required
+                    placeholder="e.g 08032644455"
+                    class="forminputs text-dark"
+                  />
+                </div>
+              </div>
+            </div>
 
-          <div class="content px-md-5 my-2">
-            <v-select
-              :options="alluserdetails"
-              label="other_name surname"
-              :reduce="(option) => option.id"
-              @input="sendLinkInput"
-            ></v-select>
-          </div>
-
-          <div class="d-flex justify-content-center mx-5 my-3">
-            <button class="btn mainbtndashboard">Add Instructor</button>
-          </div>
+            <div class="my-4">
+              <div class="flex gap-3 justify-content-center">
+                <input
+                  class="
+                    btn
+                    px-md-4 px-3
+                    py-2
+                    mainbtndashboard
+                    medbrownparagraph
+                  "
+                  type="submit"
+                  value="Create Instructor"
+                />
+              </div>
+            </div>
+          </form>
         </b-modal>
       </div>
     </div>
@@ -62,6 +128,13 @@ export default {
       alluserdetails: [],
       user: ['sample', 'no'],
       busy: true,
+      instructor: {
+        other_name: '',
+        surname: '',
+        email: '',
+        password: '',
+        phone: '',
+      },
     }
   },
 
@@ -106,14 +179,46 @@ export default {
 
       console.log(e)
     },
+    async addInstructor() {
+      try {
+        let payload = {
+          surname: this.instructor.surname,
+          other_name: this.instructor.other_name,
+          phone: this.instructor.phone,
+
+          send_lastest_updates: false,
+          user_type: {
+            user_type: 'online_user',
+            email: this.instructor.email,
+            password: this.instructor.password,
+            legal: [
+              {
+                type: 'y3yy3',
+                version: '7464',
+                stamp: '2022-02-20T17:10:29.462Z',
+              },
+            ],
+          },
+        }
+
+        await this.$axios.$post(
+          `admin/create-an-instructor?school_id=${process.env.SCHOOL_ID}`,
+          payload
+        )
+        this.getUsers()
+        this.$bvModal.hide('addInstructor')
+        this.$toast.success('Linked Successfully')
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async getUsers() {
       this.busy = true
       const users = await this.$axios.$get(
         `instructors-v/get-all-instructors?page=1&size=50`
       )
 
-      this.userdetails.push(...users.items)
-      console.log('users', users.items)
+      this.userdetails =  users.items
       this.busy = false
     },
     async getAllUsers() {
@@ -122,7 +227,6 @@ export default {
       )
 
       this.alluserdetails.push(...users.items)
-      console.log('users', users.items)
     },
   },
 }

@@ -328,63 +328,109 @@
                   >
                     Add Event
                   </button>
-                  <b-modal id="addEvent" centered hide-header hide-footer>
-                    <h2 class="largebrownparagraph bold700 my-3">
-                      Create Event
-                    </h2>
+                  <b-modal id="addEvent" centered title="Create Event" hide-footer>
+                    
                     <form class="modabody" @submit.prevent="createEvent">
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Event Name
-                        </label>
+                     <div class="row px-4">
 
-                        <input
-                          type="text"
-                          v-model="event.name"
-                          required
-                          placeholder="Event Name"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Event Description
-                        </label>
+                        <div class="col-12">
+                          <div class="my-2">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >Event Name
+                            </label>
 
-                        <input
-                          type="text"
-                          v-model="event.description"
-                          required
-                          placeholder="Event Description"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Start Date
-                        </label>
-                        <input
-                          type="date"
-                          required
-                          v-model="event.start_date"
-                          placeholder="Start Date"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >End Date
-                        </label>
-                        <input
-                          type="date"
-                          required
-                          v-model="event.end_date"
-                          placeholder="End Date"
-                          class="forminputs text-dark"
-                        />
+                            <input
+                              type="text"
+                              v-model="event.name"
+                              required
+                              placeholder="Event Name"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+                      
+                      <div class="col-12">
+                        <div class="my-2">
+                          <label
+                            for=""
+                            class="medbrownparagraph graytext"
+                            >Event Description
+                          </label>
+
+                          <input
+                            type="text"
+                            v-model="event.description"
+                            required
+                            placeholder="Event Description"
+                            class="forminputs text-dark"
+                          />
+                        </div>
                       </div>
 
-                      <div class="my-4">
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label for="" class="medbrownparagraph graytext"
+                            >Start Date
+                          </label>
+                          <input
+                            type="date"
+                            required
+                            v-model="event.start_date"
+                            placeholder="Start Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label
+                            for=""
+                            class="medbrownparagraph graytext"
+                            >Start Time
+                          </label>
+                          <input
+                            type="time"
+                            required
+                            v-model="event.start_time"
+                            placeholder="End Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label for="" class="medbrownparagraph graytext"
+                            >End Date
+                          </label>
+                          <input
+                            type="date"
+                            required
+                            v-model="event.end_date"
+                            placeholder="Start Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="my-2">
+                          <label
+                            for=""
+                            class="d-block medbrownparagraph graytext"
+                            >End Time
+                          </label>
+                          <input
+                            type="time"
+                            required
+                            v-model="event.end_time"
+                            placeholder="End Date"
+                            class="forminputs text-dark"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="my-4 col-12">
                         <div class="d-flex justify-content-center">
                           <button
                             class="
@@ -399,6 +445,7 @@
                           </button>
                         </div>
                       </div>
+                     </div>
                     </form>
                   </b-modal>
                 </div>
@@ -500,6 +547,8 @@ export default {
         description: '',
         start_date: '',
         end_date: '',
+        start_time: '',
+        end_time: '',
       },
       events: [],
     }
@@ -639,6 +688,7 @@ export default {
           `course-v/add-course-event?course_id=${this.$route.params.course}`,
           this.event
         )
+        this.$fetch()
         this.$bvModal.hide('addEvent')
         this.$toast.success('Event added Successfully')
       } catch (e) {
