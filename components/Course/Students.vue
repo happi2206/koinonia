@@ -116,12 +116,13 @@
 <script>
 export default {
   props: {
-    course_instructors: {
+    students: {
       type: Object,
     },
   },
   data() {
     return {
+      students: this.students,
       student: {
         other_name: '',
         surname: '',
@@ -133,6 +134,15 @@ export default {
           type: 'student',
         },
       },
+      addStudent: '',
+      studentfields: [
+        { key: 'other_name', label: 'First name', sortable: true },
+        { key: 'surname', sortable: true },
+        { key: 'email', sortable: true },
+        { key: 'gender', sortable: true },
+        { key: 'phone no', sortable: true },
+        { key: 'dots', label: 'Action', sortable: true },
+      ],
     }
   },
 
