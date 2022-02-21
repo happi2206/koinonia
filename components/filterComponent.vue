@@ -62,7 +62,8 @@
             <input
               type="text"
               required
-              placeholder="Search "
+              placeholder="Search"
+              @change="$emit('search', $event.target.value)"
               class="px-md-3 px-2 py-2 border rounded"
             />
 
@@ -119,7 +120,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      visualization: 'list',
+      visualization: 'list'
     }
   },
   methods: {

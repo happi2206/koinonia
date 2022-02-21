@@ -335,15 +335,13 @@
             @click.prevent="setCourseParams('archived')"
             class="
               nav-link
-              disabled
-              pointer-events-none
               block
-              text-black
               
               medbrownparagraph
               leading-tight
               cursor-pointer
               uppercase
+              text-black
               border-x-0 border-t-0 border-b-2 border-transparent
               px-6
               py-3
@@ -351,14 +349,15 @@
               hover:border-transparent hover:bg-gray-100
               focus:border-transparent
             "
-            :class="{ active: currentTab == 3 }"
+            :class="{ active: currentTab == 2 }"
             >Archived</a
           >
         </li>
+     
       </ul>
       <div>
         <div  :class="{ 'fade show': currentTab == 0 }">
-          <filter-component>
+          <filter-component @search="searchTable">
             <template #default="{ visualization }">
               <table-component
                 :items="courses"
@@ -434,6 +433,8 @@ export default {
       imagedetail: [],
       courses: [],
       currentTab: 0,
+      status:"",
+      search:""
     }
   },
 
@@ -467,11 +468,14 @@ export default {
         this.$nuxt.$loading.finish()
       }
     },
-    async getAllCourses(payload = null) {
+    async getAllCourses() {
       this.busy = true
       let uri = 'course-v/get-all-course?page=1&size=50'
-      if(payload) {
-        uri = uri + payload
+      if(this.search){
+          uri = uri + `&search=${this.search}`
+        }
+      if(this.status) {
+        uri = uri + `&status=${this.status}`
       }
       const courses = await this.$axios.$get(uri)
       courses.items = courses.items.reverse()
@@ -485,11 +489,14 @@ export default {
     },
     // setfilter
     setCourseParams(payload){
-        let params =  ""
-        if(payload){
-          params = `&status=${payload}`
-        }
-        this.getAllCourses(params)
+      this.status = payload
+      this.getAllCourses()
+    },
+
+    // searchtable
+    searchTable(payload){
+      this.search = payload
+        this.getAllCourses()
     },
     handlefileupload(event) {
       const filedetail = []
