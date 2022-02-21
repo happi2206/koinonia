@@ -96,6 +96,17 @@
             </div>
 
             <div class="my-4">
+              <div
+                class="
+                  d-flex
+                  align-items-center
+                  justify-content-center
+                  w-50
+                  h-50
+                "
+              >
+                <img :src="courseData.feature_image" alt="" class="img-fluid" />
+              </div>
               <div class="flex gap-3 justify-content-center">
                 <upload-file v-model="courseData.feature_image" />
                 <input

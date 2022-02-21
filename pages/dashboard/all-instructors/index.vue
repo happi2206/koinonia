@@ -207,6 +207,8 @@ export default {
       )
 
       this.userdetails = users.items
+
+      console.log(users)
       this.busy = false
     },
     async getAllUsers() {
