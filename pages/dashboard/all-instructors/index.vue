@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-md-5 horizontalspacing pt-md-5">
+  <div class="mt-lg-5 horizontalspacing pt-lg-5">
     <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">Instructors</h2>
       <div>
@@ -8,6 +8,7 @@
         </button>
 
         <b-modal id="addInstructor" centered title="Add Instructor" hide-footer>
+          <preloader :show="preloader_main"/>
           <form class="modabody px-3" @submit.prevent="addInstructor">
             <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
@@ -49,18 +50,6 @@
               <div class="row">
                 <div class="col-md-12">
                   <label for="" class="d-block medbrownparagraph graytext"
-                    >Password
-                  </label>
-                  <input
-                    type="password"
-                    v-model="instructor.password"
-                    required
-                    placeholder="e.g sample password"
-                    class="forminputs text-dark"
-                  />
-                </div>
-                <div class="col-md-12">
-                  <label for="" class="d-block medbrownparagraph graytext"
                     >Phone
                   </label>
                   <input
@@ -96,14 +85,19 @@
 
     <div class="mt-2">
       <div class="card p-md-5 bg-white rounded">
-        <table-component
-          :items="userdetails"
-          :fields="fields"
-          :busy="busy"
-          :dropdownItem="dropdownItem"
-          @Share_Link_Code="shareLinkCode"
-          @Delete_Instructor="handleDelete"
-        />
+        <filter-component @search="searchTable">
+          <table-component
+            :items="userdetails"
+            :fields="fields"
+            @page-changed="handlePage"
+            :perPage="perPage"
+            :totalItems="totalItems"
+            :busy="busy"
+            :dropdownItem="dropdownItem"
+            @Share_Link_Code="shareLinkCode"
+            @Delete_Instructor="handleDelete"
+          />
+        </filter-component>
       </div>
     </div>
   </div>
@@ -119,9 +113,11 @@ export default {
       dropdownItem: ['Share_Link_Code', 'Delete_Instructor'],
       fields: [
         // { key: 'id', sortable: true },
-        { key: 'other_name', sortable: true },
         { key: 'surname', sortable: true },
+        { key: 'other_name', sortable: true },
         { key: 'email', sortable: true },
+        { key: 'phone', sortable: true },
+        { key: 'link_code', sortable: true },
         { key: 'dots', label: 'Action', sortable: true },
       ],
       userdetails: [],
@@ -135,12 +131,17 @@ export default {
         password: '',
         phone: '',
       },
+      search: '',
+      perPage: 50,
+      totalItems: 0,
+      currentPage: 1,
+      preloader_main: false
     }
   },
 
   mounted() {
-    this.getUsers()
-    this.getAllUsers()
+    // this.getUsers()
+    this.getAllInstructors()
   },
 
   methods: {
@@ -181,35 +182,32 @@ export default {
     },
     async addInstructor() {
       try {
+        this.preloader_main = true
         let payload = {
           surname: this.instructor.surname,
           other_name: this.instructor.other_name,
           phone: this.instructor.phone,
-
           send_lastest_updates: false,
           user_type: {
-            user_type: 'online_user',
+            user_type: 'flat_user',
+            type: 'instructor',
             email: this.instructor.email,
-            password: this.instructor.password,
-            legal: [
-              {
-                type: 'y3yy3',
-                version: '7464',
-                stamp: '2022-02-20T17:10:29.462Z',
-              },
-            ],
           },
         }
-
-        await this.$axios.$post(
-          `admin/create-an-instructor?school_id=${process.env.SCHOOL_ID}`,
+        const users = await this.$axios.$post(
+          `admin/create-an-instructor`,
           payload
         )
-        this.getUsers()
+        this.userdetails = users.items.reverse()
+        this.perPage = users.size
+        this.totalItems = users.total
+        this.currentPage = users.page
         this.$bvModal.hide('addInstructor')
-        this.$toast.success('Linked Successfully')
+        this.$toast.success('Admin created Successfully')
       } catch (e) {
-        console.log(e)
+        this.$toast.error(e)
+      }finally{
+        this.preloader_main = false
       }
     },
     async getUsers() {
@@ -218,15 +216,36 @@ export default {
         `instructors-v/get-all-instructors?page=1&size=50`
       )
 
-      this.userdetails =  users.items
+      this.userdetails = users.items
       this.busy = false
     },
-    async getAllUsers() {
-      const users = await this.$axios.$get(
-        `admin-v/get-all-register-users?page=1&size=50`
-      )
-
-      this.alluserdetails.push(...users.items)
+    async getAllInstructors() {
+      try {
+        this.busy = true
+        let uri = `instructors-v/get-all-instructors?page=${this.currentPage}&size=${this.perPage}`
+        if (this.search) {
+          uri = uri + `&search=${this.search}`
+        }
+        const users = await this.$axios.$get(uri)
+        this.userdetails = users.items.reverse()
+        this.perPage = users.size
+        this.totalItems = users.total
+        this.currentPage = users.page
+      } catch (error) {
+        this.$toast.error(error)
+      } finally {
+        this.busy = false
+      }
+    },
+    // searchtable
+    searchTable(payload) {
+      this.search = payload
+      this.getAllInstructors()
+    },
+    // handle page
+    handlePage(e) {
+      this.currentPage = e
+      this.getAllInstructors()
     },
   },
 }

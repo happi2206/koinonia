@@ -17,42 +17,6 @@
         <p class="text-center brownparagraph">
           {{ populateData.short_description }}
         </p>
-
-        <div
-          class="
-            d-flex
-            flex-md-row flex-column
-            justify-content-md-between justify-content-center
-            align-items-center
-          "
-        >
-          <div class="d-flex">
-            <div class="mx-2">
-              <span
-                class="iconify"
-                data-icon="akar-icons:linkedin-box-fill"
-                data-width="25"
-                data-height="25"
-              ></span>
-            </div>
-            <div class="mx-2">
-              <span
-                class="iconify"
-                data-icon="akar-icons:twitter-fill"
-                data-width="25"
-                data-height="25"
-              ></span>
-            </div>
-            <div class="mx-2">
-              <span
-                class="iconify"
-                data-icon="entypo-social:facebook"
-                data-width="25"
-                data-height="25"
-              ></span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

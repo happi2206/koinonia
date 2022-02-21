@@ -5,9 +5,8 @@ export default {
   loadingIndicator: {
     name: 'three-bounce',
     color: '#ffcd06',
-    background: 'white'
+    background: 'white',
   },
-  
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -29,21 +28,23 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap'
+        href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap',
       },
       {
         rel: 'stylesheet',
-        href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css',
       },
     ],
     script: [
       {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js",
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js',
       },
       {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js",
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js',
       },
-
+      {
+        src: 'https://code.iconify.design/2/2.1.2/iconify.min.js',
+      },
     ],
   },
 
@@ -60,6 +61,7 @@ export default {
     '~/plugins/vue-select.js',
     '~/plugins/bootstrap-icon.js',
     '~/plugins/vue-editor.js',
+    '~/plugins/global-filter.js',
     '~/plugins/luxon.js',
   ],
 

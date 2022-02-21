@@ -1,5 +1,6 @@
 <template>
   <div>
+    <preloader :show="is_login"/>
     <main class="">
       <div class="row verticalspacing">
         <div class="col-lg-6">
@@ -38,6 +39,7 @@
           </div>
         </div>
         <div class="col-lg-5">
+          
           <div class="">
             <div class="mt-5">
               <h2 class="brownheader text-center">Log in</h2>
@@ -182,11 +184,14 @@
                             </div>
                           </div>
 
-                          <input
-                            class="subscribebtn btn rad6 btn mt-3 py-3"
-                            type="submit"
-                            value="Login"
-                          />
+                          <button class="subscribebtn btn rad6 btn mt-3 py-3" :disabled="is_login">
+                            <span v-if="is_login">
+                            <b-spinner small  variant="light"></b-spinner>
+                              Please wait...</span>
+                            <span v-else>Login</span>
+                          </button>
+
+                          
                         </div>
                       </form>
 
@@ -227,9 +232,9 @@ export default {
     return {
       loginInputs: {
         username: '',
-        password: '',
-        // checkedValue: false,
+        password: ''
       },
+      is_login: false
     }
   },
 
@@ -239,8 +244,8 @@ export default {
     }),
     async loginUser() {
       try {
-        // show preloader
-        this.$nuxt.$loading.start()
+        // set is login
+        this.is_login = true
         // call login function
         await this.login(this.loginInputs)
         // redirect user
@@ -250,7 +255,7 @@ export default {
         this.$toast.error(e.data.detail)
       } finally {
         // hide preloader
-        this.$nuxt.$loading.finish()
+        this.is_login = false
       }
     },
   },

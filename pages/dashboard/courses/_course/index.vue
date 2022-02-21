@@ -11,131 +11,37 @@
           Courses
         </a>
       </div>
-      <header-card :courseDetail="courseDetail" />
 
-      <!-- tabs -->
-      <div class="bg-white p-md-5 mt-4">
-        <ul
-          class="
-            nav nav-tabs
-            flex flex-col
-            md:flex-row
-            flex-wrap
-            list-none
-            border-b-0
-            pl-0
-            mb-4
-          "
-          id="tabs-tab"
-          role="tablist"
-        >
-          <li class="nav-item" role="presentation">
-            <a
-              @click.prevent="currentTab = 0"
-              class="
-                nav-link
-                block
-                font-medium
-                medbrownparagraph
-                leading-tight
-                uppercase
-                text-black
-                cursor-pointer
-                border-x-0 border-t-0 border-b-2 border-transparent
-                px-md-4 px-0
-                py-md-3 py-0 py-3
-                my-2
-                hover:border-transparent hover:bg-gray-100
-                focus:border-transparent
-              "
-              :class="{ active: currentTab == 0 }"
-              >Course Overview</a
-            >
-          </li>
-          <li class="nav-item" role="presentation">
-            <a
-              @click.prevent="currentTab = 1"
-              class="
-                <!--
-                nav-link
-                -->
-                block
-                font-medium
-                medbrownparagraph
-                leading-tight
-                uppercase
-                cursor-pointer
-                border-x-0 border-t-0 border-transparent
-                px-md-4 px-0
-                py-md-3 py-0 py-3
-                my-2
-                text-black
-                hover:border-transparent hover:bg-gray-100
-                focus:border-transparent
-              "
-              :class="{ active: currentTab == 1 }"
-              >Instructors</a
-            >
-          </li>
-          <li class="nav-item" role="presentation">
-            <a
-              @click.prevent="currentTab = 2"
-              class="
-                nav-link
-                block
-                font-medium
-                medbrownparagraph
-                leading-tight
-                cursor-pointer
-                uppercase
-                text-black
-                border-x-0 border-t-0 border-b-2 border-transparent
-                px-md-4 px-0
-                py-md-3 py-0 py-3
-                my-2
-                hover:border-transparent hover:bg-gray-100
-                focus:border-transparent
-              "
-              :class="{ active: currentTab == 2 }"
-              >Students</a
-            >
-          </li>
-          <li class="nav-item" role="presentation">
-            <a
-              @click.prevent="currentTab = 3"
-              class="
-                nav-link
-                block
-                font-medium
-                medbrownparagraph
-                leading-tight
-                cursor-pointer
-                uppercase
-                text-black
-                border-x-0 border-t-0 border-b-2 border-transparent
-                px-md-4 px-0
-                py-md-3 py-0 py-3
-                my-2
-                hover:border-transparent hover:bg-gray-100
-                focus:border-transparent
-              "
-              :class="{ active: currentTab == 3 }"
-              >Attendance</a
-            >
-          </li>
-        </ul>
-        <div>
-          <div
-            v-show="currentTab == 0"
-            :class="{ 'fade show': currentTab == 0 }"
+      <!-- <div >
+        <PuSkeleton :count="3"> </PuSkeleton>
+      </div> -->
+
+      <div>
+        <header-card :courseDetail="courseDetail" />
+      </div>
+      <div class="card mt-3">
+        <b-tabs content-class="mt-3" class="custom-tabs">
+          <b-tab title="Course Overiew" active>
+            <div>
+              <PuSkeleton :count="5" />
+            </div>
+
+            <div>
+              <!-- <skeleton-loader-vue
+                type="circle"
+                :width="200"
+                :height="200"
+                animation="fade"
+              /> -->
+              <course-overview :courseDetail="courseDetail"></course-overview>
+            </div>
+          </b-tab>
+          <b-tab
+            title="Instructors"
+            @click="get_all_course_instructors"
+            class=""
           >
-            <course-overview :courseDetail="courseDetail"></course-overview>
-          </div>
-          <div
-            v-show="currentTab == 1"
-            :class="{ 'fade show': currentTab == 1 }"
-          >
-            <filter-component>
+            <filter-component @search="searchInstructors">
               <template #besideFilterButton>
                 <div class="ml-5">
                   <button
@@ -150,20 +56,23 @@
                     title="Add Instructor"
                     hide-footer
                   >
-                    <div class="content px-md-5 my-2">
+                    <div class="content px-md-3 my-2">
                       <div class="my-3">
-                        <label class="medbrownparagraph">Instructor Name</label>
                         <v-select
                           :options="instructors"
                           v-model="addInstructor"
-                          label="other_name"
+                          placeholder="Select instructor"
                           :reduce="(option) => option.id"
-                        ></v-select>
+                        >
+                          <template #option="{ surname, other_name }">
+                            <span>{{ surname }} {{ other_name }}</span>
+                          </template>
+                        </v-select>
                       </div>
-                      <div class="my-3">
+                      <!-- <div class="my-3">
                         <label class="medbrownparagraph">Designation</label>
                         <v-select :options="designations"></v-select>
-                      </div>
+                      </div> -->
                     </div>
 
                     <div class="d-flex justify-content-center mx-5 my-3">
@@ -179,8 +88,9 @@
               </template>
               <template #default="{ visualization }">
                 <table-component
-                  :items="instructors"
+                  :items="course_instructors"
                   :fields="instructorfields"
+                  :busy="busy"
                   v-if="visualization === 'list'"
                 />
 
@@ -193,11 +103,8 @@
                 </div>
               </template>
             </filter-component>
-          </div>
-          <div
-            v-show="currentTab == 2"
-            :class="{ 'fade show': currentTab == 2 }"
-          >
+          </b-tab>
+          <b-tab title="Students" @click="get_all_course_students" class="">
             <filter-component>
               <template #besideFilterButton>
                 <div class="ml-5">
@@ -302,6 +209,7 @@
                 <table-component
                   :items="students"
                   :fields="studentfields"
+                  :busy="busy"
                   v-if="visualization === 'list'"
                 />
 
@@ -314,11 +222,8 @@
                 </div>
               </template>
             </filter-component>
-          </div>
-          <div
-            v-show="currentTab == 3"
-            :class="{ 'fade show': currentTab == 3 }"
-          >
+          </b-tab>
+          <b-tab title="Attendance" class="">
             <filter-component>
               <template #besideFilterButton>
                 <div class="ml-5">
@@ -328,11 +233,14 @@
                   >
                     Add Event
                   </button>
-                  <b-modal id="addEvent" centered title="Create Event" hide-footer>
-                    
+                  <b-modal
+                    id="addEvent"
+                    centered
+                    title="Create Event"
+                    hide-footer
+                  >
                     <form class="modabody" @submit.prevent="createEvent">
-                     <div class="row px-4">
-
+                      <div class="row px-4">
                         <div class="col-12">
                           <div class="my-2">
                             <label
@@ -350,102 +258,98 @@
                             />
                           </div>
                         </div>
-                      
-                      <div class="col-12">
-                        <div class="my-2">
-                          <label
-                            for=""
-                            class="medbrownparagraph graytext"
-                            >Event Description
-                          </label>
 
-                          <input
-                            type="text"
-                            v-model="event.description"
-                            required
-                            placeholder="Event Description"
-                            class="forminputs text-dark"
-                          />
-                        </div>
-                      </div>
+                        <div class="col-12">
+                          <div class="my-2">
+                            <label for="" class="medbrownparagraph graytext"
+                              >Event Description
+                            </label>
 
-                      <div class="col-6">
-                        <div class="my-2">
-                          <label for="" class="medbrownparagraph graytext"
-                            >Start Date
-                          </label>
-                          <input
-                            type="date"
-                            required
-                            v-model="event.start_date"
-                            placeholder="Start Date"
-                            class="forminputs text-dark"
-                          />
+                            <input
+                              type="text"
+                              v-model="event.description"
+                              required
+                              placeholder="Event Description"
+                              class="forminputs text-dark"
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="my-2">
-                          <label
-                            for=""
-                            class="medbrownparagraph graytext"
-                            >Start Time
-                          </label>
-                          <input
-                            type="time"
-                            required
-                            v-model="event.start_time"
-                            placeholder="End Date"
-                            class="forminputs text-dark"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="my-2">
-                          <label for="" class="medbrownparagraph graytext"
-                            >End Date
-                          </label>
-                          <input
-                            type="date"
-                            required
-                            v-model="event.end_date"
-                            placeholder="Start Date"
-                            class="forminputs text-dark"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="my-2">
-                          <label
-                            for=""
-                            class="d-block medbrownparagraph graytext"
-                            >End Time
-                          </label>
-                          <input
-                            type="time"
-                            required
-                            v-model="event.end_time"
-                            placeholder="End Date"
-                            class="forminputs text-dark"
-                          />
-                        </div>
-                      </div>
 
-                      <div class="my-4 col-12">
-                        <div class="d-flex justify-content-center">
-                          <button
-                            class="
-                              btn
-                              px-md-4 px-3
-                              py-2
-                              mainbtndashboard
-                              medbrownparagraph
-                            "
-                          >
-                            Add Event
-                          </button>
+                        <div class="col-6">
+                          <div class="my-2">
+                            <label for="" class="medbrownparagraph graytext"
+                              >Start Date
+                            </label>
+                            <input
+                              type="date"
+                              required
+                              v-model="event.start_date"
+                              placeholder="Start Date"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="my-2">
+                            <label for="" class="medbrownparagraph graytext"
+                              >Start Time
+                            </label>
+                            <input
+                              type="time"
+                              required
+                              v-model="event.start_time"
+                              placeholder="End Date"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="my-2">
+                            <label for="" class="medbrownparagraph graytext"
+                              >End Date
+                            </label>
+                            <input
+                              type="date"
+                              required
+                              v-model="event.end_date"
+                              placeholder="Start Date"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="my-2">
+                            <label
+                              for=""
+                              class="d-block medbrownparagraph graytext"
+                              >End Time
+                            </label>
+                            <input
+                              type="time"
+                              required
+                              v-model="event.end_time"
+                              placeholder="End Date"
+                              class="forminputs text-dark"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="my-4 col-12">
+                          <div class="d-flex justify-content-center">
+                            <button
+                              class="
+                                btn
+                                px-md-4 px-3
+                                py-2
+                                mainbtndashboard
+                                medbrownparagraph
+                              "
+                            >
+                              Add Event
+                            </button>
+                          </div>
                         </div>
                       </div>
-                     </div>
                     </form>
                   </b-modal>
                 </div>
@@ -469,8 +373,8 @@
                 </div>
               </template>
             </filter-component>
-          </div>
-        </div>
+          </b-tab>
+        </b-tabs>
       </div>
     </div>
   </div>
@@ -511,17 +415,16 @@ export default {
         { key: 'dots', label: '', sortable: true },
       ],
       instructorfields: [
+        { key: 'other_name', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
-        { key: 'other_name', sortable: true },
+
         { key: 'email', sortable: true },
-        { key: 'gender', sortable: true },
         { key: 'phone no', sortable: true },
-        { key: 'designation', sortable: true },
         { key: 'dots', label: 'Action', sortable: true },
       ],
       studentfields: [
+        { key: 'other_name', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
-        { key: 'other_name', sortable: true },
         { key: 'email', sortable: true },
         { key: 'gender', sortable: true },
         { key: 'phone no', sortable: true },
@@ -551,62 +454,13 @@ export default {
         end_time: '',
       },
       events: [],
-    }
-  },
+      busy: false,
+      course_instructors: [],
+      search_instructor: '',
+      instructorPerPage:30,
+      instructorTotalItems:0,
+      instructorCurrentPage:1
 
-  async fetch() {
-    // console.log(this.$route.params.course)
-
-    try {
-      const courses = await this.$axios.$get(
-        `course-v/get-a-course?course_id=${this.$route.params.course}`
-      )
-      this.courseDetail = courses
-    } catch (e) {
-      console.log(e)
-    }
-
-    try {
-      const instructors = await this.$axios.$get(
-        `instructors-v/get-all-instructors?page=1&size=50`
-      )
-
-      this.instructors = instructors.items
-
-      // this.instructors.push(...instructors.items)
-    } catch (e) {
-      console.log(e)
-    }
-    try {
-      const students = await this.$axios.$get(
-        `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
-      )
-
-      this.students = students.items
-    } catch (e) {
-      console.log(e)
-    }
-    try {
-      const events = await this.$axios.$get(
-        `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
-      )
-      console.log('event is', events)
-      this.events = events.items.map((e, i) => {
-        let filterstudent = e.students.filter((i) => {
-          return i.status == true
-        })
-        let number = e.students.length - filterstudent
-        return {
-          Name: e.name,
-          'Start Date': e.start_date,
-          'End Date': e.end_date,
-          'No of Students': e.students.length,
-          Progress: number,
-          id: e.id,
-        }
-      })
-    } catch (e) {
-      console.log(e)
     }
   },
 
@@ -731,6 +585,93 @@ export default {
         console.log(e)
       }
     },
+    async get_a_course() {
+      try {
+        const courses = await this.$axios.$get(
+          `course-v/get-a-course?course_id=${this.$route.params.course}`
+        )
+        this.courseDetail = courses
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async get_all_instructors() {
+      try {
+        const instructors = await this.$axios.$get(
+          `instructors-v/get-all-instructors?page=1&size=50`
+        )
+
+        this.instructors = instructors.items
+      } catch (e) {
+        this.$toast.error(e)
+      }
+    },
+    async get_all_course_instructors() {
+      try {
+        this.busy = true
+        let uri = `course-v/get-all-course-instructors?course_id=${this.$route.params.course}&page=${this.instructorCurrentPage}&size=${this.instructorPerPage}`
+
+        if (this.search_instructor) {
+          uri = uri + `&search=${this.search_instructor}`
+        }
+        const instructors = await this.$axios.$get(uri)
+        this.course_instructors = instructors.items.reverse()
+        this.instructorPerPage = users.size
+        this.instructorTotalItems = users.total
+        this.instructorCurrentPage = users.page
+
+      } catch (e) {
+        this.$toast.error(e)
+      } finally {
+        this.busy = false
+      }
+    },
+    async get_all_course_students() {
+      try {
+        this.busy = true
+        const students = await this.$axios.$get(
+          `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=1&size=50`
+        )
+
+        this.students = students.items
+      } catch (e) {
+        this.$toast.error(e)
+      } finally {
+        this.busy = false
+      }
+    },
+    async get_all_course_events() {
+      try {
+        const events = await this.$axios.$get(
+          `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
+        )
+        console.log('event is', events)
+        this.events = events.items.map((e, i) => {
+          let filterstudent = e.students.filter((i) => {
+            return i.status == true
+          })
+          let number = e.students.length - filterstudent
+          return {
+            Name: e.name,
+            'Start Date': e.start_date,
+            'End Date': e.end_date,
+            'No of Students': e.students.length,
+            Progress: number,
+            id: e.id,
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    searchInstructors(e) {
+      this.search_instructor = e
+      this.get_all_course_instructors()
+    },
+  },
+  mounted() {
+    this.get_a_course()
+    this.get_all_instructors()
   },
 }
 </script>

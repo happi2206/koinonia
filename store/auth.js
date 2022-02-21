@@ -51,6 +51,8 @@ export default {
     // login user
     async loginUser({ commit }, credentials) {
       try {
+        // convert to lower case
+        credentials.username = credentials.username.toLowerCase()
         // making axios request
         const response = await this.$axios.$post(
           `user/login-user?school_id=${process.env.SCHOOL_ID}`,

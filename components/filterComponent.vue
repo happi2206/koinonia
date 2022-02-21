@@ -32,10 +32,13 @@
               </div>
             </div>
           </div>
-          <div v-if="!disablePagination" class="records-count">
+          <div
+            v-if="!disablePagination"
+            class="records-count medbrownparagraph"
+          >
             <span class="medbrownparagraph">View by: </span>
             <select
-              class="records-count"
+              class="records-count medbrownparagraph medbrownparagraph"
               @change="$emit('view-by', $event.target.value)"
             >
               <option class="medbrownparagraph" value="10">10 Records</option>
@@ -59,11 +62,12 @@
             <input
               type="text"
               required
-              placeholder="Search "
+              placeholder="Search"
+              @change="$emit('search', $event.target.value)"
               class="px-md-3 px-2 py-2 border rounded"
             />
 
-            <button class="bg-yellow-400 py-2 px-3">
+            <button class="accentcolorbg py-2 px-3">
               <b-icon icon="search"></b-icon>
             </button>
           </div>
@@ -116,7 +120,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      visualization: 'list',
+      visualization: 'list'
     }
   },
   methods: {

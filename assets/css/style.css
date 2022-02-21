@@ -82,11 +82,11 @@ html body main {
 }
 
 .mainyellowbg {
-  background: #ffcd06;
+  background: #d3a13b;
 }
 
 .mainyellowcolor {
-  color: #ffcd06;
+  color: #d3a13b;
 }
 
 .lightyellowbg {
@@ -99,6 +99,10 @@ html body main {
 
 .mainbluebg {
   background: #0734aa;
+}
+
+.blackbg {
+  background: #000;
 }
 
 .mainbluecolor {
@@ -123,6 +127,10 @@ html body main {
 
 .darkerbluebg {
   background: #112b70;
+}
+
+.blacknav {
+  background: #000 !important;
 }
 
 .darkerbluecolor {
@@ -192,7 +200,7 @@ html body main {
 }
 
 button.mainbtn {
-  background-color: #ffcd06;
+  background-color: #d3a13b;
   font-family: 'Brown';
   font-size: 14px;
   font-style: normal;
@@ -200,7 +208,7 @@ button.mainbtn {
   line-height: 16px;
   letter-spacing: 0em;
   text-align: left;
-  border-radius: 0;
+  border-radius: 5px;
 }
 
 button.tertiarybtn {
@@ -239,7 +247,7 @@ a.loginbtndashboard {
 } */
 
 /* .nuxt-link-exact-active {
-  background: #ffcd0624;
+  background: #D3A13B24;
   margin: 10px 10px;
 } */
 a:hover {
@@ -247,7 +255,7 @@ a:hover {
 }
 
 a.mainbtndashboard {
-  background-color: #ffcd06;
+  background-color: #d3a13b;
   color: black;
 
   text-align: left;
@@ -260,7 +268,7 @@ a.mainbtndashboard:hover {
 }
 
 button.mainbtndashboard {
-  background-color: #ffcd06;
+  background-color: #d3a13b;
   color: black;
 
   text-align: left;
@@ -287,7 +295,7 @@ button.loginbtndashboard {
 }
 
 input.mainbtndashboard {
-  background-color: #ffcd06;
+  background-color: #d3a13b;
   font-family: Brown;
   font-size: 14px;
   font-style: normal;
@@ -303,7 +311,7 @@ input.mainbtndashboard {
 }
 
 button.searchbtninside {
-  background-color: #ffcd06;
+  background-color: #d3a13b;
   font-family: Brown;
   font-size: 14px;
   font-style: normal;
@@ -316,7 +324,7 @@ button.searchbtninside {
 }
 
 input.subscribebtn {
-  background-color: #0734aa;
+  background-color: #000;
   color: #fff;
   font-family: 'Brown';
   font-size: 14px;
@@ -329,13 +337,13 @@ input.subscribebtn {
   text-align: center;
   border-radius: 0;
 }
-.subscribebtn:hover {
-  border: #0734aa;
-  color: #0734aa;
+input.subscribebtn:hover {
+  border: #000;
+  color: #000;
   background: transparent;
 }
 button.subscribebtn {
-  background-color: #0734aa;
+  background-color: #000;
   color: #fff;
   font-family: 'Brown';
   font-size: 14px;
@@ -349,8 +357,8 @@ button.subscribebtn {
   border-radius: 0;
 }
 button.subscribebtn:hover {
-  border: 1px solid #0734aa;
-  color: #0734aa;
+  border: 1px solid #000;
+  color: #000;
   background: transparent;
 }
 button.subscribebtn.rad6 {
@@ -504,10 +512,10 @@ button.loginbtn {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #003294;
+  color: #d3a13b;
   background-color: transparent;
   background-clip: padding-box;
-  border: 1px solid #003294;
+  border: 1px solid #d3a13b;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .newsletterinputs::placeholder {
@@ -518,7 +526,7 @@ button.loginbtn {
   font-weight: 400;
   line-height: 19px;
   letter-spacing: 0.002em;
-  color: #2257bf !important;
+  color: #d3a13b !important;
 }
 .newsletterinputs:focus {
   outline: none;
@@ -537,7 +545,7 @@ button.loginbtn {
   border-radius: 6px;
   background-color: transparent;
   background-clip: padding-box;
-  border: 1px solid #8692a6;
+  border: 1px solid #000;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .forminputs::placeholder {
@@ -552,7 +560,7 @@ button.loginbtn {
 }
 .forminputs:focus {
   outline: none;
-  box-shadow: 0 0 5px #ffcd06;
+  box-shadow: 0 0 5px #d3a13b;
 }
 .forminputs.textarea {
   height: calc(8.5em + 0.75rem + 2px);
@@ -562,6 +570,13 @@ button.loginbtn {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border: 0.5px solid #bdbdbd;
+}
+
+.accentcolorbg {
+  background-color: #d3a13b;
+}
+.accentcolor {
+  color: #d3a13b;
 }
 
 .flwidth {
@@ -747,7 +762,7 @@ th {
 }
 
 .sidebar-wrapper {
-  width: 17%;
+  width: 15%;
   height: 100%;
   max-height: 100%;
   position: fixed;
@@ -755,6 +770,10 @@ th {
   left: 0;
   background-color: #fff;
   z-index: 999;
+}
+
+.z1000 {
+  z-index: 999 !important;
 }
 .sidebar-wrapper .sidebar-menu {
   list-style-type: none;
@@ -765,7 +784,7 @@ th {
   list-style-type: none;
 }
 .sidebar-wrapper .sidebar-menu li.active {
-  background: #ffcd0624;
+  background: #d3a13b24;
   margin: 0px 10px;
 }
 
@@ -774,7 +793,7 @@ th {
 }
 
 .page-content {
-  margin-left: 250px;
+  margin-left: 200px;
   margin-top: 60px;
   background-color: #f5f6f7;
 }
@@ -814,7 +833,7 @@ th {
 
 .svgplaceholderimages {
   position: absolute;
-  top: 180px;
+  top: 220px;
 }
 
 .coursewidth1 {
@@ -830,7 +849,7 @@ th {
   width: 43px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #ffce31;
+  border: 3px solid #d3a13b;
 }
 
 .studentimgcontainer img {
@@ -903,7 +922,7 @@ th {
 .circle-small .progress {
   fill: none;
   stroke-width: 6px;
-  stroke: #ffcd06;
+  stroke: #d3a13b;
   stroke-linecap: round;
   stroke-dasharray: 232.36;
   transform: rotate(-90deg);
@@ -1176,7 +1195,7 @@ th {
   text-align: left;
 }
 .custom-tabs .nav-link.active {
-  border-bottom: 7px solid #ffce31;
+  border-bottom: 7px solid #d3a13b;
   color: #0734aa;
   font-family: Brown;
   font-size: 14px;
@@ -1214,17 +1233,24 @@ th {
   }
 }
 @media (max-width: 991.5px) {
-  .sidebar-wrapper {
-    width: 7%;
-  }
-
   .customscroll .horizontalspacing {
     margin-left: 20px;
     margin-right: 20px;
   }
 
+  .sidebar-wrapper {
+    width: 28%;
+  }
+  .verticalspacing {
+    margin-top: 20px;
+  }
+
   .flwidth {
     width: 60%;
+  }
+
+  .page-content {
+    margin-top: 20px;
   }
 
   .forminputpadding {
@@ -1260,12 +1286,21 @@ th {
   }
 }
 @media (max-width: 768.5px) {
-  .sidebar-wrapper {
-    width: 60%;
-  }
-
   .flwidth {
     width: 100%;
+  }
+
+  .b-avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .svgplaceholderimages {
+    top: 230px;
+  }
+
+  .sidebar-wrapper {
+    width: 35%;
   }
 
   .carouselheight {
@@ -1301,7 +1336,7 @@ th {
   }
   .forminputs:focus {
     outline: none;
-    box-shadow: 0 0 5px #ffcd06;
+    box-shadow: 0 0 5px #d3a13b;
   }
   .forminputs.textarea {
     height: calc(8.5em + 0.75rem + 2px);
@@ -1320,13 +1355,11 @@ th {
     object-fit: cover;
   }
 
-  .page-content {
-    margin-top: 20px;
-  }
-
   .medparagraph,
   .brownparagraph,
-  .medbrownparagraph {
+  .medbrownparagraph,
+  .custom-tabs .nav-link,
+  .custom-tabs .nav-link.active {
     font-size: 10px;
     line-height: 17px;
   }
@@ -1405,9 +1438,18 @@ th {
     font-size: 12px !important;
   }
 }
+@media (max-width: 691.5px) {
+  .sidebar-wrapper {
+    width: 50%;
+  }
+}
 @media (max-width: 576.5px) {
   .coursewidth1 {
     width: 100%;
+  }
+
+  .svgplaceholderimages {
+    top: 290px;
   }
 
   .coursewidth2 {
@@ -1422,6 +1464,20 @@ th {
 
   .carouselheight {
     height: 55vh;
+  }
+
+  .horizontalspacing {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+@media (max-width: 400.5px) {
+  .sidebar-wrapper {
+    width: 60%;
+  }
+
+  .svgplaceholderimages {
+    top: 310px;
   }
 }
 

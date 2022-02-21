@@ -1,5 +1,7 @@
 <template>
-  <div class="mt-md-5 horizontalspacing pt-md-5">
+<div>
+  
+  <div class="mt-lg-5 horizontalspacing pt-lg-5">
     <div class="flex items-center pt-5 justify-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">All Courses</h2>
       <button
@@ -13,6 +15,7 @@
 
       <!-- add course -->
       <b-modal id="addcourse" title="Add Course" hide-footer>
+        <preloader :show="add_preloader"/>
         <div class="modacontent">
           <form class="modabody px-4" @submit.prevent="addCourses">
             <div class="my-4">
@@ -249,13 +252,12 @@
     <div class="bg-white p-md-5">
       <ul
         class="
-          nav nav-tabs
-          flex flex-col
-          md:flex-row
-          flex-wrap
+          nav
+          custom-tabs
+          nav-tabs
+          flex
           medbrownparagraph
           list-none
-          border-b-0
           pl-0
           mb-4
         "
@@ -264,111 +266,70 @@
       >
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 0"
+            @click.prevent="setCourseParams()"
             class="
               nav-link
-              block
               medbrownparagraph
               leading-tight
-              uppercase
               text-black
               cursor-pointer
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
               my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
-            :class="{ active: currentTab == 0 }"
+            :class="{ active: status }"
             >All Status</a
           >
         </li>
-        <!-- <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 1"
+            @click.prevent="setCourseParams('open')"
             class="
-             
-              block
-              
+              nav-link
               medbrownparagraph
               leading-tight
-              uppercase
               cursor-pointer
-              border-x-0 border-t-0 border-transparent
-              px-6
-              py-3
               my-2
               text-black
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
             "
-            :class="{ active: currentTab == 1 }"
+            :class="{ active: open }"
             >Open</a
           >
         </li>
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 2"
-            class="
-              nav-link
-              block
-              
-              medbrownparagraph
-              leading-tight
-              cursor-pointer
-              uppercase
-              text-black
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
-              my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
-            "
-            :class="{ active: currentTab == 2 }"
+            @click.prevent="setCourseParams('on_going')"
+            class="nav-link medbrownparagraph leading-tight cursor-pointer my-2"
+            :class="{ active: on_going }"
             >On Going</a
           >
         </li>
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="currentTab = 3"
-            class="
-              nav-link
-              disabled
-              pointer-events-none
-              block
-              text-black
-              
-              medbrownparagraph
-              leading-tight
-              cursor-pointer
-              uppercase
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
-              my-2
-              hover:border-transparent hover:bg-gray-100
-              focus:border-transparent
-            "
-            :class="{ active: currentTab == 3 }"
+            @click.prevent="setCourseParams('archived')"
+            class="nav-link medbrownparagraph leading-tight cursor-pointer my-2"
+            :class="{ active: on_going }"
             >Archived</a
           >
-        </li> -->
+        </li>
+     
+     
       </ul>
       <div>
-        <div v-show="currentTab == 0" :class="{ 'fade show': currentTab == 0 }">
-          <filter-component>
+        <div  :class="{ 'fade show': currentTab == 0 }">
+          <filter-component @search="searchTable">
             <template #default="{ visualization }">
               <table-component
                 :items="courses"
                 v-if="visualization === 'list'"
                 :busy="busy"
                 :fields="fields"
+                
                 :dropdownItem="dropdownItem"
                 @row-clicked="onRowClicked"
                 @Edit="handleEdit"
                 @Delete="handleDelete"
+                @page-changed = "handlePage"
+                :perPage="perPage"
+                :totalItems="totalItems"
               />
 
               <div class="row" v-else>
@@ -382,18 +343,10 @@
             </template>
           </filter-component>
         </div>
-        <div v-show="currentTab == 1" :class="{ 'fade show': currentTab == 1 }">
-          Tab 2 content
-        </div>
-        <div v-show="currentTab == 2" :class="{ 'fade show': currentTab == 2 }">
-          Tab 3 content
-        </div>
-        <div v-show="currentTab == 3" :class="{ 'fade show': currentTab == 3 }">
-          a
-        </div>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -405,6 +358,9 @@ export default {
   layout: 'dashboard',
   middleware: 'auth',
   components: { VueEditor },
+  computed:{
+
+  },
   data() {
     return {
       busy: false,
@@ -420,6 +376,7 @@ export default {
         end_date: '',
         feature_image: '',
       },
+      active: true,
       fields: [
         { key: 'check', label: '', sortable: true },
         { key: 'title', label: 'Name', sortable: true },
@@ -429,6 +386,9 @@ export default {
         { key: 'end_date', sortable: true },
         { key: 'dots', label: '', sortable: true },
       ],
+      status: true,
+      on_going: false,
+      open: false,
       courseData: {
         title: '',
         short_description: '',
@@ -442,10 +402,20 @@ export default {
       imagedetail: [],
       courses: [],
       currentTab: 0,
+      status:"",
+      search:"",
+      perPage:50,
+      totalItems:0,
+      currentPage:1,
+      add_preloader: false
     }
   },
 
   methods: {
+    handlePage(e){
+      this.currentPage = e
+      this.getAllCourses()
+    },
     onRowClicked(e) {
       console.log(e)
       this.$router.push(`courses/${e.id}`)
@@ -456,7 +426,7 @@ export default {
     },
     async addCourses() {
       try {
-        this.$nuxt.$loading.start()
+        this.add_preloader = true
         const response = await this.$axios.$post(
           `course-v/add-course`,
           this.courseData
@@ -472,16 +442,18 @@ export default {
       } catch (e) {
         this.$toast.error(e)
       } finally {
-        this.$nuxt.$loading.finish()
+        this.add_preloader = false
       }
     },
     async getAllCourses() {
       this.busy = true
-      let uri = this.user.is_administrator
-        ? //  get-all-course-instructors?course_id=4&search=r&page=1&size=50
-
-          'course-v/get-all-course?page=1&size=50&search=hello'
-        : 'course-v/get-current-instructor-courses?page=1&size=50&search=Tanya'
+      let uri = `course-v/get-all-course?page=${this.currentPage}&size=${this.perPage}`
+      if(this.search){
+          uri = uri + `&search=${this.search}`
+        }
+      if(this.status) {
+        uri = uri + `&status=${this.status}`
+      }
       const courses = await this.$axios.$get(uri)
       courses.items = courses.items.reverse()
       this.courses = courses.items.map((e, i) => ({
@@ -490,9 +462,22 @@ export default {
         dots: '',
         ...e,
       }))
+      this.perPage = courses.size
+      this.totalItems = courses.total
+      this.currentPage = courses.page
       this.busy = false
     },
+    // setfilter
+    setCourseParams(payload){
+      this.status = payload
+      this.getAllCourses()
+    },
 
+    // searchtable
+    searchTable(payload){
+      this.search = payload
+        this.getAllCourses()
+    },
     handlefileupload(event) {
       const filedetail = []
       filedetail.push(event.target.files)
@@ -560,4 +545,8 @@ export default {
 </script>
 
 <style>
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  border-radius: none;
+}
 </style>

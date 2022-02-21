@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-md-5 horizontalspacing pt-md-5">
+  <div class="mt-lg-5 horizontalspacing pt-lg-5">
     <div class="flex items-center pt-5 justify-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">Courses</h2>
       <!-- <button
@@ -274,16 +274,7 @@
 
     <div class="bg-white p-md-5">
       <ul
-        class="
-          nav nav-tabs
-          flex flex-col
-          md:flex-row
-          flex-wrap
-          list-none
-          border-b-0
-          pl-0
-          mb-4
-        "
+        class="nav nav-tabs flex list-none border-b-0 pl-0 mb-4"
         id="tabs-tab"
         role="tablist"
       >

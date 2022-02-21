@@ -150,7 +150,7 @@
     <b-pagination
       v-if="paginate"
       v-model="currentPage"
-      :total-rows="totalRows"
+      :total-rows="totalItems"
       :per-page="perPage"
       align="right"
       size="sm"
@@ -195,6 +195,10 @@ export default {
     paginate: {
       type: Boolean,
       default: true,
+    },
+    totalItems: {
+      type: Number,
+      default: 0,
     },
     filter: {
       type: String,
