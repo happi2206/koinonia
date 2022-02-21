@@ -263,7 +263,7 @@
       >
         <li class="nav-item" role="presentation">
           <a
-            @click.prevent="setCourseParams('status')"
+            @click.prevent="setCourseParams()"
             class="
               nav-link
               medbrownparagraph
@@ -302,33 +302,12 @@
         <li class="nav-item" role="presentation">
           <a
             @click.prevent="setCourseParams('archived')"
-            class="
-              nav-link
-<<<<<<< HEAD
-              block
-              
-              medbrownparagraph
-              leading-tight
-              cursor-pointer
-              uppercase
-              text-black
-              border-x-0 border-t-0 border-b-2 border-transparent
-              px-6
-              py-3
-=======
-              disabled
-              pointer-events-none
-              text-black
-              medbrownparagraph
-              leading-tight
-              cursor-pointer
->>>>>>> 2864758f3e382e493cf677d8e90345901ff8f004
-              my-2
-            "
-            :class="{ active: currentTab == 2 }"
+            class="nav-link medbrownparagraph leading-tight cursor-pointer my-2"
+            :class="{ active: on_going }"
             >Archived</a
           >
         </li>
+     
      
       </ul>
       <div>
