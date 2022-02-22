@@ -41,6 +41,9 @@
             v-if="visualization === 'list'"
             :dropdownItem="dropdownItem"
             :fields="fields"
+            @page-changed="handlePage"
+          :perPage="perPage"
+          :totalItems="totalItems"
           >
             <template #status="{ data }">
               <b-form-checkbox
