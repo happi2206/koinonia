@@ -96,7 +96,9 @@
             :dropdownItem="dropdownItem"
             @Share_Link_Code="shareLinkCode"
             @Delete_Instructor="handleDelete"
-          />
+          >
+            
+          </table-component>
         </filter-component>
       </div>
     </div>
