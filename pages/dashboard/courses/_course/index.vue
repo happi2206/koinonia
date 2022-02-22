@@ -15,7 +15,7 @@
       <div v-if="isLoading">
         <b-row>
           <b-col cols="3">
-            <b-skeleton-img height="40%"></b-skeleton-img>
+            <b-skeleton-img height="70%"></b-skeleton-img>
           </b-col>
 
           <b-col cols="6" class="">
@@ -24,11 +24,11 @@
             <b-skeleton animation="wave" width="70%"></b-skeleton>
           </b-col>
         </b-row>
-        <!-- <b-card>
-          <b-skeleton animation="throb" width="85%"></b-skeleton>
-          <b-skeleton animation="throb" width="55%"></b-skeleton>
-          <b-skeleton animation="throb" width="70%"></b-skeleton>
-        </b-card> -->
+        <b-row>
+          <b-col cols="12" class="">
+            <b-skeleton-img no-aspect height="150px"></b-skeleton-img>
+          </b-col>
+        </b-row>
       </div>
 
       <div v-else>
