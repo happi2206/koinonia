@@ -28,7 +28,7 @@
         </p>
         <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
           <span class="lightgraytext">
-            Student Absent: {{ eventDetail.students.length - present }}</span
+            Student Absent: {{ absent  }}</span
           >
           <span class=""> </span>
         </p>
@@ -94,6 +94,8 @@ export default {
         { key: 'status', label: 'Status', sortable: true },
         { key: 'dots', label: 'Action', sortable: false },
       ],
+      present:0,
+      absent: 0
     }
   },
 
@@ -105,6 +107,9 @@ export default {
       )
 
       this.studentArray = student.items
+
+      this.present = this.studentArray.filter(i=>i.status === true)
+      this.absent = this.studentArray.filter(i=>i.status === false)
     } catch (e) {
       console.log(e)
     } finally {
@@ -141,15 +146,7 @@ export default {
     },
   },
   computed: {
-    present() {
-      if (!this.busy) {
-        let students = this.eventDetail.students.filter((i) => {
-          return i.status
-        })
-
-        return students.length
-      }
-    },
+  
   },
 
   mounted() {},
