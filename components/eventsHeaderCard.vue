@@ -78,6 +78,69 @@
           </template>
         </filter-component>
       </div>
+      <div class="bg-white rounded p-3 my-2">
+        <div
+          class="
+            border-bottom
+            d-flex
+            align-items-center
+            justify-content-between
+          "
+        >
+          <h2 class="brown24 py-3 bold700 text-capitalize mb-0">
+            {{ eventDetail.name }}
+          </h2>
+        </div>
+        <div class="my-2 d-flex flex-md-row flex-column">
+          <p class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Start Date:</span>
+            <span class=""> {{ eventDetail.start_date | DateFormat }} </span>
+          </p>
+          <p class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> End Date:</span>
+            <span class=""> </span>
+            {{ eventDetail.end_date | DateFormat }}
+          </p>
+          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> No in class:</span>
+            <span class=""> {{ eventDetail.students.length }}</span>
+          </p>
+          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Student Present: {{ present }}</span>
+            <span class=""> </span>
+          </p>
+          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Student Absent: {{ absent }}</span>
+            <span class=""> </span>
+          </p>
+        </div>
+      </div>
+      <div class="bg-white rounded p-md-3 my-2">
+        <filter-component @search="SearchText">
+          <template #default="{ visualization }">
+            <table-component
+              :busy="busy"
+              :items="studentArray"
+              v-if="visualization === 'list'"
+              :dropdownItem="dropdownItem"
+              :fields="fields"
+              @page-changed="handlePage"
+              :perPage="perPage"
+              :totalItems="totalItems"
+            >
+              <template #status="{ data }">
+                <b-form-checkbox
+                  :button-variant="'success'"
+                  v-model="data.value"
+                  @change="updateAttendance(data.item.student.id, $event)"
+                  size="lg"
+                  switch
+                ></b-form-checkbox>
+              </template>
+            </table-component>
+          </template>
+        </filter-component>
+      </div>
     </div>
   </div>
 </template>
@@ -116,6 +179,12 @@ export default {
         { key: 'by', label: 'Check in Method', sortable: true },
         { key: 'status', label: 'Status', sortable: true },
       ],
+      present: 0,
+      absent: 0,
+      search: '',
+      perPage: 5,
+      totalItems: 0,
+      currentPage: 1,
     }
   },
 
@@ -123,17 +192,19 @@ export default {
     this.isLoading = true
     try {
       this.busy = true
-      const student = await this.$axios.$get(
-        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
-      )
+      let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
 
-      this.isLoading = false
+      if (this.search) {
+        uri = uri + `&search=${this.search}`
+      }
+      const student = await this.$axios.$get(uri)
+      let present = student.items.filter((i) => i.status === true).length
+      this.absent = student.total - present
+      this.present = present
       this.studentArray = student.items
-
-      this.present = this.studentArray.filter((i) => i.status === true).length
-      this.absent = student.total - this.present
+      this.isLoading = false
     } catch (e) {
-      console.log(e)
+      this.$toast.error(e)
     } finally {
       this.busy = false
     }
@@ -141,10 +212,15 @@ export default {
   methods: {
     async getChecked() {
       try {
-        const student = await this.$axios.$get(
-          `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
-        )
+        let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
 
+        if (this.search) {
+          uri = uri + `&search=${this.search}`
+        }
+        const student = await this.$axios.$get(uri)
+        let present = student.items.filter((i) => i.status === true).length
+        this.absent = student.total - present
+        this.present = present
         this.studentArray = student.items
       } catch (e) {
         console.log(e)
@@ -165,18 +241,16 @@ export default {
         console.log(error)
       }
     },
-  },
-  computed: {
-    present() {
-      if (!this.busy) {
-        let students = this.eventDetail.students.filter((i) => {
-          return i.status
-        })
-
-        return students.length
-      }
+    handlePage(e) {
+      this.currentPage = e
+      this.$fetch()
+    },
+    SearchText(e) {
+      this.search = e
+      this.$fetch()
     },
   },
+  computed: {},
 
   mounted() {},
 }
