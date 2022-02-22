@@ -1,14 +1,13 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex flex-wrap align-items-center justify-content-between">
+      <div class="d-flex align-items-center flex-wrap justify-content-between">
         <div
           class="
             d-flex
             align-items-center
             justify-content-between justify-content-md-start
             flex-wrap
-            my-3 my-lg-0
           "
         >
           <div class="mr-2">
@@ -55,16 +54,17 @@
             align-items-md-center
             justify-content-between justify-content-md-end
             flex-md-row flex-column
+            width100
             mb-1 mb-md-0
           "
         >
-          <div class="flex">
+          <div class="flex w-100 my-md-0 my-3">
             <input
               type="text"
               required
               placeholder="Search"
               @change="$emit('search', $event.target.value)"
-              class="px-md-3 px-2 py-2 border rounded"
+              class="px-md-3 px-2 py-2 border rounded widthfullsearch"
             />
 
             <button class="accentcolorbg py-2 px-3">
@@ -75,7 +75,7 @@
             <slot></slot>
           </div> -->
 
-          <div class="my-md-0 my-3 d-flex justify-content-end align-items-end">
+          <div class="my-md-0">
             <slot name="besideFilterButton"></slot>
           </div>
           <div id="filters-container" class="filters-container d-none">
@@ -120,7 +120,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      visualization: 'list'
+      visualization: 'list',
     }
   },
   methods: {
@@ -136,6 +136,7 @@ export default Vue.extend({
 .flwidth {
   width: 50%;
 }
+
 .display-toggle .icon-wrapper {
   background: #fbfdfe;
   /* Outline Color */
@@ -166,5 +167,15 @@ export default Vue.extend({
 }
 .display-toggle .icon-wrapper.active svg path {
   fill: #1070b7;
+}
+
+@media (max-width: 767.5px) {
+  .widthfullsearch {
+    width: 100%;
+  }
+
+  .width100 {
+    width: 100%;
+  }
 }
 </style>

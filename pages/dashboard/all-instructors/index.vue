@@ -8,7 +8,7 @@
         </button>
 
         <b-modal id="addInstructor" centered title="Add Instructor" hide-footer>
-          <preloader :show="preloader_main"/>
+          <preloader :show="preloader_main" />
           <form class="modabody px-3" @submit.prevent="addInstructor">
             <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
@@ -113,12 +113,13 @@ export default {
       dropdownItem: ['Share_Link_Code', 'Delete_Instructor'],
       fields: [
         // { key: 'id', sortable: true },
+        { key: 'other_name', label: 'First Name', sortable: true },
         { key: 'surname', sortable: true },
         { key: 'other_name', sortable: true },
         { key: 'email', sortable: true },
         { key: 'phone', sortable: true },
         { key: 'link_code', sortable: true },
-        { key: 'dots', label: 'Action', sortable: true },
+        { key: 'dots', label: 'Action', sortable: false },
       ],
       userdetails: [],
       alluserdetails: [],
@@ -135,7 +136,7 @@ export default {
       perPage: 50,
       totalItems: 0,
       currentPage: 1,
-      preloader_main: false
+      preloader_main: false,
     }
   },
 
@@ -206,7 +207,7 @@ export default {
         this.$toast.success('Admin created Successfully')
       } catch (e) {
         this.$toast.error(e)
-      }finally{
+      } finally {
         this.preloader_main = false
       }
     },
@@ -217,6 +218,8 @@ export default {
       )
 
       this.userdetails = users.items
+
+      console.log(users)
       this.busy = false
     },
     async getAllInstructors() {

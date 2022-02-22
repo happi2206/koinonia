@@ -1,96 +1,120 @@
 <template>
-  <div class="mx-3">
-    <filter-component :issearchdisabled="true">
-      <template #besideFilterButton="">
-        <div>
-          <button
-            class="btn py-3 mainbtndashboard medbrownparagraph"
-            v-b-modal.addEvent
-          >
-            Add Event
-          </button>
+  <filter-component>
+    <template #besideFilterButton>
+      <div class="ml-md-5">
+        <button
+          class="btn py-2 mainbtndashboard medbrownparagraph text"
+          v-b-modal.addEvent
+        >
+          Add Event
+        </button>
+        <b-modal id="addEvent" centered title="Create Event" hide-footer>
+          <form class="modabody" @submit.prevent="createEvent">
+            <div class="row px-4">
+              <div class="col-12">
+                <div class="my-2">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Event Name
+                  </label>
 
-          <b-modal id="addEvent" centered hide-header hide-footer>
-            <h2 class="largebrownparagraph bold700 my-3">Create Event</h2>
-            <form class="modabody">
-              <div class="my-4">
-                <label for="" class="d-block medbrownparagraph graytext"
-                  >Event Name
-                </label>
-
-                <input
-                  type="text"
-                  v-model="events.name"
-                  required
-                  placeholder="Event title"
-                  class="forminputs text-dark"
-                />
-              </div>
-              <div class="my-4">
-                <label for="" class="d-block medbrownparagraph graytext"
-                  >Description
-                </label>
-                <input
-                  type="text"
-                  v-model="events.description"
-                  placeholder="Description"
-                  class="forminputs text-dark"
-                />
-              </div>
-              <div class="my-4">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >Start Date
-                    </label>
-                    <input
-                      type="date"
-                      v-model="events.start_date"
-                      required
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >Start Time
-                    </label>
-                    <input
-                      type="time"
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="my-4">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >End Date
-                    </label>
-                    <input
-                      type="date"
-                      v-model="events.end_date"
-                      required
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >End Time
-                    </label>
-                    <input
-                      type="time"
-                      placeholder="e.g DD/MM/YYYY"
-                      class="forminputs text-dark"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    v-model="event.name"
+                    required
+                    placeholder="Event Name"
+                    class="forminputs text-dark"
+                  />
                 </div>
               </div>
 
-              <div class="my-4">
+              <div class="col-12" v-if="eventDescriptionAdded">
+                <div class="my-2">
+                  <label for="" class="medbrownparagraph graytext"
+                    >Event Description
+                  </label>
+
+                  <input
+                    type="text"
+                    v-model="event.description"
+                    required
+                    placeholder="Event Description"
+                    class="forminputs text-dark"
+                  />
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="my-2">
+                  <label for="" class="medbrownparagraph graytext"
+                    >Start Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    v-model="event.start_date"
+                    placeholder="Start Date"
+                    class="forminputs text-dark"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="my-2">
+                  <label for="" class="medbrownparagraph graytext"
+                    >Start Time
+                  </label>
+                  <input
+                    type="time"
+                    required
+                    v-model="event.start_time"
+                    placeholder="End Date"
+                    class="forminputs text-dark"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="my-2">
+                  <label for="" class="medbrownparagraph graytext"
+                    >End Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    v-model="event.end_date"
+                    placeholder="Start Date"
+                    class="forminputs text-dark"
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="my-2">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >End Time
+                  </label>
+                  <input
+                    type="time"
+                    required
+                    v-model="event.end_time"
+                    placeholder="End Date"
+                    class="forminputs text-dark"
+                  />
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div
+                  class="d-flex justify-content-end"
+                  @click="addDescriptionField"
+                >
+                  <p class="medbrownparagraph">
+                    <span v-if="!eventDescriptionAdded"> Add an </span>
+
+                    <span v-else>Remove</span>
+                    event description
+                  </p>
+                </div>
+              </div>
+
+              <div class="my-4 col-12">
                 <div class="d-flex justify-content-center">
                   <button
                     class="
@@ -105,100 +129,103 @@
                   </button>
                 </div>
               </div>
-            </form>
-          </b-modal>
-        </div>
-      </template>
-      <template #belowFilterButton>
-        <div class="d-flex align-items-center justify-content-between my-4">
-          <div class="records-count medbrownparagraph">
-            <span> Month: </span>
-            <select class="records-count medbrownparagraph">
-              <option value="Januray">Janurary</option>
-            </select>
-          </div>
-
-          <div class="d-flex justify-content-end">
-            <div class="col-lg-4">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >From
-              </label>
-              <input
-                type="date"
-                placeholder="e.g DD/MM/YYYY"
-                class="forminputs text-dark py-2"
-              />
             </div>
-            <div class="col-lg-4">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >From
-              </label>
-              <input
-                type="date"
-                placeholder="e.g DD/MM/YYYY"
-                class="forminputs text-dark py-2"
-              />
-            </div>
-          </div>
-        </div>
-      </template>
+          </form>
+        </b-modal>
+      </div>
+    </template>
+    <template #default="{ visualization }">
+      <table-component
+        :items="events"
+        v-if="visualization === 'list'"
+        :fields="fields"
+        :dropdownItem="dropdownItem"
+        @row-clicked="onRowClicked"
+      >
+      </table-component>
 
-      <template #default="{ visualization }">
-        <table-component
-          :items="allevents"
-          v-if="visualization === 'list'"
-          :fields="fields"
-          :dropdownItem="dropdownItem"
-          @row-clicked="onRowClicked"
-          @Edit="handleEdit"
-          @Delete="handleDelete"
-        />
-        <div class="row" v-else>
-          <grid-component
-            :data="event"
-            v-for="(event, index) in eventsdata"
-            :key="index"
-            @grid-clicked="onGridClicked"
-          ></grid-component>
-        </div>
-      </template>
-    </filter-component>
-  </div>
+      <div class="row" v-else>
+        <grid-component
+          :data="events"
+          v-for="(event, index) in events"
+          :key="index"
+        ></grid-component>
+      </div>
+    </template>
+  </filter-component>
 </template>
 
 <script>
 export default {
+  props: {
+    events: {
+      type: Array,
+    },
+  },
   data() {
     return {
-      fields: [
-        { key: 'name', sortable: true },
-        { key: 'descriptiom', sortable: true },
-        { key: 'start_date', sortable: true },
-        { key: 'end_date', sortable: true },
-        { key: 'dots', label: '', thStyle: { color: '#000' }, sortable: true },
-      ],
-      events: {
+      event: {
         name: '',
         description: '',
         start_date: '',
         end_date: '',
+        start_time: '',
+        end_time: '',
       },
-
-      allevents: {},
+      fields: [
+        { key: 'Name', sortable: true },
+        { key: 'Start Date', sortable: true },
+        { key: 'End Date', sortable: true },
+        { key: 'No of Students', sortable: true },
+        {
+          key: 'Progress',
+          label: '',
+          sortable: true,
+          thStyle: { width: '200px' },
+        },
+        { key: 'dots', label: '', sortable: true },
+      ],
+      eventDescriptionAdded: false,
+      busy: false,
     }
   },
 
-  async fetch() {
-    try {
-      const events = await this.$axios.$get(
-        `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
-      )
-      console.log('events are are', events)
-      this.allevents = events
-      this.$toast.success('courses')
-    } catch (e) {
+  methods: {
+    async createEvent() {
+      try {
+        console.log(this.event.end_date, this.event.start_date)
+
+        await this.$axios.$post(
+          `course-v/add-course-event?course_id=${this.$route.params.course}`,
+          this.event
+        )
+        this.$fetch()
+        this.$bvModal.hide('addEvent')
+        this.$toast.success('Event added Successfully')
+      } catch (e) {
+        this.$toast.error(e.data.detail.message)
+      }
+    },
+    onRowClicked(e) {
       console.log(e)
-    }
+
+      this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
+    },
+    async createEvent() {
+      try {
+        console.log(this.event.end_date, this.event.start_date)
+
+        await this.$axios.$post(
+          `course-v/add-course-event?course_id=${this.$route.params.course}`,
+          this.event
+        )
+        this.$fetch()
+        this.$bvModal.hide('addEvent')
+        this.$toast.success('Event added Successfully')
+      } catch (e) {
+        this.$toast.error(e.data.detail.message)
+      }
+    },
   },
 }
 </script>

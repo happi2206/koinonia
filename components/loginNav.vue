@@ -34,7 +34,7 @@
 
       <div class="d-flex align-items-center">
         <div class="" v-if="authenticated">
-          <div class="relativecontainer d-block d-lg-none">
+          <div class="relativecontainer d-block d-lg-none mx-3">
             <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
             <div class="absolutecontainer online">
               <span class="mainyellowcolor"><b-icon icon="dot"></b-icon></span>
@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <div class="d-block d-lg-none ml-2" v-if="authenticated">
+        <div class="d-block d-lg-none mx-3" v-if="authenticated">
           <div class="d-lg-flex align-items-lg-center">
             <b-dropdown
               size="lg"
@@ -193,17 +193,9 @@
           </div>
 
           <div class="d-flex flex-column flex-lg-row align-items-center">
-            <ul
-              class="
-                thirdcontent
-                d-flex
-                flex-lg-row flex-column
-                align-items-center
-                mb-0
-              "
-            >
+            <ul class="thirdcontent d-flex align-items-center mb-0">
               <div v-if="authenticated" class="d-flex">
-                <li class="nav-item mb-0">
+                <li class="nav-item mb-0 mx-4">
                   <nuxt-link
                     to="/dashboard/all-courses"
                     class="nav-link text-white dashboardlink mb-0"
@@ -213,7 +205,7 @@
                 </li>
 
                 <li
-                  class="nav-item mb-0"
+                  class="nav-item mb-0 mx-4"
                   v-if="user.is_instructor || user.is_administrator"
                 >
                   <nuxt-link
@@ -265,7 +257,7 @@
               </div>
             </ul>
 
-            <div class="" v-if="authenticated">
+            <div class="mx-4" v-if="authenticated">
               <div class="relativecontainer d-none d-lg-block">
                 <span class="text-white"
                   ><b-icon icon="bell-fill"></b-icon
@@ -278,7 +270,7 @@
               </div>
             </div>
 
-            <div class="d-none d-lg-block ml-2" v-if="authenticated">
+            <div class="d-none d-lg-block ml-2 mx-4" v-if="authenticated">
               <div class="d-lg-flex align-items-lg-center">
                 <b-dropdown
                   size="lg"

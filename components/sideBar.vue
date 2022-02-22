@@ -3,7 +3,7 @@
     <div class="backdropfscreen" @click="openSide" v-show="isMobile"></div>
     <div class="d-block d-lg-none" @click="openSide">
       <div class="pt-5 px-3 z1000">
-        <b-icon icon="list" class="text-dark pt-2 pb-4"></b-icon>
+        <b-icon icon="list" class="text-dark py-md-4 pt-2 pb-4"></b-icon>
       </div>
     </div>
     <nav id="sidebar" class="sidebar-wrapper mt-lg-5 pt-lg-5" v-if="isMobile">
@@ -128,7 +128,7 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 996;
-  background: RGBA(0, 0, 0, 0.1);
+  /* background: RGBA(0, 0, 0, 0.1); */
 }
 
 /* .icontogs {

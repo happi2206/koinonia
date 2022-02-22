@@ -23,16 +23,6 @@
         <b-tabs content-class="mt-3" class="custom-tabs">
           <b-tab title="Course Overiew" active>
             <div>
-              <PuSkeleton :count="5" />
-            </div>
-
-            <div>
-              <!-- <skeleton-loader-vue
-                type="circle"
-                :width="200"
-                :height="200"
-                animation="fade"
-              /> -->
               <course-overview :courseDetail="courseDetail"></course-overview>
             </div>
           </b-tab>
@@ -41,338 +31,13 @@
             @click="get_all_course_instructors"
             class=""
           >
-            <filter-component @search="searchInstructors">
-              <template #besideFilterButton>
-                <div class="ml-5">
-                  <button
-                    class="btn py-2 mainbtndashboard medbrownparagraph"
-                    v-b-modal.addInstructor
-                  >
-                    Add Instructor
-                  </button>
-                  <b-modal
-                    id="addInstructor"
-                    centered
-                    title="Add Instructor"
-                    hide-footer
-                  >
-                    <div class="content px-md-3 my-2">
-                      <div class="my-3">
-                        <v-select
-                          :options="instructors"
-                          v-model="addInstructor"
-                          placeholder="Select instructor"
-                          :reduce="(option) => option.id"
-                        >
-                          <template #option="{ surname, other_name }">
-                            <span>{{ surname }} {{ other_name }}</span>
-                          </template>
-                        </v-select>
-                      </div>
-                      <!-- <div class="my-3">
-                        <label class="medbrownparagraph">Designation</label>
-                        <v-select :options="designations"></v-select>
-                      </div> -->
-                    </div>
-
-                    <div class="d-flex justify-content-center mx-5 my-3">
-                      <button
-                        class="btn mainbtndashboard"
-                        @click="addInstructortoCourse"
-                      >
-                        Add Instructor
-                      </button>
-                    </div>
-                  </b-modal>
-                </div>
-              </template>
-              <template #default="{ visualization }">
-                <table-component
-                  :items="course_instructors"
-                  :fields="instructorfields"
-                  :busy="busy"
-                  v-if="visualization === 'list'"
-                />
-
-                <div class="row" v-else>
-                  <grid-component
-                    :data="instructors"
-                    v-for="(instructor, index) in instructors"
-                    :key="index"
-                  ></grid-component>
-                </div>
-              </template>
-            </filter-component>
+            <CourseInstructors :course_instructors="course_instructors" />
           </b-tab>
           <b-tab title="Students" @click="get_all_course_students" class="">
-            <filter-component>
-              <template #besideFilterButton>
-                <div class="ml-5">
-                  <button
-                    class="btn py-2 mainbtndashboard medbrownparagraph"
-                    v-b-modal.addStudent
-                  >
-                    Add Student
-                  </button>
-                  <input
-                    @change="uploadStudents"
-                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                    ref="uploadcsv"
-                    type="file"
-                    class="hidden"
-                  />
-                  <button
-                    @click.prevent="$refs.uploadcsv.click()"
-                    class="btn py-2 mainbtndashboard medbrownparagraph"
-                  >
-                    upload students
-                  </button>
-                  <b-modal
-                    id="addStudent"
-                    title="Create Student"
-                    centered
-                    hide-footer
-                  >
-                    <form class="modabody p-4" @submit.prevent="createStudent">
-                      <div>
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Student Email
-                        </label>
-
-                        <input
-                          type="text"
-                          v-model="student.user_type.email"
-                          required
-                          placeholder="Email"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Student Name
-                        </label>
-
-                        <input
-                          type="text"
-                          v-model="student.other_name"
-                          required
-                          placeholder="Name of student"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-                      <div class="my-4">
-                        <label for="" class="d-block medbrownparagraph graytext"
-                          >Last Name
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          v-model="student.surname"
-                          placeholder="Surname"
-                          class="forminputs text-dark"
-                        />
-                      </div>
-
-                      <!-- <div class="my-4">
-                        <div class="form-check">
-                          <label class="form-check-label medbrownparagraph">
-                            <input
-                              type="checkbox"
-                              class="form-check-input"
-                              required
-                              v-model="student.send_lastest_updates"
-                            />
-                          </label>
-                        </div>
-                      </div> -->
-
-                      <div class="my-4">
-                        <div class="d-flex justify-content-center">
-                          <button
-                            class="
-                              btn
-                              px-md-4 px-3
-                              py-2
-                              mainbtndashboard
-                              medbrownparagraph
-                            "
-                          >
-                            Add Student
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </b-modal>
-                </div>
-              </template>
-              <template #default="{ visualization }">
-                <table-component
-                  :items="students"
-                  :fields="studentfields"
-                  :busy="busy"
-                  v-if="visualization === 'list'"
-                />
-
-                <div class="row" v-else>
-                  <grid-component
-                    :data="students"
-                    v-for="(student, index) in students"
-                    :key="index"
-                  ></grid-component>
-                </div>
-              </template>
-            </filter-component>
+            <CourseStudents :students="students" />
           </b-tab>
           <b-tab title="Attendance" class="">
-            <filter-component>
-              <template #besideFilterButton>
-                <div class="ml-5">
-                  <button
-                    class="btn py-2 mainbtndashboard medbrownparagraph"
-                    v-b-modal.addEvent
-                  >
-                    Add Event
-                  </button>
-                  <b-modal
-                    id="addEvent"
-                    centered
-                    title="Create Event"
-                    hide-footer
-                  >
-                    <form class="modabody" @submit.prevent="createEvent">
-                      <div class="row px-4">
-                        <div class="col-12">
-                          <div class="my-2">
-                            <label
-                              for=""
-                              class="d-block medbrownparagraph graytext"
-                              >Event Name
-                            </label>
-
-                            <input
-                              type="text"
-                              v-model="event.name"
-                              required
-                              placeholder="Event Name"
-                              class="forminputs text-dark"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="col-12">
-                          <div class="my-2">
-                            <label for="" class="medbrownparagraph graytext"
-                              >Event Description
-                            </label>
-
-                            <input
-                              type="text"
-                              v-model="event.description"
-                              required
-                              placeholder="Event Description"
-                              class="forminputs text-dark"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="col-6">
-                          <div class="my-2">
-                            <label for="" class="medbrownparagraph graytext"
-                              >Start Date
-                            </label>
-                            <input
-                              type="date"
-                              required
-                              v-model="event.start_date"
-                              placeholder="Start Date"
-                              class="forminputs text-dark"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="my-2">
-                            <label for="" class="medbrownparagraph graytext"
-                              >Start Time
-                            </label>
-                            <input
-                              type="time"
-                              required
-                              v-model="event.start_time"
-                              placeholder="End Date"
-                              class="forminputs text-dark"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="my-2">
-                            <label for="" class="medbrownparagraph graytext"
-                              >End Date
-                            </label>
-                            <input
-                              type="date"
-                              required
-                              v-model="event.end_date"
-                              placeholder="Start Date"
-                              class="forminputs text-dark"
-                            />
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="my-2">
-                            <label
-                              for=""
-                              class="d-block medbrownparagraph graytext"
-                              >End Time
-                            </label>
-                            <input
-                              type="time"
-                              required
-                              v-model="event.end_time"
-                              placeholder="End Date"
-                              class="forminputs text-dark"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="my-4 col-12">
-                          <div class="d-flex justify-content-center">
-                            <button
-                              class="
-                                btn
-                                px-md-4 px-3
-                                py-2
-                                mainbtndashboard
-                                medbrownparagraph
-                              "
-                            >
-                              Add Event
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </b-modal>
-                </div>
-              </template>
-              <template #default="{ visualization }">
-                <table-component
-                  :items="events"
-                  v-if="visualization === 'list'"
-                  :fields="fields"
-                  :dropdownItem="dropdownItem"
-                  @row-clicked="onRowClicked"
-                >
-                </table-component>
-
-                <div class="row" v-else>
-                  <grid-component
-                    :data="events"
-                    v-for="(event, index) in events"
-                    :key="index"
-                  ></grid-component>
-                </div>
-              </template>
-            </filter-component>
+            <CourseAttendance :events="events" />
           </b-tab>
         </b-tabs>
       </div>
@@ -419,8 +84,12 @@ export default {
         { key: 'surname', sortable: true },
 
         { key: 'email', sortable: true },
-        { key: 'phone no', sortable: true },
-        { key: 'dots', label: 'Action', sortable: true },
+        { key: 'phone', sortable: true },
+        {
+          key: 'link_code',
+          sortable: true,
+        },
+        // { key: 'dots', label: 'Action', sortable: true },
       ],
       studentfields: [
         { key: 'other_name', label: 'First name', sortable: true },
@@ -445,22 +114,22 @@ export default {
       designations: ['Lead Instructor', 'Teacher'],
       addInstructor: '',
       addStudent: '',
-      event: {
-        name: '',
-        description: '',
-        start_date: '',
-        end_date: '',
-        start_time: '',
-        end_time: '',
-      },
+      // event: {
+      //   name: '',
+      //   description: '',
+      //   start_date: '',
+      //   end_date: '',
+      //   start_time: '',
+      //   end_time: '',
+      // },
       events: [],
+      eventDescriptionAdded: false,
       busy: false,
       course_instructors: [],
       search_instructor: '',
-      instructorPerPage:30,
-      instructorTotalItems:0,
-      instructorCurrentPage:1
-
+      instructorPerPage: 30,
+      instructorTotalItems: 0,
+      instructorCurrentPage: 1,
     }
   },
 
@@ -554,6 +223,9 @@ export default {
         title: '',
         objective: '',
       })
+    },
+    addDescriptionField() {
+      this.eventDescriptionAdded = !this.eventDescriptionAdded
     },
     onRowClicked(e) {
       console.log(e)
