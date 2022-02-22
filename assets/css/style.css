@@ -1325,6 +1325,15 @@ th {
     width: 100%;
   }
 
+  td {
+    font-size: 11px;
+    line-height: 19px;
+  }
+  th {
+    font-size: 11px;
+    line-height: 19px;
+  }
+
   .brownheaderlarge {
     font-family: 'Ancona-Ex';
     font-size: 38px;
