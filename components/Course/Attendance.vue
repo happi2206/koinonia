@@ -1,5 +1,6 @@
 <template>
-  <filter-component>
+  <div v-observe-visibility="get_all_course_events">
+    <filter-component>
     <template #besideFilterButton>
       <div class="ml-md-5">
         <button
@@ -9,6 +10,7 @@
           Add Event
         </button>
         <b-modal id="addEvent" centered title="Create Event" hide-footer>
+          <preloader :show="is_creating" />
           <form class="modabody" @submit.prevent="createEvent">
             <div class="row px-4">
               <div class="col-12">
@@ -117,6 +119,7 @@
               <div class="my-4 col-12">
                 <div class="d-flex justify-content-center">
                   <button
+                  :disabled="is_creating"
                     class="
                       btn
                       px-md-4 px-3
@@ -141,6 +144,10 @@
         :fields="fields"
         :dropdownItem="dropdownItem"
         @row-clicked="onRowClicked"
+        :busy="busy"
+          @page-changed="handlePage"
+          :perPage="perPage"
+          :totalItems="totalItems"
       >
       </table-component>
 
@@ -153,6 +160,7 @@
       </div>
     </template>
   </filter-component>
+  </div>
 </template>
 
 <script>
@@ -187,23 +195,26 @@ export default {
       ],
       eventDescriptionAdded: false,
       busy: false,
+      events: [],
+      is_creating:false
     }
   },
 
   methods: {
     async createEvent() {
       try {
-        console.log(this.event.end_date, this.event.start_date)
-
+        this.is_creating = true
         await this.$axios.$post(
           `course-v/add-course-event?course_id=${this.$route.params.course}`,
           this.event
         )
-        this.$fetch()
+        
         this.$bvModal.hide('addEvent')
         this.$toast.success('Event added Successfully')
       } catch (e) {
         this.$toast.error(e.data.detail.message)
+      }finally{
+        this.is_creating = false
       }
     },
     onRowClicked(e) {
@@ -211,22 +222,35 @@ export default {
 
       this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
     },
-    async createEvent() {
+    async get_all_course_events() {
       try {
-        console.log(this.event.end_date, this.event.start_date)
-
-        await this.$axios.$post(
-          `course-v/add-course-event?course_id=${this.$route.params.course}`,
-          this.event
+        this.busy = true
+        const events = await this.$axios.$get(
+          `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
         )
-        this.$fetch()
-        this.$bvModal.hide('addEvent')
-        this.$toast.success('Event added Successfully')
+        console.log('event is', events)
+        this.events = events.items.map((e, i) => {
+          let filterstudent = e.students.filter((i) => {
+            return i.status == true
+          })
+          let number = e.students.length - filterstudent
+          return {
+            Name: e.name,
+            'Start Date': e.start_date,
+            'End Date': e.end_date,
+            'No of Students': e.students.length,
+            Progress: number,
+            id: e.id,
+          }
+        })
       } catch (e) {
-        this.$toast.error(e.data.detail.message)
+        this.$toast.error(e)
+      }finally{
+        this.busy = false
       }
     },
   },
+ 
 }
 </script>
 

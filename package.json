@@ -28,6 +28,7 @@
     "vue-flickity": "^1.2.1",
     "vue-loading-skeleton": "^1.1.9",
     "vue-luxon": "^0.10.0",
+    "vue-observe-visibility": "^1.0.0",
     "vue-select": "^3.16.0",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
