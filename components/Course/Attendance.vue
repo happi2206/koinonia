@@ -149,6 +149,9 @@
           :perPage="perPage"
           :totalItems="totalItems"
         >
+          <template #no_of_students="{ data }">
+           {{data}}
+          </template>
           <template #Progress="{ data }">
             
             <b-progress class="mt-2" :max="10">
@@ -198,7 +201,7 @@ export default {
         { key: 'name', sortable: true },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
-        { key: 'No of Students', sortable: true },
+        { key: 'no_of_students', sortable: true },
         {
           key: 'Progress',
           label: 'Progress',
