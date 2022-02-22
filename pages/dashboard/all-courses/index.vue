@@ -232,28 +232,6 @@
                 </p>
               </div>
 
-              <div class="my-4 row">
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    justify-content-center
-                    col-md-4 col-12
-                  "
-                >
-                  <img
-                    :src="currentCourse.feature_image"
-                    alt=""
-                    class="img-fluid"
-                  />
-                </div>
-                <div
-                  class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
-                >
-                  <upload-file v-model="currentCourse.feature_image" />
-                </div>
-              </div>
-
               <div class="my-4">
                 <div class="d-flex justify-content-center">
                   <button
@@ -265,11 +243,33 @@
                       medbrownparagraph
                     "
                   >
-                    Edit Event
+                    Edit Course
                   </button>
                 </div>
               </div>
             </form>
+
+            <div class="my-4 row">
+              <div
+                class="
+                  d-flex
+                  align-items-center
+                  justify-content-center
+                  col-md-4 col-12
+                "
+              >
+                <img
+                  :src="currentCourse.feature_image"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
+              <div
+                class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
+              >
+                <upload-file v-model="currentCourse.feature_image" />
+              </div>
+            </div>
           </div>
         </b-modal>
       </div>
