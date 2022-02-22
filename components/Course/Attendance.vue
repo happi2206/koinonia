@@ -102,7 +102,7 @@
                   </div>
                 </div>
 
-                <div class="col-12">
+                <!-- <div class="col-12">
                   <div
                     class="d-flex justify-content-end"
                     @click="addDescriptionField"
@@ -114,7 +114,7 @@
                       event description
                     </p>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="my-4 col-12">
                   <div class="d-flex justify-content-center">
@@ -149,19 +149,6 @@
           :perPage="perPage"
           :totalItems="totalItems"
         >
-          <template #Progress="{ data }">
-            
-            <b-progress class="mt-2" :max="10">
-              <b-progress-bar
-                :value="getPresent(data.item.students)"
-                variant="success"
-              ></b-progress-bar>
-              <b-progress-bar
-                :value="getAbsent(data.item.students)"
-                variant="danger"
-              ></b-progress-bar>
-            </b-progress>
-          </template>
         </table-component>
 
         <div class="row" v-else>
@@ -193,6 +180,7 @@ export default {
         start_time: '',
         end_time: '',
       },
+      dropdownItem: ['Share_QR_Code', 'Delete', 'Edit'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', sortable: true },
@@ -253,6 +241,21 @@ export default {
         this.totalItems = events.total
         this.currentPage = events.page
 
+        this.events = events.items.map((e, i) => {
+          let filterstudent = e.students.filter((i) => {
+            return i.status == true
+          })
+
+          let number = e.students.length - filterstudent
+          return {
+            Name: e.name,
+            start_date: e.start_date,
+            end_date: e.end_date,
+            'No of Students': e.students.length,
+            Progress: number,
+            id: e.id,
+          }
+        })
       } catch (e) {
         this.$toast.error(e)
       } finally {
