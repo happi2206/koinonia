@@ -31,13 +31,13 @@
             @click="get_all_course_instructors"
             class=""
           >
-            <CourseInstructors :course_instructors="course_instructors" />
+            <!-- <CourseInstructors :course_instructors="course_instructors" /> -->
           </b-tab>
           <b-tab title="Students" @click="get_all_course_students" class="">
-            <CourseStudents :students="students" />
+            <!-- <CourseStudents :students="students" /> -->
           </b-tab>
           <b-tab title="Attendance" class="">
-            <CourseAttendance :events="events" />
+            <!-- <CourseAttendance :events="events" /> -->
           </b-tab>
         </b-tabs>
       </div>
@@ -288,9 +288,10 @@ export default {
         }
         const instructors = await this.$axios.$get(uri)
         this.course_instructors = instructors.items.reverse()
-        this.instructorPerPage = users.size
-        this.instructorTotalItems = users.total
-        this.instructorCurrentPage = users.page
+        this.instructorPerPage = instructors.size
+        this.instructorTotalItems = instructors.total
+        this.instructorCurrentPage = instructors.page
+
       } catch (e) {
         this.$toast.error(e)
       } finally {
