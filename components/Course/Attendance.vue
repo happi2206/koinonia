@@ -149,6 +149,19 @@
           :perPage="perPage"
           :totalItems="totalItems"
         >
+          <template #Progress="{ data }">
+            
+            <b-progress class="mt-2" :max="10">
+              <b-progress-bar
+                :value="getPresent(data.item.students)"
+                variant="success"
+              ></b-progress-bar>
+              <b-progress-bar
+                :value="getAbsent(data.item.students)"
+                variant="danger"
+              ></b-progress-bar>
+            </b-progress>
+          </template>
         </table-component>
 
         <div class="row" v-else>
