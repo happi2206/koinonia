@@ -140,7 +140,7 @@
         <b-modal id="editmodal" title="Edit Course" hide-footer>
           <div class="modacontent">
             <form class="modabody" @submit.prevent="editCourse">
-              <div class="my-4">
+              <!-- <div class="my-4">
                 <label for="" class="d-block medbrownparagraph graytext"
                   >Course Code
                 </label>
@@ -152,7 +152,7 @@
                   placeholder="e.g ECO23"
                   class="forminputs text-dark"
                 />
-              </div>
+              </div> -->
               <div class="my-4">
                 <label for="" class="d-block medbrownparagraph graytext"
                   >Course Name
@@ -219,7 +219,7 @@
               </div>
               <div class="my-4">
                 <label for="" class="d-block medbrownparagraph graytext"
-                  >Course Subtitle
+                  >Course Long Description
                 </label>
                 <VueEditor v-model="currentCourse.long_description" required>
                 </VueEditor>
@@ -245,12 +245,12 @@
                       medbrownparagraph
                     "
                   >
-                    Edit Course
+                    Save Changes
                   </button>
                 </div>
               </div>
             </form>
-
+            <!-- 
             <div class="my-4 row">
               <div
                 class="
@@ -271,7 +271,7 @@
               >
                 <upload-file v-model="currentCourse.feature_image" />
               </div>
-            </div>
+            </div> -->
           </div>
         </b-modal>
       </div>
@@ -412,17 +412,18 @@ export default {
       },
       active: true,
       fields: [
-        { key: 'check', label: '', sortable: true },
+        { key: 'check', label: '', sortable: false },
         { key: 'title', label: 'Name', sortable: true },
         { key: 'course_code', sortable: true },
         {
           key: 'no_of_students',
-          thStyle: { width: '30px' },
+          label: 'No of Stud',
+
           sortable: true,
         },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
-        { key: 'dots', label: 'Action', sortable: false },
+        { key: 'dots', label: '', sortable: false },
       ],
       status: true,
       on_going: false,

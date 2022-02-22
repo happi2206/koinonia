@@ -25,13 +25,10 @@
         </div>
       </template>
 
-      <template #cell(current_academic_year)="data">
-        <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
-        <span
-          class="badge"
-          :class="[data.value ? 'badge-success' : 'badge-danger']"
-          >{{ data.value ? 'Active' : 'Inactive' }}</span
-        >
+      <template #cell(link_code)="data">
+        <span class="border p-2" style="border-radius: 5px">{{
+          data.value
+        }}</span>
       </template>
 
       <template #cell(color)="data">

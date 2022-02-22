@@ -12,32 +12,47 @@
         </a>
       </div>
 
-      <!-- <div >
-        <PuSkeleton :count="3"> </PuSkeleton>
-      </div> -->
+      <div v-if="isLoading">
+        <b-row>
+          <b-col cols="3">
+            <b-skeleton-img height="40%"></b-skeleton-img>
+          </b-col>
 
-      <div>
-        <header-card :courseDetail="courseDetail" />
+          <b-col cols="6" class="">
+            <b-skeleton animation="wave" width="85%"></b-skeleton>
+            <b-skeleton animation="wave" width="55%"></b-skeleton>
+            <b-skeleton animation="wave" width="70%"></b-skeleton>
+          </b-col>
+        </b-row>
+        <b-card>
+          <b-skeleton animation="throb" width="85%"></b-skeleton>
+          <b-skeleton animation="throb" width="55%"></b-skeleton>
+          <b-skeleton animation="throb" width="70%"></b-skeleton>
+        </b-card>
       </div>
-      <div class="card mt-3">
-        <b-tabs content-class="mt-3" class="custom-tabs">
-          <b-tab title="Course Overiew" active>
-            <div>
-              <course-overview :courseDetail="courseDetail"></course-overview>
-            </div>
-          </b-tab>
-          <b-tab
-            title="Instructors"
-          >
-            <CourseInstructors  />
-          </b-tab>
-          <b-tab title="Students" >
-            <CourseStudents  />
-          </b-tab>
-          <b-tab title="Attendance" class="">
-            <CourseAttendance  />
-          </b-tab>
-        </b-tabs>
+
+      <div v-else>
+        <div>
+          <header-card :courseDetail="courseDetail" />
+        </div>
+        <div class="card mt-3">
+          <b-tabs content-class="mt-3" class="custom-tabs">
+            <b-tab title="Course Overiew" active>
+              <div>
+                <course-overview :courseDetail="courseDetail"></course-overview>
+              </div>
+            </b-tab>
+            <b-tab title="Instructors">
+              <CourseInstructors />
+            </b-tab>
+            <b-tab title="Students">
+              <CourseStudents />
+            </b-tab>
+            <b-tab title="Attendance" class="">
+              <CourseAttendance />
+            </b-tab>
+          </b-tabs>
+        </div>
       </div>
     </div>
   </div>
@@ -56,6 +71,7 @@ export default {
       schemeOfWork: [{ title: '', objective: 'objective' }],
       currentTab: 0,
       students: [],
+      isLoading: false,
       // dropdownItem: [
       //   // 'Print_QR_Code',
       //   'Edit',
@@ -76,7 +92,7 @@ export default {
         },
         { key: 'dots', label: '', sortable: true },
       ],
-    
+
       studentfields: [
         { key: 'other_name', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
@@ -98,7 +114,7 @@ export default {
         },
       },
       designations: ['Lead Instructor', 'Teacher'],
-      
+
       addStudent: '',
       // event: {
       //   name: '',
@@ -108,14 +124,10 @@ export default {
       //   start_time: '',
       //   end_time: '',
       // },
-      
-     
     }
   },
 
   methods: {
-   
- 
     addScheme() {
       this.schemeOfWork.push({
         title: '',
@@ -156,17 +168,18 @@ export default {
       }
     },
     async get_a_course() {
+      this.isLoading = true
       try {
         const courses = await this.$axios.$get(
           `course-v/get-a-course?course_id=${this.$route.params.course}`
         )
         this.courseDetail = courses
+        this.isLoading = false
       } catch (e) {
         console.log(e)
       }
     },
-   
-   
+
     searchInstructors(e) {
       this.search_instructor = e
       this.get_all_course_instructors()

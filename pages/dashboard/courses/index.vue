@@ -237,7 +237,7 @@
               </p>
             </div>
 
-            <div class="my-4 d-flex justify-content-end">
+            <!-- <div class="my-4 d-flex justify-content-end">
               <div class="upload-btn-wrapper">
                 <button class="upbtn">Upload file</button>
 
@@ -249,9 +249,8 @@
                   ref="fileup"
                   @change="handlefileupload($event)"
                 />
-                <!-- <input type="file" name="myfile" /> -->
               </div>
-            </div>
+            </div> -->
             <div class="my-4">
               <div class="d-flex justify-content-center">
                 <button
@@ -400,7 +399,6 @@
             </template>
           </filter-component>
         </div>
-       
       </div>
     </div>
   </div>
