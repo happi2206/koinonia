@@ -47,7 +47,7 @@
       </template>
       <template #default="{ visualization }">
         <table-component
-          :items="course_instructors"
+          :items="instructors"
           :fields="instructorfields"
           :busy="busy"
           @page-changed="handlePage"
@@ -70,14 +70,12 @@
 
 <script>
 export default {
- 
   data() {
     return {
       addInstructor: '',
       instructorfields: [
         { key: 'other_name', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
-
         { key: 'email', sortable: true },
         { key: 'phone', sortable: true },
         {
@@ -104,6 +102,7 @@ export default {
         )
 
         this.instructors = instructors.items
+        console.log('instructors are', this.instructors)
       } catch (e) {
         this.$toast.error(e)
       }

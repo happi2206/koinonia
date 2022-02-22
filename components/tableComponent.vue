@@ -25,13 +25,10 @@
         </div>
       </template>
 
-      <template #cell(current_academic_year)="data">
-        <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
-        <span
-          class="badge"
-          :class="[data.value ? 'badge-success' : 'badge-danger']"
-          >{{ data.value ? 'Active' : 'Inactive' }}</span
-        >
+      <template #cell(link_code)="data">
+        <span class="border p-2" style="border-radius: 5px">{{
+          data.value
+        }}</span>
       </template>
 
       <template #cell(color)="data">
@@ -89,8 +86,9 @@
       <template #cell(end_date)="data">
         <span>{{ data.item.end_date | DateFormat }}</span>
       </template>
-      <template #cell(progress)="data">
-        <b-progress class="mt-2" :max="10">
+      <template #cell(Progress)="data">
+       <slot name="Progress" :data="data"></slot>
+         <!-- <b-progress class="mt-2" :max="10">
           <b-progress-bar
             :value="data.item.progress"
             variant="success"
@@ -99,7 +97,20 @@
             :value="10 - data.item.progress"
             variant="danger"
           ></b-progress-bar>
-        </b-progress>
+        </b-progress> -->
+      </template>
+      <template #cell(no_of_student)="data">
+       <slot name="no_of_students" :data="data"></slot>
+         <!-- <b-progress class="mt-2" :max="10">
+          <b-progress-bar
+            :value="data.item.progress"
+            variant="success"
+          ></b-progress-bar>
+          <b-progress-bar
+            :value="10 - data.item.progress"
+            variant="danger"
+          ></b-progress-bar>
+        </b-progress> -->
       </template>
       <template #cell(actions)="row">
         <div class="text-left w-auto">

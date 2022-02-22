@@ -8,7 +8,8 @@
           class="brownparagraph bold700 mainbluecolor"
         >
           <b-icon icon="arrow-left"></b-icon>
-          {{eventDetail.name}}
+
+          {{ eventDetail.name }}
         </a>
       </div>
       <events-header-card
