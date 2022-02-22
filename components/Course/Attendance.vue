@@ -1,6 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
-    <filter-component>
+    <filter-component @search="SearchText">
     <template #besideFilterButton>
       <div class="ml-md-5">
         <button
@@ -145,9 +145,9 @@
         :dropdownItem="dropdownItem"
         @row-clicked="onRowClicked"
         :busy="busy"
-          @page-changed="handlePage"
-          :perPage="perPage"
-          :totalItems="totalItems"
+        @page-changed="handlePage"
+        :perPage="perPage"
+        :totalItems="totalItems"
       >
       </table-component>
 
@@ -182,8 +182,8 @@ export default {
       },
       fields: [
         { key: 'Name', sortable: true },
-        { key: 'Start Date', sortable: true },
-        { key: 'End Date', sortable: true },
+        { key: 'start_date', sortable: true },
+        { key: 'end_date', sortable: true },
         { key: 'No of Students', sortable: true },
         {
           key: 'Progress',
@@ -196,7 +196,11 @@ export default {
       eventDescriptionAdded: false,
       busy: false,
       events: [],
-      is_creating:false
+      is_creating:false,
+      search: '',
+      perPage: 5,
+      totalItems: 0,
+      currentPage: 1,
     }
   },
 
@@ -218,26 +222,36 @@ export default {
       }
     },
     onRowClicked(e) {
-      console.log(e)
 
       this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
     },
     async get_all_course_events() {
       try {
         this.busy = true
-        const events = await this.$axios.$get(
-          `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=1&size=50`
-        )
-        console.log('event is', events)
+
+        let uri = `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=${this.currentPage}&size=${this.perPage}`
+
+        if (this.search) {
+          uri = uri + `&search=${this.search}`
+        }
+        const events = await this.$axios.$get(uri)
+
+        this.events = events.items.reverse()
+        this.perPage = events.size
+        this.totalItems = events.total
+        this.currentPage = events.page
+
+        
         this.events = events.items.map((e, i) => {
           let filterstudent = e.students.filter((i) => {
             return i.status == true
           })
+          
           let number = e.students.length - filterstudent
           return {
             Name: e.name,
-            'Start Date': e.start_date,
-            'End Date': e.end_date,
+            'start_date': e.start_date,
+            'end_date': e.end_date,
             'No of Students': e.students.length,
             Progress: number,
             id: e.id,
@@ -248,6 +262,14 @@ export default {
       }finally{
         this.busy = false
       }
+    },
+    handlePage(e) {
+      this.currentPage = e
+      this.get_all_course_events()
+    },
+     SearchText(e) {
+      this.search = e
+      this.get_all_course_events()
     },
   },
  
