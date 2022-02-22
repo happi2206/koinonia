@@ -8,6 +8,7 @@
             align-items-center
             justify-content-between justify-content-md-start
             flex-wrap
+            firstwidth
           "
         >
           <div class="mr-2">
@@ -52,13 +53,13 @@
           class="
             d-flex
             align-items-md-center
-            justify-content-between justify-content-md-end
+            justify-content-md-end
             flex-md-row flex-column
-            width100
+            secondwidth
             mb-1 mb-md-0
           "
         >
-          <div class="flex w-100 my-md-0 my-3">
+          <div class="flex width100 my-md-0 my-3">
             <input
               type="text"
               required
@@ -167,6 +168,30 @@ export default Vue.extend({
 }
 .display-toggle .icon-wrapper.active svg path {
   fill: #1070b7;
+}
+
+.firstwidth {
+  width: 30%;
+}
+.secondwidth {
+  width: 70%;
+}
+
+@media (max-width: 900.5px) {
+  .firstwidth {
+    width: 20%;
+  }
+  .secondwidth {
+    width: 80%;
+  }
+}
+@media (max-width: 900.5px) {
+  .firstwidth {
+    width: 100%;
+  }
+  .secondwidth {
+    width: 100%;
+  }
 }
 
 @media (max-width: 767.5px) {
