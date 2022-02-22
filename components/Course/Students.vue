@@ -126,7 +126,13 @@ export default {
   data() {
     return {
       students: [],
-      dropdownItem: ['Share Link Code','Edit', 'Print_QR_Code', 'Delete', 'Edit'],
+      dropdownItem: [
+        'Share Link Code',
+        'Edit',
+        'Print_QR_Code',
+        'Delete',
+        'Edit',
+      ],
       student: {
         other_name: '',
         surname: '',
@@ -147,7 +153,6 @@ export default {
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
         { key: 'phone no', sortable: true },
-        { key: 'dots', label: 'Action', sortable: true },
       ],
       busy: false,
       search: '',

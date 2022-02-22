@@ -27,7 +27,6 @@
                 navbar-brand
                 logo-icon-mobile
                 pr-2
-                accentcolorbg
                 mr-2
                 logoplaceholder
                 d-flex
@@ -198,7 +197,6 @@
                   navbar-brand
                   logo-icon-mobile
                   pr-2
-                  accentcolorbg
                   mr-2
                   logoplaceholder
                   d-flex
@@ -211,7 +209,9 @@
                   alt=""
                   class="img-fluid logoimages"
                 />
-                <span class="mb-0 medbrownparagraph text-white"> KOINONIA</span>
+                <span class="mb-0 medbrownparagraphlogo text-white">
+                  KOINONIA</span
+                >
               </nuxt-link>
             </div>
           </div>
@@ -219,23 +219,23 @@
           <div class="d-flex flex-column flex-lg-row align-items-center">
             <ul class="thirdcontent d-flex align-items-center mb-0">
               <div v-if="authenticated" class="d-flex">
-                <li class="nav-item mb-0 mx-4">
+                <li class="nav-item mb-0">
                   <nuxt-link
                     style="Ancona-Ex"
                     to="/dashboard/all-courses"
-                    class="nav-link accentcolor dashboardlink mb-0"
+                    class="nav-link text-white dashboardlink mb-0"
                   >
                     My learning
                   </nuxt-link>
                 </li>
 
                 <li
-                  class="nav-item mb-0 mx-4"
+                  class="nav-item mb-0 mx-2"
                   v-if="user.is_instructor || user.is_administrator"
                 >
                   <nuxt-link
                     to="/dashboard/all-courses"
-                    class="nav-link accentcolor dashboardlink mb-0"
+                    class="nav-link text-white dashboardlink mb-0"
                   >
                     Instructors dashboard
                   </nuxt-link>
@@ -282,20 +282,20 @@
               </div>
             </ul>
 
-            <div class="mx-4" v-if="authenticated">
+            <div class="mx-2" v-if="authenticated">
               <div class="relativecontainer d-none d-lg-block">
                 <span class="text-white"
-                  ><b-icon icon="bell-fill" class="accentcolor"></b-icon
+                  ><b-icon icon="bell-fill" class="text-white"></b-icon
                 ></span>
                 <div class="absolutecontainer online">
                   <span class="mainyellowcolor"
-                    ><b-icon icon="dot" class="accentcolor"></b-icon
+                    ><b-icon icon="dot" class="text-white"></b-icon
                   ></span>
                 </div>
               </div>
             </div>
 
-            <div class="d-none d-lg-block ml-2 mx-4" v-if="authenticated">
+            <div class="d-none d-lg-block ml-2" v-if="authenticated">
               <div class="d-lg-flex align-items-lg-center">
                 <b-dropdown
                   size="lg"
@@ -310,13 +310,13 @@
                         <b-avatar variant="warning"></b-avatar>
                       </div>
                       <div>
-                        <span class="mx-2 medbrownparagraph accentcolor">
+                        <span class="mx-2 medbrownparagraph text-white">
                           {{ user.other_name }}
                         </span>
                       </div>
                       <b-icon
                         icon="chevron-compact-down"
-                        class="accentcolor"
+                        class="text-white"
                       ></b-icon>
                     </div>
                   </template>

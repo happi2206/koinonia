@@ -596,6 +596,11 @@ button.loginbtn {
   width: 40%;
 }
 
+.coursedetail {
+  height: 250px;
+  object-fit: contain;
+}
+
 .footerlinks {
   font-family: Inter;
   font-size: 20px;
@@ -655,6 +660,14 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 
+.medbrownparagraphlogo {
+  font-family: 'Ancona-Ex';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+}
 .medbrownparagraph {
   font-family: 'Ancona-Ex';
   font-size: 14px;
@@ -1310,6 +1323,15 @@ th {
 @media (max-width: 768.5px) {
   .flwidth {
     width: 100%;
+  }
+
+  td {
+    font-size: 11px;
+    line-height: 19px;
+  }
+  th {
+    font-size: 11px;
+    line-height: 19px;
   }
 
   .brownheaderlarge {

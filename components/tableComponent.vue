@@ -79,7 +79,7 @@
       <template #cell(start_date)="data">
         <span>{{ data.item.start_date | DateFormat }}</span>
       </template>
-     
+
       <template #cell(check_in)="data">
         <span>{{ data.item.check_in | DateFormat }}</span>
       </template>
@@ -87,8 +87,8 @@
         <span>{{ data.item.end_date | DateFormat }}</span>
       </template>
       <template #cell(Progress)="data">
-       <slot name="Progress" :data="data"></slot>
-         <!-- <b-progress class="mt-2" :max="10">
+        <slot name="Progress" :data="data"></slot>
+        <!-- <b-progress class="mt-2" :max="10">
           <b-progress-bar
             :value="data.item.progress"
             variant="success"
@@ -99,9 +99,9 @@
           ></b-progress-bar>
         </b-progress> -->
       </template>
-      <template #cell(no_of_student)="data">
-       <slot name="no_of_students" :data="data"></slot>
-         <!-- <b-progress class="mt-2" :max="10">
+      <template #cell(no_of_students)="data">
+        <slot name="no_of_students" :data="data"></slot>
+        <!-- <b-progress class="mt-2" :max="10">
           <b-progress-bar
             :value="data.item.progress"
             variant="success"

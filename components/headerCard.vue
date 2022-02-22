@@ -3,7 +3,7 @@
     <div v-if="Object.keys(courseDetail)" class="bg-white rounded p-3">
       <div class="row">
         <div class="col-md-3 px-0 pl-md-2">
-          <div class="rounded">
+          <div class="rounded coursedetail">
             <img
               :src="courseDetail.feature_image"
               alt=""
