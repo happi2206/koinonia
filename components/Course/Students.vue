@@ -1,7 +1,7 @@
 <template>
   <filter-component>
     <template #besideFilterButton>
-      <div class="ml-5">
+      <div class="ml-md-5">
         <button
           class="btn py-2 mainbtndashboard medbrownparagraph"
           v-b-modal.addStudent
@@ -19,7 +19,7 @@
           @click.prevent="$refs.uploadcsv.click()"
           class="btn py-2 mainbtndashboard medbrownparagraph"
         >
-          upload students
+          Bulk Upload
         </button>
         <b-modal id="addStudent" title="Create Student" centered hide-footer>
           <form class="modabody p-4" @submit.prevent="createStudent">

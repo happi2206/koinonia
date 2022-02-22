@@ -1,14 +1,13 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex flex-wrap align-items-center justify-content-between">
+      <div class="d-flex align-items-center flex-wrap justify-content-between">
         <div
           class="
             d-flex
             align-items-center
             justify-content-between justify-content-md-start
             flex-wrap
-            my-3 my-lg-0
           "
         >
           <div class="mr-2">
@@ -55,10 +54,11 @@
             align-items-md-center
             justify-content-between justify-content-md-end
             flex-md-row flex-column
+            width100
             mb-1 mb-md-0
           "
         >
-          <div class="flex">
+          <div class="flex w-100 my-md-0 my-3">
             <input
               type="text"
               required
@@ -75,7 +75,7 @@
             <slot></slot>
           </div> -->
 
-          <div class="my-md-0 my-3">
+          <div class="my-md-0">
             <slot name="besideFilterButton"></slot>
           </div>
           <div id="filters-container" class="filters-container d-none">
@@ -136,6 +136,7 @@ export default Vue.extend({
 .flwidth {
   width: 50%;
 }
+
 .display-toggle .icon-wrapper {
   background: #fbfdfe;
   /* Outline Color */
@@ -168,8 +169,12 @@ export default Vue.extend({
   fill: #1070b7;
 }
 
-@media (max-width: 400.5px) {
+@media (max-width: 767.5px) {
   .widthfullsearch {
+    width: 100%;
+  }
+
+  .width100 {
     width: 100%;
   }
 }

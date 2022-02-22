@@ -1,9 +1,9 @@
 <template>
   <filter-component>
     <template #besideFilterButton>
-      <div class="ml-5">
+      <div class="ml-md-5">
         <button
-          class="btn py-2 mainbtndashboard medbrownparagraph"
+          class="btn py-2 mainbtndashboard medbrownparagraph text"
           v-b-modal.addEvent
         >
           Add Event

@@ -416,7 +416,7 @@ export default {
         { key: 'no_of_students', sortable: true },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
-        { key: 'dots', label: '', sortable: true },
+        { key: 'dots', label: 'Action', sortable: false },
       ],
       status: true,
       on_going: false,
