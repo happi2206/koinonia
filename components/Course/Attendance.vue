@@ -150,7 +150,7 @@
           :totalItems="totalItems"
         >
           <template #no_of_students="{ data }">
-            {{ data }}
+            <span>{{ data.item.students.length }}</span>
           </template>
           <template #Progress="{ data }">
             <b-progress class="mt-2" :max="10">
