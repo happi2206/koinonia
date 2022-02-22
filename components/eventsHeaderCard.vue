@@ -116,6 +116,7 @@ export default {
         this.absent = student.total - present
         this.present = present
         this.studentArray = student.items
+        this.totalItems = student.total
     } catch (e) {
       this.$toast.error(e)
     } finally {
@@ -135,6 +136,7 @@ export default {
         this.absent = student.total - present
         this.present = present
         this.studentArray = student.items
+        this.totalItems = student.total
       } catch (e) {
         console.log(e)
       } finally {
