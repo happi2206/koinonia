@@ -2,7 +2,7 @@
   <div v-observe-visibility="get_all_course_students">
     <filter-component @search="SearchText">
       <template #besideFilterButton>
-        <div class="ml-md-5">
+        <div class="">
           <button
             class="btn py-2 mainbtndashboard medbrownparagraph"
             v-b-modal.addStudent
