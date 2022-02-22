@@ -400,15 +400,7 @@
             </template>
           </filter-component>
         </div>
-        <div v-show="currentTab == 1" :class="{ 'fade show': currentTab == 1 }">
-          Tab 2 content
-        </div>
-        <div v-show="currentTab == 2" :class="{ 'fade show': currentTab == 2 }">
-          Tab 3 content
-        </div>
-        <div v-show="currentTab == 3" :class="{ 'fade show': currentTab == 3 }">
-          Tab 4 content
-        </div>
+       
       </div>
     </div>
   </div>
