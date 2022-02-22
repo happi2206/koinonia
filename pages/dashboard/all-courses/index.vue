@@ -291,7 +291,7 @@
         >
           <li class="nav-item" role="presentation">
             <a
-              @click.prevent="setCourseParams('status')"
+              @click.prevent="setCourseParams()"
               class="
                 nav-link
                 medbrownparagraph
@@ -300,7 +300,7 @@
                 cursor-pointer
                 my-2
               "
-              :class="{ active: status }"
+              :class="{ active: false }"
               >All Status</a
             >
           </li>
