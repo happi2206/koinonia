@@ -23,15 +23,24 @@
           <div class="d-flex align-items-center">
             <nuxt-link
               to="/"
-              class="navbar-brand logo-icon-mobile logoplaceholder pr-2 mr-2"
+              class="
+                navbar-brand
+                logo-icon-mobile
+                pr-2
+                accentcolorbg
+                mr-2
+                logoplaceholder
+                d-flex
+                align-items-center
+              "
+              href="#"
             >
               <img
-                src="~assets/images/koinoiologo.png"
+                src="~/assets/images/koinoiologo.png"
                 alt=""
-                class="img-fluid"
+                class="img-fluid logoimages"
               />
-
-              KOINONIA
+              <span class="mb-0 medbrownparagraph text-white"> KOINONIA</span>
             </nuxt-link>
           </div>
         </div>
