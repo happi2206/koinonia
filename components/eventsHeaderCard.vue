@@ -115,7 +115,6 @@ export default {
         { key: 'check_in', label: 'Date/Time in', sortable: true },
         { key: 'by', label: 'Check in Method', sortable: true },
         { key: 'status', label: 'Status', sortable: true },
-        { key: 'dots', label: 'Action', sortable: false },
       ],
     }
   },
@@ -130,6 +129,9 @@ export default {
 
       this.isLoading = false
       this.studentArray = student.items
+
+      this.present = this.studentArray.filter((i) => i.status === true).length
+      this.absent = student.total - this.present
     } catch (e) {
       console.log(e)
     } finally {
