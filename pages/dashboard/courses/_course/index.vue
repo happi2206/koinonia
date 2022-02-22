@@ -31,13 +31,13 @@
             @click="get_all_course_instructors"
             class=""
           >
-            <CourseInstructors :course_instructors="course_instructors" />
+            <!-- <CourseInstructors :course_instructors="course_instructors" /> -->
           </b-tab>
           <b-tab title="Students" @click="get_all_course_students" class="">
-            <CourseStudents :students="students" />
+            <!-- <CourseStudents :students="students" /> -->
           </b-tab>
           <b-tab title="Attendance" class="">
-            <CourseAttendance :events="events" />
+            <!-- <CourseAttendance :events="events" /> -->
           </b-tab>
         </b-tabs>
       </div>
