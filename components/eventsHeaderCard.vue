@@ -108,8 +108,8 @@ export default {
 
       this.studentArray = student.items
 
-      this.present = this.studentArray.filter(i=>i.status === true)
-      this.absent = this.studentArray.filter(i=>i.status === false)
+      this.present = this.studentArray.filter(i=>i.status === true).length
+      this.absent = this.studentArray.filter(i=>i.status === false).length
     } catch (e) {
       console.log(e)
     } finally {
