@@ -412,7 +412,7 @@ export default {
       },
       active: true,
       fields: [
-        { key: 'check', label: '', sortable: false },
+        { key: '', sortable: false },
         { key: 'title', label: 'Name', sortable: true },
         { key: 'course_code', sortable: true },
         {
@@ -423,7 +423,7 @@ export default {
         },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
-        { key: 'dots', label: '', sortable: false },
+        { key: 'dots', label: 'Action', sortable: false },
       ],
       status: true,
       on_going: false,

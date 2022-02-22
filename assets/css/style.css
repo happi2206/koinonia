@@ -850,7 +850,7 @@ th {
   justify-content: center;
 
   height: 60vh;
-  background: #28438724;
+  background: RGBA(211, 161, 59, 0.17);
 }
 .imagesection img {
   width: 100%;
