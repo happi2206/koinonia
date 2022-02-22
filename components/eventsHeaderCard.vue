@@ -27,15 +27,13 @@
           <span class=""> </span>
         </p>
         <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
-          <span class="lightgraytext">
-            Student Absent: {{ absent  }}</span
-          >
+          <span class="lightgraytext"> Student Absent: {{ absent }}</span>
           <span class=""> </span>
         </p>
       </div>
     </div>
     <div class="bg-white rounded p-md-3 my-2">
-      <filter-component>
+      <filter-component @search="SearchText">
         <template #default="{ visualization }">
           <table-component
             :busy="busy"
@@ -93,41 +91,52 @@ export default {
         { key: 'by', label: 'Check in Method', sortable: true },
         { key: 'status', label: 'Status', sortable: true },
       ],
-      present:0,
-      absent: 0
+      present: 0,
+      absent: 0,
+      search: '',
+      perPage: 5,
+      totalItems: 0,
+      currentPage: 1,
     }
   },
 
   async fetch() {
     try {
       this.busy = true
-      const student = await this.$axios.$get(
-        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
-      )
+      let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
 
-      this.studentArray = student.items
-
-      this.present = this.studentArray.filter(i=>i.status === true).length
-      this.absent = student.total - this.present
+      if (this.search) {
+        uri = uri + `&search=${this.search}`
+      }
+      const student = await this.$axios.$get(uri)
+       let present = student.items.filter((i) => i.status === true).length
+        this.absent = student.total - present
+        this.present = present
+        this.studentArray = student.items
     } catch (e) {
-      console.log(e)
+      this.$toast.error(e)
     } finally {
       this.busy = false
     }
   },
   methods: {
-    async getChecked(){
-    try {
-      const student = await this.$axios.$get(
-        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
-      )
+    async getChecked() {
+      try {
+        let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
 
-      this.studentArray = student.items
-    } catch (e) {
-      console.log(e)
-    } finally {
-      this.busy = false
-    }
+      if (this.search) {
+        uri = uri + `&search=${this.search}`
+      }
+      const student = await this.$axios.$get(uri)
+       let present = student.items.filter((i) => i.status === true).length
+        this.absent = student.total - present
+        this.present = present
+        this.studentArray = student.items
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.busy = false
+      }
     },
     async updateAttendance(student, status) {
       let url = status
@@ -138,15 +147,20 @@ export default {
           `${url}?student_id=${student}&event_id=${this.$route.params.eventclicked}&course_id=${this.$route.params.event}`
         )
         this.getChecked()
-       
       } catch (error) {
         console.log(error)
       }
     },
+    handlePage(e) {
+      this.currentPage = e
+      this.$fetch()
+    },
+    SearchText(e) {
+      this.search = e
+      this.$fetch()
+    },
   },
-  computed: {
-  
-  },
+  computed: {},
 
   mounted() {},
 }
