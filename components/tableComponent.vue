@@ -82,6 +82,7 @@
       <template #cell(start_date)="data">
         <span>{{ data.item.start_date | DateFormat }}</span>
       </template>
+     
       <template #cell(check_in)="data">
         <span>{{ data.item.check_in | DateFormat }}</span>
       </template>
@@ -91,11 +92,11 @@
       <template #cell(progress)="data">
         <b-progress class="mt-2" :max="10">
           <b-progress-bar
-            :value="data.item.Progress"
+            :value="data.item.progress"
             variant="success"
           ></b-progress-bar>
           <b-progress-bar
-            :value="10 - data.item.Progress"
+            :value="10 - data.item.progress"
             variant="danger"
           ></b-progress-bar>
         </b-progress>

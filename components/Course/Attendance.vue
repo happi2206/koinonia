@@ -182,8 +182,8 @@ export default {
       },
       fields: [
         { key: 'Name', sortable: true },
-        { key: 'Start Date', sortable: true },
-        { key: 'End Date', sortable: true },
+        { key: 'start_date', sortable: true },
+        { key: 'end_date', sortable: true },
         { key: 'No of Students', sortable: true },
         {
           key: 'Progress',
@@ -222,7 +222,6 @@ export default {
       }
     },
     onRowClicked(e) {
-      console.log(e)
 
       this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
     },
@@ -247,11 +246,12 @@ export default {
           let filterstudent = e.students.filter((i) => {
             return i.status == true
           })
+          
           let number = e.students.length - filterstudent
           return {
             Name: e.name,
-            'Start Date': e.start_date,
-            'End Date': e.end_date,
+            'start_date': e.start_date,
+            'end_date': e.end_date,
             'No of Students': e.students.length,
             Progress: number,
             id: e.id,

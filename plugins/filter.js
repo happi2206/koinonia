@@ -53,3 +53,7 @@ Vue.filter('DateTimeFormat', (value) => {
     const date = DateTime.fromISO(value)
     return date.toLocaleString(DateTime.DATETIME_MED);
 })
+Vue.filter('LinkCode', (value) => {
+    if (!value) return ''
+    return `KMOS - ${value}`;
+})
