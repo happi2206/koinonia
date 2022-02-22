@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <filter-component @search="searchInstructors">
+  <div v-observe-visibility="get_all_course_instructors">
+    <filter-component @search="SearchText">
       <template #besideFilterButton>
         <div class="ml-md-5">
           <button
@@ -50,6 +50,9 @@
           :items="course_instructors"
           :fields="instructorfields"
           :busy="busy"
+          @page-changed="handlePage"
+          :perPage="perPage"
+          :totalItems="totalItems"
           v-if="visualization === 'list'"
         />
 
@@ -67,10 +70,88 @@
 
 <script>
 export default {
-  props: {
-    course_instructors: {
-      type: Object,
+ 
+  data() {
+    return {
+      addInstructor: '',
+      instructorfields: [
+        { key: 'other_name', label: 'First name', sortable: true },
+        { key: 'surname', sortable: true },
+
+        { key: 'email', sortable: true },
+        { key: 'phone', sortable: true },
+        {
+          key: 'link_code',
+          sortable: true,
+        },
+        // { key: 'dots', label: 'Action', sortable: true },
+      ],
+
+      instructors: [],
+      course_instructors: [],
+      busy: false,
+      search: '',
+      perPage: 30,
+      totalItems: 0,
+      currentPage: 1,
+    }
+  },
+  methods: {
+    async get_all_instructors() {
+      try {
+        const instructors = await this.$axios.$get(
+          `instructors-v/get-all-instructors?page=1&size=50`
+        )
+
+        this.instructors = instructors.items
+      } catch (e) {
+        this.$toast.error(e)
+      }
     },
+    async get_all_course_instructors() {
+      try {
+        this.busy = true
+        let uri = `course-v/get-all-course-instructors?course_id=${this.$route.params.course}&page=${this.currentPage}&size=${this.perPage}`
+
+        if (this.search) {
+          uri = uri + `&search=${this.search}`
+        }
+        const instructors = await this.$axios.$get(uri)
+        this.course_instructors = instructors.items.reverse()
+        this.perPage = instructors.size
+        this.totalItems = instructors.total
+        this.currentPage = instructors.page
+      } catch (e) {
+        this.$toast.error(e)
+      } finally {
+        this.busy = false
+      }
+    },
+    async addInstructortoCourse() {
+      try {
+        await this.$axios.$post(
+          `course-v/add-instructor-to-a-course?course_id=${this.$route.params.course}`,
+          {
+            ids: [`${this.addInstructor}`],
+          }
+        )
+
+        this.$toast.success('Instructor added Successfully')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    handlePage(e) {
+      this.currentPage = e
+      this.get_all_course_instructors()
+    },
+    SearchText(e) {
+      this.search = e
+      this.get_all_course_instructors()
+    },
+  },
+  mounted() {
+    this.get_all_instructors()
   },
 }
 </script>

@@ -291,7 +291,7 @@
         >
           <li class="nav-item" role="presentation">
             <a
-              @click.prevent="setCourseParams('status')"
+              @click.prevent="setCourseParams()"
               class="
                 nav-link
                 medbrownparagraph
@@ -350,7 +350,7 @@
         </ul>
         <div>
           <div :class="{ 'fade show': currentTab == 0 }">
-            <filter-component>
+            <filter-component @search="SearchText">
               <template #default="{ visualization }">
                 <table-component
                   :items="courses"
@@ -450,11 +450,9 @@ export default {
       this.getAllCourses()
     },
     onRowClicked(e) {
-      console.log(e)
       this.$router.push(`courses/${e.id}`)
     },
     onGridClicked(e) {
-      console.log(e)
       this.$router.push(`courses/${e.id}`)
     },
     async addCourses() {
@@ -478,7 +476,7 @@ export default {
         this.add_preloader = false
       }
     },
-    async getAllCourses(payload = null) {
+    async getAllCourses() {
       this.busy = true
       let uri = `course-v/get-all-course?page=${this.currentPage}&size=${this.perPage}`
       if (this.search) {
@@ -502,20 +500,26 @@ export default {
     },
     // setfilter
     setCourseParams(payload) {
-      let params = ''
+      // let params = ''
 
-      if (payload) {
-        params = `&status=${payload}`
-        ;(this.status = false),
-          (this.on_going = false),
-          (this.open = false),
-          (this.archived = false),
-          (this[payload] = !this[payload])
+      // if (payload) {
+      //   params = `&status=${payload}`
+      //   ;(this.status = false),
+      //     (this.on_going = false),
+      //     (this.open = false),
+      //     (this.archived = false),
+      //     (this[payload] = !this[payload])
 
-        console.log('payload is', payload)
-      }
+      //   console.log('payload is', payload)
+      // }
+      this.status = payload
 
-      this.getAllCourses(params)
+      this.getAllCourses()
+    },
+    // search textsection
+    SearchText(e) {
+      this.search = e
+      this.getAllCourses()
     },
     handlefileupload(event) {
       const filedetail = []
