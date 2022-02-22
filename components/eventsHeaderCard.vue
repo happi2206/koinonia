@@ -192,6 +192,7 @@ export default {
     this.isLoading = true
     try {
       this.busy = true
+      this.isLoading = true
       let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
 
       if (this.search) {
@@ -201,8 +202,9 @@ export default {
       let present = student.items.filter((i) => i.status === true).length
       this.absent = student.total - present
       this.present = present
-      this.studentArray = student.items
       this.isLoading = false
+      this.studentArray = student.items
+      this.totalItems = student.total
     } catch (e) {
       this.$toast.error(e)
     } finally {
@@ -222,6 +224,7 @@ export default {
         this.absent = student.total - present
         this.present = present
         this.studentArray = student.items
+        this.totalItems = student.total
       } catch (e) {
         console.log(e)
       } finally {
