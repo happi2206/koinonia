@@ -12,7 +12,7 @@
           <form class="modabody px-3" @submit.prevent="addInstructor">
             <div class="my-2">
               <label for="" class="d-block medbrownparagraph graytext"
-                >Instructors Other Name
+                >Instructors First Name
               </label>
               <input
                 type="text"
@@ -97,7 +97,6 @@
             @Share_Link_Code="shareLinkCode"
             @Delete_Instructor="handleDelete"
           >
-            
           </table-component>
         </filter-component>
       </div>
