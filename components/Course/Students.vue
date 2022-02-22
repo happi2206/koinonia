@@ -103,6 +103,7 @@
           v-if="visualization === 'list'"
           @page-changed="handlePage"
           :perPage="perPage"
+          :dropdownItem="dropdownItem"
           :totalItems="totalItems"
         />
 
@@ -125,6 +126,7 @@ export default {
   data() {
     return {
       students: [],
+      dropdownItem: ['Share Link Code', 'Share_QR_Code', 'Delete'],
       student: {
         other_name: '',
         surname: '',
@@ -222,7 +224,9 @@ export default {
           uri = uri + `&search=${this.search}`
         }
         const students = await this.$axios.$get(uri)
+
         this.students = students.items.reverse()
+
         this.perPage = students.size
         this.totalItems = students.total
         this.currentPage = students.page

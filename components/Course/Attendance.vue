@@ -102,7 +102,7 @@
                   </div>
                 </div>
 
-                <div class="col-12">
+                <!-- <div class="col-12">
                   <div
                     class="d-flex justify-content-end"
                     @click="addDescriptionField"
@@ -114,7 +114,7 @@
                       event description
                     </p>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="my-4 col-12">
                   <div class="d-flex justify-content-center">

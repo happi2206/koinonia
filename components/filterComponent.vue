@@ -171,10 +171,27 @@ export default Vue.extend({
 }
 
 .firstwidth {
-  width: 40%;
+  width: 30%;
 }
 .secondwidth {
-  width: 60%;
+  width: 70%;
+}
+
+@media (max-width: 900.5px) {
+  .firstwidth {
+    width: 20%;
+  }
+  .secondwidth {
+    width: 80%;
+  }
+}
+@media (max-width: 900.5px) {
+  .firstwidth {
+    width: 100%;
+  }
+  .secondwidth {
+    width: 100%;
+  }
 }
 
 @media (max-width: 767.5px) {
