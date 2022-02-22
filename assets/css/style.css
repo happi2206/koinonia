@@ -596,6 +596,11 @@ button.loginbtn {
   width: 40%;
 }
 
+.coursedetail {
+  height: 250px;
+  object-fit: contain;
+}
+
 .footerlinks {
   font-family: Inter;
   font-size: 20px;
