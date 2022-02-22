@@ -150,10 +150,9 @@
           :totalItems="totalItems"
         >
           <template #no_of_students="{ data }">
-           {{data}}
+            {{ data }}
           </template>
           <template #Progress="{ data }">
-            
             <b-progress class="mt-2" :max="10">
               <b-progress-bar
                 :value="getPresent(data.item.students)"
@@ -208,8 +207,8 @@ export default {
           sortable: true,
           thStyle: { width: '150px' },
         },
-        { key: 'dots', label: '', sortable: true },
       ],
+
       eventDescriptionAdded: false,
       busy: false,
       events: [],
@@ -252,23 +251,30 @@ export default {
         }
         const events = await this.$axios.$get(uri)
 
+        events.items.forEach((element) => {
+          console.log(element.students.length)
+        })
+
         this.events = events.items.reverse()
+
+        // this.events.map((element) => {
+        //   this.events.push(element.students.length)
+        // })
+        console.log(this.events)
         this.perPage = events.size
         this.totalItems = events.total
         this.currentPage = events.page
 
-        // this.events = events.items.map((e, i) => {
+        //  this.events = events.items.map((e, i) => {
         //   let filterstudent = e.students.filter((i) => {
         //     return i.status == true
         //   })
 
-        //   let number = e.students.length - filterstudent
         //   return {
         //     Name: e.name,
         //     start_date: e.start_date,
         //     end_date: e.end_date,
         //     'No of Students': e.students.length,
-        //     Progress: number,
         //     id: e.id,
         //   }
         // })
@@ -286,12 +292,12 @@ export default {
       this.search = e
       this.get_all_course_events()
     },
-    getPresent(item){
-      return item.filter(t => t.status === true).length
+    getPresent(item) {
+      return item.filter((t) => t.status === true).length
     },
-    getAbsent(item){
-      return item.filter(t => t.status === false).length
-    }
+    getAbsent(item) {
+      return item.filter((t) => t.status === false).length
+    },
   },
 }
 </script>

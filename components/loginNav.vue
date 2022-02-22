@@ -217,7 +217,7 @@
           <div class="d-flex flex-column flex-lg-row align-items-center">
             <ul class="thirdcontent d-flex align-items-center mb-0">
               <div v-if="authenticated" class="d-flex">
-                <li class="nav-item mb-0 mx-2">
+                <li class="nav-item mb-0">
                   <nuxt-link
                     style="Ancona-Ex"
                     to="/dashboard/all-courses"
@@ -293,7 +293,7 @@
               </div>
             </div>
 
-            <div class="d-none d-lg-block ml-3" v-if="authenticated">
+            <div class="d-none d-lg-block ml-2" v-if="authenticated">
               <div class="d-lg-flex align-items-lg-center">
                 <b-dropdown
                   size="lg"
