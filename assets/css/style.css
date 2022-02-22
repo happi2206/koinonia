@@ -1021,6 +1021,12 @@ th {
   border-radius: 5px;
 }
 
+.logoplaceholder img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
 /* .imagesection:before {
   content: '';
   display: block;
@@ -1304,6 +1310,22 @@ th {
 @media (max-width: 768.5px) {
   .flwidth {
     width: 100%;
+  }
+
+  .brownheaderlarge {
+    font-family: 'Ancona-Ex';
+    font-size: 38px;
+    line-height: 40px;
+  }
+
+  .textsection {
+    top: 40px;
+    width: 80%;
+  }
+  .logoplaceholder img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
   .b-avatar {

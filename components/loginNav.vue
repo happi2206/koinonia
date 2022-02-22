@@ -21,9 +21,12 @@
       <div class="d-flex justify-content-between width100">
         <div class="d-block d-lg-none">
           <div class="d-flex align-items-center">
-            <nuxt-link to="/" class="navbar-brand logo-icon-mobile pr-2 mr-2">
+            <nuxt-link
+              to="/"
+              class="navbar-brand logo-icon-mobile logoplaceholder pr-2 mr-2"
+            >
               <img
-                src="~assets/images/blueyellologo.png"
+                src="~assets/images/koinoiologo.png"
                 alt=""
                 class="img-fluid"
               />
@@ -180,11 +183,11 @@
             <div class="d-flex flex-column flex-lg-row align-items-center">
               <nuxt-link
                 to="/"
-                class="navbar-brand logo-icon-mobile pr-2 mr-2"
+                class="navbar-brand logo-icon-mobile pr-2 mr-2 logoplaceholder"
                 href="#"
               >
                 <img
-                  src="~/assets/images/blueyellologo.png"
+                  src="~/assets/images/koinoiologo.png"
                   alt=""
                   class="img-fluid logoimages"
                 />
