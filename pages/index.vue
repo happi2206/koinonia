@@ -54,15 +54,15 @@
                 nisi ut aliquip ex ea commodo consequat.
               </p>
 
-              <div class="svgplaceholderimages">
+              <!-- <div class="">
                 <div class="d-flex align-items-center">
                   <img
-                    src="~/assets/images/people1.png"
+                    src="~/assets/images/imagesection.jpeg"
                     alt=""
                     class="img-fluid"
                   />
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

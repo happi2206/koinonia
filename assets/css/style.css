@@ -849,7 +849,7 @@ th {
   display: flex;
   justify-content: center;
 
-  height: 70vh;
+  height: 60vh;
   background: #28438724;
 }
 .imagesection img {
@@ -1301,19 +1301,18 @@ th {
     width: 80%;
   }
 
-  /* .textsection {
-    left: 20px;
+  .textsection {
     top: 140px;
-  } */
+  }
 
   .header {
     font-size: 28px;
     line-height: 30px;
   }
 
-  .imagesection {
+  /* .imagesection {
     height: 60vh;
-  }
+  } */
 
   .absolutecontainer.absolutes {
     position: relative;
@@ -1483,7 +1482,7 @@ th {
   }
 
   .imagesection {
-    height: 50vh;
+    height: 40vh;
   }
 
   button.mainbtndashboard {
