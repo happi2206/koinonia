@@ -660,6 +660,14 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 
+.medbrownparagraphlogo {
+  font-family: 'Ancona-Ex';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+}
 .medbrownparagraph {
   font-family: 'Ancona-Ex';
   font-size: 14px;

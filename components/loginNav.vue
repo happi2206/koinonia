@@ -209,7 +209,9 @@
                   alt=""
                   class="img-fluid logoimages"
                 />
-                <span class="mb-0 medbrownparagraph text-white"> KOINONIA</span>
+                <span class="mb-0 medbrownparagraphlogo text-white">
+                  KOINONIA</span
+                >
               </nuxt-link>
             </div>
           </div>
