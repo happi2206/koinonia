@@ -112,6 +112,19 @@ export default {
     }
   },
   methods: {
+    async getChecked(){
+    try {
+      const student = await this.$axios.$get(
+        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=1&size=50`
+      )
+
+      this.studentArray = student.items
+    } catch (e) {
+      console.log(e)
+    } finally {
+      this.busy = false
+    }
+    },
     async updateAttendance(student, status) {
       let url = status
         ? 'course-v/mark-attendance-event'
@@ -120,7 +133,8 @@ export default {
         await this.$axios.$patch(
           `${url}?student_id=${student}&event_id=${this.$route.params.eventclicked}&course_id=${this.$route.params.event}`
         )
-        this.$fetch()
+        this.getChecked()
+       
       } catch (error) {
         console.log(error)
       }
