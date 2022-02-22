@@ -197,6 +197,7 @@
               <div v-if="authenticated" class="d-flex">
                 <li class="nav-item mb-0 mx-4">
                   <nuxt-link
+                    style="Ancona-Ex"
                     to="/dashboard/all-courses"
                     class="nav-link text-white dashboardlink mb-0"
                   >

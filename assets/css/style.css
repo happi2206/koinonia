@@ -1,12 +1,25 @@
 /* Brown Font  */
 @font-face {
   font-family: 'Ancona-Ex';
-  src: url('../font/Ancona-Regular.ttf') format('ttf'),
-    url('../font/Ancona-Regular.ttf') format('truetype');
+  src: url('../font/AnconaEx.woff') format('woff'),
+    url('../font/AnconaEx.woff') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
+/* @font-face {
+  font-family: 'Ancona-Ex';
+  src: url('../font/Ancona-Regular.ttf') format('ttf'),
+    url('../font/Ancona-Ex-Regular.ttf') format('truetype'),
+    url('../font/AnconaEx.svg') format('svg'),
+    url('../font/AnconaEx.woff') format('woff'),
+    url('../font/AnconaEx.woff') format('woff2'),
+    url('../font/Ancona-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} */
+
 /* @font-face {
   font-family: 'Ancona-Ex';
   src: url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf'),
@@ -224,7 +237,7 @@ button.tertiarybtn {
 }
 
 .dashboardlink {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -285,7 +298,7 @@ button.loginbtndashboard {
   border-radius: 10px;
   border: 1px solid #fff;
   color: #fff;
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -296,7 +309,7 @@ button.loginbtndashboard {
 
 input.mainbtndashboard {
   background-color: #d3a13b;
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -312,7 +325,7 @@ input.mainbtndashboard {
 
 button.searchbtninside {
   background-color: #d3a13b;
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -614,7 +627,7 @@ button.loginbtn {
 }
 
 .brownheader {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -623,7 +636,7 @@ button.loginbtn {
 }
 
 .brownheaderlarge {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
@@ -633,7 +646,7 @@ button.loginbtn {
 }
 
 .brownparagraph {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -643,7 +656,7 @@ button.loginbtn {
 }
 
 .medbrownparagraph {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -651,7 +664,7 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 td {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -659,7 +672,7 @@ td {
   letter-spacing: 0em;
 }
 th {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -668,7 +681,7 @@ th {
 }
 
 .smallbrownparagraph {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -678,7 +691,7 @@ th {
 }
 
 .largebrownparagraph {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -688,7 +701,7 @@ th {
 }
 
 .brown24 {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -698,7 +711,7 @@ th {
 }
 
 .brown18 {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -708,7 +721,7 @@ th {
 }
 
 .brown20 {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -717,7 +730,7 @@ th {
   text-align: left;
 }
 .brown28 {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 28px;
   font-style: normal;
   font-weight: 400;
@@ -872,7 +885,7 @@ th {
   padding: 8px 20px;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -882,7 +895,7 @@ th {
 }
 
 .upload-btn-wrapper input[type='file'] {
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -1186,7 +1199,7 @@ th {
 
 .custom-tabs .nav-link {
   color: #333333;
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   border-left: none;
   border-right: none;
@@ -1200,7 +1213,7 @@ th {
 .custom-tabs .nav-link.active {
   border-bottom: 7px solid #d3a13b;
   color: #0734aa;
-  font-family: Brown;
+  font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

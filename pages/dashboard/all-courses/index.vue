@@ -300,7 +300,7 @@
                 cursor-pointer
                 my-2
               "
-              :class="{ active: status }"
+              :class="{ active: false }"
               >All Status</a
             >
           </li>

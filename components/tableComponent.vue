@@ -57,7 +57,7 @@
         <span class="text-capitalize"> {{ data.value }}</span>
       </template>
       <template #cell(check)="data">
-        <input type="checkbox" value="data.value">
+        <input type="checkbox" :value="data.value" />
       </template>
 
       <template #cell(house)="data">
