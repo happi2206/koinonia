@@ -616,9 +616,9 @@ export default {
         }
         const instructors = await this.$axios.$get(uri)
         this.course_instructors = instructors.items.reverse()
-        this.instructorPerPage = users.size
-        this.instructorTotalItems = users.total
-        this.instructorCurrentPage = users.page
+        this.instructorPerPage = instructors.size
+        this.instructorTotalItems = instructors.total
+        this.instructorCurrentPage = instructors.page
 
       } catch (e) {
         this.$toast.error(e)
