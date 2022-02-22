@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       students: [],
-      dropdownItem: ['Share Link Code', 'Share_QR_Code', 'Delete'],
+      dropdownItem: ['Share Link Code', 'Share_QR_Code', 'Delete', 'Edit'],
       student: {
         other_name: '',
         surname: '',

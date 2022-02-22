@@ -180,6 +180,7 @@ export default {
         start_time: '',
         end_time: '',
       },
+      dropdownItem: ['Share_QR_Code', 'Delete', 'Edit'],
       fields: [
         { key: 'Name', sortable: true },
         { key: 'start_date', sortable: true },
