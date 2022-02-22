@@ -4,7 +4,7 @@
       <template #besideFilterButton>
         <div class="">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
             v-b-modal.addStudent
           >
             Add Student
@@ -18,7 +18,7 @@
           />
           <button
             @click.prevent="$refs.uploadcsv.click()"
-            class="btn py-2 mainbtndashboard medbrownparagraph"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
           >
             Bulk Upload
           </button>
@@ -194,7 +194,7 @@ export default {
         `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
         new_array
       )
-      
+
       this.$toast.success('Students added Successfully')
     },
 
@@ -214,8 +214,7 @@ export default {
 
     async get_all_course_students() {
       try {
-
-this.busy = true
+        this.busy = true
         let uri = `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=${this.currentPage}&size=${this.perPage}`
 
         if (this.search) {
@@ -226,7 +225,6 @@ this.busy = true
         this.perPage = students.size
         this.totalItems = students.total
         this.currentPage = students.page
-        
       } catch (e) {
         this.$toast.error(e)
       } finally {

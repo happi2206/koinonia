@@ -589,7 +589,7 @@ button.loginbtn {
   background-color: #d3a13b;
 }
 .accentcolor {
-  color: #d3a13b;
+  color: #d3a13b !important;
 }
 
 .flwidth {

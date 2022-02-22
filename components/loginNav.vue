@@ -30,6 +30,8 @@
                 alt=""
                 class="img-fluid"
               />
+
+              KOINONIA
             </nuxt-link>
           </div>
         </div>
@@ -183,7 +185,16 @@
             <div class="d-flex flex-column flex-lg-row align-items-center">
               <nuxt-link
                 to="/"
-                class="navbar-brand logo-icon-mobile pr-2 mr-2 logoplaceholder"
+                class="
+                  navbar-brand
+                  logo-icon-mobile
+                  pr-2
+                  accentcolorbg
+                  mr-2
+                  logoplaceholder
+                  d-flex
+                  align-items-center
+                "
                 href="#"
               >
                 <img
@@ -191,6 +202,7 @@
                   alt=""
                   class="img-fluid logoimages"
                 />
+                <span class="mb-0 medbrownparagraph text-white"> KOINONIA</span>
               </nuxt-link>
             </div>
           </div>
@@ -202,7 +214,7 @@
                   <nuxt-link
                     style="Ancona-Ex"
                     to="/dashboard/all-courses"
-                    class="nav-link text-white dashboardlink mb-0"
+                    class="nav-link accentcolor dashboardlink mb-0"
                   >
                     My learning
                   </nuxt-link>
@@ -214,7 +226,7 @@
                 >
                   <nuxt-link
                     to="/dashboard/all-courses"
-                    class="nav-link text-white dashboardlink mb-0"
+                    class="nav-link accentcolor dashboardlink mb-0"
                   >
                     Instructors dashboard
                   </nuxt-link>
@@ -264,11 +276,11 @@
             <div class="mx-4" v-if="authenticated">
               <div class="relativecontainer d-none d-lg-block">
                 <span class="text-white"
-                  ><b-icon icon="bell-fill"></b-icon
+                  ><b-icon icon="bell-fill" class="accentcolor"></b-icon
                 ></span>
                 <div class="absolutecontainer online">
                   <span class="mainyellowcolor"
-                    ><b-icon icon="dot"></b-icon
+                    ><b-icon icon="dot" class="accentcolor"></b-icon
                   ></span>
                 </div>
               </div>
@@ -286,16 +298,16 @@
                   <template #button-content>
                     <div class="d-flex align-items-center medbrownparagraph">
                       <div class="profimgfull d-none d-lg-block">
-                        <b-avatar variant="success"></b-avatar>
+                        <b-avatar variant="warning"></b-avatar>
                       </div>
                       <div>
-                        <span class="mx-2 medbrownparagraph text-white">
+                        <span class="mx-2 medbrownparagraph accentcolor">
                           {{ user.other_name }}
                         </span>
                       </div>
                       <b-icon
                         icon="chevron-compact-down"
-                        class="text-white"
+                        class="accentcolor"
                       ></b-icon>
                     </div>
                   </template>

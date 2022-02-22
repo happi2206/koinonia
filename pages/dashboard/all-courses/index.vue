@@ -104,7 +104,7 @@
                     d-flex
                     align-items-center
                     justify-content-center
-                    col-md-4 col-12
+                    col-md-5 col-12
                   "
                 >
                   <img
@@ -114,21 +114,23 @@
                   />
                 </div>
                 <div
-                  class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
+                  class="flex gap-3 justify-content-center my-4 col-md-7 col-12"
                 >
                   <upload-file v-model="courseData.feature_image" />
-                  <input
-                    class="
-                      btn
-                      px-md-4 px-3
-                      py-2
-                      mainbtndashboard
-                      medbrownparagraph
-                    "
-                    type="submit"
-                    value="Create Course"
-                  />
                 </div>
+              </div>
+              <div class="d-flex justify-content-center text-center mt-4">
+                <input
+                  class="
+                    btn
+                    px-md-4 px-3
+                    py-2
+                    mainbtndashboard
+                    medbrownparagraph
+                  "
+                  type="submit"
+                  value="Create Course"
+                />
               </div>
             </form>
           </div>
@@ -413,7 +415,11 @@ export default {
         { key: 'check', label: '', sortable: true },
         { key: 'title', label: 'Name', sortable: true },
         { key: 'course_code', sortable: true },
-        { key: 'no_of_students', sortable: true },
+        {
+          key: 'no_of_students',
+          thStyle: { width: '30px' },
+          sortable: true,
+        },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
         { key: 'dots', label: 'Action', sortable: false },

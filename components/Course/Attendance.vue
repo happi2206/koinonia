@@ -1,107 +1,107 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
     <filter-component>
-    <template #besideFilterButton>
-      <div class="ml-md-5">
-        <button
-          class="btn py-2 mainbtndashboard medbrownparagraph text"
-          v-b-modal.addEvent
-        >
-          Add Event
-        </button>
-        <b-modal id="addEvent" centered title="Create Event" hide-footer>
-          <preloader :show="is_creating" />
-          <form class="modabody" @submit.prevent="createEvent">
-            <div class="row px-4">
-              <div class="col-12">
-                <div class="my-2">
-                  <label for="" class="d-block medbrownparagraph graytext"
-                    >Event Name
-                  </label>
+      <template #besideFilterButton>
+        <div class="ml-md-5">
+          <button
+            class="btn py-2 mainbtndashboard medbrownparagraph text"
+            v-b-modal.addEvent
+          >
+            Add Event
+          </button>
+          <b-modal id="addEvent" centered title="Create Event" hide-footer>
+            <preloader :show="is_creating" />
+            <form class="modabody" @submit.prevent="createEvent">
+              <div class="row px-4">
+                <div class="col-12">
+                  <div class="my-2">
+                    <label for="" class="d-block medbrownparagraph graytext"
+                      >Event Name
+                    </label>
 
-                  <input
-                    type="text"
-                    v-model="event.name"
-                    required
-                    placeholder="Event Name"
-                    class="forminputs text-dark"
-                  />
+                    <input
+                      type="text"
+                      v-model="event.name"
+                      required
+                      placeholder="Event Name"
+                      class="forminputs text-dark"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div class="col-12" v-if="eventDescriptionAdded">
-                <div class="my-2">
-                  <label for="" class="medbrownparagraph graytext"
-                    >Event Description
-                  </label>
+                <div class="col-12" v-if="eventDescriptionAdded">
+                  <div class="my-2">
+                    <label for="" class="medbrownparagraph graytext"
+                      >Event Description
+                    </label>
 
-                  <input
-                    type="text"
-                    v-model="event.description"
-                    required
-                    placeholder="Event Description"
-                    class="forminputs text-dark"
-                  />
+                    <input
+                      type="text"
+                      v-model="event.description"
+                      required
+                      placeholder="Event Description"
+                      class="forminputs text-dark"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div class="col-6">
-                <div class="my-2">
-                  <label for="" class="medbrownparagraph graytext"
-                    >Start Date
-                  </label>
-                  <input
-                    type="date"
-                    required
-                    v-model="event.start_date"
-                    placeholder="Start Date"
-                    class="forminputs text-dark"
-                  />
+                <div class="col-6">
+                  <div class="my-2">
+                    <label for="" class="medbrownparagraph graytext"
+                      >Start Date
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      v-model="event.start_date"
+                      placeholder="Start Date"
+                      class="forminputs text-dark"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="col-6">
-                <div class="my-2">
-                  <label for="" class="medbrownparagraph graytext"
-                    >Start Time
-                  </label>
-                  <input
-                    type="time"
-                    required
-                    v-model="event.start_time"
-                    placeholder="End Date"
-                    class="forminputs text-dark"
-                  />
+                <div class="col-6">
+                  <div class="my-2">
+                    <label for="" class="medbrownparagraph graytext"
+                      >Start Time
+                    </label>
+                    <input
+                      type="time"
+                      required
+                      v-model="event.start_time"
+                      placeholder="End Date"
+                      class="forminputs text-dark"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="col-6">
-                <div class="my-2">
-                  <label for="" class="medbrownparagraph graytext"
-                    >End Date
-                  </label>
-                  <input
-                    type="date"
-                    required
-                    v-model="event.end_date"
-                    placeholder="Start Date"
-                    class="forminputs text-dark"
-                  />
+                <div class="col-6">
+                  <div class="my-2">
+                    <label for="" class="medbrownparagraph graytext"
+                      >End Date
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      v-model="event.end_date"
+                      placeholder="Start Date"
+                      class="forminputs text-dark"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="col-6">
-                <div class="my-2">
-                  <label for="" class="d-block medbrownparagraph graytext"
-                    >End Time
-                  </label>
-                  <input
-                    type="time"
-                    required
-                    v-model="event.end_time"
-                    placeholder="End Date"
-                    class="forminputs text-dark"
-                  />
+                <div class="col-6">
+                  <div class="my-2">
+                    <label for="" class="d-block medbrownparagraph graytext"
+                      >End Time
+                    </label>
+                    <input
+                      type="time"
+                      required
+                      v-model="event.end_time"
+                      placeholder="End Date"
+                      class="forminputs text-dark"
+                    />
+                  </div>
                 </div>
-              </div>
-
+                <!-- 
               <div class="col-12">
                 <div
                   class="d-flex justify-content-end"
@@ -114,52 +114,52 @@
                     event description
                   </p>
                 </div>
-              </div>
+              </div> -->
 
-              <div class="my-4 col-12">
-                <div class="d-flex justify-content-center">
-                  <button
-                  :disabled="is_creating"
-                    class="
-                      btn
-                      px-md-4 px-3
-                      py-2
-                      mainbtndashboard
-                      medbrownparagraph
-                    "
-                  >
-                    Add Event
-                  </button>
+                <div class="my-4 col-12">
+                  <div class="d-flex justify-content-center">
+                    <button
+                      :disabled="is_creating"
+                      class="
+                        btn
+                        px-md-4 px-3
+                        py-2
+                        mainbtndashboard
+                        medbrownparagraph
+                      "
+                    >
+                      Add Event
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
-        </b-modal>
-      </div>
-    </template>
-    <template #default="{ visualization }">
-      <table-component
-        :items="events"
-        v-if="visualization === 'list'"
-        :fields="fields"
-        :dropdownItem="dropdownItem"
-        @row-clicked="onRowClicked"
-        :busy="busy"
+            </form>
+          </b-modal>
+        </div>
+      </template>
+      <template #default="{ visualization }">
+        <table-component
+          :items="events"
+          v-if="visualization === 'list'"
+          :fields="fields"
+          :dropdownItem="dropdownItem"
+          @row-clicked="onRowClicked"
+          :busy="busy"
           @page-changed="handlePage"
           :perPage="perPage"
           :totalItems="totalItems"
-      >
-      </table-component>
+        >
+        </table-component>
 
-      <div class="row" v-else>
-        <grid-component
-          :data="events"
-          v-for="(event, index) in events"
-          :key="index"
-        ></grid-component>
-      </div>
-    </template>
-  </filter-component>
+        <div class="row" v-else>
+          <grid-component
+            :data="events"
+            v-for="(event, index) in events"
+            :key="index"
+          ></grid-component>
+        </div>
+      </template>
+    </filter-component>
   </div>
 </template>
 
@@ -182,8 +182,8 @@ export default {
       },
       fields: [
         { key: 'Name', sortable: true },
-        { key: 'Start Date', sortable: true },
-        { key: 'End Date', sortable: true },
+        { key: 'start_date', label: 'Start Date', sortable: true },
+        { key: 'end_date', sortable: true },
         { key: 'No of Students', sortable: true },
         {
           key: 'Progress',
@@ -191,12 +191,12 @@ export default {
           sortable: true,
           thStyle: { width: '200px' },
         },
-        { key: 'dots', label: '', sortable: true },
+        { key: 'dots', label: 'Action', sortable: true },
       ],
       eventDescriptionAdded: false,
       busy: false,
       events: [],
-      is_creating:false
+      is_creating: false,
     }
   },
 
@@ -208,12 +208,12 @@ export default {
           `course-v/add-course-event?course_id=${this.$route.params.course}`,
           this.event
         )
-        
+
         this.$bvModal.hide('addEvent')
         this.$toast.success('Event added Successfully')
       } catch (e) {
         this.$toast.error(e.data.detail.message)
-      }finally{
+      } finally {
         this.is_creating = false
       }
     },
@@ -245,12 +245,11 @@ export default {
         })
       } catch (e) {
         this.$toast.error(e)
-      }finally{
+      } finally {
         this.busy = false
       }
     },
   },
- 
 }
 </script>
 
