@@ -44,9 +44,12 @@ Vue.filter('AssetSize', (value) => {
 })
 Vue.filter('DateFormat', (value) => {
     if (!value) return ''
-    let dt = new Date(value);
-    dt = DateTime.fromJSDate(dt).setLocale('en')
-        .toFormat('DDD');
+    const date = DateTime.fromISO(value)
+    return date.toLocaleString(DateTime.DATE_MED);
+})
 
-    return dt
+Vue.filter('DateTimeFormat', (value) => {
+    if (!value) return ''
+    const date = DateTime.fromISO(value)
+    return date.toLocaleString(DateTime.DATETIME_MED);
 })
