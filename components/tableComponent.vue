@@ -77,14 +77,14 @@
         <slot name="avatar" :data="data">{{ data.value }}</slot>
       </template>
       <template #cell(start_date)="data">
-        <span>{{ data.item.start_date | DateFormat }}</span>
+        <span>{{ data.item.start_date | DateTimeFormat }}</span>
       </template>
 
       <template #cell(check_in)="data">
-        <span>{{ data.item.check_in | DateFormat }}</span>
+        <span>{{ data.item.check_in | DateTimeFormat }}</span>
       </template>
       <template #cell(end_date)="data">
-        <span>{{ data.item.end_date | DateFormat }}</span>
+        <span>{{ data.item.end_date | DateTimeFormat }}</span>
       </template>
       <template #cell(Progress)="data">
         <slot name="Progress" :data="data"></slot>

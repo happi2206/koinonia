@@ -5,20 +5,22 @@
         <b-icon icon="arrow-left" class="mx-2 mainbluecolor"></b-icon>
         <a
           href="#"
-          @click.prevent="$router.go(-2)"
-          class="brownparagraph bold700 mainbluecolor mb-0"
-        >
-          {{ courseTitle }}
-        </a>
-        <span
-          class="iconify mainbluecolor"
-          data-icon="dashicons:arrow-left-alt2"
-        ></span>
-        <a
-          href="#"
           @click.prevent="$router.go(-1)"
-          class="brownparagraph bold700 mainbluecolor mb-0"
+          class="
+            brownparagraph
+            bold700
+            mainbluecolor
+            mb-0
+            d-flex
+            align-items-center
+          "
         >
+          <span
+            class="iconify mainbluecolor"
+            data-icon="dashicons:arrow-left-alt2"
+          ></span>
+          <span>{{ courseTitle }}</span>
+
           <span>
             {{ eventDetail.name }}
           </span>
