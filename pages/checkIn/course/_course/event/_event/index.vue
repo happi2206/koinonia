@@ -4,13 +4,19 @@
     <div class="horizontalspacing pt-5">
       <div>
         <div class="mt-5 pt-5">
-          <div class="pt-5">
+          <div class="imglogocontainer d-flex justify-content-center">
+            <img
+              src="~/assets/images/koinoiologo.png"
+              alt=""
+              class="img-fluid logoimages"
+            />
+          </div>
+          <div class="pt-3">
             <h2 class="text-center largebrownparagraph">
-              Welcome to your <span></span> course. Please fill in your details
-              accordingly
+              Welcome to <span>{{ course.title }}</span> . Please fill in your
+              details accordingly to join<span>{{ event.name }}</span>
             </h2>
           </div>
-          <h2 class="largebrownparagraph text-center">Check in</h2>
           <p class="medbrownparagraph"></p>
         </div>
 
@@ -94,12 +100,38 @@ export default {
       }
     },
   },
+
+  async asyncData({ route, $axios }) {
+    try {
+      const getCourse = await $axios.$get(
+        `course-v/get-a-course?course_id=${route.params.course}`
+      )
+      const getEvent = await $axios.$get(
+        `course-v/get-course-event?course_id=${route.params.course}&event_id=${route.params.event}`
+      )
+
+      return {
+        course: getCourse,
+        event: getEvent,
+      }
+      alert(JSON.stringify(getId))
+    } catch (e) {
+      console.log(e)
+    }
+  },
 }
 </script>
 
 <style  scoped>
 .width75 {
   width: 75%;
+}
+
+.imglogocontainer img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  background: #000;
 }
 
 @media (max-width: 991.5px) {
