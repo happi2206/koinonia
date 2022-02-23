@@ -319,6 +319,12 @@ input.mainbtndashboard {
   border-radius: 10px;
 }
 
+button.mainbtndashboard:hover {
+  background-color: #fff;
+  border: 1px solid #d3a13b;
+  color: #d3a13b;
+}
+
 .gap {
   gap: 10px;
 }
