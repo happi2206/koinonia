@@ -567,8 +567,8 @@ export default {
           `course-v/edit-course?course_id=${forSubmit.id}`,
           forSubmit
         )
-        this.$fetch()
-        console.log(e)
+        this.getAllCourses()
+        this.$bvModal.hide('editmodal')
       } catch (e) {
         console.error(e)
       }

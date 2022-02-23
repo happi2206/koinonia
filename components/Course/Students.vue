@@ -212,7 +212,7 @@ export default {
           `course-v/add-flat-student-to-a-course?course_id=${this.$route.params.course}`,
           this.student
         )
-        this.$fetch()
+        this.get_all_course_students()
         this.$bvModal.hide('addStudent')
         this.$toast.success('Student added Successfully')
       } catch (e) {

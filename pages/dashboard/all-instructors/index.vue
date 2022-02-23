@@ -162,7 +162,7 @@ export default {
     async handleDelete(e) {
       try {
         await this.$axios.delete(`admin-v/delete-user?user_id=${e.id}`)
-        this.$fetch()
+        this.getAllInstructors()
       } catch (e) {
         console.log(e)
       }

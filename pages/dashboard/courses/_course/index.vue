@@ -153,8 +153,10 @@ export default {
           `course-v/edit-course?course_id=${forSubmit.id}`,
           forSubmit
         )
-        this.$fetch()
-        console.log(e)
+
+        this.$bvModal.hide('editmodal')
+
+        this.getAllCourses()
       } catch (e) {
         console.error(e)
       }
@@ -162,7 +164,7 @@ export default {
     async handleDelete(e) {
       try {
         await this.$axios.delete(`course-v/delete-course?course_id=${e.id}`)
-        this.$fetch()
+        this.getAllCourses()
       } catch (e) {
         console.log(e)
       }
