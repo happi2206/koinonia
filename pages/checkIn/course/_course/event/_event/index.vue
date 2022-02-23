@@ -96,7 +96,7 @@
                       <span class="bold800"> {{ other_name }}.</span>
                     </h2>
                     <h2 class="text-center largebrownparagraph">
-                      Your attendance for
+                      Your Attendance for
                       {{ event.name }} has been succesfully taken
                     </h2>
                   </strong>
