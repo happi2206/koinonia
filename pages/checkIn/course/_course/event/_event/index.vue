@@ -92,7 +92,7 @@
                   flex-column
                   align-items-center align-content-center
                 "
-                v-if="errorDetail == 'User has already been checked in'"
+                v-if="errorDetail !== ''"
               >
                 <b-icon
                   icon="x-circle-fill"
