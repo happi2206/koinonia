@@ -1,4 +1,5 @@
-/* Brown Font  */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 @font-face {
   font-family: 'Ancona-Ex';
   src: url('../font/AnconaEx.woff') format('woff'),
@@ -107,6 +108,10 @@ html body main {
 
 .lightyellowcolor {
   color: #fff8dc;
+}
+
+.robotofont {
+  font-family: 'Roboto', sans-serif;
 }
 
 .mainbluebg {
@@ -435,7 +440,7 @@ button.loginbtn {
 }
 
 .biggerparagraph {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -445,7 +450,7 @@ button.loginbtn {
 }
 
 .roboto24 {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 24px;
   font-style: normal;
   line-height: 28px;
@@ -454,7 +459,7 @@ button.loginbtn {
 }
 
 .roboto22 {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 22px;
   font-style: normal;
   line-height: 22px;
@@ -503,7 +508,7 @@ button.loginbtn {
 }
 
 .roboto32 {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -513,7 +518,7 @@ button.loginbtn {
 }
 
 .roboto12 {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

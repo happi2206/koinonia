@@ -107,12 +107,12 @@
                   variant="success"
                 ></b-icon>
                 <strong id="form-confirm-label">
-                  <h2 class="text-center largebrownparagraph">
+                  <h2 class="text-center biggerparagraph">
                     Welcome
 
                     <span class="bold800"> {{ other_name }}.</span>
                   </h2>
-                  <h2 class="text-center largebrownparagraph">
+                  <h2 class="text-center biggerparagraph">
                     Your Attendance for
                     {{ event.name }} has been succesfully taken
                   </h2>
