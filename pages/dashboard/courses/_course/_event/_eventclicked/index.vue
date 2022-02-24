@@ -15,11 +15,11 @@
             align-items-center
           "
         >
+          <span>{{ courseTitle }}</span>
           <span
             class="iconify mainbluecolor"
             data-icon="dashicons:arrow-left-alt2"
           ></span>
-          <span>{{ courseTitle }}</span>
 
           <span>
             {{ eventDetail.name }}

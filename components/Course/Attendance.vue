@@ -207,6 +207,7 @@ export default {
           sortable: true,
           thStyle: { width: '150px' },
         },
+        { key: 'dots', label: 'Action', sortable: false },
       ],
 
       eventDescriptionAdded: false,

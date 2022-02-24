@@ -5,9 +5,15 @@
       <div>
         <div class="mt-5 pt-5">
           <div class="pt-3">
-            <h2 class="text-center largebrownparagraph">
-              Welcome to <span>{{ course.title }}</span> . Please fill in your
-              details accordingly to join<span> {{ event.name }}</span>
+            <strong
+              ><h2 class="text-center">
+                {{ course.title }}
+              </h2></strong
+            >
+            <h2 class="text-center h1 lead">
+              Please fill in your details accordingly to join<span>
+                {{ event.name }}</span
+              >
             </h2>
           </div>
           <p class="medbrownparagraph"></p>
@@ -19,7 +25,7 @@
             @submit.prevent="submitFunction"
           >
             <div class="my-4 py-2">
-              <label for="" class="d-block medbrownparagraph graytext"
+              <label for="" class="d-block graytext"
                 >Surname
                 <span class="text-danger">*</span>
               </label>
@@ -32,7 +38,7 @@
               />
             </div>
             <div class="my-4 py-2">
-              <label for="" class="d-block medbrownparagraph graytext"
+              <label for="" class="d-block graytext"
                 >Registeration Number
                 <span class="text-danger">*</span>
               </label>
@@ -79,7 +85,13 @@
                 role="dialog"
                 aria-modal="false"
                 aria-labelledby="form-confirm-label"
-                class="d-flex justify-content-between align-items-center p-3"
+                class="
+                  d-flex
+                  flex-md-row flex-column-reverse
+                  justify-content-between
+                  align-items-center
+                  p-3
+                "
               >
                 <div class="d-flex justify-content-center">
                   <img
@@ -132,6 +144,8 @@ export default {
     },
     async submitFunction() {
       this.processing = false
+      //  const string =
+      //  this.formInputs.surname.charAt(0).toUpperCase() + string.slice(1)
 
       try {
         const response = await this.$axios.$post(
@@ -139,16 +153,14 @@ export default {
           {
             school_id: process.env.SCHOOL_ID,
             surname: this.formInputs.surname,
-            registration_number: this.formInputs.regNo,
+            registration_number: 'KSOM/2022/ABUJA/' + this.formInputs.regNo,
             course_id: this.$route.params.course,
             event_id: this.$route.params.event,
           }
         )
 
         this.other_name = response.message.other_name
-
         this.busy = true
-        this.$toast.success('Registration Successful')
       } catch (e) {
         this.$toast.error(e.data.detail.message)
         console.log(e.data.detail.message)

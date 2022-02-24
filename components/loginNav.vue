@@ -9,6 +9,7 @@
         align-items-center
         navbar-expand-lg
         mobilenavigation
+        mx-0
         my-0
         pt-2
         pb-2
