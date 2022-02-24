@@ -241,7 +241,7 @@ button.tertiarybtn {
 }
 
 .dashboardlink {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -468,7 +468,7 @@ button.loginbtn {
 }
 
 .medparagraph {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

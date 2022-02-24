@@ -66,12 +66,12 @@
               no-caret
             >
               <template #button-content>
-                <div class="d-flex align-items-center medbrownparagraph">
+                <div class="d-flex align-items-center medparagraph">
                   <div class="profimgfull d-block d-lg-none">
                     <b-avatar variant="success"></b-avatar>
                   </div>
                   <div>
-                    <span class="mx-2 medbrownparagraph text-white">
+                    <span class="mx-2 medparagraph text-white">
                       {{ user.other_name }}
                     </span>
                   </div>
@@ -81,17 +81,17 @@
                   ></b-icon>
                 </div>
               </template>
-              <b-dropdown-item href="#" class="medbrownparagraph">
+              <b-dropdown-item href="#" class="medparagraph">
                 <nuxt-link to="/dashboard/accountsettings"> profile </nuxt-link>
               </b-dropdown-item>
-              <b-dropdown-item href="#" class="medbrownparagraph">
+              <b-dropdown-item href="#" class="medparagraph">
                 <nuxt-link to="/dashboard/accountsettings">
                   Account Settings
                 </nuxt-link>
               </b-dropdown-item>
               <b-dropdown-item
                 href="#"
-                class="medbrownparagraph"
+                class="medparagraph"
                 v-if="!user.is_instructor"
                 @click.prevent="linkToContent"
               >
@@ -99,7 +99,7 @@
               </b-dropdown-item>
               <b-dropdown-item
                 href="#"
-                class="medbrownparagraph"
+                class="medparagraph"
                 v-if="!user.is_administrator"
                 @click.prevent="linkToContent"
               >
@@ -107,17 +107,13 @@
               </b-dropdown-item>
               <b-dropdown-item
                 href="#"
-                class="medbrownparagraph"
+                class="medparagraph"
                 @click.prevent="linkToContent"
                 v-else
               >
                 Link as Courses
               </b-dropdown-item>
-              <b-dropdown-item
-                @click="signOut"
-                href="#"
-                class="medbrownparagraph"
-              >
+              <b-dropdown-item @click="signOut" href="#" class="medparagraph">
                 Logout
               </b-dropdown-item>
             </b-dropdown>
@@ -163,7 +159,7 @@
           >
             <nuxt-link
               to="/login"
-              class="mb-0 text-white medbrownparagraph text-center"
+              class="mb-0 text-white medparagraph text-center"
             >
               Log in
             </nuxt-link>
@@ -171,14 +167,14 @@
           <button class="btn mainbtn px-lg-4 px-3 py-lg-2 py-1 mx-lg-2 mx-1">
             <nuxt-link
               to="/register"
-              class="mb-0 text-white medbrownparagraph text-center"
+              class="mb-0 text-white medparagraph text-center"
             >
               Sign Up
             </nuxt-link>
           </button>
         </div>
       </div>
-      <b-collapse id="nav-collapse" is-nav class="horizontalspacing py-2">
+      <b-collapse id="nav-collapse" is-nav class="mx-2 py-2">
         <div
           class="
             d-flex
@@ -222,7 +218,6 @@
               <div v-if="authenticated" class="d-flex">
                 <li class="nav-item mb-0">
                   <nuxt-link
-                    style="Ancona-Ex"
                     to="/dashboard/all-courses"
                     class="nav-link text-white dashboardlink mb-0"
                   >
@@ -256,7 +251,7 @@
                     d-none d-lg-block
                     mb-0
                     text-white
-                    medbrownparagraph
+                    medparagraph
                     text-center
                   "
                 >
@@ -274,7 +269,7 @@
                     d-none d-lg-block
                     text-white
                     mainbtndashboard
-                    medbrownparagraph
+                    medparagraph
                     text-center
                   "
                 >
@@ -306,12 +301,12 @@
                   no-caret
                 >
                   <template #button-content>
-                    <div class="d-flex align-items-center medbrownparagraph">
+                    <div class="d-flex align-items-center medparagraph">
                       <div class="profimgfull d-none d-lg-block">
                         <b-avatar variant="warning"></b-avatar>
                       </div>
                       <div>
-                        <span class="mx-2 medbrownparagraph text-white">
+                        <span class="mx-2 medparagraph text-white">
                           {{ user.other_name }}
                         </span>
                       </div>
@@ -321,19 +316,19 @@
                       ></b-icon>
                     </div>
                   </template>
-                  <b-dropdown-item href="#" class="medbrownparagraph">
+                  <b-dropdown-item href="#" class="medparagraph">
                     <nuxt-link to="/dashboard/accountsettings">
                       profile
                     </nuxt-link>
                   </b-dropdown-item>
-                  <b-dropdown-item href="#" class="medbrownparagraph">
+                  <b-dropdown-item href="#" class="medparagraph">
                     <nuxt-link to="/dashboard/accountsettings">
                       Account Settings
                     </nuxt-link>
                   </b-dropdown-item>
                   <b-dropdown-item
                     href="#"
-                    class="medbrownparagraph"
+                    class="medparagraph"
                     v-if="!user.is_instructor"
                     @click.prevent="linkToContent"
                   >
@@ -341,7 +336,7 @@
                   </b-dropdown-item>
                   <b-dropdown-item
                     href="#"
-                    class="medbrownparagraph"
+                    class="medparagraph"
                     v-if="!user.is_administrator"
                     @click.prevent="linkToContent"
                   >
@@ -349,7 +344,7 @@
                   </b-dropdown-item>
                   <b-dropdown-item
                     href="#"
-                    class="medbrownparagraph"
+                    class="medparagraph"
                     @click.prevent="linkToContent"
                     v-else
                   >
@@ -358,7 +353,7 @@
                   <b-dropdown-item
                     @click="signOut"
                     href="#"
-                    class="medbrownparagraph"
+                    class="medparagraph"
                   >
                     Logout
                   </b-dropdown-item>
