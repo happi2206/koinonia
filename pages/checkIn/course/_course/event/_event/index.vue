@@ -202,11 +202,20 @@ export default {
   async asyncData({ route, $axios }) {
     try {
       const getCourse = await $axios.$get(
-        `course-v/get-a-course?course_id=${route.params.course}`
+        `course-v/get-a-course-by-id/?course_id=${route.params.course}&school_id=${process.env.SCHOOL_ID}`
       )
       const getEvent = await $axios.$get(
-        `course-v/get-course-event?course_id=${route.params.course}&event_id=${route.params.event}`
+        `course-v/get-course-event-by-id?course_id=${route.params.course}&event_id=${route.params.event}&school_id=${process.env.SCHOOL_ID}`
       )
+
+      console.log(getCourse)
+
+      // const getCourse = await $axios.$get(
+      //   `course-v/get-a-course?course_id=${route.params.course}`
+      // )
+      // const getEvent = await $axios.$get(
+      //   `course-v/get-course-event?course_id=${route.params.course}&event_id=${route.params.event}`
+      // )
 
       return {
         course: getCourse,
