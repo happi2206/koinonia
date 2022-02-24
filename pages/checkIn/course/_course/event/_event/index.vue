@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <login-nav />
+  <div class="container">
+    <!-- <login-nav /> -->
     <div class="horizontalspacing pt-5">
       <div>
         <div class="mt-5 pt-5">
@@ -53,15 +53,7 @@
 
             <div class="my-4 py-2 d-flex justify-content-center">
               <button
-                class="
-                  btn
-                  py-md-3 py-2
-                  mainbtndashboard
-                  largebrownparagraph
-                  w-100
-                  text-center text
-                  bold700
-                "
+                class="btn py-md-3 py-2 mainbtndashboard largebrownparagraph w-100 text-center text bold700"
                 ref="submit"
                 type="submit"
               >
@@ -85,13 +77,7 @@
                 role="dialog"
                 aria-modal="false"
                 aria-labelledby="form-confirm-label"
-                class="
-                  d-flex
-                  flex-md-row flex-column-reverse
-                  justify-content-between
-                  align-items-center
-                  p-3
-                "
+                class="d-flex flex-md-row flex-column-reverse justify-content-between align-items-center p-3"
               >
                 <div class="d-flex justify-content-center">
                   <img
@@ -123,6 +109,8 @@
 </template>
 
 <script>
+const { detect } = require('detect-browser')
+const browser = detect()
 export default {
   data() {
     return {
@@ -156,6 +144,11 @@ export default {
             registration_number: 'KSOM/2022/ABUJA/' + this.formInputs.regNo,
             course_id: this.$route.params.course,
             event_id: this.$route.params.event,
+            browser: {
+              name: browser.name,
+              version: browser.version,
+              os: browser.os,
+            },
           }
         )
 
@@ -188,7 +181,7 @@ export default {
 }
 </script>
 
-<style  scoped>
+<style scoped>
 .width75 {
   width: 75%;
 }
