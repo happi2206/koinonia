@@ -12,19 +12,19 @@
     >
       <div class="mt-5 py-3">
         <b-overlay :show="busy" opacity="1" blur="0">
-          <div class="card-body bg-white p-5">
+          <div class="card-body bg-white p-5 mt-5">
             <strong
-              ><h2 class="text-center">
+              ><h2 class="text-center px-md-5">
                 {{ course.title }}
               </h2></strong
             >
-            <h2 class="text-center h1 lead">
+            <h2 class="text-center h1 lead px-md-5 py-1">
               Please fill in your details accordingly to join<span>
                 {{ event.name }}</span
               >
             </h2>
 
-            <form class="p-md-5 px-2" @submit.prevent="submitFunction">
+            <form class="px-md-5 px-2" @submit.prevent="submitFunction">
               <div class="my-4 py-2">
                 <label for="" class="d-block graytext"
                   >Surname

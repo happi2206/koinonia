@@ -47,14 +47,14 @@
       </div>
 
       <div class="d-flex align-items-center">
-        <div class="" v-if="authenticated">
+        <!-- <div class="" v-if="authenticated">
           <div class="relativecontainer d-block d-lg-none mx-3">
             <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
             <div class="absolutecontainer online">
               <span class="mainyellowcolor"><b-icon icon="dot"></b-icon></span>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="d-block d-lg-none mx-3" v-if="authenticated">
           <div class="d-lg-flex align-items-lg-center">
@@ -278,7 +278,7 @@
               </div>
             </ul>
 
-            <div class="mx-2" v-if="authenticated">
+            <!-- <div class="mx-2" v-if="authenticated">
               <div class="relativecontainer d-none d-lg-block">
                 <span class="text-white"
                   ><b-icon icon="bell-fill" class="text-white"></b-icon
@@ -289,7 +289,7 @@
                   ></span>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="d-none d-lg-block ml-2" v-if="authenticated">
               <div class="d-lg-flex align-items-lg-center">
