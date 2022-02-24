@@ -1,10 +1,18 @@
 <template>
-  <div>
-    <login-nav />
-    <div class="horizontalspacing pt-5">
-      <div>
-        <div class="mt-5 pt-5">
-          <div class="pt-3">
+  <div class="bodylightgray h-100">
+    <div
+      class="
+        container
+        d-flex
+        justify-content-center
+        align-content-center
+        pt-5
+        customcard
+      "
+    >
+      <div class="mt-5 py-3">
+        <b-overlay :show="busy" opacity="1" blur="0">
+          <div class="card-body bg-white p-5">
             <strong
               ><h2 class="text-center">
                 {{ course.title }}
@@ -15,108 +23,104 @@
                 {{ event.name }}</span
               >
             </h2>
+
+            <form class="p-md-5 px-2" @submit.prevent="submitFunction">
+              <div class="my-4 py-2">
+                <label for="" class="d-block graytext"
+                  >Surname
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  v-model="formInputs.surname"
+                  placeholder="e.g Nuella"
+                  class="forminputs text-dark"
+                />
+              </div>
+              <div class="my-4 py-2">
+                <label for="" class="d-block graytext"
+                  >Registeration Number
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  v-model="formInputs.regNo"
+                  placeholder="e.g Ime"
+                  class="forminputs text-dark"
+                />
+              </div>
+
+              <div class="my-4 py-2 d-flex justify-content-center">
+                <button
+                  class="
+                    btn-lg btn
+                    py-md-3 py-2
+                    mainbtndashboard
+                    largebrownparagraph
+                    w-100
+                    text-center text
+                    bold700
+                  "
+                  ref="submit"
+                  type="submit"
+                >
+                  Check in
+                </button>
+              </div>
+            </form>
           </div>
-          <p class="medbrownparagraph"></p>
-        </div>
 
-        <div class="bg-white mt-3 d-flex justify-content-center">
-          <form
-            class="forminputpadding w-75 width75"
-            @submit.prevent="submitFunction"
-          >
-            <div class="my-4 py-2">
-              <label for="" class="d-block graytext"
-                >Surname
-                <span class="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                v-model="formInputs.surname"
-                placeholder="e.g Nuella"
-                class="forminputs text-dark"
-              />
-            </div>
-            <div class="my-4 py-2">
-              <label for="" class="d-block graytext"
-                >Registeration Number
-                <span class="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                v-model="formInputs.regNo"
-                placeholder="e.g Ime"
-                class="forminputs text-dark"
-              />
-            </div>
+          <template #overlay>
+            <div
+              ref="dialog"
+              tabindex="-1"
+              role="dialog"
+              aria-modal="false"
+              aria-labelledby="form-confirm-label"
+              class="
+                d-flex
+                flex-md-row flex-column-reverse
+                justify-content-between
+                align-items-center
+                p-md-3
+              "
+            >
+              <!-- <b-icon
+                icon="x-circle-fill"
+                font-scale="3"
+                variant="danger"
+              ></b-icon> -->
 
-            <div class="my-4 py-2 d-flex justify-content-center">
-              <button
-                class="
-                  btn
-                  py-md-3 py-2
-                  mainbtndashboard
-                  largebrownparagraph
-                  w-100
-                  text-center text
-                  bold700
-                "
-                ref="submit"
-                type="submit"
-              >
-                Check in
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class="bg-white mt-3 d-flex justify-content-center">
-          <b-overlay
-            :show="busy"
-            no-wrap
-            @shown="onShown"
-            @hidden="onHidden"
-            opacity="1rem"
-          >
-            <template #overlay>
               <div
-                ref="dialog"
-                tabindex="-1"
-                role="dialog"
-                aria-modal="false"
-                aria-labelledby="form-confirm-label"
                 class="
                   d-flex
-                  flex-md-row flex-column-reverse
-                  justify-content-between
-                  align-items-center
-                  p-3
+                  flex-column
+                  align-items-center align-content-center
                 "
               >
-                <div class="d-flex justify-content-center">
-                  <img
-                    src="~/assets/images/welcomemessage.svg"
-                    alt=""
-                    class="img-fluid logoimages"
-                  />
-                </div>
-                <p>
-                  <strong id="form-confirm-label">
-                    <h2 class="text-center largebrownparagraph">
-                      Welcome
+                <b-icon
+                  icon="check-circle-fill"
+                  font-scale="3"
+                  class="my-3"
+                  variant="success"
+                ></b-icon>
+                <strong id="form-confirm-label">
+                  <h2 class="text-center largebrownparagraph">
+                    Welcome
 
-                      <span class="bold800"> {{ other_name }}.</span>
-                    </h2>
-                    <h2 class="text-center largebrownparagraph">
-                      Your Attendance for
-                      {{ event.name }} has been succesfully taken
-                    </h2>
-                  </strong>
-                </p>
+                    <span class="bold800"> {{ other_name }}.</span>
+                  </h2>
+                  <h2 class="text-center largebrownparagraph">
+                    Your Attendance for
+                    {{ event.name }} has been succesfully taken
+                  </h2>
+                </strong>
               </div>
-            </template>
-          </b-overlay>
-        </div>
+            </div>
+          </template>
+        </b-overlay>
       </div>
     </div>
   </div>
@@ -127,8 +131,8 @@ export default {
   data() {
     return {
       formInputs: {
-        surname: '',
-        regNo: '',
+        surname: 'Igbinedion',
+        regNo: '020',
       },
       busy: false,
       processing: false,
@@ -136,23 +140,18 @@ export default {
     }
   },
   methods: {
-    onShown() {
-      this.$refs.dialog.focus()
-    },
-    onHidden() {
-      this.$refs.submit.focus()
-    },
     async submitFunction() {
       this.processing = false
-      //  const string =
-      //  this.formInputs.surname.charAt(0).toUpperCase() + string.slice(1)
+      const string =
+        this.formInputs.surname.charAt(0).toUpperCase() +
+        this.formInputs.surname.slice(1)
 
       try {
         const response = await this.$axios.$post(
           'course-v/take-attendance-via-qrcode',
           {
             school_id: process.env.SCHOOL_ID,
-            surname: this.formInputs.surname,
+            surname: string,
             registration_number: 'KSOM/2022/ABUJA/' + this.formInputs.regNo,
             course_id: this.$route.params.course,
             event_id: this.$route.params.event,
@@ -191,6 +190,10 @@ export default {
 <style  scoped>
 .width75 {
   width: 75%;
+}
+
+.customcard {
+  height: 100vh;
 }
 
 .imglogocontainer img {
