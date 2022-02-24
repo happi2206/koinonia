@@ -195,7 +195,13 @@ export default {
         start_time: '',
         end_time: '',
       },
-      dropdownItem: ['Share_QR_Code', 'Delete', 'Edit'],
+      dropdownItem: [
+        'Print QR Code',
+        'Edit',
+        'Download as PDF',
+        'Download as XLS',
+        'Download as CSV',
+      ],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', sortable: true },

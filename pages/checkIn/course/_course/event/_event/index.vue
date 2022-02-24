@@ -40,7 +40,7 @@
               </div>
               <div class="my-4 py-2">
                 <label for="" class="d-block mainparagraph18 graytext"
-                  >Registeration Number
+                  >Registration Number
                   <span class="text-danger">*</span>
                 </label>
                 <input
@@ -96,15 +96,19 @@
               >
                 <b-icon
                   icon="x-circle-fill"
-                  font-scale="3"
+                  font-scale="4"
                   class="my-3"
                   variant="danger"
                 ></b-icon>
                 <strong id="form-confirm-label">
-                  <h2 class="text-center biggerparagraph">
+                  <h2 class="text-center roboto24">
                     You have already been checked into this event
                   </h2>
                 </strong>
+
+                <button class="btn-outline-danger" @click="closeWindow">
+                  Close
+                </button>
               </div>
               <div
                 class="
@@ -153,7 +157,7 @@ export default {
       busy: false,
       processing: false,
       other_name: '',
-      errorDetail: 'User has already been checked in',
+      errorDetail: '',
     }
   },
 
@@ -188,6 +192,10 @@ export default {
         console.log(e.data.detail.message)
         this.errorDetail = e.data.detail.message
       }
+    },
+
+    closeWindow() {
+      window.close()
     },
   },
 

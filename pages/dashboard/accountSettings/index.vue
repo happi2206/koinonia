@@ -1,6 +1,6 @@
 <template>
   <div class="bodylightgray">
-    <div class="mt-5 pt-md-5 horizontalspacing">
+    <div class="mt-5 pt-md-3 horizontalspacing">
       <div class="mt-5">
         <h2 class="largebrownparagraph">Account</h2>
       </div>
@@ -21,7 +21,7 @@
           </div>
 
           <div class="my-3">
-            <h2 class="text-center brown24">Links</h2>
+            <h2 class="text-center brown24">Password</h2>
           </div>
 
           <div class="my-5">
@@ -56,8 +56,11 @@
           </div>
 
           <div class="d-flex justify-content-center pb-5">
-            <input class="btn mainbtndashboard px-5 mb-5" type="sumbit" value="Save"/>
-           
+            <input
+              class="btn mainbtndashboard text-center px-2 mb-5"
+              type="sumbit"
+              value="Save"
+            />
           </div>
         </form>
       </div>
@@ -69,27 +72,23 @@
 import { mapGetters } from 'vuex'
 export default {
   layout: 'dashboard',
-  data(){
-    return { 
-      password_object:{
-        old_password:'',
-        new_password:'',
-        confirm_pssword:''
-      }
+  data() {
+    return {
+      password_object: {
+        old_password: '',
+        new_password: '',
+        confirm_pssword: '',
+      },
     }
   },
-   computed: {
-     ...mapGetters({
+  computed: {
+    ...mapGetters({
       authenticated: 'auth/authenticated',
       user: 'auth/user',
       token: 'auth/token',
     }),
   },
-  methods:{
-
-  },
-  
-
+  methods: {},
 }
 </script>
 

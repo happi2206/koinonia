@@ -290,6 +290,11 @@ a.mainbtndashboard:hover {
   color: black;
 }
 
+.dropdown-menu {
+  top: 30px !important;
+  left: -120px !important;
+}
+
 button.mainbtndashboard {
   background-color: #d3a13b;
   color: black;
@@ -406,7 +411,7 @@ button.loginbtn {
 }
 
 .header {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
