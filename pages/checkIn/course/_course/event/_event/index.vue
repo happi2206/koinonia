@@ -1,5 +1,5 @@
 <template>
-  <div class="bodylightgray h-100">
+  <div class="bodylightgray2 h-100">
     <div
       class="
         container
@@ -58,10 +58,9 @@
                     btn-lg btn
                     py-md-3 py-2
                     mainbtndashboard
-                    largebrownparagraph
+                    biggerparagraph
                     w-100
                     text-center text
-                    bold700
                   "
                   ref="submit"
                   type="submit"
@@ -201,6 +200,10 @@ export default {
   height: 150px;
   object-fit: contain;
   background: #000;
+}
+
+.bodylightgray2 {
+  background-color: #f7f7f7;
 }
 
 @media (max-width: 991.5px) {
