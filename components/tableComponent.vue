@@ -149,6 +149,7 @@
           <template v-if="dropdownItem.length > 0">
             <b-dropdown-item
               v-for="(dropdown, index) in dropdownItem"
+              right
               :key="index"
               class="text-capitalize"
               @click="$emit(dropdown, row.item)"

@@ -1,45 +1,7 @@
 <template>
   <div class="bodylightgray">
-    <div class="backdropfscreen" @click="openSide" v-show="isMobile"></div>
-    <div
-      class="d-block d-lg-none bg-white"
-      @click="openSide"
-      v-if="authenticated"
-    >
-      <div class="pt-5 px-3 icontogs">
-        <b-icon icon="list" class="text-dark py-md-4 pt-2 pb-4"></b-icon>
-      </div>
-    </div>
-
-    <div v-if="authenticated && isMobile">
-      <nav id="sidebar" class="sidebar-wrapper">
-        <div class="sidebar-menu bg-white">
-          <div class="h-full bg-white px-1 absolute" id="sidenavExample">
-            <div v-if="authenticated">
-              <li class="nav-item mb-0">
-                <nuxt-link
-                  to="/dashboard/all-courses"
-                  class="nav-link text-dark medbrownparagraph mb-0"
-                >
-                  My learning
-                </nuxt-link>
-              </li>
-
-              <li
-                class="nav-item mb-0"
-                v-if="user.is_instructor || user.is_administrator"
-              >
-                <nuxt-link
-                  to="/dashboard/all-courses"
-                  class="nav-link text-dark medbrownparagraph mb-0"
-                >
-                  Instructors dashboard
-                </nuxt-link>
-              </li>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div class="d-block d-lg-none">
+      <side-bar />
     </div>
     <section class="">
       <div class="imagesection">
@@ -632,9 +594,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Flickity from 'vue-flickity'
+// import Flickity from 'vue-flickity'
+// import SideBar from '~/components/sideBar.vue'
 export default {
-  components: { Flickity },
+  // components: { FlickitySideBar },
   data() {
     return {
       flickityOptions: {
@@ -663,6 +626,12 @@ export default {
     },
     next() {
       this.$refs.flickity.next()
+    },
+
+    created() {
+      this.$nuxt.$on('openSidebar', () => {
+        this.isMobile = !this.isMobile
+      })
     },
 
     previous() {

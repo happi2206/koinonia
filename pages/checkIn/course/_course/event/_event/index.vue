@@ -14,8 +14,8 @@
         <b-overlay :show="busy" opacity="1" blur="0" class="bg-white">
           <div class="card-body bg-white p-md-5 p-4 mt-5">
             <strong
-              ><h2 class="roboto24 px-md-5 px-2">
-                {{ course.title }}
+              ><h2 class="roboto24 text-center px-md-5 px-2">
+                Attendance check in
               </h2></strong
             >
             <p class="biggerparagraph px-md-5 px-2 py-1">
@@ -87,11 +87,7 @@
               "
             >
               <div
-                class="
-                  d-flex
-                  flex-column
-                  align-items-center align-content-center
-                "
+                class="d-flex flex-column align-items-center align-content-end"
                 v-if="errorDetail != ''"
               >
                 <b-icon
@@ -106,9 +102,12 @@
                   </h2>
                 </strong>
 
-                <button class="btn-outline-danger" @click="closeWindow">
-                  Close
-                </button>
+                <nuxt-link to="/" class="d-flex mt-5">
+                  <span class="iconify" data-icon="bi:arrow-left"></span>
+                  <p class="medparagraph text-dark mb-0 mr-3">
+                    Go back to Home page
+                  </p>
+                </nuxt-link>
               </div>
               <div
                 class="

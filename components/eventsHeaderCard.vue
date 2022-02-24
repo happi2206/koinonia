@@ -112,7 +112,7 @@ export default {
         // { key: 'id', sortable: true },
         { key: 'student.other_name', label: 'First Name', sortable: true },
         { key: 'student.surname', label: 'Surname', sortable: true },
-        { key: 'student.email', label: 'Email', sortable: true },
+        { key: 'student.email', label: 'Registration Number', sortable: true },
         { key: 'check_in', label: 'Date/Time in', sortable: true },
         { key: 'by', label: 'Check in Method', sortable: true },
         { key: 'status', label: 'Status', sortable: true },
@@ -120,7 +120,7 @@ export default {
       present: 0,
       absent: 0,
       search: '',
-      perPage: 5,
+      perPage: 50,
       totalItems: 0,
       currentPage: 1,
     }

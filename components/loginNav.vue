@@ -21,7 +21,11 @@
     >
       <div class="d-block d-lg-none w-25">
         <div class="d-flex align-items-center">
-          <div class="pr-2" @click="$nuxt.$emit('openSidebar')">
+          <div
+            class="pr-2"
+            @click="$nuxt.$emit('openSidebar')"
+            v-if="authenticated"
+          >
             <b-icon icon="list" class="text-white"></b-icon>
           </div>
 
@@ -39,20 +43,20 @@
               "
               href="#"
             >
-              <span class="mb-0 medbrownparagraph text-white"> KSOM</span>
+              <span class="mb-0 medbrownparagraphlogo text-white"> KSOM</span>
             </nuxt-link>
           </div>
         </div>
       </div>
 
       <div class="d-flex align-items-center">
-        <div class="d-block d-lg-none mx-3" v-if="authenticated">
+        <div class="d-block d-lg-none" v-if="authenticated">
           <div class="d-lg-flex align-items-lg-center">
             <b-dropdown
               size="lg"
               variant="link"
               toggle-class="text-decoration-none"
-              class="p-0"
+              class="p-0 menudropdown"
               no-caret
             >
               <template #button-content>
@@ -64,19 +68,14 @@
                       class="mr-1"
                     ></b-avatar>
                   </div>
-                  <b-icon
-                    icon="chevron-compact-down"
-                    class="text-white"
-                  ></b-icon>
                 </div>
               </template>
-              <b-dropdown-item href="#" class="medparagraph">
+              <b-dropdown-item class="medparagraph">
                 <nuxt-link to="/dashboard/all-courses" class="text-dark">
                   My learning
                 </nuxt-link>
               </b-dropdown-item>
               <b-dropdown-item
-                href="#"
                 class="medparagraph"
                 v-if="user.is_instructor || user.is_administrator"
               >
@@ -84,13 +83,12 @@
                   Instructors dashboard
                 </nuxt-link>
               </b-dropdown-item>
-              <b-dropdown-item href="#" class="medparagraph">
+              <b-dropdown-item class="medparagraph">
                 <nuxt-link to="/dashboard/accountsettings" class="text-dark">
                   Account Settings
                 </nuxt-link>
               </b-dropdown-item>
               <b-dropdown-item
-                href="#"
                 class="medparagraph"
                 v-if="!user.is_administrator"
                 @click.prevent="linkToContent"
@@ -98,23 +96,20 @@
                 Link as Administrator
               </b-dropdown-item>
               <b-dropdown-item
-                href="#"
                 class="medparagraph"
                 @click.prevent="linkToContent"
                 v-else
               >
-                Link as Courses
+                Link a Course
               </b-dropdown-item>
-              <b-dropdown-item @click="signOut" href="#" class="medparagraph">
+              <b-dropdown-item @click="signOut" class="medparagraph">
                 Logout
               </b-dropdown-item>
             </b-dropdown>
 
             <div>
               <b-modal id="link" centered hide-header hide-footer>
-                <h2 class="brownparagraph bold700 my-3">
-                  Link as {{ titlecontent }}
-                </h2>
+                <h2 class="brownparagraph bold700 my-3">Link a course</h2>
                 <div class="content px-1">
                   <input
                     type="text"
@@ -270,7 +265,7 @@
                   size="lg"
                   variant="link"
                   toggle-class="text-decoration-none"
-                  class="p-0"
+                  class="p-0 menudropdown"
                   no-caret
                 >
                   <template #button-content>
@@ -284,10 +279,6 @@
                           class="mr-1"
                         ></b-avatar>
                       </div>
-                      <b-icon
-                        icon="chevron-compact-down"
-                        class="text-white"
-                      ></b-icon>
                     </div>
                   </template>
                   <b-dropdown-item href="#" class="medparagraph">

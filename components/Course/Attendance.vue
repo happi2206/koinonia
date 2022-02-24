@@ -45,13 +45,13 @@
                   </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-12">
                   <div class="my-2">
                     <label for="" class="medbrownparagraph graytext"
-                      >Start Date
+                      >Start Date and Time
                     </label>
                     <input
-                      type="date"
+                      type="datetime-local"
                       required
                       v-model="event.start_date"
                       placeholder="Start Date"
@@ -59,27 +59,14 @@
                     />
                   </div>
                 </div>
-                <div class="col-6">
+
+                <div class="col-12">
                   <div class="my-2">
                     <label for="" class="medbrownparagraph graytext"
-                      >Start Time
+                      >End Date and Time
                     </label>
                     <input
-                      type="time"
-                      required
-                      v-model="event.start_time"
-                      placeholder="End Date"
-                      class="forminputs text-dark"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="my-2">
-                    <label for="" class="medbrownparagraph graytext"
-                      >End Date
-                    </label>
-                    <input
-                      type="date"
+                      type="datetime-local"
                       required
                       v-model="event.end_date"
                       placeholder="Start Date"
@@ -87,34 +74,6 @@
                     />
                   </div>
                 </div>
-                <div class="col-6">
-                  <div class="my-2">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >End Time
-                    </label>
-                    <input
-                      type="time"
-                      required
-                      v-model="event.end_time"
-                      placeholder="End Date"
-                      class="forminputs text-dark"
-                    />
-                  </div>
-                </div>
-
-                <!-- <div class="col-12">
-                  <div
-                    class="d-flex justify-content-end"
-                    @click="addDescriptionField"
-                  >
-                    <p class="medbrownparagraph">
-                      <span v-if="!eventDescriptionAdded"> Add an </span>
-
-                      <span v-else>Remove</span>
-                      event description
-                    </p>
-                  </div>
-                </div> -->
 
                 <div class="my-4 col-12">
                   <div class="d-flex justify-content-center">
@@ -221,7 +180,7 @@ export default {
       events: [],
       is_creating: false,
       search: '',
-      perPage: 5,
+      perPage: 50,
       totalItems: 0,
       currentPage: 1,
     }

@@ -92,7 +92,7 @@ html body {
 }
 
 .height {
-  height: 120% !important;
+  height: 200vh;
 }
 
 html body main {
@@ -290,7 +290,7 @@ a.mainbtndashboard:hover {
   color: black;
 }
 
-.dropdown-menu {
+.menudropdown .dropdown-menu {
   top: 30px !important;
   left: -120px !important;
 }
@@ -698,7 +698,7 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 td {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -706,7 +706,7 @@ td {
   letter-spacing: 0em;
 }
 th {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -1085,7 +1085,7 @@ th {
 
 .textsection {
   position: absolute;
-  top: 100px;
+  top: 150px;
   /* left: 50px; */
   width: 60%;
 }
@@ -1375,7 +1375,7 @@ th {
   }
 
   .textsection {
-    top: 40px;
+    top: 100px;
     width: 80%;
   }
   .logoplaceholder img {
