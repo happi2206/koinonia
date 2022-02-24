@@ -443,7 +443,7 @@ button.loginbtn {
   font-family: Roboto;
   font-size: 20px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 22px;
   letter-spacing: 0em;
   text-align: left;
@@ -1350,7 +1350,7 @@ th {
 
   .brownheaderlarge {
     font-family: 'Ancona-Ex';
-    font-size: 38px;
+    font-size: 28px;
     line-height: 40px;
   }
 
@@ -1391,12 +1391,17 @@ th {
     width: 24px;
   }
 
-  /* .forminputs {
-    height: calc(2.2em + 0.75rem + 2px);
+  .position-absolute.bg-light {
+    background-color: #fff !important;
+    background: #fff !important;
+  }
+
+  .forminputs {
+    height: calc(2em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
     font-size: 10px !important;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  } */
+  }
   /* .forminputs::placeholder {
     font-family: 'Ancona-Ex';
     font-weight: 300;
@@ -1442,7 +1447,7 @@ th {
   .header2,
   .roboto22,
   .roboto24 {
-    font-size: 16px;
+    font-size: 22px;
   }
 
   .largebrownparagraph,

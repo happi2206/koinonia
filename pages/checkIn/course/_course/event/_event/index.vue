@@ -11,18 +11,18 @@
       "
     >
       <div class="mt-5 py-3">
-        <b-overlay :show="busy" opacity="1" blur="0">
-          <div class="card-body bg-white p-5 mt-5">
+        <b-overlay :show="busy" opacity="1" blur="0" class="bg-white">
+          <div class="card-body bg-white p-md-5 p-4 mt-5">
             <strong
-              ><h2 class="text-center px-md-5">
+              ><h2 class="text-center roboto24 px-md-5 px-2">
                 {{ course.title }}
               </h2></strong
             >
-            <h2 class="text-center h1 lead px-md-5 py-1">
+            <p class="text-center biggerparagraph px-md-5 px-2 py-1">
               Please fill in your details accordingly to join<span>
                 {{ event.name }}</span
               >
-            </h2>
+            </p>
 
             <form class="px-md-5 px-2" @submit.prevent="submitFunction">
               <div class="my-4 py-2">
@@ -56,7 +56,7 @@
                 <button
                   class="
                     btn-lg btn
-                    py-md-3 py-2
+                    py-md-3
                     mainbtndashboard
                     biggerparagraph
                     w-100
