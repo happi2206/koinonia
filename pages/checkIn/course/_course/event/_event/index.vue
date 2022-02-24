@@ -92,7 +92,7 @@
                   flex-column
                   align-items-center align-content-center
                 "
-                v-if="errorDetail !== ''"
+                v-if="errorDetail != ''"
               >
                 <b-icon
                   icon="x-circle-fill"
@@ -102,7 +102,7 @@
                 ></b-icon>
                 <strong id="form-confirm-label">
                   <h2 class="text-center roboto24">
-                    You have already been checked into this event
+                    {{ errorDetail }}
                   </h2>
                 </strong>
 
@@ -188,9 +188,9 @@ export default {
         this.other_name = response.message.other_name
         this.busy = true
       } catch (e) {
-        //  this.$toast.error(e.data.detail.message)
         console.log(e.data.detail.message)
         this.errorDetail = e.data.detail.message
+        this.busy = true
       }
     },
 
