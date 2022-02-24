@@ -88,7 +88,13 @@ html {
 }
 html body {
   overflow-x: hidden !important;
+  height: 100%;
 }
+
+.height {
+  height: 120% !important;
+}
+
 html body main {
   overflow-y: hidden;
   overflow-x: hidden;
@@ -430,7 +436,7 @@ button.loginbtn {
 }
 
 .mainparagraph18 {
-  font-family: 'Ancona-Ex';
+  font-family: Roboto;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -895,6 +901,11 @@ th {
   object-fit: cover;
 }
 
+.position-absolute.bg-light {
+  background-color: #fff !important;
+  background: #fff !important;
+}
+
 .upload-btn-wrapper {
   position: relative;
   overflow: hidden;
@@ -1339,6 +1350,10 @@ th {
     width: 100%;
   }
 
+  .mainparagraph18 {
+    font-size: 14px;
+  }
+
   td {
     font-size: 11px;
     line-height: 19px;
@@ -1389,11 +1404,6 @@ th {
   .profimgfull img {
     height: 24px;
     width: 24px;
-  }
-
-  .position-absolute.bg-light {
-    background-color: #fff !important;
-    background: #fff !important;
   }
 
   .forminputs {

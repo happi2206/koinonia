@@ -19,31 +19,35 @@
         darkborderbottom
       "
     >
-      <div class="d-flex justify-content-between width100">
-        <div class="d-block d-lg-none">
-          <div class="d-flex align-items-center">
-            <nuxt-link
-              to="/"
-              class="
-                navbar-brand
-                logo-icon-mobile
-                pr-2
-                mr-2
-                logoplaceholder
-                d-flex
-                align-items-center
-              "
-              href="#"
-            >
-              <img
-                src="~/assets/images/koinoiologo.png"
-                alt=""
-                class="img-fluid logoimages"
-              />
-              <span class="mb-0 medbrownparagraph text-white"> KOINONIA</span>
-            </nuxt-link>
+      <div class="d-block d-lg-none w-25">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="pr-3" @click="$nuxt.$emit('openSidebar')">
+            <b-icon icon="list" class="text-white"></b-icon>
           </div>
         </div>
+      </div>
+
+      <div class="d-block d-lg-none mr-3">
+        <nuxt-link
+          to="/"
+          class="
+            navbar-brand
+            logo-icon-mobile
+            pr-2
+            mr-2
+            logoplaceholder
+            d-flex
+            align-items-center
+          "
+          href="#"
+        >
+          <img
+            src="~/assets/images/koinoiologo.png"
+            alt=""
+            class="img-fluid logoimages"
+          />
+          <span class="mb-0 medbrownparagraph text-white"> KOINONIA</span>
+        </nuxt-link>
       </div>
 
       <div class="d-flex align-items-center">
@@ -73,6 +77,12 @@
                   <div>
                     <span class="mx-2 medparagraph text-white">
                       {{ user.other_name }}
+
+                      <span v-if="user.surname.length > 7"> </span>
+
+                      <span v-else>
+                        {{ user.surname }}
+                      </span>
                     </span>
                   </div>
                   <b-icon
@@ -305,9 +315,16 @@
                       <div class="profimgfull d-none d-lg-block">
                         <b-avatar variant="warning"></b-avatar>
                       </div>
+
                       <div>
                         <span class="mx-2 medparagraph text-white">
                           {{ user.other_name }}
+
+                          <span v-if="user.surname.length > 7"> </span>
+
+                          <span v-else>
+                            {{ user.surname }}
+                          </span>
                         </span>
                       </div>
                       <b-icon

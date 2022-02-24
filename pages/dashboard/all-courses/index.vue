@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-lg-5 horizontalspacing pt-lg-5">
+    <div class="mt-5 horizontalspacing pt-3">
       <div class="flex items-center pt-5 justify-between mb-4">
         <h2 class="largebrownparagraph bold700 mb-0">All Courses</h2>
         <button

@@ -24,6 +24,6 @@ export default {
 
 <style>
 .height {
-  min-height: 100vh !important;
+  height: 100% !important;
 }
 </style>

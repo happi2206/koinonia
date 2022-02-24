@@ -14,11 +14,11 @@
         <b-overlay :show="busy" opacity="1" blur="0" class="bg-white">
           <div class="card-body bg-white p-md-5 p-4 mt-5">
             <strong
-              ><h2 class="text-center roboto24 px-md-5 px-2">
+              ><h2 class="roboto24 px-md-5 px-2">
                 {{ course.title }}
               </h2></strong
             >
-            <p class="text-center biggerparagraph px-md-5 px-2 py-1">
+            <p class="biggerparagraph px-md-5 px-2 py-1">
               Please fill in your details accordingly to join<span>
                 {{ event.name }}</span
               >
@@ -26,7 +26,7 @@
 
             <form class="px-md-5 px-2" @submit.prevent="submitFunction">
               <div class="my-4 py-2">
-                <label for="" class="d-block graytext"
+                <label for="" class="d-block mainparagraph18 graytext"
                   >Surname
                   <span class="text-danger">*</span>
                 </label>
@@ -39,7 +39,7 @@
                 />
               </div>
               <div class="my-4 py-2">
-                <label for="" class="d-block graytext"
+                <label for="" class="d-block mainparagraph18 graytext"
                   >Registeration Number
                   <span class="text-danger">*</span>
                 </label>
@@ -86,18 +86,33 @@
                 p-md-3
               "
             >
-              <!-- <b-icon
-                icon="x-circle-fill"
-                font-scale="3"
-                variant="danger"
-              ></b-icon> -->
-
               <div
                 class="
                   d-flex
                   flex-column
                   align-items-center align-content-center
                 "
+                v-if="errorDetail == 'User has already been checked in'"
+              >
+                <b-icon
+                  icon="x-circle-fill"
+                  font-scale="3"
+                  class="my-3"
+                  variant="danger"
+                ></b-icon>
+                <strong id="form-confirm-label">
+                  <h2 class="text-center biggerparagraph">
+                    You have already been checked into this event
+                  </h2>
+                </strong>
+              </div>
+              <div
+                class="
+                  d-flex
+                  flex-column
+                  align-items-center align-content-center
+                "
+                v-else
               >
                 <b-icon
                   icon="check-circle-fill"
@@ -138,8 +153,10 @@ export default {
       busy: false,
       processing: false,
       other_name: '',
+      errorDetail: 'User has already been checked in',
     }
   },
+
   methods: {
     async submitFunction() {
       this.processing = false
@@ -167,8 +184,9 @@ export default {
         this.other_name = response.message.other_name
         this.busy = true
       } catch (e) {
-        this.$toast.error(e.data.detail.message)
+        //  this.$toast.error(e.data.detail.message)
         console.log(e.data.detail.message)
+        this.errorDetail = e.data.detail.message
       }
     },
   },
