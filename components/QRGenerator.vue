@@ -10,7 +10,7 @@
         filename="Attendance QR code"
         :pdf-quality="2"
         :manual-pagination="false"
-        pdf-format="A4"
+        pdf-format="A3"
         pdf-orientation="portrait"
         pdf-content-width="100%"
         @hasStartedGeneration="hasStartedGeneration()"
@@ -41,11 +41,11 @@
             <h3 class="mb-3">SCAN TO CHECK IN</h3>
             <div class="container">
               <ol style="margin-left: 2.5rem">
-                <li style="font-size: 1rem; padding: 1rem 0">
+                <li style="font-size: 1rem; padding: 1rem 0; font-weight: 600">
                   1. Open your phone camera and point at the picture.
                 </li>
                 <li
-                  style="font-size: 1rem; padding: 1rem 0"
+                  style="font-size: 1rem; padding: 1rem 0; font-weight: 600"
                   class="d-flex align-items-center"
                 >
                   2.&nbsp;
@@ -60,15 +60,15 @@
 
                   icon.
                 </li>
-                <li style="font-size: 1rem; padding: 1rem 0">
+                <li style="font-size: 1rem; padding: 1rem 0; font-weight: 600">
                   3. Tap on the name or the icon to open the attendance web
                   page.
                 </li>
-                <li style="font-size: 1rem; padding: 1rem 0">
+                <li style="font-size: 1rem; padding: 1rem 0; font-weight: 600">
                   4. Fill in your Surname and your 3 digit Registration Number
                   on the spaces provided.
                 </li>
-                <li style="font-size: 1rem; padding: 1rem 0">
+                <li style="font-size: 1rem; padding: 1rem 0; font-weight: 600">
                   5. Click on Check in button.
                 </li>
               </ol>
