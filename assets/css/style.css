@@ -1446,6 +1446,19 @@ th {
   .forminputs.textarea {
     height: calc(8.5em + 0.75rem + 2px);
   }
+
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+
   .forminputs.searchbar {
     height: calc(2.2em + 0.75rem + 2px);
     border-top-right-radius: 0;

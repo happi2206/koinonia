@@ -1,6 +1,6 @@
 <template>
   <div>
-    <preloader :show="is_login"/>
+    <preloader :show="is_login" />
     <main class="">
       <div class="row verticalspacing">
         <div class="col-lg-6">
@@ -39,14 +39,11 @@
           </div>
         </div>
         <div class="col-lg-5">
-          
           <div class="">
             <div class="mt-5">
               <h2 class="brownheader text-center">Log in</h2>
 
-              <p class="brownparagraph text-center">
-                Go inside the best gamers social network!
-              </p>
+              <p class="brownparagraph text-center">Sign into Koinonia</p>
 
               <div class="mt-3">
                 <div>
@@ -184,14 +181,16 @@
                             </div>
                           </div>
 
-                          <button class="subscribebtn btn rad6 btn mt-3 py-3" :disabled="is_login">
+                          <button
+                            class="subscribebtn btn rad6 btn mt-3 py-3"
+                            :disabled="is_login"
+                          >
                             <span v-if="is_login">
-                            <b-spinner small  variant="light"></b-spinner>
-                              Please wait...</span>
+                              <b-spinner small variant="light"></b-spinner>
+                              Please wait...</span
+                            >
                             <span v-else>Login</span>
                           </button>
-
-                          
                         </div>
                       </form>
 
@@ -232,9 +231,9 @@ export default {
     return {
       loginInputs: {
         username: '',
-        password: ''
+        password: '',
       },
-      is_login: false
+      is_login: false,
     }
   },
 
