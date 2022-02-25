@@ -35,7 +35,7 @@
                   type="text"
                   required
                   v-model="formInputs.surname"
-                  placeholder="e.g Nuella"
+                  placeholder="e.g Daniels"
                   class="forminputs text-dark"
                 />
               </div>

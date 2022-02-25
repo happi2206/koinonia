@@ -62,6 +62,18 @@
                   class="forminputs text-dark"
                 />
               </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Registration Number
+                </label>
+                <input
+                  type="text"
+                  required
+                  v-model="student.registration_number"
+                  placeholder="Registration Number"
+                  class="forminputs text-dark"
+                />
+              </div>
 
               <!-- <div class="my-4">
                         <div class="form-check">
@@ -133,9 +145,34 @@ export default {
         'Delete',
         'Edit',
       ],
+
+      // {
+      //   "surname": "string",
+      //   "other_name": "string",
+      //   "avatar": "string",
+      //   "marital_status": "single",
+      //   "gender": "male",
+      //   "phone": "string",
+      //   "registration_number": "string",
+      //   "salutation": "string",
+      //   "send_lastest_updates": false,
+      //   "user_type": {
+      //     "user_type": "flat_user",
+      //     "link_code": "string",
+      //     "type": "student",
+      //     "email": "user@example.com"
+      //   }
+      // }
+
       student: {
-        other_name: '',
         surname: '',
+        other_name: '',
+        avatar: '',
+        marital_status: 'single',
+        gender: 'male',
+        phone: 'string',
+        registration_number: '',
+        salutation: 'string',
         send_latest_updates: false,
         user_type: {
           user_type: 'flat_user',
