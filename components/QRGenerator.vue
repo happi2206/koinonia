@@ -19,7 +19,7 @@
       >
         <section slot="pdf-content">
           <section class="intro">
-            <h3 class="text-uppercase">
+            <h3 class="text-uppercase mt-4">
               <span> {{ eventData.name }}</span> ATTENDANCE
             </h3>
             <!-- <h3>CLASS OF 2022</h3> -->
