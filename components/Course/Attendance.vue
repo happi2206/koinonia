@@ -140,7 +140,7 @@
       </template>
     </filter-component>
     <div ref="my-component" v-show="openComponent">
-      <QRGenerator ref="qcode" :eventData="qrEvent"></QRGenerator>
+      <QRGenerator :courseId="$route.params.course" :eventId="eventId" ref="qcode" :eventData="qrEvent"></QRGenerator>
     </div>
   </div>
 </template>
@@ -200,6 +200,8 @@ export default {
       perPage: 50,
       totalItems: 0,
       currentPage: 1,
+      courseId: '',
+      eventId:''
     }
   },
 
@@ -225,6 +227,7 @@ export default {
     printQr(e) {
       console.log(e)
       this.qrEvent = e
+      this.eventId = e.id;
       // this.openComponent = true
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
       // this.$refs.qcode.html2Pdf.generatePdf()

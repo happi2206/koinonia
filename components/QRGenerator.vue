@@ -34,7 +34,7 @@
               class="d-flex justify-content-center align-items-center my-5"
             >
               <VueQRCodeComponent
-                text="https://koinonia-nuxt.onrender.com/checkIn/course/62145ac6ab45aafcabd7da17/event/62189b9c7b07627b7e7d4488"
+                :text="`${location}/checkIn/course/${courseId}/event/${eventId}`"
               ></VueQRCodeComponent>
             </figure>
             <h3 class="mb-3">SCAN TO CHECK IN</h3>
@@ -84,11 +84,23 @@ import VueHtml2pdf from 'vue-html2pdf'
 import VueQRCodeComponent from 'vue-qrcode-component'
 
 export default {
+  data() {
+    return {
+      location: window.location.origin,
+    }
+  },
   props: {
     linkCode: {
       type: String,
     },
-
+    courseId:{
+      type: String,
+      required: true,
+    },
+    eventId:{
+      type: String,
+      required: true,
+    },
     eventData: {
       type: Object,
     },
