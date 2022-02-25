@@ -48,7 +48,7 @@
                   type="text"
                   required
                   v-model="formInputs.regNo"
-                  placeholder="e.g Ime"
+                  placeholder="e.g 072"
                   class="forminputs text-dark"
                 />
               </div>
