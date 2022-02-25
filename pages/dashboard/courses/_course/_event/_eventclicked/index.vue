@@ -1,6 +1,24 @@
 <template>
   <div class="bodylightgray">
-    <div class="mt-5 pt-md-5 horizontalspacing">
+    <div v-if="isLoading" class="mt-5 pt-md-5 horizontalspacing">
+      <b-row>
+        <b-col cols="3">
+          <b-skeleton-img height="70%"></b-skeleton-img>
+        </b-col>
+
+        <b-col cols="6" class="">
+          <b-skeleton animation="wave" width="85%"></b-skeleton>
+          <b-skeleton animation="wave" width="55%"></b-skeleton>
+          <b-skeleton animation="wave" width="70%"></b-skeleton>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="12" class="">
+          <b-skeleton-img no-aspect height="150px"></b-skeleton-img>
+        </b-col>
+      </b-row>
+    </div>
+    <div class="mt-5 pt-md-5 horizontalspacing" v-else>
       <div class="my-4 d-flex align-items-center">
         <b-icon icon="arrow-left" class="mx-2 mainbluecolor"></b-icon>
         <a
@@ -45,10 +63,12 @@ export default {
       courseid: '',
       eventid: '',
       courseTitle: '',
+      isLoading: false,
     }
   },
 
   async fetch() {
+    this.isLoading = true
     try {
       const events = await this.$axios.$get(
         `course-v/get-course-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
@@ -56,6 +76,7 @@ export default {
       this.courseid = this.$route.params.event
       this.eventid = this.$route.params.eventclicked
       this.eventDetail = events
+      this.isLoading = false
     } catch (e) {
       console.log(e)
     }

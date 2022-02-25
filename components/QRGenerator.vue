@@ -34,7 +34,7 @@
               class="d-flex justify-content-center align-items-center my-5"
             >
               <VueQRCodeComponent
-                text="https://github.com/gerardreches/vue-qrcode-component"
+                text="https://koinonia-nuxt.onrender.com/checkIn/course/62145ac6ab45aafcabd7da17/event/62163631433c93e04a960c5d"
               ></VueQRCodeComponent>
             </figure>
             <h3 class="mb-3">SCAN TO CHECK IN</h3>
@@ -163,6 +163,7 @@ h3 {
 }
 ​ .stand-out {
   margin-top: 0;
+  color: #fca311;
 }
 ​ p:last-child {
   margin-bottom: 3rem;
