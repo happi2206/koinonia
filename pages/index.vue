@@ -1,6 +1,6 @@
 <template>
   <div class="bodylightgray">
-    <div class="d-block d-lg-none">
+    <div class="d-block d-lg-none" v-if="authenticated">
       <side-bar />
     </div>
     <section class="">

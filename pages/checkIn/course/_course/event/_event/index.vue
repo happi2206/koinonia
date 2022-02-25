@@ -11,11 +11,12 @@
       "
     >
       <div class="mt-5 py-3">
+        <h2 class="roboto24 text-center px-md-5 px-2">Attendance Check-In</h2>
         <b-overlay :show="busy" opacity="1" blur="0" class="bg-white">
           <div class="card-body bg-white p-md-5 p-4 mt-5">
             <strong
               ><h2 class="roboto24 text-center px-md-5 px-2">
-                Attendance check in
+                {{ event.name }}
               </h2></strong
             >
             <p class="biggerparagraph px-md-5 px-2 py-1">
@@ -134,6 +135,12 @@
                     {{ event.name }} has been succesfully taken
                   </h2>
                 </strong>
+                <nuxt-link to="/" class="d-flex mt-5">
+                  <span class="iconify" data-icon="bi:arrow-left"></span>
+                  <p class="medparagraph text-dark mb-0 mr-3">
+                    Go back to Home page
+                  </p>
+                </nuxt-link>
               </div>
             </div>
           </template>
@@ -144,8 +151,11 @@
 </template>
 
 <script>
-const { detect } = require('detect-browser')
-const browser = detect()
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
+
+// Initialize an agent at application startup.
+const fpPromise = FingerprintJS.load()
+
 export default {
   data() {
     return {
@@ -157,6 +167,7 @@ export default {
       processing: false,
       other_name: '',
       errorDetail: '',
+      browser: '',
     }
   },
 
@@ -176,11 +187,7 @@ export default {
             registration_number: 'KSOM/2022/ABUJA/' + this.formInputs.regNo,
             course_id: this.$route.params.course,
             event_id: this.$route.params.event,
-            browser: {
-              name: browser.name,
-              version: browser.version,
-              os: browser.os,
-            },
+            browser: this.browser,
           }
         )
 
@@ -199,6 +206,9 @@ export default {
   },
 
   async asyncData({ route, $axios }) {
+    const fp = await fpPromise
+    const result = await fp.get()
+
     try {
       const getCourse = await $axios.$get(
         `course-v/get-a-course-by-id/?course_id=${route.params.course}&school_id=${process.env.SCHOOL_ID}`
@@ -219,6 +229,7 @@ export default {
       return {
         course: getCourse,
         event: getEvent,
+        browser: result.visitorId,
       }
     } catch (e) {
       console.log(e)
