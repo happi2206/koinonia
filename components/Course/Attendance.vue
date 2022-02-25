@@ -151,8 +151,6 @@ export default {
         description: '',
         start_date: '',
         end_date: '',
-        start_time: '',
-        end_time: '',
       },
       dropdownItem: [
         'Print QR Code',
