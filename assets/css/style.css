@@ -1366,9 +1366,9 @@ th {
     width: 100%;
   }
 
-  .mainparagraph18 {
-    font-size: 14px;
-  }
+  /* .mainparagraph18 {
+    font-size: 18px;
+  } */
 
   td {
     font-size: 11px;
@@ -1425,7 +1425,7 @@ th {
   .forminputs {
     height: calc(2em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
-    font-size: 10px !important;
+    font-size: 16px !important;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
   /* .forminputs::placeholder {
