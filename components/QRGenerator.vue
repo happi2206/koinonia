@@ -19,51 +19,49 @@
       >
         <section slot="pdf-content">
           <section class="intro">
-            <h1>
-              ATTENDANCE of
+            <h3 class="text-uppercase">
+              <span> {{ eventData.name }}</span> ATTENDANCE
+            </h3>
+            <!-- <h3>CLASS OF 2022</h3> -->
 
-              <span> {{ eventData.name }}</span>
-            </h1>
-            <h2>CLASS OF 2022</h2>
-
-            <div class="d-flex justify-content-between mx-5 px-5">
-              <p class="text-center">
-                Start Date: {{ eventData.start_date.slice(0, 10) }}
-              </p>
-              <p class="text-center">
-                End Date: {{ eventData.end_date.slice(0, 10) }}
-              </p>
+            <div class="d-flex justify-content-center mx-5 px-5 my-3">
+              <h4 class="text-center">
+                {{ eventData.start_date | DateTimeFormat }}
+              </h4>
             </div>
             <!-- place-holder image -->
-            <figure class="d-flex justify-content-center align-items-center">
+            <figure
+              class="d-flex justify-content-center align-items-center my-5"
+            >
               <VueQRCodeComponent
                 text="https://github.com/gerardreches/vue-qrcode-component"
               ></VueQRCodeComponent>
             </figure>
-            <h3>SCAN TO CHECK IN</h3>
+            <h3 class="mb-3">SCAN TO CHECK IN</h3>
             <div class="container">
               <ol>
-                <li>Open your phone camera and point at the picture.</li>
+                <li>1. Open your phone camera and point at the picture.</li>
                 <li class="d-flex align-items-center">
+                  2.
                   <span>
                     Once focued on the picture it will show Koinonia or a</span
                   >
 
-                  <span
-                    class="iconify mt-4"
-                    data-icon="bx:barcode-reader"
-                  ></span>
+                  <div class="pt-3 mx-2">
+                    <span class="iconify" data-icon="bx:barcode-reader"></span>
+                  </div>
 
                   icon.
                 </li>
                 <li>
-                  Tap on the name or the icon to open the attendance web page.
+                  3. Tap on the name or the icon to open the attendance web
+                  page.
                 </li>
                 <li>
-                  Fill in your Surname and your 3 digit Registration Number on
-                  the spaces provided.
+                  4. Fill in your Surname and your 3 digit Registration Number
+                  on the spaces provided.
                 </li>
-                <li>Click on Check in button.</li>
+                <li>5. Click on Check in button.</li>
               </ol>
               <p class="stand-out">
                 Note: If your camera does not pick up the QR code, you can
