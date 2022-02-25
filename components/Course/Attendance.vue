@@ -224,9 +224,9 @@ export default {
         }
         const events = await this.$axios.$get(uri)
 
-        events.items.forEach((element) => {
-          console.log(element.students.length)
-        })
+        // events.items.forEach((element) => {
+        //   console.log(element.students.length)
+        // })
 
         this.events = events.items.reverse()
 
