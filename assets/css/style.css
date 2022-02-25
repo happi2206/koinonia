@@ -1574,10 +1574,10 @@ th {
     top: 190px;
   }
 
-  .horizontalspacing {
+  /* .horizontalspacing {
     margin-left: 5px;
     margin-right: 5px;
-  }
+  } */
 }
 @media (max-width: 400.5px) {
   .sidebar-wrapper {

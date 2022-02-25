@@ -12,7 +12,7 @@
             <li class="py-2 my-2">
               <nuxt-link
                 to="/dashboard/all-courses"
-                class="flex items-center medbrownparagraph text-dark mx-3"
+                class="flex items-center medbrownparagraph text-dark mx-3 px-3"
               >
                 <span
                   class="iconify"
@@ -24,7 +24,7 @@
             <li class="py-2 my-2">
               <nuxt-link
                 to="/dashboard/all-instructors"
-                class="flex items-center medbrownparagraph text-dark mx-3"
+                class="flex items-center medbrownparagraph text-dark mx-3 px-3"
               >
                 <span class="iconify" data-icon="la:chalkboard-teacher"></span>
                 <span class="px-3">Instructors</span>

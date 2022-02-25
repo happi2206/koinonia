@@ -3,7 +3,10 @@
     <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">Instructors</h2>
       <div>
-        <button class="btn mainbtn py-2" v-b-modal.addInstructor>
+        <button
+          class="btn mainbtn py-2 medbrownparagraph"
+          v-b-modal.addInstructor
+        >
           Add Instructor
         </button>
 
