@@ -29,7 +29,7 @@
                 {{ eventData.start_date | DateTimeFormat }}
               </h4>
             </div> -->
-            <!-- place-holder image -->
+            <!-- place-holderimage -->
             <figure
               class="d-flex justify-content-center align-items-center my-5"
             >
