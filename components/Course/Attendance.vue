@@ -102,6 +102,7 @@
           v-if="visualization === 'list'"
           :fields="fields"
           :dropdownItem="dropdownItem"
+          @Print_QR_Code="printQr"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -156,7 +157,7 @@ export default {
         end_date: '',
       },
       dropdownItem: [
-        'Print QR Code',
+        'Print_QR_Code',
         'Edit',
         'Download as PDF',
         'Download as XLS',
@@ -214,6 +215,10 @@ export default {
         this.is_creating = false
       }
     },
+
+    printQr() {
+      console.log('object')
+    },
     onRowClicked(e) {
       this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
     },
@@ -234,9 +239,9 @@ export default {
 
         this.events = events.items
 
-        // this.events.map((element) => {
-        //   this.events.push(element.students.length)
-        // })
+        //  this.events.map((element) => {
+        //  this.events.push(element.students.length)
+        //  })
         console.log(this.events)
         this.perPage = events.size
         this.totalItems = events.total

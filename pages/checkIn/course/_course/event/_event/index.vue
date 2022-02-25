@@ -15,7 +15,7 @@
         <b-overlay :show="busy" opacity="1" blur="0" class="bg-white">
           <div class="card-body bg-white p-md-5 p-4 mt-5">
             <strong
-              ><h2 class="roboto24 text-center px-md-5 px-2">
+              ><h2 class="roboto24 text-center px-md-5 px-2 text-capitalize">
                 {{ event.name }}
               </h2></strong
             >
@@ -115,7 +115,7 @@
                   variant="danger"
                 ></b-icon>
                 <strong id="form-confirm-label">
-                  <h2 class="text-center roboto24">
+                  <h2 class="text-center roboto24 text-capitalize">
                     {{ errorDetail }}
                   </h2>
                 </strong>
@@ -145,7 +145,9 @@
                   <h2 class="text-center biggerparagraph">
                     Welcome
 
-                    <span class="bold800"> {{ other_name }}.</span>
+                    <span class="bold800 text-capitalize">
+                      {{ other_name }}.</span
+                    >
                   </h2>
                   <h2 class="text-center biggerparagraph">
                     Your Attendance for

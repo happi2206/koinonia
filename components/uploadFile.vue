@@ -13,6 +13,7 @@
       @click.prevent="$refs.uploadImage.click()"
       class="btn px-md-4 px-3 py-2 upbtn medbrownparagraph"
     >
+      <slot name="edittext"></slot>
       Upload Image
     </button>
   </div>

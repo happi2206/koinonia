@@ -4,12 +4,7 @@
     @grid-clicked="$emit('grid-clicked', $event)"
   >
     <div class="bg-white rounded p-2">
-      <div class="d-flex justify-content-center">
-        <!-- <img
-          src="~assets/images/carouselpeople1.png"
-          alt=""
-          class="img-fluid"
-        /> -->
+      <div class="d-flex justify-content-center imgheight">
         <img :src="data.feature_image" alt="" class="img-fluid" />
       </div>
 
@@ -49,4 +44,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style  scoped>
+.imgheight {
+  height: 200px;
+  object-fit: cover;
+}
+</style>

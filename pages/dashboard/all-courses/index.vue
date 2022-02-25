@@ -143,19 +143,6 @@
         <b-modal id="editmodal" title="Edit Course" hide-footer>
           <div class="modacontent">
             <div class="modabody">
-              <!-- <div class="my-4">
-                <label for="" class="d-block medbrownparagraph graytext"
-                  >Course Code
-                </label>
-
-                <input
-                  type="text"
-                  v-model="currentCourse.course_code"
-                  required
-                  placeholder="e.g ECO23"
-                  class="forminputs text-dark"
-                />
-              </div> -->
               <div class="my-4">
                 <label for="" class="d-block medbrownparagraph graytext"
                   >Course Name
@@ -255,7 +242,9 @@
                 <div
                   class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
                 >
-                  <upload-file v-model="currentCourse.feature_image" />
+                  <upload-file v-model="currentCourse.feature_image">
+                    <template #edittext> Change Image </template>
+                  </upload-file>
                 </div>
               </div> -->
 
