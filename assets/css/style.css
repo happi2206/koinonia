@@ -648,6 +648,14 @@ button.loginbtn {
   font-weight: 800;
 }
 
+.progress-bar.bg-danger {
+  background: #f15c78 !important;
+}
+
+.progress-bar.bg-success {
+  background: #6fcf97 !important;
+}
+
 .bold700 {
   font-weight: 700 !important;
 }
