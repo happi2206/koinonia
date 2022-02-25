@@ -268,12 +268,12 @@ export default {
       this.search = e
       this.get_all_course_events()
     },
-    getPresent(item) {
-      return item.filter((t) => t.status === true).length
-    },
-    getAbsent(item) {
-      return item.filter((t) => t.status === false).length
-    },
+    // getPresent(item) {
+    //   return item.filter((t) => t.status === true).length
+    // },
+    // getAbsent(item) {
+    //   return item.filter((t) => t.status === false).length
+    // },
   },
 }
 </script>

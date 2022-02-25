@@ -54,6 +54,13 @@
               </div>
 
               <div class="my-4 py-2 d-flex justify-content-center">
+                <!-- <button class="subscribebtn btn rad6 btn mt-3 py-3" :disabled="is_login">
+                            <span v-if="is_login">
+                            <b-spinner small  variant="light"></b-spinner>
+                              Please wait...</span>
+                            <span v-else>Login</span>
+                          </button> -->
+
                 <button
                   class="
                     btn-lg btn
@@ -65,8 +72,18 @@
                   "
                   ref="submit"
                   type="submit"
+                  :disabled="isLoading"
                 >
-                  Check in
+                  <span v-if="isLoading">
+                    <b-spinner
+                      small
+                      label="Small Spinner"
+                      variant="dark"
+                    ></b-spinner>
+                    Checking in...
+                  </span>
+
+                  <span v-else>Check in</span>
                 </button>
               </div>
             </form>
@@ -168,6 +185,7 @@ export default {
       other_name: '',
       errorDetail: '',
       browser: '',
+      isLoading: false,
     }
   },
 
@@ -177,7 +195,7 @@ export default {
       const string =
         this.formInputs.surname.charAt(0).toUpperCase() +
         this.formInputs.surname.slice(1)
-
+      this.isLoading = true
       try {
         const response = await this.$axios.$post(
           'course-v/take-attendance-via-qrcode',
@@ -190,6 +208,8 @@ export default {
             browser: this.browser,
           }
         )
+
+        this.isLoading = false
 
         this.other_name = response.message.other_name
         this.busy = true
