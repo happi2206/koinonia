@@ -179,8 +179,8 @@ export default {
   data() {
     return {
       formInputs: {
-        surname: 'Igbinedion',
-        regNo: '020',
+        surname: '',
+        regNo: '',
       },
       busy: false,
       processing: false,

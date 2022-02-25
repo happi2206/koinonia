@@ -34,7 +34,7 @@
               class="d-flex justify-content-center align-items-center my-5"
             >
               <VueQRCodeComponent
-                text="https://koinonia-nuxt.onrender.com/checkIn/course/62145ac6ab45aafcabd7da17/event/62163631433c93e04a960c5d"
+                text="https://koinonia-nuxt.onrender.com/checkIn/course/62145ac6ab45aafcabd7da17/event/62189b9c7b07627b7e7d4488"
               ></VueQRCodeComponent>
             </figure>
             <h3 class="mb-3">SCAN TO CHECK IN</h3>
