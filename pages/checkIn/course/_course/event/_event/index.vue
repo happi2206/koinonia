@@ -24,7 +24,6 @@
                 {{ event.name }}</span
               >
             </p>
-
             <form class="px-md-5 px-2" @submit.prevent="submitFunction">
               <div class="my-4 py-2">
                 <label for="" class="d-block mainparagraph18 graytext"
@@ -52,7 +51,6 @@
                   class="forminputs text-dark"
                 />
               </div>
-
               <div class="my-4 py-2 d-flex justify-content-center">
                 <!-- <button class="subscribebtn btn rad6 btn mt-3 py-3" :disabled="is_login">
                             <span v-if="is_login">
@@ -60,7 +58,6 @@
                               Please wait...</span>
                             <span v-else>Login</span>
                           </button> -->
-
                 <button
                   class="
                     btn-lg btn
@@ -82,13 +79,11 @@
                     ></b-spinner>
                     Checking in...
                   </span>
-
                   <span v-else>Check in</span>
                 </button>
               </div>
             </form>
           </div>
-
           <template #overlay>
             <div
               ref="dialog"
@@ -119,7 +114,6 @@
                     {{ errorDetail }}
                   </h2>
                 </strong>
-
                 <nuxt-link to="/" class="d-flex mt-5">
                   <span class="iconify" data-icon="bi:arrow-left"></span>
                   <p class="medparagraph text-dark mb-0 mr-3">
@@ -144,7 +138,6 @@
                 <strong id="form-confirm-label">
                   <h2 class="text-center biggerparagraph">
                     Welcome
-
                     <span class="bold800 text-capitalize">
                       {{ other_name }} {{ surname }}.</span
                     >
@@ -168,13 +161,10 @@
     </div>
   </div>
 </template>
-
 <script>
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
-
 // Initialize an agent at application startup.
 const fpPromise = FingerprintJS.load()
-
 export default {
   data() {
     return {
@@ -190,7 +180,6 @@ export default {
       isLoading: false,
     }
   },
-
   methods: {
     async submitFunction() {
       this.processing = false
@@ -210,10 +199,10 @@ export default {
             browser: this.browser,
           }
         )
-
         this.isLoading = false
-
+        console.log(response.message)
         this.other_name = response.message.other_name
+        this.surname = response.message.surname
         this.busy = true
       } catch (e) {
         console.log(e.data.detail.message)
@@ -221,16 +210,13 @@ export default {
         this.busy = true
       }
     },
-
     closeWindow() {
       window.close()
     },
   },
-
   async asyncData({ route, $axios }) {
     const fp = await fpPromise
     const result = await fp.get()
-
     try {
       const getCourse = await $axios.$get(
         `course-v/get-a-course-by-id/?course_id=${route.params.course}&school_id=${process.env.SCHOOL_ID}`
@@ -238,16 +224,13 @@ export default {
       const getEvent = await $axios.$get(
         `course-v/get-course-event-by-id?course_id=${route.params.course}&event_id=${route.params.event}&school_id=${process.env.SCHOOL_ID}`
       )
-
       console.log(getCourse)
-
       // const getCourse = await $axios.$get(
       //   `course-v/get-a-course?course_id=${route.params.course}`
       // )
       // const getEvent = await $axios.$get(
       //   `course-v/get-course-event?course_id=${route.params.course}&event_id=${route.params.event}`
       // )
-
       return {
         course: getCourse,
         event: getEvent,
@@ -259,27 +242,22 @@ export default {
   },
 }
 </script>
-
 <style scoped>
 .width75 {
   width: 75%;
 }
-
 .customcard {
   height: 100vh;
 }
-
 .imglogocontainer img {
   width: 150px;
   height: 150px;
   object-fit: contain;
   background: #000;
 }
-
 .bodylightgray2 {
   background-color: #f7f7f7;
 }
-
 @media (max-width: 991.5px) {
   .width75 {
     width: 85%;

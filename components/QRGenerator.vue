@@ -47,9 +47,9 @@
                   class="d-flex align-items-center"
                   style="font-size: 1rem; font-weight: 600; padding: 1rem"
                 >
-                  2.
+                  2.&nbsp;
                   <span>
-                    Once focued on the picture it will show
+                    Once focused on the picture it will show
                     <b><i>Koinonia</i></b> or a</span
                   >
 
