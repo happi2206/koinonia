@@ -112,7 +112,11 @@ export default {
         // { key: 'id', sortable: true },
         { key: 'student.other_name', label: 'First Name', sortable: true },
         { key: 'student.surname', label: 'Surname', sortable: true },
-        { key: 'student.email', label: 'Registration Number', sortable: true },
+        {
+          key: 'student.registration_number',
+          label: 'Registration Number',
+          sortable: true,
+        },
         { key: 'check_in', label: 'Date/Time in', sortable: true },
         { key: 'by', label: 'Check in Method', sortable: true },
         { key: 'status', label: 'Status', sortable: true },
