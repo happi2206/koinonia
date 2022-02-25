@@ -146,7 +146,7 @@
                     Welcome
 
                     <span class="bold800 text-capitalize">
-                      {{ other_name }}.</span
+                      {{ other_name }} {{ surname }}.</span
                     >
                   </h2>
                   <h2 class="text-center biggerparagraph">
