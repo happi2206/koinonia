@@ -10,7 +10,7 @@
         filename="Attendance QR code"
         :pdf-quality="2"
         :manual-pagination="false"
-        pdf-format="a3"
+        pdf-format="A4"
         pdf-orientation="portrait"
         pdf-content-width="100%"
         @hasStartedGeneration="hasStartedGeneration()"
@@ -19,16 +19,16 @@
       >
         <section slot="pdf-content">
           <section class="intro">
-            <h3 class="text-uppercase">
-              <span> {{ eventData.name }}</span> ATTENDANCE
-            </h3>
+            <h1 class="text-uppercase pt-4">ATTENDANCE</h1>
             <!-- <h3>CLASS OF 2022</h3> -->
 
-            <div class="d-flex justify-content-center mx-5 px-5 my-3">
+            <h3 class="text-uppercase pt-4">{{ eventData.name }}</h3>
+
+            <!-- <div class="d-flex justify-content-center mx-5 px-5 my-3">
               <h4 class="text-center">
                 {{ eventData.start_date | DateTimeFormat }}
               </h4>
-            </div>
+            </div> -->
             <!-- place-holder image -->
             <figure
               class="d-flex justify-content-center align-items-center my-5"
@@ -38,13 +38,19 @@
               ></VueQRCodeComponent>
             </figure>
             <h3 class="mb-3">SCAN TO CHECK IN</h3>
-            <div class="container">
-              <ol>
-                <li>1. Open your phone camera and point at the picture.</li>
-                <li class="d-flex align-items-center">
+            <div class="container ml-8">
+              <ol style="margin-left: 4rem">
+                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
+                  1. Open your phone camera and point at the picture.
+                </li>
+                <li
+                  class="d-flex align-items-center"
+                  style="font-size: 1rem; font-weight: 600; padding: 1rem"
+                >
                   2.
                   <span>
-                    Once focued on the picture it will show Koinonia or a</span
+                    Once focued on the picture it will show
+                    <b><i>Koinonia</i></b> or a</span
                   >
 
                   <div class="pt-3 mx-2">
@@ -53,22 +59,24 @@
 
                   icon.
                 </li>
-                <li>
+                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
                   3. Tap on the name or the icon to open the attendance web
                   page.
                 </li>
-                <li>
+                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
                   4. Fill in your Surname and your 3 digit Registration Number
                   on the spaces provided.
                 </li>
-                <li>5. Click on Check in button.</li>
+                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
+                  5. Click on Check in button.
+                </li>
               </ol>
-              <p class="stand-out">
+              <p class="stand-out ml-12">
                 Note: If your camera does not pick up the QR code, you can
                 download a free QR code scanner from App Store or Play Store.
               </p>
 
-              <p>
+              <p class="ml-12">
                 *You would need to have data on your phone to self check in.
               </p>
             </div>
@@ -93,11 +101,11 @@ export default {
     linkCode: {
       type: String,
     },
-    courseId:{
+    courseId: {
       type: String,
       required: true,
     },
-    eventId:{
+    eventId: {
       type: String,
       required: true,
     },
