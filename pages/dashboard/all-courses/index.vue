@@ -237,7 +237,7 @@
                 </p>
               </div>
 
-              <!-- <div class="my-4 row">
+              <div class="my-4 row">
                 <div
                   class="
                     d-flex
@@ -257,7 +257,7 @@
                 >
                   <upload-file v-model="currentCourse.feature_image" />
                 </div>
-              </div> -->
+              </div>
 
               <div class="my-4">
                 <div class="d-flex justify-content-center">
