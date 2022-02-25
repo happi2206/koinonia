@@ -67,6 +67,7 @@ export default {
     '~/plugins/vue-editor.js',
     '~/plugins/global-filter.js',
     '~/plugins/luxon.js',
+    '~/plugins/vue-html2pdf',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

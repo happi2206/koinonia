@@ -112,6 +112,7 @@
           <!-- <template #no_of_students="{ data }">
             <span>{{ data.item.students.length }}</span>
           </template> -->
+
           <template #Progress="{ data }">
             <b-progress class="mt-2" :max="10">
               <b-progress-bar
@@ -138,6 +139,9 @@
         </div>
       </template>
     </filter-component>
+    <div ref="my-component" v-show="openComponent">
+      <QRGenerator ref="qcode" :eventData="qrEvent"></QRGenerator>
+    </div>
   </div>
 </template>
 
@@ -156,6 +160,7 @@ export default {
         start_date: '',
         end_date: '',
       },
+      openComponent: false,
       dropdownItem: [
         'Print_QR_Code',
         'Edit',
@@ -187,6 +192,7 @@ export default {
       ],
 
       eventDescriptionAdded: false,
+      qrEvent: [],
       busy: false,
       events: [],
       is_creating: false,
@@ -216,8 +222,13 @@ export default {
       }
     },
 
-    printQr() {
-      console.log('object')
+    printQr(e) {
+      console.log(e)
+      this.qrEvent = e
+      // this.openComponent = true
+      this.$refs.qcode.$refs.html2Pdf.generatePdf()
+      // this.$refs.qcode.html2Pdf.generatePdf()
+      //console.log('object')
     },
     onRowClicked(e) {
       this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
