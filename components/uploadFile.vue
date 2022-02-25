@@ -13,13 +13,19 @@
       @click.prevent="$refs.uploadImage.click()"
       class="btn px-md-4 px-3 py-2 upbtn medbrownparagraph"
     >
-      UploadImage
+      Upload Image
     </button>
   </div>
 </template>
 <script>
 export default {
   name: 'uploadfile',
+  // props: {
+  //   textcontent: {
+  //     type: String,
+  //     required
+  //   },
+  // },
   data() {
     return {}
   },

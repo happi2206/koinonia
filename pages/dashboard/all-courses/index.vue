@@ -16,7 +16,7 @@
         <b-modal id="addcourse" title="Add Course" hide-footer>
           <preloader :show="add_preloader" />
           <div class="modacontent">
-            <form class="modabody px-4" @submit.prevent="addCourses">
+            <div class="modabody px-4">
               <div class="my-4">
                 <label class="d-block medbrownparagraph graytext"
                   >Course Name
@@ -120,7 +120,7 @@
                 </div>
               </div>
               <div class="d-flex justify-content-center text-center mt-4">
-                <input
+                <button
                   class="
                     btn
                     px-md-4 px-3
@@ -128,18 +128,21 @@
                     mainbtndashboard
                     medbrownparagraph
                   "
+                  @click="addCourses"
                   type="submit"
                   value="Create Course"
-                />
+                >
+                  Create course
+                </button>
               </div>
-            </form>
+            </div>
           </div>
         </b-modal>
 
         <!-- edit course -->
         <b-modal id="editmodal" title="Edit Course" hide-footer>
           <div class="modacontent">
-            <form class="modabody" @submit.prevent="editCourse">
+            <div class="modabody">
               <!-- <div class="my-4">
                 <label for="" class="d-block medbrownparagraph graytext"
                   >Course Code
@@ -234,6 +237,28 @@
                 </p>
               </div>
 
+              <!-- <div class="my-4 row">
+                <div
+                  class="
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                    col-md-4 col-12
+                  "
+                >
+                  <img
+                    :src="currentCourse.feature_image"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
+                <div
+                  class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
+                >
+                  <upload-file v-model="currentCourse.feature_image" />
+                </div>
+              </div> -->
+
               <div class="my-4">
                 <div class="d-flex justify-content-center">
                   <button
@@ -244,34 +269,13 @@
                       mainbtndashboard
                       medbrownparagraph
                     "
+                    @click="editCourse"
                   >
                     Save Changes
                   </button>
                 </div>
               </div>
-            </form>
-            <!-- 
-            <div class="my-4 row">
-              <div
-                class="
-                  d-flex
-                  align-items-center
-                  justify-content-center
-                  col-md-4 col-12
-                "
-              >
-                <img
-                  :src="currentCourse.feature_image"
-                  alt=""
-                  class="img-fluid"
-                />
-              </div>
-              <div
-                class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
-              >
-                <upload-file v-model="currentCourse.feature_image" />
-              </div>
-            </div> -->
+            </div>
           </div>
         </b-modal>
       </div>
@@ -366,7 +370,18 @@
                   @page-changed="handlePage"
                   :perPage="perPage"
                   :totalItems="totalItems"
-                />
+                >
+                  <template #start_date="{ data }">
+                    <span>
+                      {{ data.value }}
+                    </span>
+                  </template>
+                  <template #end_date="{ data }">
+                    <span>
+                      {{ data.value }}
+                    </span>
+                  </template>
+                </table-component>
 
                 <div class="row" v-else>
                   <grid-component
@@ -418,7 +433,6 @@ export default {
         {
           key: 'no_of_students',
           label: 'No of Stud',
-
           sortable: true,
         },
         { key: 'start_date', sortable: true },
@@ -500,6 +514,8 @@ export default {
         dots: '',
         ...e,
       }))
+
+      console.log('courses are', this.courses)
       this.perPage = courses.size
       this.totalItems = courses.total
       this.currentPage = courses.page

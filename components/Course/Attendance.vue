@@ -164,8 +164,8 @@ export default {
       ],
       fields: [
         { key: 'name', sortable: true },
-        { key: 'start_date', sortable: true },
-        { key: 'end_date', sortable: true },
+        { key: 'start_date', label: 'Start Date/Time', sortable: true },
+        { key: 'end_date', label: 'End Date/Time', sortable: true },
         {
           key: 'number_of_students_present',
           label: 'Students Present',
@@ -207,6 +207,7 @@ export default {
 
         this.$bvModal.hide('addEvent')
         this.$toast.success('Event added Successfully')
+        this.get_all_course_events()
       } catch (e) {
         this.$toast.error(e.data.detail.message)
       } finally {

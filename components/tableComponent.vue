@@ -77,14 +77,18 @@
         <slot name="avatar" :data="data">{{ data.value }}</slot>
       </template>
       <template #cell(start_date)="data">
-        <span>{{ data.item.start_date | DateTimeFormat }}</span>
+        <slot name="start_date" :data="data">
+          <span>{{ data.item.start_date | DateTimeFormat }}</span></slot
+        >
       </template>
 
       <template #cell(check_in)="data">
         <span>{{ data.item.check_in | DateTimeFormat }}</span>
       </template>
       <template #cell(end_date)="data">
-        <span>{{ data.item.end_date | DateTimeFormat }}</span>
+        <slot name="end_date" :data="data"
+          ><span>{{ data.item.end_date | DateTimeFormat }}</span></slot
+        >
       </template>
       <template #cell(Progress)="data">
         <slot name="Progress" :data="data"></slot>
@@ -99,19 +103,10 @@
           ></b-progress-bar>
         </b-progress> -->
       </template>
-      <template #cell(no_of_students)="data">
+      <!-- <template #cell(no_of_students)="data">
         <slot name="no_of_students" :data="data"></slot>
-        <!-- <b-progress class="mt-2" :max="10">
-          <b-progress-bar
-            :value="data.item.progress"
-            variant="success"
-          ></b-progress-bar>
-          <b-progress-bar
-            :value="10 - data.item.progress"
-            variant="danger"
-          ></b-progress-bar>
-        </b-progress> -->
-      </template>
+     
+      </template> -->
       <template #cell(actions)="row">
         <div class="text-left w-auto">
           <button
