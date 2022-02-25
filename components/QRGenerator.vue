@@ -71,13 +71,16 @@
                   5. Click on Check in button.
                 </li>
               </ol>
-              <p class="stand-out ml-12">
+              <p
+                class="stand-out ml-12"
+                style="font-size: 1.2rem; font-weight: 600"
+              >
                 Note: If your camera does not pick up the QR code, you can
                 download a free QR code scanner from App Store or Play Store.
               </p>
 
-              <p class="ml-12">
-                *You would need to have data on your phone to self check in.
+              <p class="ml-12" style="font-size: 1.2rem; font-weight: 600">
+                You would need to have data on your phone to self check in.
               </p>
             </div>
           </section>
