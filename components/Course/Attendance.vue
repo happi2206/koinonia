@@ -163,7 +163,16 @@ export default {
         { key: 'name', sortable: true },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
-        { key: 'no_of_students', sortable: true },
+        {
+          key: 'number_of_students_present',
+          label: 'Students Present',
+          sortable: true,
+        },
+        {
+          key: 'total_number_of_students',
+          label: 'Total Students',
+          sortable: true,
+        },
         {
           key: 'Progress',
           label: 'Progress',
