@@ -9,7 +9,7 @@
       <template #conten> Users</template> -->
     </side-bar>
 
-    <main class="page-content mt-0 mb-5 height">
+    <main class="page-content mt-0 height">
       <Nuxt />
     </main>
   </div>
@@ -23,7 +23,4 @@ export default {
 </script>
 
 <style>
-.height {
-  height: 100% !important;
-}
 </style>
