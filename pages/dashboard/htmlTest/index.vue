@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-5 pt-5">
-      <button @click="generateReport">button</button>
+      <button @click="generateReport">buttons</button>
     </div>
     <client-only>
       <vue-html2pdf
@@ -27,11 +27,9 @@
             <h2>23 - FEB</h2>
             <!-- place-holder image -->
             <figure class="d-flex justify-content-center align-items-center">
-              <img
-                src="data:image/png;base64, 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"
-                alt=""
-                class="img-fluid"
-              />
+              <VueQRCodeComponent
+                text="https://github.com/gerardreches/vue-qrcode-component"
+              ></VueQRCodeComponent>
             </figure>
             <h3>SCAN TO CHECK IN</h3>
             <div class="container">
@@ -87,6 +85,7 @@
 
 <script>
 import VueHtml2pdf from 'vue-html2pdf'
+import VueQRCodeComponent from 'vue-qrcode-component'
 
 export default {
   methods: {
@@ -101,6 +100,7 @@ export default {
 
   components: {
     VueHtml2pdf,
+    VueQRCodeComponent,
   },
 }
 </script>
