@@ -232,7 +232,7 @@ export default {
         //   console.log(element.students.length)
         // })
 
-        this.events = events.items.reverse()
+        this.events = events.items
 
         // this.events.map((element) => {
         //   this.events.push(element.students.length)
