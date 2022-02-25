@@ -108,17 +108,20 @@
           :perPage="perPage"
           :totalItems="totalItems"
         >
-          <template #no_of_students="{ data }">
+          <!-- <template #no_of_students="{ data }">
             <span>{{ data.item.students.length }}</span>
-          </template>
+          </template> -->
           <template #Progress="{ data }">
             <b-progress class="mt-2" :max="10">
               <b-progress-bar
-                :value="getPresent(data.item.students)"
+                :value="data.item.number_of_students_present"
                 variant="success"
               ></b-progress-bar>
               <b-progress-bar
-                :value="getAbsent(data.item.students)"
+                :value="
+                  data.item.total_number_of_students -
+                  data.item.number_of_students_present
+                "
                 variant="danger"
               ></b-progress-bar>
             </b-progress>
