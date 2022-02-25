@@ -45,13 +45,13 @@
                   </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-12">
                   <div class="my-2">
                     <label for="" class="medbrownparagraph graytext"
-                      >Start Date
+                      >Start Date and Time
                     </label>
                     <input
-                      type="date"
+                      type="datetime-local"
                       required
                       v-model="event.start_date"
                       placeholder="Start Date"
@@ -59,27 +59,14 @@
                     />
                   </div>
                 </div>
-                <div class="col-6">
+
+                <div class="col-12">
                   <div class="my-2">
                     <label for="" class="medbrownparagraph graytext"
-                      >Start Time
+                      >End Date and Time
                     </label>
                     <input
-                      type="time"
-                      required
-                      v-model="event.start_time"
-                      placeholder="End Date"
-                      class="forminputs text-dark"
-                    />
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="my-2">
-                    <label for="" class="medbrownparagraph graytext"
-                      >End Date
-                    </label>
-                    <input
-                      type="date"
+                      type="datetime-local"
                       required
                       v-model="event.end_date"
                       placeholder="Start Date"
@@ -87,34 +74,6 @@
                     />
                   </div>
                 </div>
-                <div class="col-6">
-                  <div class="my-2">
-                    <label for="" class="d-block medbrownparagraph graytext"
-                      >End Time
-                    </label>
-                    <input
-                      type="time"
-                      required
-                      v-model="event.end_time"
-                      placeholder="End Date"
-                      class="forminputs text-dark"
-                    />
-                  </div>
-                </div>
-
-                <!-- <div class="col-12">
-                  <div
-                    class="d-flex justify-content-end"
-                    @click="addDescriptionField"
-                  >
-                    <p class="medbrownparagraph">
-                      <span v-if="!eventDescriptionAdded"> Add an </span>
-
-                      <span v-else>Remove</span>
-                      event description
-                    </p>
-                  </div>
-                </div> -->
 
                 <div class="my-4 col-12">
                   <div class="d-flex justify-content-center">
@@ -149,17 +108,20 @@
           :perPage="perPage"
           :totalItems="totalItems"
         >
-          <template #no_of_students="{ data }">
+          <!-- <template #no_of_students="{ data }">
             <span>{{ data.item.students.length }}</span>
-          </template>
+          </template> -->
           <template #Progress="{ data }">
             <b-progress class="mt-2" :max="10">
               <b-progress-bar
-                :value="getPresent(data.item.students)"
+                :value="data.item.number_of_students_present"
                 variant="success"
               ></b-progress-bar>
               <b-progress-bar
-                :value="getAbsent(data.item.students)"
+                :value="
+                  data.item.total_number_of_students -
+                  data.item.number_of_students_present
+                "
                 variant="danger"
               ></b-progress-bar>
             </b-progress>
@@ -192,15 +154,28 @@ export default {
         description: '',
         start_date: '',
         end_date: '',
-        start_time: '',
-        end_time: '',
       },
-      dropdownItem: ['Share_QR_Code', 'Delete', 'Edit'],
+      dropdownItem: [
+        'Print QR Code',
+        'Edit',
+        'Download as PDF',
+        'Download as XLS',
+        'Download as CSV',
+      ],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', sortable: true },
         { key: 'end_date', sortable: true },
-        { key: 'no_of_students', sortable: true },
+        {
+          key: 'number_of_students_present',
+          label: 'Students Present',
+          sortable: true,
+        },
+        {
+          key: 'total_number_of_students',
+          label: 'Total Students',
+          sortable: true,
+        },
         {
           key: 'Progress',
           label: 'Progress',
@@ -215,7 +190,7 @@ export default {
       events: [],
       is_creating: false,
       search: '',
-      perPage: 5,
+      perPage: 50,
       totalItems: 0,
       currentPage: 1,
     }
@@ -252,9 +227,9 @@ export default {
         }
         const events = await this.$axios.$get(uri)
 
-        events.items.forEach((element) => {
-          console.log(element.students.length)
-        })
+        // events.items.forEach((element) => {
+        //   console.log(element.students.length)
+        // })
 
         this.events = events.items.reverse()
 
@@ -293,12 +268,12 @@ export default {
       this.search = e
       this.get_all_course_events()
     },
-    getPresent(item) {
-      return item.filter((t) => t.status === true).length
-    },
-    getAbsent(item) {
-      return item.filter((t) => t.status === false).length
-    },
+    // getPresent(item) {
+    //   return item.filter((t) => t.status === true).length
+    // },
+    // getAbsent(item) {
+    //   return item.filter((t) => t.status === false).length
+    // },
   },
 }
 </script>

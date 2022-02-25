@@ -19,9 +19,17 @@
         darkborderbottom
       "
     >
-      <div class="d-flex justify-content-between width100">
-        <div class="d-block d-lg-none">
-          <div class="d-flex align-items-center">
+      <div class="d-block d-lg-none w-25">
+        <div class="d-flex align-items-center">
+          <div
+            class="pr-2"
+            @click="$nuxt.$emit('openSidebar')"
+            v-if="authenticated"
+          >
+            <b-icon icon="list" class="text-white"></b-icon>
+          </div>
+
+          <div class="d-block d-lg-none mr-3">
             <nuxt-link
               to="/"
               class="
@@ -35,70 +43,52 @@
               "
               href="#"
             >
-              <img
-                src="~/assets/images/koinoiologo.png"
-                alt=""
-                class="img-fluid logoimages"
-              />
-              <span class="mb-0 medbrownparagraph text-white"> KOINONIA</span>
+              <span class="mb-0 medbrownparagraphlogo text-white"> KSOM</span>
             </nuxt-link>
           </div>
         </div>
       </div>
 
       <div class="d-flex align-items-center">
-        <!-- <div class="" v-if="authenticated">
-          <div class="relativecontainer d-block d-lg-none mx-3">
-            <span class="text-white"><b-icon icon="bell-fill"></b-icon></span>
-            <div class="absolutecontainer online">
-              <span class="mainyellowcolor"><b-icon icon="dot"></b-icon></span>
-            </div>
-          </div>
-        </div> -->
-
-        <div class="d-block d-lg-none mx-3" v-if="authenticated">
+        <div class="d-block d-lg-none" v-if="authenticated">
           <div class="d-lg-flex align-items-lg-center">
             <b-dropdown
               size="lg"
               variant="link"
               toggle-class="text-decoration-none"
-              class="p-0"
+              class="p-0 menudropdown"
               no-caret
             >
               <template #button-content>
                 <div class="d-flex align-items-center medparagraph">
                   <div class="profimgfull d-block d-lg-none">
-                    <b-avatar variant="success"></b-avatar>
+                    <b-avatar
+                      variant="warning"
+                      :text="user.other_name.charAt(0) + user.surname.charAt(0)"
+                      class="mr-1"
+                    ></b-avatar>
                   </div>
-                  <div>
-                    <span class="mx-2 medparagraph text-white">
-                      {{ user.other_name }}
-                    </span>
-                  </div>
-                  <b-icon
-                    icon="chevron-compact-down"
-                    class="text-white"
-                  ></b-icon>
                 </div>
               </template>
-              <b-dropdown-item href="#" class="medparagraph">
-                <nuxt-link to="/dashboard/accountsettings"> profile </nuxt-link>
+              <b-dropdown-item class="medparagraph">
+                <nuxt-link to="/dashboard/all-courses" class="text-dark">
+                  My learning
+                </nuxt-link>
               </b-dropdown-item>
-              <b-dropdown-item href="#" class="medparagraph">
-                <nuxt-link to="/dashboard/accountsettings">
+              <b-dropdown-item
+                class="medparagraph"
+                v-if="user.is_instructor || user.is_administrator"
+              >
+                <nuxt-link to="/dashboard/all-courses" class="text-dark">
+                  Instructors dashboard
+                </nuxt-link>
+              </b-dropdown-item>
+              <b-dropdown-item class="medparagraph">
+                <nuxt-link to="/dashboard/accountsettings" class="text-dark">
                   Account Settings
                 </nuxt-link>
               </b-dropdown-item>
               <b-dropdown-item
-                href="#"
-                class="medparagraph"
-                v-if="!user.is_instructor"
-                @click.prevent="linkToContent"
-              >
-                Link as Instructor
-              </b-dropdown-item>
-              <b-dropdown-item
-                href="#"
                 class="medparagraph"
                 v-if="!user.is_administrator"
                 @click.prevent="linkToContent"
@@ -106,23 +96,20 @@
                 Link as Administrator
               </b-dropdown-item>
               <b-dropdown-item
-                href="#"
                 class="medparagraph"
                 @click.prevent="linkToContent"
                 v-else
               >
-                Link as Courses
+                Link a Course
               </b-dropdown-item>
-              <b-dropdown-item @click="signOut" href="#" class="medparagraph">
+              <b-dropdown-item @click="signOut" class="medparagraph">
                 Logout
               </b-dropdown-item>
             </b-dropdown>
 
             <div>
               <b-modal id="link" centered hide-header hide-footer>
-                <h2 class="brownparagraph bold700 my-3">
-                  Link as {{ titlecontent }}
-                </h2>
+                <h2 class="brownparagraph bold700 my-3">Link a course</h2>
                 <div class="content px-1">
                   <input
                     type="text"
@@ -201,11 +188,6 @@
                 "
                 href="#"
               >
-                <img
-                  src="~/assets/images/koinoiologo.png"
-                  alt=""
-                  class="img-fluid logoimages"
-                />
                 <span class="mb-0 medbrownparagraphlogo text-white">
                   KOINONIA</span
                 >
@@ -216,15 +198,6 @@
           <div class="d-flex flex-column flex-lg-row align-items-center">
             <ul class="thirdcontent d-flex align-items-center mb-0">
               <div v-if="authenticated" class="d-flex">
-                <li class="nav-item mb-0">
-                  <nuxt-link
-                    to="/dashboard/all-courses"
-                    class="nav-link text-white dashboardlink mb-0"
-                  >
-                    My learning
-                  </nuxt-link>
-                </li>
-
                 <li
                   class="nav-item mb-0 mx-2"
                   v-if="user.is_instructor || user.is_administrator"
@@ -234,6 +207,14 @@
                     class="nav-link text-white dashboardlink mb-0"
                   >
                     Instructors dashboard
+                  </nuxt-link>
+                </li>
+                <li class="nav-item mb-0">
+                  <nuxt-link
+                    to="/dashboard/all-courses"
+                    class="nav-link text-white dashboardlink mb-0"
+                  >
+                    My learning
                   </nuxt-link>
                 </li>
               </div>
@@ -278,61 +259,49 @@
               </div>
             </ul>
 
-            <!-- <div class="mx-2" v-if="authenticated">
-              <div class="relativecontainer d-none d-lg-block">
-                <span class="text-white"
-                  ><b-icon icon="bell-fill" class="text-white"></b-icon
-                ></span>
-                <div class="absolutecontainer online">
-                  <span class="mainyellowcolor"
-                    ><b-icon icon="dot" class="text-white"></b-icon
-                  ></span>
-                </div>
-              </div>
-            </div> -->
-
             <div class="d-none d-lg-block ml-2" v-if="authenticated">
               <div class="d-lg-flex align-items-lg-center">
                 <b-dropdown
                   size="lg"
                   variant="link"
                   toggle-class="text-decoration-none"
-                  class="p-0"
+                  class="p-0 menudropdown"
                   no-caret
                 >
                   <template #button-content>
                     <div class="d-flex align-items-center medparagraph">
                       <div class="profimgfull d-none d-lg-block">
-                        <b-avatar variant="warning"></b-avatar>
+                        <b-avatar
+                          variant="warning"
+                          :text="
+                            user.other_name.charAt(0) + user.surname.charAt(0)
+                          "
+                          class="mr-1"
+                        ></b-avatar>
                       </div>
-                      <div>
-                        <span class="mx-2 medparagraph text-white">
-                          {{ user.other_name }}
-                        </span>
-                      </div>
-                      <b-icon
-                        icon="chevron-compact-down"
-                        class="text-white"
-                      ></b-icon>
                     </div>
                   </template>
                   <b-dropdown-item href="#" class="medparagraph">
-                    <nuxt-link to="/dashboard/accountsettings">
-                      profile
-                    </nuxt-link>
-                  </b-dropdown-item>
-                  <b-dropdown-item href="#" class="medparagraph">
-                    <nuxt-link to="/dashboard/accountsettings">
-                      Account Settings
+                    <nuxt-link to="/dashboard/all-courses" class="text-dark">
+                      My learning
                     </nuxt-link>
                   </b-dropdown-item>
                   <b-dropdown-item
                     href="#"
                     class="medparagraph"
-                    v-if="!user.is_instructor"
-                    @click.prevent="linkToContent"
+                    v-if="user.is_instructor || user.is_administrator"
                   >
-                    Link as Instructor
+                    <nuxt-link to="/dashboard/all-courses" class="text-dark">
+                      Instructors dashboard
+                    </nuxt-link>
+                  </b-dropdown-item>
+                  <b-dropdown-item href="#" class="medparagraph">
+                    <nuxt-link
+                      to="/dashboard/accountsettings"
+                      class="text-dark"
+                    >
+                      Account Settings
+                    </nuxt-link>
                   </b-dropdown-item>
                   <b-dropdown-item
                     href="#"
@@ -348,7 +317,7 @@
                     @click.prevent="linkToContent"
                     v-else
                   >
-                    Link as Courses
+                    Link a Course
                   </b-dropdown-item>
                   <b-dropdown-item
                     @click="signOut"
@@ -361,9 +330,7 @@
 
                 <div>
                   <b-modal id="link" centered hide-header hide-footer>
-                    <h2 class="brownparagraph bold700 my-3">
-                      Link as {{ titlecontent }}
-                    </h2>
+                    <h2 class="brownparagraph bold700 my-3">Link a course</h2>
                     <div class="content px-1">
                       <input
                         type="text"
@@ -396,6 +363,8 @@ export default {
     return {
       titlecontent: '',
       isMobile: false,
+      firstLetter: '',
+      lastLetter: '',
     }
   },
   computed: {
@@ -406,6 +375,9 @@ export default {
     user() {
       return this.$store.state.auth.user
     },
+
+    userFirstName() {},
+
     // isAdministrator() {
     //   return this.user.is_administrator
     // },

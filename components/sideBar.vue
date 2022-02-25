@@ -1,12 +1,8 @@
 <template>
   <div>
     <div class="backdropfscreen" @click="openSide" v-show="isMobile"></div>
-    <div class="d-block d-lg-none" @click="openSide">
-      <div class="pt-5 px-3 z1000">
-        <b-icon icon="list" class="text-dark py-md-4 pt-3 pb-4"></b-icon>
-      </div>
-    </div>
-    <nav id="sidebar" class="sidebar-wrapper mt-lg-5 pt-lg-5" v-if="isMobile">
+
+    <nav id="sidebar" class="sidebar-wrapper mt-5 pt-3" v-if="isMobile">
       <div class="sidebar-menu my-lg-2 bg-white">
         <div class="h-full bg-white px-1 absolute" id="sidenavExample">
           <h4 class="brownparagraph text-center my-3 mx-3" v-if="isInstructor">
@@ -83,6 +79,11 @@ export default {
       currentMenu: null,
       isMobile: false,
     }
+  },
+  created() {
+    this.$nuxt.$on('openSidebar', () => {
+      this.isMobile = !this.isMobile
+    })
   },
   methods: {
     setCurrentMenu(payload) {

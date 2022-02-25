@@ -11,22 +11,23 @@
       "
     >
       <div class="mt-5 py-3">
-        <b-overlay :show="busy" opacity="1" blur="0">
-          <div class="card-body bg-white p-5 mt-5">
+        <h2 class="roboto24 text-center px-md-5 px-2">Attendance Check-In</h2>
+        <b-overlay :show="busy" opacity="1" blur="0" class="bg-white">
+          <div class="card-body bg-white p-md-5 p-4 mt-5">
             <strong
-              ><h2 class="text-center px-md-5">
-                {{ course.title }}
+              ><h2 class="roboto24 text-center px-md-5 px-2">
+                {{ event.name }}
               </h2></strong
             >
-            <h2 class="text-center h1 lead px-md-5 py-1">
+            <p class="biggerparagraph px-md-5 px-2 py-1">
               Please fill in your details accordingly to join<span>
                 {{ event.name }}</span
               >
-            </h2>
+            </p>
 
             <form class="px-md-5 px-2" @submit.prevent="submitFunction">
               <div class="my-4 py-2">
-                <label for="" class="d-block graytext"
+                <label for="" class="d-block mainparagraph18 graytext"
                   >Surname
                   <span class="text-danger">*</span>
                 </label>
@@ -39,8 +40,8 @@
                 />
               </div>
               <div class="my-4 py-2">
-                <label for="" class="d-block graytext"
-                  >Registeration Number
+                <label for="" class="d-block mainparagraph18 graytext"
+                  >Registration Number
                   <span class="text-danger">*</span>
                 </label>
                 <input
@@ -53,10 +54,17 @@
               </div>
 
               <div class="my-4 py-2 d-flex justify-content-center">
+                <!-- <button class="subscribebtn btn rad6 btn mt-3 py-3" :disabled="is_login">
+                            <span v-if="is_login">
+                            <b-spinner small  variant="light"></b-spinner>
+                              Please wait...</span>
+                            <span v-else>Login</span>
+                          </button> -->
+
                 <button
                   class="
                     btn-lg btn
-                    py-md-3 py-2
+                    py-md-3
                     mainbtndashboard
                     biggerparagraph
                     w-100
@@ -64,8 +72,18 @@
                   "
                   ref="submit"
                   type="submit"
+                  :disabled="isLoading"
                 >
-                  Check in
+                  <span v-if="isLoading">
+                    <b-spinner
+                      small
+                      label="Small Spinner"
+                      variant="dark"
+                    ></b-spinner>
+                    Checking in...
+                  </span>
+
+                  <span v-else>Check in</span>
                 </button>
               </div>
             </form>
@@ -86,18 +104,36 @@
                 p-md-3
               "
             >
-              <!-- <b-icon
-                icon="x-circle-fill"
-                font-scale="3"
-                variant="danger"
-              ></b-icon> -->
+              <div
+                class="d-flex flex-column align-items-center align-content-end"
+                v-if="errorDetail != ''"
+              >
+                <b-icon
+                  icon="x-circle-fill"
+                  font-scale="4"
+                  class="my-3"
+                  variant="danger"
+                ></b-icon>
+                <strong id="form-confirm-label">
+                  <h2 class="text-center roboto24">
+                    {{ errorDetail }}
+                  </h2>
+                </strong>
 
+                <nuxt-link to="/" class="d-flex mt-5">
+                  <span class="iconify" data-icon="bi:arrow-left"></span>
+                  <p class="medparagraph text-dark mb-0 mr-3">
+                    Go back to Home page
+                  </p>
+                </nuxt-link>
+              </div>
               <div
                 class="
                   d-flex
                   flex-column
                   align-items-center align-content-center
                 "
+                v-else
               >
                 <b-icon
                   icon="check-circle-fill"
@@ -116,6 +152,12 @@
                     {{ event.name }} has been succesfully taken
                   </h2>
                 </strong>
+                <nuxt-link to="/" class="d-flex mt-5">
+                  <span class="iconify" data-icon="bi:arrow-left"></span>
+                  <p class="medparagraph text-dark mb-0 mr-3">
+                    Go back to Home page
+                  </p>
+                </nuxt-link>
               </div>
             </div>
           </template>
@@ -126,8 +168,11 @@
 </template>
 
 <script>
-const { detect } = require('detect-browser')
-const browser = detect()
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
+
+// Initialize an agent at application startup.
+const fpPromise = FingerprintJS.load()
+
 export default {
   data() {
     return {
@@ -138,15 +183,19 @@ export default {
       busy: false,
       processing: false,
       other_name: '',
+      errorDetail: '',
+      browser: '',
+      isLoading: false,
     }
   },
+
   methods: {
     async submitFunction() {
       this.processing = false
       const string =
         this.formInputs.surname.charAt(0).toUpperCase() +
         this.formInputs.surname.slice(1)
-
+      this.isLoading = true
       try {
         const response = await this.$axios.$post(
           'course-v/take-attendance-via-qrcode',
@@ -156,35 +205,51 @@ export default {
             registration_number: 'KSOM/2022/ABUJA/' + this.formInputs.regNo,
             course_id: this.$route.params.course,
             event_id: this.$route.params.event,
-            browser: {
-              name: browser.name,
-              version: browser.version,
-              os: browser.os,
-            },
+            browser: this.browser,
           }
         )
+
+        this.isLoading = false
 
         this.other_name = response.message.other_name
         this.busy = true
       } catch (e) {
-        this.$toast.error(e.data.detail.message)
         console.log(e.data.detail.message)
+        this.errorDetail = e.data.detail.message
+        this.busy = true
       }
+    },
+
+    closeWindow() {
+      window.close()
     },
   },
 
   async asyncData({ route, $axios }) {
+    const fp = await fpPromise
+    const result = await fp.get()
+
     try {
       const getCourse = await $axios.$get(
-        `course-v/get-a-course?course_id=${route.params.course}`
+        `course-v/get-a-course-by-id/?course_id=${route.params.course}&school_id=${process.env.SCHOOL_ID}`
       )
       const getEvent = await $axios.$get(
-        `course-v/get-course-event?course_id=${route.params.course}&event_id=${route.params.event}`
+        `course-v/get-course-event-by-id?course_id=${route.params.course}&event_id=${route.params.event}&school_id=${process.env.SCHOOL_ID}`
       )
+
+      console.log(getCourse)
+
+      // const getCourse = await $axios.$get(
+      //   `course-v/get-a-course?course_id=${route.params.course}`
+      // )
+      // const getEvent = await $axios.$get(
+      //   `course-v/get-course-event?course_id=${route.params.course}&event_id=${route.params.event}`
+      // )
 
       return {
         course: getCourse,
         event: getEvent,
+        browser: result.visitorId,
       }
     } catch (e) {
       console.log(e)
