@@ -141,11 +141,7 @@ export default {
         uri = uri + `&search=${this.search}`
       }
       const student = await this.$axios.$get(uri)
-      console.log('uri is ', student)
-      // this.absent = student.total_number_of_student - student.students_present
-      this.present = student.total
-
-      console.log('present is ', this.present)
+     
       this.absent = student.total_number_of_student - student.students_present
       this.present = student.students_present
       this.isLoading = false
