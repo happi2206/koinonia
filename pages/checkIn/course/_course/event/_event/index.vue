@@ -52,12 +52,6 @@
                 />
               </div>
               <div class="my-4 py-2 d-flex justify-content-center">
-                <!-- <button class="subscribebtn btn rad6 btn mt-3 py-3" :disabled="is_login">
-                            <span v-if="is_login">
-                            <b-spinner small  variant="light"></b-spinner>
-                              Please wait...</span>
-                            <span v-else>Login</span>
-                          </button> -->
                 <button
                   class="
                     btn-lg btn
@@ -110,11 +104,22 @@
                   variant="danger"
                 ></b-icon>
                 <strong id="form-confirm-label">
-                  <h2 class="text-center roboto24 text-capitalize">
+                  <h2 class="text-center roboto24">
                     {{ errorDetail }}
                   </h2>
                 </strong>
-                <nuxt-link to="/" class="d-flex mt-5">
+                <div
+                  class="d-flex mt-5"
+                  v-if="errorDetail == 'You are not a Student of this event'"
+                >
+                  <button
+                    class="btn btn-outline-success roboto18 text-dar mb-0 mr-3"
+                    @click="retryBtn"
+                  >
+                    Retry
+                  </button>
+                </div>
+                <nuxt-link to="/" class="d-flex mt-5" v-else>
                   <span class="iconify" data-icon="bi:arrow-left"></span>
                   <p class="medparagraph text-dark mb-0 mr-3">
                     Go back to Home page
@@ -209,6 +214,11 @@ export default {
         this.errorDetail = e.data.detail.message
         this.busy = true
       }
+    },
+    retryBtn() {
+      this.processing = false
+      this.busy = false
+      this.isLoading = false
     },
     closeWindow() {
       window.close()
