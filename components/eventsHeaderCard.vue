@@ -41,7 +41,7 @@
           </p>
           <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> No in class:</span>
-            <span class=""> {{ eventDetail.students.length }}</span>
+            <span class=""> {{ present + absent }}</span>
           </p>
           <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Student Present: {{ present }}</span>
@@ -141,12 +141,10 @@ export default {
         uri = uri + `&search=${this.search}`
       }
       const student = await this.$axios.$get(uri)
-      let present = student.items.filter((i) => i.status === true).length
-      this.absent = student.total - present
-      this.present = present
+      this.absent = student.total_number_of_student - student.students_present
+      this.present = student.students_present
       this.isLoading = false
-      this.studentArray = student.items
-      this.totalItems = student.total
+      this.studentArray = student.response.items
     } catch (e) {
       this.$toast.error(e)
     } finally {
@@ -162,11 +160,10 @@ export default {
           uri = uri + `&search=${this.search}`
         }
         const student = await this.$axios.$get(uri)
-        let present = student.items.filter((i) => i.status === true).length
-        this.absent = student.total - present
-        this.present = present
-        this.studentArray = student.items
-        this.totalItems = student.total
+        this.absent = student.total_number_of_student - student.students_present
+        this.present = student.students_present
+        this.isLoading = false
+        this.studentArray = student.response.items
       } catch (e) {
         console.log(e)
       } finally {
