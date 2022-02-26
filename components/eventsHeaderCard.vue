@@ -145,6 +145,7 @@ export default {
       this.present = student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
+        this.totalItems = student.response.total
     } catch (e) {
       this.$toast.error(e)
     } finally {
@@ -161,9 +162,10 @@ export default {
         }
         const student = await this.$axios.$get(uri)
         this.absent = student.total_number_of_student - student.students_present
-        this.present = student.students_present
-        this.isLoading = false
-        this.studentArray = student.response.items
+      this.present = student.students_present
+      this.isLoading = false
+      this.studentArray = student.response.items
+        this.totalItems = student.response.total
       } catch (e) {
         console.log(e)
       } finally {
