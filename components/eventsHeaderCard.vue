@@ -141,11 +141,16 @@ export default {
         uri = uri + `&search=${this.search}`
       }
       const student = await this.$axios.$get(uri)
-      this.absent = student.total_number_of_student - student.students_present
-      this.present = student.students_present
+      console.log('uri is ', student)
+      // this.absent = student.total_number_of_student - student.students_present
+      this.present = student.total
+
+      console.log('present is ', this.present)
+      // this.absent = student.total_number_of_student - student.students_present
+      // this.present = student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
-        this.totalItems = student.response.total
+      this.totalItems = student.response.total
     } catch (e) {
       this.$toast.error(e)
     } finally {
@@ -162,9 +167,9 @@ export default {
         }
         const student = await this.$axios.$get(uri)
         this.absent = student.total_number_of_student - student.students_present
-      this.present = student.students_present
-      this.isLoading = false
-      this.studentArray = student.response.items
+        this.present = student.students_present
+        this.isLoading = false
+        this.studentArray = student.response.items
         this.totalItems = student.response.total
       } catch (e) {
         console.log(e)
