@@ -191,6 +191,7 @@ export default {
     },
     SearchText(e) {
       this.search = e
+      this.currentPage = 1
       this.$fetch()
     },
   },
