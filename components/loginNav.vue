@@ -71,7 +71,7 @@
                 </div>
               </template>
               <b-dropdown-item class="medparagraph">
-                <nuxt-link to="/dashboard/all-courses" class="text-dark">
+                <nuxt-link to="/myLearning" class="text-dark">
                   My learning
                 </nuxt-link>
               </b-dropdown-item>
@@ -211,7 +211,7 @@
                 </li>
                 <li class="nav-item mb-0">
                   <nuxt-link
-                    to="/dashboard/all-courses"
+                    to="/myLearning"
                     class="nav-link text-white dashboardlink mb-0"
                   >
                     My learning
@@ -282,7 +282,7 @@
                     </div>
                   </template>
                   <b-dropdown-item href="#" class="medparagraph">
-                    <nuxt-link to="/dashboard/all-courses" class="text-dark">
+                    <nuxt-link to="/myLearning" class="text-dark">
                       My learning
                     </nuxt-link>
                   </b-dropdown-item>
