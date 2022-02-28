@@ -9,6 +9,8 @@
           >
             Add Event
           </button>
+
+          <!-- add event -->
           <b-modal id="addEvent" centered title="Create Event" hide-footer>
             <preloader :show="is_creating" />
             <form class="modabody" @submit.prevent="createEvent">
@@ -106,6 +108,7 @@
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
+          @Edit="handleEdit"
           :perPage="perPage"
           :totalItems="totalItems"
         >
@@ -140,8 +143,94 @@
       </template>
     </filter-component>
     <div ref="my-component" v-show="openComponent">
-      <QRGenerator :courseId="$route.params.course" :eventId="eventId" ref="qcode" :eventData="qrEvent"></QRGenerator>
+      <QRGenerator
+        :courseId="$route.params.course"
+        :eventId="eventId"
+        ref="qcode"
+        :eventData="qrEvent"
+      ></QRGenerator>
     </div>
+
+    <b-modal id="editEvent" centered title="Edit Event" hide-footer>
+      <preloader :show="is_creating" />
+      <form class="modabody">
+        <div class="row px-4">
+          <div class="col-12">
+            <div class="my-2">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Event Name
+              </label>
+
+              <input
+                type="text"
+                v-model="currentEvent.name"
+                required
+                placeholder="Event Name"
+                class="forminputs text-dark"
+              />
+            </div>
+          </div>
+
+          <div class="col-12" v-if="eventDescriptionAdded">
+            <div class="my-2">
+              <label for="" class="medbrownparagraph graytext"
+                >Event Description
+              </label>
+
+              <input
+                type="text"
+                v-model="currentEvent.description"
+                required
+                placeholder="Event Description"
+                class="forminputs text-dark"
+              />
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="my-2">
+              <label for="" class="medbrownparagraph graytext"
+                >Start Date and Time
+              </label>
+              <input
+                type="datetime-local"
+                required
+                v-model="currentEvent.start_date"
+                placeholder="Start Date"
+                class="forminputs text-dark"
+              />
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="my-2">
+              <label for="" class="medbrownparagraph graytext"
+                >End Date and Time
+              </label>
+              <input
+                type="datetime-local"
+                required
+                v-model="currentEvent.end_date"
+                placeholder="Start Date"
+                class="forminputs text-dark"
+              />
+            </div>
+          </div>
+
+          <div class="my-4 col-12">
+            <div class="d-flex justify-content-center">
+              <button
+                @click.prevent="submitEditedEvent"
+                :disabled="is_creating"
+                class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+              >
+                Edit Event
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </b-modal>
   </div>
 </template>
 
@@ -160,6 +249,7 @@ export default {
         start_date: '',
         end_date: '',
       },
+      currentEvent: {},
       openComponent: false,
       dropdownItem: [
         'Print_QR_Code',
@@ -201,7 +291,7 @@ export default {
       totalItems: 0,
       currentPage: 1,
       courseId: '',
-      eventId:''
+      eventId: '',
     }
   },
 
@@ -227,12 +317,33 @@ export default {
     printQr(e) {
       console.log(e)
       this.qrEvent = e
-      this.eventId = e.id;
+      this.eventId = e.id
       // this.openComponent = true
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
       // this.$refs.qcode.html2Pdf.generatePdf()
       //console.log('object')
     },
+
+    handleEdit(e) {
+      this.$bvModal.show('editEvent')
+      const editForm = e
+      this.currentEvent = editForm
+      console.log(editForm)
+    },
+
+    async submitEditedEvent() {
+      try {
+        await this.$axios.$patch(
+          `course-v/update-course-event?course_id=${this.$route.params.course}`,
+          this.currentEvent
+        )
+
+        // this.$bvModal.hide('editEvent')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
     onRowClicked(e) {
       this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
     },
