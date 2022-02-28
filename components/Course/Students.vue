@@ -1,6 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_students">
-    <filter-component @search="SearchText">
+    <filter-component @search="SearchText" @view-by="sortStudents">
       <template #besideFilterButton>
         <div class="">
           <button
@@ -218,6 +218,10 @@ export default {
   },
 
   methods: {
+    sortStudents(e) {
+      this.perPage = e
+      this.get_all_course_students()
+    },
     async uploadStudents(e) {
       let file = e.target.files[0]
       let students = await new Promise((resolve) => {

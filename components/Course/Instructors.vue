@@ -1,6 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_instructors">
-    <filter-component @search="SearchText">
+    <filter-component @search="SearchText" @view-by="sortInstructors">
       <template #besideFilterButton>
         <div class="ml-md-5">
           <button
@@ -90,12 +90,16 @@ export default {
       course_instructors: [],
       busy: false,
       search: '',
-      perPage: 30,
+      perPage: 10,
       totalItems: 0,
       currentPage: 1,
     }
   },
   methods: {
+    sortInstructors(e) {
+      this.perPage = e
+      this.get_all_course_instructors()
+    },
     async get_all_instructors() {
       try {
         const instructors = await this.$axios.$get(
@@ -118,9 +122,9 @@ export default {
         }
         const instructors = await this.$axios.$get(uri)
 
-        console.log('instructors are ', instructors.items)
+        console.log('instructors are ', instructors)
         this.instructors = instructors.items
-        // this.perPage = instructors.size
+        this.perPage = instructors.size
         // this.totalItems = instructors.total
         // this.currentPage = instructors.page
       } catch (e) {

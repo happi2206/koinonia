@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex align-items-center flex-wrap justify-content-between">
+      <div class="d-flex align-items-center justify-content-between">
         <div
           class="
             d-flex
@@ -49,6 +49,8 @@
             </select>
           </div>
         </div>
+
+        <slot name="filterby"></slot>
         <div
           class="
             d-flex
@@ -173,9 +175,9 @@ export default Vue.extend({
 .firstwidth {
   width: 30%;
 }
-.secondwidth {
+/* .secondwidth {
   width: 70%;
-}
+} */
 
 @media (max-width: 900.5px) {
   .firstwidth {

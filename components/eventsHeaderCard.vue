@@ -55,6 +55,21 @@
       </div>
       <div class="bg-white rounded p-md-3 my-2">
         <filter-component @search="SearchText" @view-by="sortStudents">
+          <template #filterby>
+            <div class="records-count medbrownparagraph">
+              <span class="medbrownparagraph">Sort by: </span>
+              <select class="records-count medbrownparagraph medbrownparagraph">
+                <option class="medbrownparagraph" value="self">
+                  Self checked-in
+                </option>
+                <option class="medbrownparagraph" value="20">
+                  Admin Checked-in
+                </option>
+                <option class="medbrownparagraph" value="25">All</option>
+              </select>
+            </div>
+          </template>
+
           <template #default="{ visualization }">
             <table-component
               :busy="busy"
