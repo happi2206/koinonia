@@ -181,7 +181,7 @@ export default {
       required: false,
     },
     perPage: {
-      type: Number,
+      type: String,
       default: 12,
     },
     /**

@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="bg-white rounded p-md-3 my-2">
-        <filter-component @search="SearchText">
+        <filter-component @search="SearchText" @view-by="sortStudents">
           <template #default="{ visualization }">
             <table-component
               :busy="busy"
@@ -141,7 +141,7 @@ export default {
         uri = uri + `&search=${this.search}`
       }
       const student = await this.$axios.$get(uri)
-     
+
       this.absent = student.total_number_of_student - student.students_present
       this.present = student.students_present
       this.isLoading = false
@@ -193,6 +193,10 @@ export default {
     SearchText(e) {
       this.search = e
       this.currentPage = 1
+      this.$fetch()
+    },
+    sortStudents(e) {
+      this.perPage = e
       this.$fetch()
     },
   },

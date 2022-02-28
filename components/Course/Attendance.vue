@@ -1,6 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
-    <filter-component @search="SearchText">
+    <filter-component @search="SearchText" @view-by="sortEvents">
       <template #besideFilterButton>
         <div class="ml-md-5">
           <button
@@ -338,7 +338,8 @@ export default {
           this.currentEvent
         )
 
-        // this.$bvModal.hide('editEvent')
+        this.$bvModal.hide('editEvent')
+        this.get_all_course_events()
       } catch (e) {
         console.log(e)
       }
@@ -398,6 +399,12 @@ export default {
     SearchText(e) {
       this.search = e
       this.get_all_course_events()
+    },
+
+    sortEvents(e) {
+      this.perPage = e
+      this.get_all_course_events()
+      console.log(e)
     },
     // getPresent(item) {
     //   return item.filter((t) => t.status === true).length
