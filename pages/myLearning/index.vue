@@ -17,10 +17,46 @@
               </div>
             </div>
           </b-tab>
-          <b-tab title="On-going"> on-going </b-tab>
-          <b-tab title="Archived"> archived </b-tab>
-          <b-tab title="Applied"> applied</b-tab>
-          <b-tab title="Saved"> applied</b-tab>
+          <b-tab title="On-going">
+            <div class="d-flex justify-content-center align-items-center p-4">
+              <div class="h-100">
+                <h2 class="text-center header2 my-4">No Class found</h2>
+                <p class="my-4 medbrownparagraph text-center">
+                  Link to a course by asking an administrator for the link code
+                </p>
+              </div>
+            </div>
+          </b-tab>
+          <b-tab title="Archived">
+            <div class="d-flex justify-content-center align-items-center p-4">
+              <div class="h-100">
+                <h2 class="text-center header2 my-4">No Class found</h2>
+                <p class="my-4 medbrownparagraph text-center">
+                  Link to a course by asking an administrator for the link code
+                </p>
+              </div>
+            </div>
+          </b-tab>
+          <b-tab title="Applied">
+            <div class="d-flex justify-content-center align-items-center p-4">
+              <div class="h-100">
+                <h2 class="text-center header2 my-4">No Class found</h2>
+                <p class="my-4 medbrownparagraph text-center">
+                  Link to a course by asking an administrator for the link code
+                </p>
+              </div>
+            </div></b-tab
+          >
+          <b-tab title="Saved">
+            <div class="d-flex justify-content-center align-items-center p-4">
+              <div class="h-100">
+                <h2 class="text-center header2 my-4">No Class found</h2>
+                <p class="my-4 medbrownparagraph text-center">
+                  Link to a course by asking an administrator for the link code
+                </p>
+              </div>
+            </div></b-tab
+          >
         </b-tabs>
       </div>
     </div>
