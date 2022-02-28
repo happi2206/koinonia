@@ -115,8 +115,9 @@
                   class="
                     d-flex
                     align-items-center
-                    justify-content-center
-                    col-md-5 col-12
+                    justify-content-between
+                    col-md-2 col-12
+                    my-4
                   "
                 >
                   <img
@@ -126,7 +127,13 @@
                   />
                 </div>
                 <div
-                  class="flex gap-3 justify-content-center my-4 col-md-7 col-12"
+                  class="
+                    flex
+                    gap-3
+                    justify-content-center
+                    my-4
+                    col-md-10 col-12
+                  "
                 >
                   <upload-file v-model="courseData.feature_image" />
                 </div>

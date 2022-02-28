@@ -30,8 +30,8 @@
                 </label>
 
                 <input
-                  type="text"
-                  v-model="student.user_type.email"
+                  type="email"
+                  v-model="student.email"
                   required
                   placeholder="Email"
                   class="forminputs text-dark"
@@ -44,7 +44,7 @@
 
                 <input
                   type="text"
-                  v-model="student.other_name"
+                  v-model="student.firstname"
                   required
                   placeholder="Name of student"
                   class="forminputs text-dark"
@@ -71,6 +71,18 @@
                   required
                   v-model="student.registration_number"
                   placeholder="Registration Number"
+                  class="forminputs text-dark"
+                />
+              </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Phone Number
+                </label>
+                <input
+                  type="text"
+                  required
+                  v-model="student.phone"
+                  placeholder="Phone Number"
                   class="forminputs text-dark"
                 />
               </div>
@@ -166,30 +178,36 @@ export default {
 
       student: {
         surname: '',
-        other_name: '',
-        avatar: '',
-        marital_status: 'single',
-        gender: 'male',
-        phone: 'string',
+        middlename: '',
+        firstname: '',
+        phone: '',
+        email: '',
         registration_number: '',
-        salutation: 'string',
-        send_latest_updates: false,
-        user_type: {
-          user_type: 'flat_user',
-          link_code: '',
-          email: '',
-          type: 'student',
-        },
+        // surname: '',
+        // other_name: '',
+        // avatar: '',
+        // marital_status: 'single',
+        // gender: 'male',
+        // phone: 'string',
+        // registration_number: '',
+        // salutation: 'string',
+        // send_latest_updates: false,
+        // user_type: {
+        //   user_type: 'flat_user',
+        //   link_code: '',
+        //   email: '',
+        //   type: 'student',
+        // },
       },
       addStudent: '',
       studentfields: [
-        { key: 'other_name', label: 'First name', sortable: true },
+        { key: 'firstname', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
         { key: 'registration_number', sortable: true },
         { key: 'email', sortable: true },
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
-        { key: 'phone no', sortable: true },
+        { key: 'phone', sortable: true },
       ],
       busy: false,
       search: '',
@@ -267,11 +285,13 @@ export default {
         }
         const students = await this.$axios.$get(uri)
 
-        this.students = students.items.reverse()
+        console.log('students are ', students)
 
-        this.perPage = students.size
-        this.totalItems = students.total
-        this.currentPage = students.page
+        this.students = students.items
+
+        // this.perPage = students.size
+        // this.totalItems = students.total
+        // this.currentPage = students.page
       } catch (e) {
         this.$toast.error(e)
       } finally {

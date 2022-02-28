@@ -26,9 +26,13 @@
       </template>
 
       <template #cell(link_code)="data">
-        <span class="border p-2" style="border-radius: 5px">{{
-          data.value
-        }}</span>
+        <span class="border p-2" style="border-radius: 5px">
+          <span v-if="data.value">
+            {{ data.value }}
+          </span>
+
+          <span v-else> Connected </span>
+        </span>
       </template>
 
       <template #cell(color)="data">
@@ -181,7 +185,6 @@ export default {
       required: false,
     },
     perPage: {
-      type: String,
       default: 12,
     },
     /**

@@ -45,6 +45,7 @@
           </b-modal>
         </div>
       </template>
+
       <template #default="{ visualization }">
         <table-component
           :items="instructors"
@@ -74,7 +75,7 @@ export default {
     return {
       addInstructor: '',
       instructorfields: [
-        { key: 'other_name', label: 'First name', sortable: true },
+        { key: 'firstname', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
         { key: 'email', sortable: true },
         { key: 'phone', sortable: true },
@@ -116,10 +117,12 @@ export default {
           uri = uri + `&search=${this.search}`
         }
         const instructors = await this.$axios.$get(uri)
-        this.course_instructors = instructors.items.reverse()
-        this.perPage = instructors.size
-        this.totalItems = instructors.total
-        this.currentPage = instructors.page
+
+        console.log('instructors are ', instructors.items)
+        this.instructors = instructors.items
+        // this.perPage = instructors.size
+        // this.totalItems = instructors.total
+        // this.currentPage = instructors.page
       } catch (e) {
         this.$toast.error(e)
       } finally {
