@@ -62,10 +62,10 @@
                 <option class="medbrownparagraph" value="self">
                   Self checked-in
                 </option>
-                <option class="medbrownparagraph" value="20">
+                <option class="medbrownparagraph" value="admin">
                   Admin Checked-in
                 </option>
-                <option class="medbrownparagraph" value="25">All</option>
+                <option class="medbrownparagraph" value="all">All</option>
               </select>
             </div>
           </template>

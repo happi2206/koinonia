@@ -116,8 +116,7 @@
                     d-flex
                     align-items-center
                     justify-content-between
-                    col-md-2 col-12
-                    my-4
+                    col-3
                   "
                 >
                   <img
@@ -126,15 +125,7 @@
                     class="img-fluid"
                   />
                 </div>
-                <div
-                  class="
-                    flex
-                    gap-3
-                    justify-content-center
-                    my-4
-                    col-md-10 col-12
-                  "
-                >
+                <div class="col-9 d-flex justify-content-end">
                   <upload-file v-model="courseData.feature_image" />
                 </div>
               </div>
@@ -364,7 +355,7 @@
         </ul>
         <div>
           <div :class="{ 'fade show': currentTab == 0 }">
-            <filter-component @search="SearchText">
+            <filter-component @search="SearchText" @view-by="sortCourses">
               <template #default="{ visualization }">
                 <table-component
                   :items="courses"
@@ -375,6 +366,7 @@
                   @row-clicked="onRowClicked"
                   @Edit="handleEdit"
                   @Delete="handleDelete"
+                  @handle-scroll="onScroll"
                   @page-changed="handlePage"
                   :perPage="perPage"
                   :totalItems="totalItems"
@@ -475,6 +467,23 @@ export default {
   },
 
   methods: {
+    onScroll(e) {
+      console.log('hey')
+      this.getAllCourses()
+      if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
+        this.getAllCourses()
+      }
+      console.log('hey')
+      // if (e.target.scrollHeight - 3000 <= e.target.scrollTop) {
+      //   alert('hey')
+      //   console.log('loremmm')
+      // }
+    },
+
+    sortCourses(e) {
+      this.perPage = e
+      this.getAllCourses()
+    },
     handlePage(e) {
       this.currentPage = e
       this.getAllCourses()
@@ -485,6 +494,7 @@ export default {
     onGridClicked(e) {
       this.$router.push(`courses/${e._id}`)
     },
+
     async addCourses() {
       try {
         this.add_preloader = true

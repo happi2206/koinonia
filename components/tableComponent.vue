@@ -1,6 +1,7 @@
 <template>
   <div class="table-responsive">
     <b-table
+      ref="scrollingtable"
       :items="items"
       :fields="fields"
       stacked="md"
@@ -264,8 +265,19 @@ export default {
   },
   mounted() {
     this.totalRows = this.perPage * this.pages
+    const tableScrollBody = this.$refs.scrollingtable.$el
+
+    console.log(tableScrollBody)
+
+    tableScrollBody.addEventListener('scroll', this.onScroll)
   },
   methods: {
+    onScroll(e) {
+      this.$emit('handle-scroll', e)
+      if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
+        console.log('hey')
+      }
+    },
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length

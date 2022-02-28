@@ -124,6 +124,7 @@
           :items="students"
           :fields="studentfields"
           :busy="busy"
+          :paginate="true"
           v-if="visualization === 'list'"
           @page-changed="handlePage"
           :perPage="perPage"
@@ -211,7 +212,7 @@ export default {
       ],
       busy: false,
       search: '',
-      perPage: 50,
+      perPage: 30,
       totalItems: 0,
       currentPage: 1,
     }
@@ -272,8 +273,14 @@ export default {
           this.student
         )
         this.get_all_course_students()
+
         this.$bvModal.hide('addStudent')
         this.$toast.success('Student added Successfully')
+        this.student.surname = ''
+        this.student.firstname = ''
+        this.student.phone = ''
+        this.student.email = ''
+        this.student.registration_number = ''
       } catch (e) {
         console.log(e)
       }
@@ -293,9 +300,9 @@ export default {
 
         this.students = students.items
 
-        // this.perPage = students.size
-        // this.totalItems = students.total
-        // this.currentPage = students.page
+        this.perPage = students.size
+        this.totalItems = students.total
+        this.currentPage = students.page
       } catch (e) {
         this.$toast.error(e)
       } finally {
