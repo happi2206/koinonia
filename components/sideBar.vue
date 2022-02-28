@@ -101,17 +101,17 @@ export default {
     this.isAdministrator = user.is_administrator
     this.isInstructor = user.is_instructor
   },
-  computed: {
-    user() {
-      return this.$store.state.auth.user
-    },
-    isAdministrator() {
-      return user.is_administrator
-    },
-    isInstructor() {
-      return user.is_instructor
-    },
-  },
+  // computed: {
+  //   user() {
+  //     return this.$store.state.auth.user
+  //   },
+  //   isAdministrator() {
+  //     return user.is_administrator
+  //   },
+  //   isInstructor() {
+  //     return user.is_instructor
+  //   },
+  // },
 }
 </script>
 

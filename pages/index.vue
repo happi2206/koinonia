@@ -33,7 +33,7 @@
     <section class="mt-3 horizontalspacing" v-if="false">
       <b-tabs content-class="mt-3" class="custom-tabs">
         <b-tab title="All Courses" active>
-          <div class="row mt-4">
+          <!-- <div class="row mt-4">
             <div
               class="col-lg-6 my-3 my-lg-0"
               :key="index"
@@ -71,13 +71,13 @@
                         )
                       "
                     ></p>
-                    <!-- <p class="mt-4 mb-0 medbrownparagraph">23334 Enrolled</p> -->
+     
                   </div>
                 </div>
               </div>
             </div>
-          </div></b-tab
-        >
+          </div> -->
+        </b-tab>
         <b-tab title="On-going" class=""><p>I'm the second tab</p></b-tab>
         <b-tab title="Archived" disabled><p>I'm a disabled tab!</p></b-tab>
         <b-tab title="Applied" disabled><p>I'm a disabled tab!</p></b-tab>
@@ -594,6 +594,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
 // import Flickity from 'vue-flickity'
 // import SideBar from '~/components/sideBar.vue'
 export default {
@@ -637,28 +638,28 @@ export default {
     previous() {
       this.$refs.flickity.previous()
     },
-    async get_all() {
-      try {
-        if (this.authenticated) {
-          // set custom hear
-          const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.token}`,
-          }
-          // make axios request for all courses
-          const { items } = await this.$axios.$get(
-            `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=2`,
-            {
-              headers: headers,
-            }
-          )
-          // assign response to coures
-          this.courses = items
-        }
-      } catch (e) {
-        this.$toast.error(e.data.detail)
-      }
-    },
+    // async get_all() {
+    //   try {
+    //     if (this.authenticated) {
+    //       // set custom hear
+    //       const headers = {
+    //         'Content-Type': 'application/json',
+    //         Authorization: `Bearer ${this.token}`,
+    //       }
+    //       // make axios request for all courses
+    //       const { items } = await this.$axios.$get(
+    //         `https://koinonia.herokuapp.com/api/v1/slate/course-v/get-all-course?page=1&size=2`,
+    //         {
+    //           headers: headers,
+    //         }
+    //       )
+    //       // assign response to coures
+    //       this.courses = items
+    //     }
+    //   } catch (e) {
+    //     this.$toast.error(e.data.detail)
+    //   }
+    // },
   },
   mounted() {
     if (localStorage.getItem('reloaded')) {
@@ -672,7 +673,7 @@ export default {
     }
     this.$nextTick(async () => {
       this.$nuxt.$loading.start()
-      await this.get_all()
+      // await this.get_all()
       this.$nuxt.$loading.finish()
     })
   },

@@ -318,10 +318,7 @@ export default {
       console.log(e)
       this.qrEvent = e
       this.eventId = e.id
-      // this.openComponent = true
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
-      // this.$refs.qcode.html2Pdf.generatePdf()
-      //console.log('object')
     },
 
     handleEdit(e) {
@@ -359,33 +356,11 @@ export default {
         }
         const events = await this.$axios.$get(uri)
 
-        // events.items.forEach((element) => {
-        //   console.log(element.students.length)
-        // })
-
         this.events = events.items
-
-        //  this.events.map((element) => {
-        //  this.events.push(element.students.length)
-        //  })
         console.log(this.events)
         this.perPage = events.size
         this.totalItems = events.total
         this.currentPage = events.page
-
-        //  this.events = events.items.map((e, i) => {
-        //   let filterstudent = e.students.filter((i) => {
-        //     return i.status == true
-        //   })
-
-        //   return {
-        //     Name: e.name,
-        //     start_date: e.start_date,
-        //     end_date: e.end_date,
-        //     'No of Students': e.students.length,
-        //     id: e.id,
-        //   }
-        // })
       } catch (e) {
         this.$toast.error(e)
       } finally {

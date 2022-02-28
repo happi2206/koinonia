@@ -55,7 +55,7 @@
               </div>
               <div class="my-4">
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12 my-2 py-2">
                     <label for="" class="d-block medbrownparagraph graytext"
                       >Start Date
                     </label>
@@ -67,13 +67,25 @@
                       class="forminputs text-dark"
                     />
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-12 my-2 py-2">
                     <label for="" class="d-block medbrownparagraph graytext"
                       >End Date
                     </label>
                     <input
                       type="date"
                       v-model="courseData.end_date"
+                      required
+                      placeholder="e.g DD/MM/YYYY"
+                      class="forminputs text-dark"
+                    />
+                  </div>
+                  <div class="col-md-12 my-2 py-2">
+                    <label for="" class="d-block medbrownparagraph graytext"
+                      >Enroll Date
+                    </label>
+                    <input
+                      type="date"
+                      v-model="courseData.enroll_date"
                       required
                       placeholder="e.g DD/MM/YYYY"
                       class="forminputs text-dark"
@@ -362,12 +374,12 @@
                 >
                   <template #start_date="{ data }">
                     <span>
-                      {{ data.value }}
+                      {{ data.value | DateFormat }}
                     </span>
                   </template>
                   <template #end_date="{ data }">
                     <span>
-                      {{ data.value }}
+                      {{ data.value | DateFormat }}
                     </span>
                   </template>
                 </table-component>
@@ -411,6 +423,7 @@ export default {
         course_code: '',
         feature_image: '',
         start_date: '',
+        enroll_date: '',
         end_date: '',
         feature_image: '',
       },
@@ -460,14 +473,26 @@ export default {
       this.getAllCourses()
     },
     onRowClicked(e) {
-      this.$router.push(`courses/${e.id}`)
+      this.$router.push(`courses/${e._id}`)
     },
     onGridClicked(e) {
-      this.$router.push(`courses/${e.id}`)
+      this.$router.push(`courses/${e._id}`)
     },
     async addCourses() {
       try {
         this.add_preloader = true
+
+        console.log(this.courseData.start_date)
+
+        this.courseData.start_date = new Date(this.courseData.start_date)
+        this.courseData.start_date = this.courseData.start_date.toISOString()
+
+        this.courseData.end_date = new Date(this.courseData.end_date)
+        this.courseData.end_date = this.courseData.end_date.toISOString()
+
+        this.courseData.enroll_date = new Date(this.courseData.enroll_date)
+        this.courseData.enroll_date = this.courseData.enroll_date.toISOString()
+
         const response = await this.$axios.$post(
           `course-v/add-course`,
           this.courseData
@@ -488,6 +513,7 @@ export default {
     },
     async getAllCourses() {
       this.busy = true
+
       let uri = `course-v/get-all-course?page=${this.currentPage}&size=${this.perPage}`
       if (this.search) {
         uri = uri + `&search=${this.search}`
@@ -496,34 +522,16 @@ export default {
         uri = uri + `&status=${this.status}`
       }
       const courses = await this.$axios.$get(uri)
-      courses.items = courses.items.reverse()
-      this.courses = courses.items.map((e, i) => ({
-        serial: i,
-        check: '',
-        dots: '',
-        ...e,
-      }))
 
-      console.log('courses are', this.courses)
-      this.perPage = courses.size
-      this.totalItems = courses.total
-      this.currentPage = courses.page
+      this.courses = courses.items
+      console.log(courses)
+      // this.perPage = courses.size
+      // this.totalItems = courses.total
+      // this.currentPage = courses.page
       this.busy = false
     },
     // setfilter
     setCourseParams(payload) {
-      // let params = ''
-
-      // if (payload) {
-      //   params = `&status=${payload}`
-      //   ;(this.status = false),
-      //     (this.on_going = false),
-      //     (this.open = false),
-      //     (this.archived = false),
-      //     (this[payload] = !this[payload])
-
-      //   console.log('payload is', payload)
-      // }
       this.status = payload
 
       this.getAllCourses()
@@ -568,8 +576,21 @@ export default {
         delete forSubmit.serial
         delete forSubmit.dots
 
+        this.currentCourse.start_date = new Date(this.currentCourse.start_date)
+        this.currentCourse.start_date =
+          this.currentCourse.start_date.toISOString()
+
+        this.currentCourse.end_date = new Date(this.currentCourse.end_date)
+        this.currentCourse.end_date = this.currentCourse.end_date.toISOString()
+
+        this.currentCourse.enroll_date = new Date(
+          this.currentCourse.enroll_date
+        )
+        this.currentCourse.enroll_date =
+          this.currentCourse.enroll_date.toISOString()
+
         await this.$axios.$patch(
-          `course-v/edit-course?course_id=${forSubmit.id}`,
+          `course-v/edit-course?course_id=${forSubmit._id}`,
           forSubmit
         )
         this.getAllCourses()
@@ -580,7 +601,7 @@ export default {
     },
     async handleDelete(e) {
       try {
-        await this.$axios.delete(`course-v/delete-course?course_id=${e.id}`)
+        await this.$axios.delete(`course-v/delete-course?course_id=${e._id}`)
         this.getAllCourses()
       } catch (e) {
         console.log(e)

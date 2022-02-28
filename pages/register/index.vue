@@ -138,7 +138,7 @@
                               >
                               <input
                                 type="text"
-                                v-model="registerInputs.other_name"
+                                v-model="registerInputs.firstname"
                                 required
                                 placeholder="Email"
                                 class="forminputs"
@@ -166,7 +166,7 @@
                               >
                               <input
                                 type="email"
-                                v-model="registerInputs.user_type.email"
+                                v-model="registerInputs.email"
                                 required
                                 placeholder="Email"
                                 class="forminputs"
@@ -180,7 +180,7 @@
                               >
                               <input
                                 type="password"
-                                v-model="registerInputs.user_type.password"
+                                v-model="registerInputs.password"
                                 required
                                 placeholder="********"
                                 class="forminputs"
@@ -206,7 +206,6 @@
                                     type="checkbox"
                                     class="form-check-input"
                                     required
-                                    v-model="legal_check"
                                   />
 
                                   I agree to
@@ -274,16 +273,19 @@ export default {
     return {
       registerInputs: {
         surname: '',
-        other_name: '',
-        user_type: {
-          user_type: 'online_user',
-          email: '',
-          password: '',
-          legal: null,
-        },
+        firstname: '',
+        middlename: '',
         send_lastest_updates: true,
+        email: '',
+        password: '',
+        legal: [
+          {
+            type: 'user',
+            version: 'v1',
+            stamp: '2022-02-28T10:05:37.087975',
+          },
+        ],
       },
-      legal_check: false,
       preloader: false,
     }
   },

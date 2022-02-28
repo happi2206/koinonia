@@ -139,7 +139,7 @@
           no-caret
         >
           <template class="p-0 mx-auto text-center" #button-content>
-            <b-icon icon="three-dots-vertical"></b-icon>
+            <b-icon icon="three-dots-vertical" class="text-dark"></b-icon>
           </template>
           <template v-if="dropdownItem.length > 0">
             <b-dropdown-item
