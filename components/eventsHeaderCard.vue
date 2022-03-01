@@ -171,12 +171,13 @@ export default {
   },
   methods: {
     sortBy(e) {
-      if (e !== 'all') {
+      if (e != 'all') {
         this.check_in_method = e
         this.$fetch()
       } else {
         this.$fetch()
       }
+      this.$fetch()
     },
 
     async getChecked() {
