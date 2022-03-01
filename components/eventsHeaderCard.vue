@@ -57,18 +57,14 @@
         <filter-component @search="SearchText" @view-by="sortStudents">
           <template #filterby>
             <div class="records-count medbrownparagraph">
-              <span class="medbrownparagraph">Sort by: </span>
+              <span class="medbrownparagraph">Check in type: </span>
               <select
                 class="records-count medbrownparagraph medbrownparagraph"
                 @change="sortBy($event.target.value)"
               >
                 <option class="medbrownparagraph" value="all">All</option>
-                <option class="medbrownparagraph" value="self">
-                  Self checked-in
-                </option>
-                <option class="medbrownparagraph" value="admin">
-                  Admin Checked-in
-                </option>
+                <option class="medbrownparagraph" value="self">Self</option>
+                <option class="medbrownparagraph" value="admin">Admin</option>
               </select>
             </div>
           </template>
@@ -177,6 +173,8 @@ export default {
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
+        this.$fetch()
+      } else {
         this.$fetch()
       }
     },
