@@ -112,20 +112,20 @@
           :perPage="perPage"
           :totalItems="totalItems"
         >
-          <!-- <template #no_of_students="{ data }">
-            <span>{{ data.item.students.length }}</span>
-          </template> -->
+          <template #no_of_students="{ data }">
+            <span>{{ data }}</span>
+          </template>
 
           <template #Progress="{ data }">
             <b-progress class="mt-2" :max="10">
               <b-progress-bar
-                :value="data.item.number_of_students_present"
+                :value="data.item.no_of_students_present"
                 variant="success"
               ></b-progress-bar>
               <b-progress-bar
                 :value="
-                  data.item.total_number_of_students -
-                  data.item.number_of_students_present
+                  data.item.total_number_of_student -
+                  data.item.no_of_students_present
                 "
                 variant="danger"
               ></b-progress-bar>
@@ -263,12 +263,12 @@ export default {
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
         { key: 'end_date', label: 'End Date/Time', sortable: true },
         {
-          key: 'number_of_students_present',
+          key: 'no_of_students_present',
           label: 'Students Present',
           sortable: true,
         },
         {
-          key: 'total_number_of_students',
+          key: 'total_number_of_student',
           label: 'Total Students',
           sortable: true,
         },
@@ -292,6 +292,8 @@ export default {
       currentPage: 1,
       courseId: '',
       eventId: '',
+      studentPresent: '',
+      studentAbsent: '',
     }
   },
 
@@ -303,6 +305,11 @@ export default {
           `course-v/add-course-event?course_id=${this.$route.params.course}`,
           this.event
         )
+
+        this.event.name = ''
+        this.event.description = ''
+        this.event.start_date = ''
+        this.event.end_date = ''
 
         this.$bvModal.hide('addEvent')
         this.$toast.success('Event added Successfully')
@@ -325,13 +332,14 @@ export default {
       this.$bvModal.show('editEvent')
       const editForm = e
       this.currentEvent = editForm
+      console.log(this.currentEvent)
       console.log(editForm)
     },
 
     async submitEditedEvent() {
       try {
         await this.$axios.$patch(
-          `course-v/update-course-event?course_id=${this.$route.params.course}`,
+          `course-v/update-course-event?course_id=${this.$route.params.course}&event_id=${this.currentEvent.id}`,
           this.currentEvent
         )
 
@@ -355,6 +363,8 @@ export default {
           uri = uri + `&search=${this.search}`
         }
         const events = await this.$axios.$get(uri)
+
+        console.log('events are ', events)
 
         this.events = events.items
         console.log(this.events)

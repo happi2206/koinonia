@@ -19,7 +19,19 @@
               </label>
               <input
                 type="text"
-                v-model="instructor.other_name"
+                v-model="instructor.firstname"
+                required
+                placeholder="e.g Name"
+                class="forminputs"
+              />
+            </div>
+            <div class="my-2">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Instructors Middle Name
+              </label>
+              <input
+                type="text"
+                v-model="instructor.middlename"
                 required
                 placeholder="e.g Name"
                 class="forminputs"
@@ -45,7 +57,7 @@
                 type="email"
                 v-model="instructor.email"
                 required
-                placeholder="e.g Alchemy"
+                placeholder="e.g john@gmail.com"
                 class="forminputs"
               />
             </div>
@@ -117,9 +129,9 @@ export default {
       dropdownItem: ['Share_Link_Code', 'Delete_Instructor'],
       fields: [
         // { key: 'id', sortable: true },
-        { key: 'other_name', label: 'First Name', sortable: true },
+        { key: 'firstname', label: 'First Name', sortable: true },
         { key: 'surname', sortable: true },
-        { key: 'other_name', sortable: true },
+        { key: 'middlename', sortable: true },
         { key: 'email', sortable: true },
         { key: 'phone', sortable: true },
         { key: 'link_code', sortable: true },
@@ -130,7 +142,8 @@ export default {
       user: ['sample', 'no'],
       busy: true,
       instructor: {
-        other_name: '',
+        firstname: '',
+        middlename: '',
         surname: '',
         email: '',
         password: '',
@@ -190,14 +203,11 @@ export default {
         this.preloader_main = true
         let payload = {
           surname: this.instructor.surname,
-          other_name: this.instructor.other_name,
+          firstname: this.instructor.firstname,
+          middlename: this.instructor.middlename,
           phone: this.instructor.phone,
-          send_lastest_updates: false,
-          user_type: {
-            user_type: 'flat_user',
-            type: 'instructor',
-            email: this.instructor.email,
-          },
+          email: this.instructor.email,
+          school_id: process.env.SCHOOL_ID,
         }
         const users = await this.$axios.$post(
           `admin/create-an-instructor`,
@@ -234,7 +244,8 @@ export default {
           uri = uri + `&search=${this.search}`
         }
         const users = await this.$axios.$get(uri)
-        this.userdetails = users.items.reverse()
+        console.log(users)
+        this.userdetails = users
         this.perPage = users.size
         this.totalItems = users.total
         this.currentPage = users.page

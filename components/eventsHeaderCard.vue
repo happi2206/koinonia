@@ -32,22 +32,24 @@
         <div class="my-2 d-flex flex-md-row flex-column">
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Start Date:</span>
-            <span class=""> {{ eventDetail.start_date | DateFormat }} </span>
+            <span class="">
+              {{ eventDetail.start_date | DateTimeFormat }}
+            </span>
           </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> End Date:</span>
             <span class=""> </span>
-            {{ eventDetail.end_date | DateFormat }}
+            {{ eventDetail.end_date | DateTimeFormat }}
           </p>
-          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> No in class:</span>
             <span class=""> {{ present + absent }}</span>
           </p>
-          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Student Present: {{ present }}</span>
             <span class=""> </span>
           </p>
-          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Student Absent: {{ absent }}</span>
             <span class=""> </span>
           </p>
@@ -58,14 +60,17 @@
           <template #filterby>
             <div class="records-count medbrownparagraph">
               <span class="medbrownparagraph">Sort by: </span>
-              <select class="records-count medbrownparagraph medbrownparagraph">
+              <select
+                class="records-count medbrownparagraph medbrownparagraph"
+                @change="sortBy($event.target.value)"
+              >
+                <option class="medbrownparagraph" value="all">All</option>
                 <option class="medbrownparagraph" value="self">
                   Self checked-in
                 </option>
                 <option class="medbrownparagraph" value="admin">
                   Admin Checked-in
                 </option>
-                <option class="medbrownparagraph" value="all">All</option>
               </select>
             </div>
           </template>
@@ -125,7 +130,7 @@ export default {
       dropdownItem: ['Edit Event', 'Delete Event'],
       fields: [
         // { key: 'id', sortable: true },
-        { key: 'student.other_name', label: 'First Name', sortable: true },
+        { key: 'student.firstname', label: 'First Name', sortable: true },
         { key: 'student.surname', label: 'Surname', sortable: true },
         {
           key: 'student.registration_number',
@@ -142,6 +147,7 @@ export default {
       perPage: 50,
       totalItems: 0,
       currentPage: 1,
+      check_in_method: '',
     }
   },
 
@@ -152,13 +158,19 @@ export default {
       // this.isLoading = true
       let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
 
+      if (this.check_in_method) {
+        uri = uri + `&check_in_method=${this.check_in_method}`
+      }
+
       if (this.search) {
         uri = uri + `&search=${this.search}`
       }
       const student = await this.$axios.$get(uri)
 
-      this.absent = student.total_number_of_student - student.students_present
+      console.log(student)
+
       this.present = student.students_present
+      this.absent = student.total_number_of_student - student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
       this.totalItems = student.response.total
@@ -169,6 +181,13 @@ export default {
     }
   },
   methods: {
+    sortBy(e) {
+      if (e !== 'all') {
+        this.check_in_method = e
+        this.$fetch()
+      }
+      console.log(e)
+    },
     async getChecked() {
       try {
         let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
