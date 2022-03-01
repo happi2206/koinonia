@@ -345,7 +345,7 @@
         </ul>
         <div>
           <div :class="{ 'fade show': currentTab == 0 }">
-            <filter-component @search="SearchText">
+            <filter-component @search="SearchText" @view-by="sortCourses">
               <template #default="{ visualization }">
                 <table-component
                   :items="courses"
@@ -455,6 +455,10 @@ export default {
   },
 
   methods: {
+    sortCourses(e) {
+      this.perPage = e
+      this.getAllCourses()
+    },
     handlePage(e) {
       this.currentPage = e
       this.getAllCourses()

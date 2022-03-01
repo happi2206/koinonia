@@ -55,6 +55,23 @@
       </div>
       <div class="bg-white rounded p-md-3 my-2">
         <filter-component @search="SearchText" @view-by="sortStudents">
+          <template #filterby>
+            <div class="records-count medbrownparagraph">
+              <span class="medbrownparagraph">Sort by: </span>
+              <select
+                class="records-count medbrownparagraph medbrownparagraph"
+                @change="sortBy($event.target.value)"
+              >
+                <option class="medbrownparagraph" value="all">All</option>
+                <option class="medbrownparagraph" value="self">
+                  Self checked-in
+                </option>
+                <option class="medbrownparagraph" value="admin">
+                  Admin Checked-in
+                </option>
+              </select>
+            </div>
+          </template>
           <template #default="{ visualization }">
             <table-component
               :busy="busy"
@@ -127,6 +144,7 @@ export default {
       perPage: 50,
       totalItems: 0,
       currentPage: 1,
+      check_in_method: '',
     }
   },
 
@@ -136,7 +154,9 @@ export default {
       this.busy = true
       // this.isLoading = true
       let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
-
+      if (this.check_in_method) {
+        uri = uri + `&check_in_method=${this.check_in_method}`
+      }
       if (this.search) {
         uri = uri + `&search=${this.search}`
       }
@@ -154,6 +174,13 @@ export default {
     }
   },
   methods: {
+    sortBy(e) {
+      if (e !== 'all') {
+        this.check_in_method = e
+        this.$fetch()
+      }
+    },
+
     async getChecked() {
       try {
         let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`

@@ -62,11 +62,7 @@
               <template #button-content>
                 <div class="d-flex align-items-center medparagraph">
                   <div class="profimgfull d-block d-lg-none">
-                    <b-avatar
-                      variant="warning"
-                      :text="user.other_name.charAt(0) + user.surname.charAt(0)"
-                      class="mr-1"
-                    ></b-avatar>
+                    <b-avatar variant="warning" class="mr-1"></b-avatar>
                   </div>
                 </div>
               </template>
@@ -271,13 +267,7 @@
                   <template #button-content>
                     <div class="d-flex align-items-center medparagraph">
                       <div class="profimgfull d-none d-lg-block">
-                        <b-avatar
-                          variant="warning"
-                          :text="
-                            user.other_name.charAt(0) + user.surname.charAt(0)
-                          "
-                          class="mr-1"
-                        ></b-avatar>
+                        <b-avatar variant="warning" class="mr-1"></b-avatar>
                       </div>
                     </div>
                   </template>

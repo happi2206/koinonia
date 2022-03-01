@@ -1,6 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_students">
-    <filter-component @search="SearchText">
+    <filter-component @search="SearchText" @view-by="sortStudents">
       <template #besideFilterButton>
         <div class="">
           <button
@@ -241,6 +241,11 @@ export default {
       )
 
       this.$toast.success('Students added Successfully')
+    },
+
+    sortStudents(e) {
+      this.perPage = e
+      this.get_all_course_students()
     },
 
     async createStudent() {
