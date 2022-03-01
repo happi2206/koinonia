@@ -2,6 +2,7 @@
   <div class="table-responsive">
     <b-table
       :items="items"
+      ref="scrollingtable"
       :fields="fields"
       stacked="md"
       :filter="filter"
@@ -139,7 +140,7 @@
           no-caret
         >
           <template class="p-0 mx-auto text-center" #button-content>
-            <b-icon icon="three-dots-vertical"></b-icon>
+            <b-icon icon="three-dots-vertical" class="text-dark"></b-icon>
           </template>
           <template v-if="dropdownItem.length > 0">
             <b-dropdown-item
@@ -261,8 +262,18 @@ export default {
   },
   mounted() {
     this.totalRows = this.perPage * this.pages
+
+    // const tableScrollBody = this.$refs.scrollingtable.$el
+    // console.log(tableScrollBody)
+    // tableScrollBody.addEventListener('scroll', this.onScroll)
   },
   methods: {
+    // onScroll(e) {
+    //   this.$emit('handle-scroll', e)
+    //   if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
+    //     console.log('hey')
+    //   }
+    // },
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
