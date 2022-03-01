@@ -104,7 +104,7 @@
           v-if="visualization === 'list'"
           :fields="fields"
           :dropdownItem="dropdownItem"
-          @Print_QR_Code="printQr"
+          @Download_QR_Code="printQr"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -251,13 +251,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: [
-        'Print_QR_Code',
-        'Edit',
-        'Download as PDF',
-        'Download as XLS',
-        'Download as CSV',
-      ],
+      dropdownItem: ['Download_QR_Code', 'Edit'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },

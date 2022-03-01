@@ -44,12 +44,12 @@
             <span class=""> {{ present + absent }}</span>
           </p>
           <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Present: {{ present }}</span>
-            <span class=""> </span>
+            <span class="lightgraytext"> Student Present: </span>
+            <span class=""> {{ present }}</span>
           </p>
           <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Absent: {{ absent }}</span>
-            <span class=""> </span>
+            <span class="lightgraytext"> Student Absent:</span>
+            <span class=""> {{ absent }}</span>
           </p>
         </div>
       </div>
@@ -70,8 +70,9 @@
           </template>
           <template #default="{ visualization }">
             <table-component
+              :paginate="true"
               :busy="busy"
-              :items="studentArray"
+              :items="itemsToShow"
               v-if="visualization === 'list'"
               :dropdownItem="dropdownItem"
               :fields="fields"
@@ -89,6 +90,7 @@
                 ></b-form-checkbox>
               </template>
             </table-component>
+            <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
         </filter-component>
       </div>
@@ -113,7 +115,9 @@ export default {
 
   data() {
     return {
+      newData: [],
       busy: false,
+      newbusy: false,
       students: [],
       studentelement: [],
       studentsInCourse: {},
@@ -124,6 +128,7 @@ export default {
       fields: [
         // { key: 'id', sortable: true },
         { key: 'student.other_name', label: 'First Name', sortable: true },
+
         { key: 'student.surname', label: 'Surname', sortable: true },
         {
           key: 'student.registration_number',
@@ -162,6 +167,7 @@ export default {
       this.present = student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
+      // this.newStuff = student.response.items
       this.totalItems = student.response.total
     } catch (e) {
       this.$toast.error(e)
@@ -170,18 +176,37 @@ export default {
     }
   },
   methods: {
+    sortStudents(e) {
+      this.perPage = e
+      this.$fetch()
+    },
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
         this.$fetch()
       } else {
         this.check_in_method = ''
-
         this.$fetch()
       }
 
       this.$fetch()
     },
+
+    // async fetchMore(e) {
+    //   try {
+    //     this.newbusy = true
+    //     let uri = `course-v/get-all-students-in-an-event?course_id=${
+    //       this.$route.params.event
+    //     }&event_id=${this.$route.params.eventclicked}&page=${e + 1}&size=${
+    //       this.perPage
+    //     }&check_in_method=${this.check_in_method}`
+    //     const results = await this.$axios.$get(uri)
+    //     this.newData = results.response.items
+    //     console.log(results.response.items)
+    //     this.newbusy = false
+    //   } catch (error) {}
+    //   // alert(e)
+    // },
 
     async getChecked() {
       try {
@@ -224,12 +249,16 @@ export default {
       this.currentPage = 1
       this.$fetch()
     },
-    sortStudents(e) {
-      this.perPage = e
-      this.$fetch()
+  },
+  computed: {
+    itemsToShow() {
+      if (this.newData.length) {
+        return this.studentArray.concat(this.newData)
+      } else {
+        return this.studentArray
+      }
     },
   },
-  computed: {},
 
   mounted() {},
 }
