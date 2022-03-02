@@ -36,8 +36,8 @@
           </div>
         </div>
         <div class="col-lg-5">
-          <div class="d-flex flex-column justify-content-between">
-            <div class="arrow-height">
+          <div class="justify-content-between">
+            <div class="arrow-height d-flex">
               <nuxt-link
                 to="/"
                 class="
@@ -46,7 +46,6 @@
                   bold700
                   mainbluecolor
                   text-center
-                  h-50
                   d-flex
                 "
               >
@@ -58,7 +57,7 @@
                     data-height="16"
                   ></span>
                 </span>
-                <span class="ml-2">Back</span>
+                <span class="ml-2 fix">Back</span>
               </nuxt-link>
             </div>
             <div class="mt-5">
@@ -176,5 +175,14 @@ export default {
 <style>
 .arrow-height {
   height: 20vh;
+}
+
+@media screen and (max-width: 992px) {
+  .arrow-height {
+    margin-top: 30px;
+  }
+  .fix {
+    margin-top: 2px;
+  }
 }
 </style>
