@@ -4,7 +4,7 @@
 
     <div class="page-content mt-0 height">
       <div class="bodylightgray horizontalspacing">
-        <div class="pt-md-5 horizontalspacing">
+        <div class="pt-5 horizontalspacing">
           <div class="mt-5">
             <h2 class="largebrownparagraph">Account</h2>
           </div>

@@ -2,8 +2,8 @@
   <div>
     <profile-sidebar />
     <div class="page-content mt-0 height">
-      <div class="bodylightgray">
-        <div class="mt-5 pt-md-3 horizontalspacing">
+      <div class="bodylightgray horizontalspacing">
+        <div class="pt-5 horizontalspacing">
           <div class="mt-5">
             <h2 class="largebrownparagraph">Account</h2>
           </div>
