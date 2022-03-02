@@ -199,10 +199,10 @@ export default {
         { key: 'other_name', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
         { key: 'registration_number', sortable: true },
-        { key: 'email', sortable: true },
+        // { key: 'email', sortable: true },
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
-        { key: 'phone no', sortable: true },
+        { key: 'phone', sortable: true },
       ],
       busy: false,
       search: '',
@@ -276,17 +276,17 @@ export default {
 
       let new_array = []
       for (const iterator of students) {
-        new_array.push({
-          phone: iterator['Phone'],
-          registration_number: iterator['Registration Number'],
-        })
+        if (iterator['Phone']) {
+          new_array.push({
+            phone: iterator['Phone'],
+            registration_number: iterator['Registration Number'],
+          })
+        }
       }
-      console.log(new_array)
 
-      return
 
       await this.$axios.$post(
-        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+        `course-v/add-phone-numbers-to-a-course?course_id=${this.$route.params.course}`,
         new_array
       )
 
