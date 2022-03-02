@@ -47,9 +47,10 @@
                   mainbluecolor
                   text-center
                   d-flex
+                  hack
                 "
               >
-                <span class="pt-0.5">
+                <span class="pt-0.5 hack">
                   <span
                     class="iconify"
                     data-icon="bi:arrow-left"
@@ -71,7 +72,7 @@
               <div class="mt-3">
                 <div>
                   <div class="px-sm-5 px-3">
-                    <div class="my-4 px-md-5">
+                    <div class="my-4 md-5">
                       <form @submit.prevent="loginUser">
                         <div class="my-3 px-2">
                           <div class="my-4">
@@ -94,22 +95,6 @@
                               class="lightgraytext absolutecontainer eyeicon"
                             >
                             </span>
-                          </div>
-
-                          <div class="my-4">
-                            <div class="form-check">
-                              <label class="form-check-label medbrownparagraph">
-                                <input
-                                  type="checkbox"
-                                  required
-                                  class="form-check-input"
-                                  value="checkedValue"
-                                  checked
-                                />
-
-                                Keep me signed in
-                              </label>
-                            </div>
                           </div>
 
                           <button
@@ -176,13 +161,20 @@ export default {
 .arrow-height {
   height: 20vh;
 }
+.hack {
+  height: 18px;
+}
 
 @media screen and (max-width: 992px) {
   .arrow-height {
-    margin-top: 30px;
+    margin-top: 40px;
+    height: 10vh;
   }
   .fix {
     margin-top: 2px;
+  }
+  p.brownparagraph {
+    padding: 0 1rem;
   }
 }
 </style>
