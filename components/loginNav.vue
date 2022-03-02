@@ -62,7 +62,11 @@
               <template #button-content>
                 <div class="d-flex align-items-center medparagraph">
                   <div class="profimgfull d-block d-lg-none">
-                    <b-avatar variant="warning" class="mr-1"></b-avatar>
+                    <b-avatar
+                      :src="avatarUrl"
+                      variant="warning"
+                      class="mr-1"
+                    ></b-avatar>
                   </div>
                 </div>
               </template>
@@ -267,7 +271,11 @@
                   <template #button-content>
                     <div class="d-flex align-items-center medparagraph">
                       <div class="profimgfull d-none d-lg-block">
-                        <b-avatar variant="warning" class="mr-1"></b-avatar>
+                        <b-avatar
+                          :src="avatarUrl"
+                          variant="warning"
+                          class="mr-1"
+                        ></b-avatar>
                       </div>
                     </div>
                   </template>
@@ -344,6 +352,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import axios from '~/plugins/axios'
 export default {
   name: 'loginnavbar',
   data() {
@@ -352,6 +361,7 @@ export default {
       isMobile: false,
       firstLetter: '',
       lastLetter: '',
+      avatarUrl: '',
     }
   },
   computed: {
@@ -398,8 +408,14 @@ export default {
         this.titlecontent = 'Administrator'
       }
     },
+
+    async getUserAvatar() {
+      const profile = await this.$axios.get(`user-v/get-user-public-profile`)
+      this.avatarUrl = profile.data.profile_picture
+    },
   },
   mounted() {
+    this.getUserAvatar()
     if (this.$store.state.auth.user) {
       try {
         const user = this.$store.state.auth.user
