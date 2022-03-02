@@ -199,7 +199,7 @@ export default {
             school_id: process.env.SCHOOL_ID,
             surname: string,
             registration_number: 'KSOM/2022/ABUJA/' + this.formInputs.regNo,
-            course_id: this.$route.params.course,
+            course_id: this.$route.params.id,
             event_id: this.$route.params.event,
             browser: this.browser,
           }
