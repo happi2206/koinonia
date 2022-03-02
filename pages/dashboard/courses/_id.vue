@@ -192,7 +192,7 @@ export default {
     },
   },
   mounted() {
-    this.getNextUsers()
+    // this.getNextUsers()
     this.get_a_course()
   },
 }
