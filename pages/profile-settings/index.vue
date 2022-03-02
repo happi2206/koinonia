@@ -10,100 +10,121 @@
           </div>
 
           <div class="bg-white mt-3">
-            <div class="d-flex justify-content-center py-3">
-              <div>
-                <input
-                  @change="uploadImage"
-                  accept="image/png, image/jpeg"
-                  ref="getImage"
-                  type="file"
-                  class="hidden"
-                />
-                <div class="relativecontainer mt-5">
-                  <b-avatar
-                    :size="200"
-                    :src="public_detail.profile_picture"
-                    badge-variant="info"
-                  >
-                  </b-avatar>
-
-                  <span
-                    @click.prevent="$refs.getImage.click()"
-                    class="icon-camera bg-yellow-300 p-2 rounded-full"
-                  >
-                    <b-icon
-                      style="width: 30px; height: 30px"
-                      icon="camera"
-                    ></b-icon>
-                  </span>
+            <div class="d-flex justify-content-center" v-if="isLoading">
+              <div class="w-50 h-100">
+                <div class="my-5 d-flex justify-content-center">
+                  <b-skeleton type="avatar"></b-skeleton>
                 </div>
 
-                <div class="mt-5">
-                  <h2 class="text-4xl text-center">Basic Information</h2>
+                <div class="my-5 w-100">
+                  <b-skeleton type="input"></b-skeleton>
+                </div>
+                <div class="my-5 w-100">
+                  <b-skeleton type="input"></b-skeleton>
+                </div>
+                <div class="my-5 w-100">
+                  <b-skeleton type="input"></b-skeleton>
+                </div>
+                <div class="my-5 w-100">
+                  <b-skeleton type="input"></b-skeleton>
                 </div>
               </div>
             </div>
-            <form
-              @submit.prevent="updatePublicProfile"
-              class="forminputpadding"
-            >
-              <div class="my-3">
-                <label for="" class="d-block medbrownparagraph graytext"
-                  >Other Name
-                  <span class="text-danger">*</span>
-                </label>
-                <input
-                  type="text"
-                  v-model="public_detail.other_name"
-                  required
-                  placeholder="e.g Nuella"
-                  class="forminputs text-dark"
-                />
-              </div>
-              <div class="my-3">
-                <label for="" class="d-block medbrownparagraph graytext"
-                  >Surname
-                  <span class="text-danger">*</span>
-                </label>
-                <input
-                  type="text"
-                  v-model="public_detail.surname"
-                  required
-                  placeholder="e.g Ime"
-                  class="forminputs text-dark"
-                />
-              </div>
-              <div class="my-3">
-                <label for="" class="d-block medbrownparagraph graytext"
-                  >Headline
-                  <span class="text-danger">*</span>
-                </label>
-                <input
-                  type="text"
-                  v-model="public_detail.headline"
-                  required
-                  placeholder="e.g Student"
-                  class="forminputs text-dark"
-                />
-              </div>
-              <div class="my-3">
-                <label for="" class="d-block medbrownparagraph graytext"
-                  >Biography
-                  <span class="text-danger">*</span>
-                </label>
-                <input
-                  type="text"
-                  v-model="public_detail.biography"
-                  required
-                  placeholder="e.g Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-                  class="forminputs text-dark"
-                />
-              </div>
+            <div v-else>
+              <div class="d-flex justify-content-center py-3">
+                <div>
+                  <input
+                    @change="uploadImage"
+                    accept="image/png, image/jpeg"
+                    ref="getImage"
+                    type="file"
+                    class="hidden"
+                  />
+                  <div class="relativecontainer mt-5">
+                    <b-avatar
+                      :size="200"
+                      :src="public_detail.profile_picture"
+                      badge-variant="info"
+                    >
+                    </b-avatar>
 
-              <!-- <div class="my-3">
+                    <span
+                      @click.prevent="$refs.getImage.click()"
+                      class="icon-camera bg-yellow-300 p-2 rounded-full"
+                    >
+                      <b-icon
+                        style="width: 30px; height: 30px"
+                        icon="camera"
+                      ></b-icon>
+                    </span>
+                  </div>
+
+                  <div class="mt-5">
+                    <h2 class="text-4xl text-center">Basic Information</h2>
+                  </div>
+                </div>
+              </div>
+              <form
+                @submit.prevent="updatePublicProfile"
+                class="forminputpadding"
+              >
+                <div class="my-3">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Other Name
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    v-model="public_detail.other_name"
+                    required
+                    placeholder="e.g Nuella"
+                    class="forminputs text-dark"
+                  />
+                </div>
+                <div class="my-3">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Surname
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    v-model="public_detail.surname"
+                    required
+                    placeholder="e.g Ime"
+                    class="forminputs text-dark"
+                  />
+                </div>
+                <div class="my-3">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Headline
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    v-model="public_detail.headline"
+                    required
+                    placeholder="e.g Student"
+                    class="forminputs text-dark"
+                  />
+                </div>
+                <div class="my-3">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Biography
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    v-model="public_detail.biography"
+                    required
+                    placeholder="e.g Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                    class="forminputs text-dark"
+                  />
+                </div>
+
+                <!-- <div class="my-3">
             <h2 class="text-center brown24">Links</h2>
           </div> -->
-              <!-- 
+                <!-- 
           <div class="my-2">
             <label for="" class="d-block medbrownparagraph graytext"
               >LinkedIn
@@ -119,14 +140,15 @@
             />
           </div> -->
 
-              <div class="d-flex mt-3 justify-content-center pb-5">
-                <input
-                  type="submit"
-                  value="Save"
-                  class="btn mainbtndashboard px-5 mb-5"
-                />
-              </div>
-            </form>
+                <div class="d-flex mt-3 justify-content-center pb-5">
+                  <input
+                    type="submit"
+                    value="Save"
+                    class="btn mainbtndashboard px-5 mb-5"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -135,10 +157,9 @@
 </template>
 
 <script>
-import ProfileSidebar from '~/components/profileSidebar.vue'
 export default {
   // layout: 'dashboard',
-  components: { ProfileSidebar },
+
   data() {
     return {
       public_detail: {
@@ -149,14 +170,19 @@ export default {
         biography: '',
         socials: [],
       },
+      isLoading: false,
     }
   },
   methods: {
     async getUserProfile() {
+      this.isLoading = true
       try {
         const userprofile = await this.$axios.$get(
           `user-v/get-user-public-profile`
         )
+
+        this.isLoading = false
+        console.log(userprofile)
         if (Object.keys(userprofile).length > 0) {
           this.public_detail = userprofile
         }
