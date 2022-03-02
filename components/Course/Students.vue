@@ -245,15 +245,12 @@ export default {
       let new_array = []
       for (const iterator of students) {
         new_array.push({
-          other_name: iterator['First Name'],
           surname: iterator['Surname'],
-          send_latest_updates: false,
+          middlename: iterator['Middle Name'],
+          firstname: iterator['First Name'],
+          phone: iterator['Phone'],
+          // email: iterator['Email'],
           registration_number: iterator['Registration Number'],
-          user_type: {
-            user_type: 'flat_user',
-            link_code: '',
-            type: 'student',
-          },
         })
       }
       console.log(new_array)

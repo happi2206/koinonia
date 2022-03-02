@@ -9,7 +9,10 @@
           </div>
 
           <div class="bg-white mt-3">
-            <form class="forminputpadding py-3">
+            <form
+              class="forminputpadding py-3"
+              @submit.prevent="changePassword"
+            >
               <div class="my-5">
                 <label for="" class="d-block medbrownparagraph graytext"
                   >Email
@@ -29,39 +32,45 @@
 
               <div class="my-5">
                 <label for="" class="d-block medbrownparagraph graytext"
-                  >Change password
+                  >Enter old password
                 </label>
                 <input
                   type="password"
-                  v-model="password_object.old_password"
-                  required
-                  placeholder="Enter current password"
-                  class="forminputs"
-                />
-              </div>
-              <div class="my-5">
-                <input
-                  type="password"
-                  v-model="password_object.new_password"
+                  v-model="password_object.current_password"
                   required
                   placeholder="Enter new password"
                   class="forminputs"
                 />
               </div>
               <div class="my-5">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Enter new password
+                </label>
                 <input
                   type="password"
                   required
                   v-model="password_object.new_password"
-                  placeholder="Retype new password"
+                  placeholder="Enter your new password"
+                  class="forminputs"
+                />
+              </div>
+              <div class="my-5">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Confirm new password
+                </label>
+                <input
+                  type="password"
+                  required
+                  v-model="confirm_pssword"
+                  placeholder="Confirm your new password"
                   class="forminputs"
                 />
               </div>
 
               <div class="d-flex justify-content-center pb-5">
                 <input
-                  class="btn mainbtndashboard text-center px-2 mb-5"
-                  type="sumbit"
+                  class="btn mainbtndashboard text-center px-4 mb-5"
+                  type="submit"
                   value="Save"
                 />
               </div>
@@ -79,10 +88,10 @@ export default {
   data() {
     return {
       password_object: {
-        old_password: '',
+        current_password: '',
         new_password: '',
-        confirm_pssword: '',
       },
+      confirm_pssword: '',
     }
   },
   computed: {
@@ -92,7 +101,24 @@ export default {
       token: 'auth/token',
     }),
   },
-  methods: {},
+  methods: {
+    async changePassword() {
+      if (this.confirm_pssword !== this.password_object.new_password) {
+        this.$bvToast.toast(`Check your passwords`, {
+          title: 'Passwords do not match',
+          variant: 'danger',
+          solid: true,
+        })
+      } else {
+        try {
+          await this.$axios.$patch(`user/change-password`, this.password_object)
+        } catch (error) {
+          console.log(error)
+          // this.$toast.error(error.detail)
+        }
+      }
+    },
+  },
 }
 </script>
 
