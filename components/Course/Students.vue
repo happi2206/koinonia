@@ -16,11 +16,24 @@
             type="file"
             class="hidden"
           />
+          <input
+            @change="uploadPhone"
+            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+            ref="uploadcsvphone"
+            type="file"
+            class="hidden"
+          />
           <button
             @click.prevent="$refs.uploadcsv.click()"
             class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
           >
             Bulk Upload
+          </button>
+          <button
+            @click.prevent="$refs.uploadcsvphone.click()"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+          >
+            Upload Phone
           </button>
           <b-modal id="addStudent" title="Create Student" centered hide-footer>
             <form class="modabody p-4" @submit.prevent="createStudent">
@@ -234,6 +247,43 @@ export default {
         })
       }
       console.log(new_array)
+
+      await this.$axios.$post(
+        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+        new_array
+      )
+
+      this.$toast.success('Students added Successfully')
+    },
+    async uploadPhone(e) {
+      let file = e.target.files[0]
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLSX.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLSX.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+
+      let new_array = []
+      for (const iterator of students) {
+        new_array.push({
+          phone: iterator['Phone'],
+          registration_number: iterator['Registration Number'],
+        })
+      }
+      console.log(new_array)
+
+      return
 
       await this.$axios.$post(
         `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
