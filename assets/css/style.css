@@ -830,6 +830,10 @@ th {
   z-index: 999;
 }
 
+/* .sidebar-wrapper.profile {
+  width: 17%;
+} */
+
 .z1000 {
   z-index: 999 !important;
 }

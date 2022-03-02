@@ -80,7 +80,7 @@
                 </nuxt-link>
               </b-dropdown-item>
               <b-dropdown-item class="medparagraph">
-                <nuxt-link to="/dashboard/accountsettings" class="text-dark">
+                <nuxt-link to="/account-settings" class="text-dark">
                   Account Settings
                 </nuxt-link>
               </b-dropdown-item>
@@ -286,10 +286,7 @@
                     </nuxt-link>
                   </b-dropdown-item>
                   <b-dropdown-item href="#" class="medparagraph">
-                    <nuxt-link
-                      to="/dashboard/accountsettings"
-                      class="text-dark"
-                    >
+                    <nuxt-link to="/account-settings" class="text-dark">
                       Account Settings
                     </nuxt-link>
                   </b-dropdown-item>

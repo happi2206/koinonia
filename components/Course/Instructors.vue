@@ -115,7 +115,7 @@ export default {
     async get_all_course_instructors() {
       try {
         this.busy = true
-        let uri = `course-v/get-all-course-instructors?course_id=${this.$route.params.course}&page=${this.currentPage}&size=${this.perPage}`
+        let uri = `course-v/get-all-course-instructors?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
 
         if (this.search) {
           uri = uri + `&search=${this.search}`
@@ -136,7 +136,7 @@ export default {
     async addInstructortoCourse() {
       try {
         await this.$axios.$post(
-          `course-v/add-instructor-to-a-course?course_id=${this.$route.params.course}`,
+          `course-v/add-instructor-to-a-course?course_id=${this.$route.params.id}`,
           {
             ids: [`${this.addInstructor}`],
           }

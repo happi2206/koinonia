@@ -302,7 +302,7 @@ export default {
       try {
         this.is_creating = true
         await this.$axios.$post(
-          `course-v/add-course-event?course_id=${this.$route.params.course}`,
+          `course-v/add-course-event?course_id=${this.$route.params.id}`,
           this.event
         )
 
@@ -339,7 +339,7 @@ export default {
     async submitEditedEvent() {
       try {
         await this.$axios.$patch(
-          `course-v/update-course-event?course_id=${this.$route.params.course}&event_id=${this.currentEvent.id}`,
+          `course-v/update-course-event?course_id=${this.$route.params.id}&event_id=${this.currentEvent.id}`,
           this.currentEvent
         )
 
@@ -351,13 +351,14 @@ export default {
     },
 
     onRowClicked(e) {
-      this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
+      console.log(this.$route.params)
+      this.$router.push(`course/${this.$route.params.id}/${e.id}`)
     },
     async get_all_course_events() {
       try {
         this.busy = true
 
-        let uri = `course-v/get-all-course-event?course_id=${this.$route.params.course}&page=${this.currentPage}&size=${this.perPage}`
+        let uri = `course-v/get-all-course-event?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
 
         if (this.search) {
           uri = uri + `&search=${this.search}`

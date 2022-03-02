@@ -140,7 +140,7 @@ export default {
     onRowClicked(e) {
       console.log(e)
 
-      this.$router.push(`courses/${this.$route.params.course}/${e.id}`)
+      this.$router.push(`courses/${this.$route.params.id}/${e.id}`)
     },
     async editCourse() {
       try {
@@ -173,7 +173,7 @@ export default {
       this.isLoading = true
       try {
         const courses = await this.$axios.$get(
-          `course-v/get-a-course?course_id=${this.$route.params.course}`
+          `course-v/get-a-course?course_id=${this.$route.params.id}`
         )
         this.courseDetail = courses
         this.isLoading = false

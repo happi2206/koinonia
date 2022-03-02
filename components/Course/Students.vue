@@ -259,7 +259,7 @@ export default {
       console.log(new_array)
 
       await this.$axios.$post(
-        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.course}`,
+        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.id}`,
         new_array
       )
 
@@ -269,7 +269,7 @@ export default {
     async createStudent() {
       try {
         await this.$axios.$post(
-          `course-v/add-flat-student-to-a-course?course_id=${this.$route.params.course}`,
+          `course-v/add-flat-student-to-a-course?course_id=${this.$route.params.id}`,
           this.student
         )
         this.get_all_course_students()
@@ -289,7 +289,7 @@ export default {
     async get_all_course_students() {
       try {
         this.busy = true
-        let uri = `course-v/get-all-course-students?course_id=${this.$route.params.course}&page=${this.currentPage}&size=${this.perPage}`
+        let uri = `course-v/get-all-course-students?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
 
         if (this.search) {
           uri = uri + `&search=${this.search}`
