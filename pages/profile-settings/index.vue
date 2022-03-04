@@ -13,7 +13,7 @@
             <div class="d-flex justify-content-center" v-if="isLoading">
               <div class="w-50 h-100">
                 <div class="my-5 d-flex justify-content-center">
-                  <b-skeleton type="avatar"></b-skeleton>
+                  <b-skeleton type="avatar" size="11rem"></b-skeleton>
                 </div>
 
                 <div class="my-5 w-100">
