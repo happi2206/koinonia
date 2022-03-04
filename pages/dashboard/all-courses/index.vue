@@ -151,6 +151,7 @@
 
         <!-- edit course -->
         <b-modal id="editmodal" title="Edit Course" hide-footer>
+          <preloader :show="add_preloader" />
           <div class="modacontent">
             <div class="modabody">
               <div class="my-4">
@@ -234,14 +235,9 @@
                 </p>
               </div>
 
-              <!-- <div class="my-4 row">
+              <div class="my-4 row">
                 <div
-                  class="
-                    d-flex
-                    align-items-center
-                    justify-content-center
-                    col-md-4 col-12
-                  "
+                  class="d-flex align-items-center justify-content-center col-3"
                 >
                   <img
                     :src="currentCourse.feature_image"
@@ -249,14 +245,12 @@
                     class="img-fluid"
                   />
                 </div>
-                <div
-                  class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
-                >
+                <div class="col-9 d-flex justify-content-end">
                   <upload-file v-model="currentCourse.feature_image">
                     <template #edittext> Change Image </template>
                   </upload-file>
                 </div>
-              </div> -->
+              </div>
 
               <div class="my-4">
                 <div class="d-flex justify-content-center">
