@@ -1,6 +1,9 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
     <filter-component @search="SearchText" @view-by="sortEvents">
+      <template #graphicon>
+        <span class="iconify" data-icon="system-uicons:graph-bar"></span>
+      </template>
       <template #besideFilterButton>
         <div class="ml-md-5">
           <button
@@ -105,6 +108,7 @@
           :fields="fields"
           :dropdownItem="dropdownItem"
           @Download_as_PDF="downloadQr"
+          @Print_QR_Code="printQr"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -133,12 +137,8 @@
           </template>
         </table-component>
 
-        <div class="row" v-else>
-          <grid-component
-            :data="events"
-            v-for="(event, index) in events"
-            :key="index"
-          ></grid-component>
+        <div v-else>
+          <progress-component :events="events"> </progress-component>
         </div>
       </template>
     </filter-component>
@@ -251,7 +251,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: ['Edit', 'Download_as_PDF'],
+      dropdownItem: ['Print_QR_Code', 'Edit', 'Download_as_PDF'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
@@ -321,22 +321,22 @@ export default {
       this.eventId = e.id
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
     },
-    // printQr(e) {
-    //   this.qrEvent = e
-    //   this.eventId = e.id
+    printQr(e) {
+      this.qrEvent = e
+      this.eventId = e.id
 
-    //   const WinPrint = window.open(
-    //     '',
-    //     '',
-    //     'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0'
-    //   )
+      const WinPrint = window.open(
+        '',
+        '',
+        'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0'
+      )
 
-    //   WinPrint.document.write(
-    //     `${this.$refs.qcode.$refs.html2Pdf.generatePdf()}`
-    //   )
+      WinPrint.document.write(
+        `${this.$refs.qcode.$refs.html2Pdf.generatePdf()}`
+      )
 
-    //   WinPrint.print()
-    // },
+      WinPrint.print()
+    },
 
     handleEdit(e) {
       this.$bvModal.show('editEvent')
