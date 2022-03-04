@@ -31,15 +31,17 @@
       <span class="smallbrownparagraph mb-0">{{ event.name }}</span>
       <b-progress
         class="my-2 fullprogress"
-        :max="event.total_number_of_student"
+        :max="event.total_number_of_students"
         show-progress
       >
         <b-progress-bar
-          :value="event.no_of_students_present"
+          :value="event.number_of_students_present"
           variant="success"
         ></b-progress-bar>
         <b-progress-bar
-          :value="event.total_number_of_student - event.no_of_students_present"
+          :value="
+            event.total_number_of_students - event.number_of_students_present
+          "
           show-progress
           variant="danger"
         ></b-progress-bar>

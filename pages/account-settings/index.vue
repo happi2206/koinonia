@@ -110,6 +110,8 @@ export default {
           solid: true,
         })
       } else {
+        console.log('workex')
+        return
         try {
           await this.$axios.$patch(`user/change-password`, this.password_object)
         } catch (error) {
