@@ -4,8 +4,8 @@
 
     <!-- <pre>{{ allstudents }}</pre> -->
 
-    <div class="d-flex justify-content-center mb-4">
-      <div class="d-flex align-items-center mx-3">
+    <div class="d-flex flex-md-row flex-column justify-content-center mb-4">
+      <div class="d-flex align-items-center mx-3 my-2 my-md-0">
         <span class="lightgreen mx-2">
           <span
             class="iconify"
@@ -19,7 +19,7 @@
           Percentage of student who Attended
         </p>
       </div>
-      <div class="d-flex align-items-center mx-3">
+      <div class="d-flex align-items-center mx-3 my-2 my-md-0">
         <span class="lightred mx-2">
           <span class="iconify" data-icon="akar-icons:circle-fill"></span>
         </span>
