@@ -108,7 +108,6 @@
           :fields="fields"
           :dropdownItem="dropdownItem"
           @Download_as_PDF="downloadQr"
-          @Print_QR_Code="printQr"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -251,7 +250,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: ['Print_QR_Code', 'Edit', 'Download_as_PDF'],
+      dropdownItem: ['Edit', 'Download_as_PDF'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
