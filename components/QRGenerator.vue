@@ -113,7 +113,7 @@ export default {
       required: true,
     },
     eventData: {
-      type: Object,
+      type: Array,
     },
   },
   methods: {
