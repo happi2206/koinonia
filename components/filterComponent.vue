@@ -21,14 +21,14 @@
                 :class="[visualization === 'grid' ? 'active' : '']"
                 @click="toggleVisualization()"
               >
-                <b-icon icon="grid"></b-icon>
+                <slot name="graphicon"> <b-icon icon="grid"></b-icon></slot>
               </div>
               <div
                 class="icon-wrapper"
                 :class="[visualization === 'list' ? 'active' : '']"
                 @click="toggleVisualization()"
               >
-                <b-icon icon="card-list"></b-icon>
+                <span class="iconify" data-icon="bi:list"></span>
               </div>
             </div>
           </div>

@@ -32,14 +32,16 @@
         <div class="my-2 d-flex flex-md-row flex-column">
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Start Date:</span>
-            <span class=""> {{ eventDetail.start_date | DateFormat }} </span>
+            <span class="">
+              {{ eventDetail.start_date | DateTimeFormat }}
+            </span>
           </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> End Date:</span>
             <span class=""> </span>
-            {{ eventDetail.end_date | DateFormat }}
+            {{ eventDetail.end_date | DateTimeFormat }}
           </p>
-          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> No in class:</span>
             <span class=""> {{ present + absent }}</span>
           </p>
@@ -155,16 +157,20 @@ export default {
       this.busy = true
       // this.isLoading = true
       let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
+
       if (this.check_in_method) {
         uri = uri + `&check_in_method=${this.check_in_method}`
       }
+
       if (this.search) {
         uri = uri + `&search=${this.search}`
       }
       const student = await this.$axios.$get(uri)
 
-      this.absent = student.total_number_of_student - student.students_present
+      console.log(student)
+
       this.present = student.students_present
+      this.absent = student.total_number_of_student - student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
       // this.newStuff = student.response.items
@@ -176,10 +182,6 @@ export default {
     }
   },
   methods: {
-    sortStudents(e) {
-      this.perPage = e
-      this.$fetch()
-    },
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
