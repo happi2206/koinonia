@@ -104,6 +104,7 @@
           v-if="visualization === 'list'"
           :fields="fields"
           :dropdownItem="dropdownItem"
+          @Download_as_PDF="downloadQr"
           @Print_QR_Code="printQr"
           @row-clicked="onRowClicked"
           :busy="busy"
@@ -251,13 +252,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: [
-        'Print_QR_Code',
-        'Edit',
-        'Download as PDF',
-        'Download as XLS',
-        'Download as CSV',
-      ],
+      dropdownItem: ['Print_QR_Code', 'Edit', 'Download_as_PDF'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
@@ -321,11 +316,27 @@ export default {
       }
     },
 
-    printQr(e) {
+    downloadQr(e) {
       console.log(e)
       this.qrEvent = e
       this.eventId = e.id
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
+    },
+    printQr(e) {
+      this.qrEvent = e
+      this.eventId = e.id
+
+      const WinPrint = window.open(
+        '',
+        '',
+        'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0'
+      )
+
+      WinPrint.document.write(
+        `${this.$refs.qcode.$refs.html2Pdf.generatePdf()}`
+      )
+
+      WinPrint.print()
     },
 
     handleEdit(e) {
@@ -337,12 +348,13 @@ export default {
     },
 
     async submitEditedEvent() {
+      this.is_creating = true
       try {
         await this.$axios.$patch(
           `course-v/update-course-event?course_id=${this.$route.params.id}&event_id=${this.currentEvent.id}`,
           this.currentEvent
         )
-
+        this.is_creating = false
         this.$bvModal.hide('editEvent')
         this.get_all_course_events()
       } catch (e) {
