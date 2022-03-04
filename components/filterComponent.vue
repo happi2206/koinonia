@@ -1,13 +1,19 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex align-items-center justify-content-between">
+      <div
+        class="
+          d-flex
+          align-items-center
+          justify-content-between
+          flex-md-row flex-column
+        "
+      >
         <div
           class="
             d-flex
             align-items-center
             justify-content-between justify-content-md-start
-            flex-wrap
             firstwidth
           "
         >

@@ -1,7 +1,7 @@
 <template>
   <div class="bodylightgray">
     <div class="mt-5 pt-3 pt-lg-5 horizontalspacing">
-      <div class="my-md-4">
+      <div class="my-4">
         <a
           href="#"
           @click.prevent="$router.go(-1)"

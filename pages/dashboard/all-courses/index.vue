@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-5 horizontalspacing pt-3">
-      <div class="flex items-center pt-lg-5 justify-between mb-4">
+      <div class="flex items-center pt-lg-5 pt-3 justify-between mb-4">
         <h2 class="largebrownparagraph bold700 mb-0">All Courses</h2>
         <button
           class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
