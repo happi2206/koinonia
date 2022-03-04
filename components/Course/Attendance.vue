@@ -322,22 +322,22 @@ export default {
       this.eventId = e.id
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
     },
-    printQr(e) {
-      this.qrEvent = e
-      this.eventId = e.id
+    // printQr(e) {
+    //   this.qrEvent = e
+    //   this.eventId = e.id
 
-      const WinPrint = window.open(
-        '',
-        '',
-        'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0'
-      )
+    //   const WinPrint = window.open(
+    //     '',
+    //     '',
+    //     'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0'
+    //   )
 
-      WinPrint.document.write(
-        `${this.$refs.qcode.$refs.html2Pdf.generatePdf()}`
-      )
+    //   WinPrint.document.write(
+    //     `${this.$refs.qcode.$refs.html2Pdf.generatePdf()}`
+    //   )
 
-      WinPrint.print()
-    },
+    //   WinPrint.print()
+    // },
 
     handleEdit(e) {
       this.$bvModal.show('editEvent')
