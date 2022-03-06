@@ -72,6 +72,7 @@
                   Admin Checked-in
                 </option>
               </select>
+              <button  class="btn ml-5 px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph">Update All</button>
             </div>
           </template>
 

@@ -462,7 +462,6 @@ export default {
 
   methods: {
     onScroll(e) {
-      console.log('hey')
       this.getAllCourses()
       if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
         this.getAllCourses()
@@ -534,8 +533,10 @@ export default {
       }
       const courses = await this.$axios.$get(uri)
 
+      console.log(courses);
+
       this.courses = courses.items
-      console.log(courses)
+      // console.log(courses)
       // this.perPage = courses.size
       // this.totalItems = courses.total
       // this.currentPage = courses.page
