@@ -137,7 +137,7 @@
                               v-model="loginInputs.username"
                               required
                               placeholder="Email"
-                              class="forminputs"
+                              class="forminputs px-2"
                             />
                           </div>
                           <div class="my-4 relativecontainer">

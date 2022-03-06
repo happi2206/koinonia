@@ -50,7 +50,7 @@
                   2.&nbsp;
                   <span>
                     Once focused on the picture it will show
-                    <b><i>Koinonia</i></b> or a</span
+                    <b><i>Ksom.slate.ng</i></b> or a</span
                   >
 
                   <div class="pt-3 mx-2">
@@ -132,7 +132,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .intro h1,
 h2,
 h3 {
