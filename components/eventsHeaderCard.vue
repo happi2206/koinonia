@@ -1,5 +1,6 @@
 <template>
   <div>
+    <preloader :show="addPreloader" />
     <div v-if="isLoading">
       <b-row>
         <b-col cols="12" class="">
@@ -96,11 +97,11 @@
           </template>
 
           <template #exportButton>
-            <button class="accentcolorbg button-height py-2 px-3 ml-3">
-              <downloadexcel :fetch="exportData"
-                ><span class="iconify" data-icon="entypo:export"></span>
-              </downloadexcel>
-            </button>
+            <downloadexcel :fetch="exportData">
+              <button class="accentcolorbg button-height py-2 px-3 ml-3">
+                <span class="iconify" data-icon="entypo:export"></span>
+              </button>
+            </downloadexcel>
           </template>
 
           <template #importButton>
@@ -149,6 +150,7 @@ export default {
 
   data() {
     return {
+      addPreloader: false,
       newData: [],
       busy: false,
       newbusy: false,
@@ -215,6 +217,7 @@ export default {
   },
   methods: {
     async exportData() {
+      this.addPreloader = true
       try {
         const response = await this.$axios.$get(
           `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
@@ -224,6 +227,8 @@ export default {
         return response
       } catch (e) {
         console.log(e)
+      } finally {
+        this.addPreloader = false
       }
     },
 
