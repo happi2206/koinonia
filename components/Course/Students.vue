@@ -1,5 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_students">
+    <preloader :show="add_preloader" />
     <filter-component @search="SearchText" @view-by="sortStudents">
       <template #besideFilterButton>
         <div class="">
@@ -9,19 +10,47 @@
           >
             Add Student
           </button>
-          <input
-            @change="uploadStudents"
-            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-            ref="uploadcsv"
-            type="file"
-            class="hidden"
-          />
+
           <button
-            @click.prevent="$refs.uploadcsv.click()"
             class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+            v-b-modal.uploadModal
           >
             Bulk Upload
           </button>
+
+          <b-modal id="uploadModal" centered title="Bulk upload" hide-footer>
+            <div>
+              <p class="text-secondary">
+                Before you upload your files below, make sure your file is ready
+                to be imported
+              </p>
+            </div>
+
+            <div class="mt-3 underline">
+              <download-excel :data="json_data">
+                <button class="btn">
+                  <p class="font-weight-bold">
+                    <u> Download sample spreadsheet </u>
+                  </p>
+                </button>
+              </download-excel>
+            </div>
+            <input
+              @change="uploadStudents"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="btn py-2 mainbtndashboard medbrownparagraph"
+            >
+              Bulk Upload
+            </button>
+          </b-modal>
+
           <b-modal id="addStudent" title="Create Student" centered hide-footer>
             <form class="modabody p-4" @submit.prevent="createStudent">
               <div>
@@ -146,6 +175,7 @@
 
 <script>
 import { json2csv, csv2json } from 'json-2-csv'
+import JsonExcel from 'vue-json-excel'
 var csv = require('csvtojson')
 export default {
   data() {
@@ -159,6 +189,28 @@ export default {
         'Edit',
       ],
 
+      json_data: [
+        {
+          name: 'Tony Peña',
+          city: 'New York',
+          country: 'United States',
+          birthdate: '1978-03-15',
+          phone: {
+            mobile: '1-541-754-3010',
+            landline: '(541) 754-3010',
+          },
+        },
+        {
+          name: 'Thessaloniki',
+          city: 'Athens',
+          country: 'Greece',
+          birthdate: '1987-11-23',
+          phone: {
+            mobile: '+1 855 275 5071',
+            landline: '(2741) 2621-244',
+          },
+        },
+      ],
       // {
       //   "surname": "string",
       //   "other_name": "string",
@@ -215,10 +267,12 @@ export default {
       perPage: 30,
       totalItems: 0,
       currentPage: 1,
+      add_preloader: false,
     }
   },
 
   methods: {
+    downloadSample() {},
     sortStudents(e) {
       this.perPage = e
       this.get_all_course_students()
@@ -255,10 +309,14 @@ export default {
       }
       console.log(new_array)
 
+      this.add_preloader = true
+
       await this.$axios.$post(
         `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.id}`,
         new_array
       )
+
+      this.add_preloader = false
 
       this.$toast.success('Students added Successfully')
     },

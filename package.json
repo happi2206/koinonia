@@ -31,6 +31,7 @@
     "vue-flickity": "^1.2.1",
     "vue-html-to-paper": "^1.4.4",
     "vue-html2pdf": "^1.8.0",
+    "vue-json-excel": "^0.3.0",
     "vue-loading-skeleton": "^1.1.9",
     "vue-luxon": "^0.10.0",
     "vue-observe-visibility": "^1.0.0",
