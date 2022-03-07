@@ -88,6 +88,7 @@
             <slot name="besideFilterButton"></slot>
           </div>
           <slot name="exportButton"></slot>
+          <slot name="importButton"></slot>
         </div>
       </div>
       <hr />
