@@ -151,6 +151,7 @@
 
         <!-- edit course -->
         <b-modal id="editmodal" title="Edit Course" hide-footer>
+          <preloader :show="add_preloader" />
           <div class="modacontent">
             <div class="modabody">
               <div class="my-4">
@@ -234,14 +235,9 @@
                 </p>
               </div>
 
-              <!-- <div class="my-4 row">
+              <div class="my-4 row">
                 <div
-                  class="
-                    d-flex
-                    align-items-center
-                    justify-content-center
-                    col-md-4 col-12
-                  "
+                  class="d-flex align-items-center justify-content-center col-3"
                 >
                   <img
                     :src="currentCourse.feature_image"
@@ -249,14 +245,12 @@
                     class="img-fluid"
                   />
                 </div>
-                <div
-                  class="flex gap-3 justify-content-center my-4 col-md-8 col-12"
-                >
+                <div class="col-9 d-flex justify-content-end">
                   <upload-file v-model="currentCourse.feature_image">
                     <template #edittext> Change Image </template>
                   </upload-file>
                 </div>
-              </div> -->
+              </div>
 
               <div class="my-4">
                 <div class="d-flex justify-content-center">
@@ -468,7 +462,6 @@ export default {
 
   methods: {
     onScroll(e) {
-      console.log('hey')
       this.getAllCourses()
       if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
         this.getAllCourses()
@@ -540,8 +533,10 @@ export default {
       }
       const courses = await this.$axios.$get(uri)
 
+      console.log(courses);
+
       this.courses = courses.items
-      console.log(courses)
+      // console.log(courses)
       // this.perPage = courses.size
       // this.totalItems = courses.total
       // this.currentPage = courses.page

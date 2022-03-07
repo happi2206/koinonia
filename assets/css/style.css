@@ -651,6 +651,17 @@ button.loginbtn {
   font-weight: 800;
 }
 
+.fullprogress .progress-bar {
+  /* height: 40px !important; */
+}
+
+.lightgreen {
+  color: #6fcf97;
+}
+.lightred {
+  color: #f15c78;
+}
+
 .progress-bar.bg-danger {
   background: #f15c78 !important;
 }

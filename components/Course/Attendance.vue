@@ -1,6 +1,9 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
     <filter-component @search="SearchText" @view-by="sortEvents">
+      <template #graphicon>
+        <span class="iconify" data-icon="system-uicons:graph-bar"></span>
+      </template>
       <template #besideFilterButton>
         <div class="ml-md-5">
           <button
@@ -104,7 +107,7 @@
           v-if="visualization === 'list'"
           :fields="fields"
           :dropdownItem="dropdownItem"
-          @Print_QR_Code="printQr"
+          @Download_as_PDF="downloadQr"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -133,17 +136,14 @@
           </template>
         </table-component>
 
-        <div class="row" v-else>
-          <grid-component
-            :data="events"
-            v-for="(event, index) in events"
-            :key="index"
-          ></grid-component>
+        <div v-else>
+          <progress-component :events="events"> </progress-component>
         </div>
       </template>
     </filter-component>
     <div ref="my-component" v-show="openComponent">
       <QRGenerator
+        id="printMe"
         :courseId="$route.params.course"
         :eventId="eventId"
         ref="qcode"
@@ -251,13 +251,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: [
-        'Print_QR_Code',
-        'Edit',
-        'Download as PDF',
-        'Download as XLS',
-        'Download as CSV',
-      ],
+      dropdownItem: ['Edit', 'Download_as_PDF'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
@@ -321,11 +315,15 @@ export default {
       }
     },
 
-    printQr(e) {
+    downloadQr(e) {
       console.log(e)
       this.qrEvent = e
       this.eventId = e.id
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
+    },
+    async printQr(e) {
+      // Pass the element id here
+      await this.$htmlToPaper('printMe', { e })
     },
 
     handleEdit(e) {
@@ -337,12 +335,13 @@ export default {
     },
 
     async submitEditedEvent() {
+      this.is_creating = true
       try {
         await this.$axios.$patch(
           `course-v/update-course-event?course_id=${this.$route.params.id}&event_id=${this.currentEvent.id}`,
           this.currentEvent
         )
-
+        this.is_creating = false
         this.$bvModal.hide('editEvent')
         this.get_all_course_events()
       } catch (e) {
