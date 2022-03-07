@@ -87,22 +87,8 @@
           <div class="my-md-0">
             <slot name="besideFilterButton"></slot>
           </div>
-          <div id="filters-container" class="filters-container d-none">
-            <div
-              class="filter-closer"
-              data-toggle-visibility="#filters-container"
-            ></div>
-
-            <div class="filters-container-content">
-              <div class="search-input mb-2">
-                <input
-                  type="text"
-                  class="forminputs"
-                  placeholder="Search for class"
-                />
-              </div>
-            </div>
-          </div>
+          <slot name="exportButton"></slot>
+          <slot name="importButton"></slot>
         </div>
       </div>
       <hr />

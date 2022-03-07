@@ -94,6 +94,35 @@
             </table-component>
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
+
+          <template #exportButton>
+            <button class="accentcolorbg button-height py-2 px-3 ml-3">
+              <downloadexcel :fetch="exportData"
+                ><span class="iconify" data-icon="entypo:export"></span>
+              </downloadexcel>
+            </button>
+          </template>
+
+          <template #importButton>
+            <input
+              @change="importData"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="accentcolorbg button-height py-2 px-3 ml-3"
+            >
+              <span
+                class="iconify"
+                data-icon="fa-solid:file-import"
+                data-width="16"
+                data-height="16"
+              ></span>
+            </button>
+          </template>
         </filter-component>
       </div>
     </div>
@@ -101,6 +130,9 @@
 </template>
 
 <script>
+import downloadexcel from 'vue-json-excel'
+// import JsonExcel from 'vue-json-excel'
+
 export default {
   props: {
     eventDetail: {
@@ -182,6 +214,41 @@ export default {
     }
   },
   methods: {
+    async exportData() {
+      try {
+        const response = await this.$axios.$get(
+          `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          this.studentArray
+        )
+        console.log(response)
+        return response
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    async importData(e) {
+      let file = e.target.files[0]
+
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLS.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLS.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+      console.log(students)
+    },
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
@@ -262,8 +329,16 @@ export default {
     },
   },
 
+  components: {
+    downloadexcel,
+  },
+
   mounted() {},
 }
 </script>
 
-<style></style>
+<style scoped>
+.button-height {
+  height: 2.6rem;
+}
+</style>
