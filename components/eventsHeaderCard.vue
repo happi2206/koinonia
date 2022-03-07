@@ -94,6 +94,12 @@
             </table-component>
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
+
+          <template #exportButton>
+            <button class="accentcolorbg py-2 px-3 ml-4" @click="exportData">
+              <span class="iconify" data-icon="entypo:export"></span>
+            </button>
+          </template>
         </filter-component>
       </div>
     </div>
@@ -182,6 +188,18 @@ export default {
     }
   },
   methods: {
+    async exportData() {
+      try {
+        const response = await this.$axios.$get(
+          `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          this.studentArray
+        )
+
+        console.log(response)
+      } catch (e) {
+        console.log(e)
+      }
+    },
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
