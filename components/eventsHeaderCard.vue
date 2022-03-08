@@ -69,9 +69,18 @@
                 <option class="medbrownparagraph" value="self">Self</option>
                 <option class="medbrownparagraph" value="admin">Admin</option>
               </select>
-              <button @click.prevent="exportAttendance"
+              <!-- <pre>{{ is_Present }}</pre> -->
+              <select
+                class="records-count medbrownparagraph medbrownparagraph"
+                v-model="is_Present"
+              >
+                <option class="medbrownparagraph" value="">All</option>
+                <option class="medbrownparagraph" value="true">Present</option>
+                <option class="medbrownparagraph" value="false">Absent</option>
+              </select>
+              <!-- <button @click.prevent="exportAttendance"
                class="btn ml-4 px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
-              >Export CSV</button>
+              >Export CSV</button> -->
             </div>
           </template>
           <template #default="{ visualization }">
@@ -185,6 +194,7 @@ export default {
       totalItems: 0,
       currentPage: 1,
       check_in_method: '',
+      is_Present: '',
     }
   },
 
@@ -197,6 +207,14 @@ export default {
 
       if (this.check_in_method) {
         uri = uri + `&check_in_method=${this.check_in_method}`
+      }
+
+      if (this.is_Present) {
+        let currentBool = true
+        if (this.is_Present === 'false') {
+          currentBool = false
+        }
+        uri = uri + `&is_present=${currentBool}`
       }
 
       if (this.search) {
@@ -268,13 +286,9 @@ export default {
 
       this.$fetch()
     },
-
     async exportAttendance() {
       try {
-       
-        let uri = `course-v/export-course-attendance?course_id=${
-          this.$route.params.event
-        }&event_id=${this.$route.params.eventclicked}`
+        let uri = `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
         const results = await this.$axios.$get(uri)
         console.log(results)
       } catch (error) {}
@@ -330,6 +344,12 @@ export default {
       } else {
         return this.studentArray
       }
+    },
+  },
+
+  watch: {
+    is_Present(value) {
+      this.$fetch()
     },
   },
 
