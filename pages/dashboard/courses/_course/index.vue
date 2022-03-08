@@ -48,8 +48,11 @@
             <b-tab title="Students">
               <CourseStudents />
             </b-tab>
-            <b-tab title="Attendance" class="">
+            <b-tab title="Attendance">
               <CourseAttendance />
+            </b-tab>
+            <b-tab title="Assignment">
+              <CourseAssignment />
             </b-tab>
           </b-tabs>
         </div>
