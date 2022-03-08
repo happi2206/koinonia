@@ -2,40 +2,19 @@
   <filter-component @search="SearchText" @view-by="sortInstructors">
     <template #besideFilterButton>
       <div class="ml-md-5">
-        <button
-          class="btn py-2 mainbtndashboard medbrownparagraph"
-          v-b-modal.addInstructor
-        >
+        <!-- <button class="btn py-2 mainbtndashboard medbrownparagraph">
           Add Assignment
-        </button>
-        <b-modal id="addInstructor" centered title="Add Instructor" hide-footer>
-          <div class="content px-md-3 my-2">
-            <div class="my-3">
-              <v-select
-                :options="instructors"
-                v-model="addInstructor"
-                placeholder="Select instructor"
-                :reduce="(option) => option.id"
-              >
-                <template #option="{ surname, other_name }">
-                  <span>{{ surname }} {{ other_name }}</span>
-                </template>
-              </v-select>
-            </div>
-          </div>
+        </button> -->
 
-          <div class="d-flex justify-content-center mx-5 my-3">
-            <button class="btn mainbtndashboard" @click="addInstructortoCourse">
-              Add Instructor
-            </button>
-          </div>
-        </b-modal>
+        <nuxt-link class="btn mainbtndashboard medbrownparagraph" to="/"
+          >Add Assignment</nuxt-link
+        >
       </div>
     </template>
 
     <template #default="{ visualization }">
       <table-component
-        :items="instructors"
+        :items="assignments"
         :fields="assignmentFields"
         :busy="busy"
         @page-changed="handlePage"
@@ -60,14 +39,11 @@ export default {
   data() {
     return {
       assignmentFields: [
-        { key: 'firstname', label: 'First name', sortable: true },
-        { key: 'surname', sortable: true },
-        { key: 'email', sortable: true },
-        { key: 'phone', sortable: true },
-        {
-          key: 'link_code',
-          sortable: true,
-        },
+        { key: 'Exercise Name', sortable: true },
+        { key: 'Exercise Type', sortable: true },
+        { key: 'Date Available', sortable: true },
+        { key: 'Due Date', sortable: true },
+        { key: 'Submissions', sortable: true },
       ],
     }
   },
