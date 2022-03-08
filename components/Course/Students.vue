@@ -17,6 +17,21 @@
             Bulk Upload
           </button>
 
+          <input
+            @change="uploadPhone"
+            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+            ref="uploadcsvphone"
+            type="file"
+            class="hidden"
+          />
+
+          <button
+            @click.prevent="$refs.uploadcsvphone.click()"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+          >
+            Upload Phone
+          </button>
+
           <b-modal id="uploadModal" centered title="Bulk upload" hide-footer>
             <div>
               <p class="text-secondary">
@@ -281,6 +296,43 @@ export default {
       this.perPage = e
       this.get_all_course_students()
     },
+
+    async uploadPhone(e) {
+      let file = e.target.files[0]
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLSX.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLSX.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+      let new_array = []
+      for (const iterator of students) {
+        if (iterator['Phone']) {
+          new_array.push({
+            phone: iterator['Phone'],
+            registration_number: iterator['Registration Number'],
+            email: iterator['Email'],
+          })
+        }
+      }
+
+      try {
+        await this.$axios.$post(`course-v/add-bulk-students-updates`, new_array)
+        this.$toast.success('update successful')
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async uploadStudents(e) {
       let file = e.target.files[0]
       let students = await new Promise((resolve) => {
@@ -328,42 +380,42 @@ export default {
         console.log(e)
       }
     },
-    async uploadPhone(e) {
-      let file = e.target.files[0]
-      let students = await new Promise((resolve) => {
-        if (file) {
-          let fileReader = new FileReader()
-          fileReader.readAsBinaryString(file)
-          fileReader.onload = (event) => {
-            let data = event.target.result
-            let workbook = XLSX.read(data, { type: 'binary' })
-            workbook.SheetNames.forEach((sheet) => {
-              let rowobject = XLSX.utils.sheet_to_row_object_array(
-                workbook.Sheets[sheet]
-              )
-              resolve(rowobject)
-            })
-          }
-        }
-      })
+    // async uploadPhone(e) {
+    //   let file = e.target.files[0]
+    //   let students = await new Promise((resolve) => {
+    //     if (file) {
+    //       let fileReader = new FileReader()
+    //       fileReader.readAsBinaryString(file)
+    //       fileReader.onload = (event) => {
+    //         let data = event.target.result
+    //         let workbook = XLSX.read(data, { type: 'binary' })
+    //         workbook.SheetNames.forEach((sheet) => {
+    //           let rowobject = XLSX.utils.sheet_to_row_object_array(
+    //             workbook.Sheets[sheet]
+    //           )
+    //           resolve(rowobject)
+    //         })
+    //       }
+    //     }
+    //   })
 
-      let new_array = []
-      for (const iterator of students) {
-        if (iterator['Phone']) {
-          new_array.push({
-            phone: iterator['Phone'],
-            registration_number: iterator['Registration Number'],
-          })
-        }
-      }
+    //   let new_array = []
+    //   for (const iterator of students) {
+    //     if (iterator['Phone']) {
+    //       new_array.push({
+    //         phone: iterator['Phone'],
+    //         registration_number: iterator['Registration Number'],
+    //       })
+    //     }
+    //   }
 
-      await this.$axios.$post(
-        `course-v/add-phone-numbers-to-a-course?course_id=${this.$route.params.course}`,
-        new_array
-      )
+    //   await this.$axios.$post(
+    //     `course-v/add-phone-numbers-to-a-course?course_id=${this.$route.params.course}`,
+    //     new_array
+    //   )
 
-      this.$toast.success('Students added Successfully')
-    },
+    //   this.$toast.success('Students added Successfully')
+    // },
 
     sortStudents(e) {
       this.perPage = e
