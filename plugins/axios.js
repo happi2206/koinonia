@@ -1,10 +1,6 @@
 
 export default function ({ store, $axios, redirect }) {
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 060a32035c6573e9a0ba19cf28aecb1b2cb12141
     $axios.onRequest(config => {
         // set token
         $axios.setToken(localStorage.getItem('KOINONIA-TOKEN'), 'Bearer')
