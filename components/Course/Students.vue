@@ -27,7 +27,7 @@
             </div>
 
             <div class="mt-3 underline">
-              <download-excel :data="json_data">
+              <download-excel :data="json_data" name="bulkupload.xls">
                 <button class="btn">
                   <p class="font-weight-bold">
                     <u> Download sample spreadsheet </u>
