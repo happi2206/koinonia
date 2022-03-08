@@ -97,6 +97,8 @@
               </div>
             </div>
           </div>
+
+          <slot name="uploadButton"></slot>
         </div>
       </div>
       <hr />

@@ -72,7 +72,6 @@
                   Admin Checked-in
                 </option>
               </select>
-              <button  class="btn ml-5 px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph">Update All</button>
             </div>
           </template>
 
@@ -97,6 +96,40 @@
                 ></b-form-checkbox>
               </template>
             </table-component>
+          </template>
+
+          <template #uploadButton>
+            <input
+              @change="recieveUpdate"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="accentcolorbg button-height py-2 px-3 ml-3"
+            >
+              <span
+                class="iconify"
+                data-icon="fa-solid:file-import"
+                data-width="16"
+                data-height="16"
+              ></span>
+            </button>
+            <!-- <button
+              class="
+                btn
+                ml-5
+                px-md-4 px-3
+                py-2
+                mainbtndashboard
+                medbrownparagraph
+              "
+              @click="recieveUpdate"
+            >
+              <span class="iconify" data-icon="charm:upload"></span>
+            </button> -->
           </template>
         </filter-component>
       </div>
@@ -182,6 +215,18 @@ export default {
     }
   },
   methods: {
+    async recieveUpdate() {
+      try {
+        const response = await this.$axios.$get(
+          `course-v/update-attendance-list?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          this.studentArray
+        )
+        console.log(response)
+        return response
+      } catch (e) {
+        console.log(e)
+      }
+    },
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
