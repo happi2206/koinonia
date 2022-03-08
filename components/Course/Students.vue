@@ -4,7 +4,7 @@
       <template #besideFilterButton>
         <div class="">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-md-3"
             v-b-modal.addStudent
           >
             Add Student
@@ -283,7 +283,6 @@ export default {
           })
         }
       }
-
 
       await this.$axios.$post(
         `course-v/add-phone-numbers-to-a-course?course_id=${this.$route.params.course}`,

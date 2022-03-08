@@ -196,7 +196,7 @@
 
                       <div class="my-4 d-flex justify-content-center">
                         <nuxt-link
-                          to="/"
+                          to="/login/forgot-password"
                           class="mb-0 medbrownparagraph text-center"
                         >
                           <u>Forgot Password?</u>

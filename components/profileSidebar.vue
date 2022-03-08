@@ -5,29 +5,27 @@
     <nav id="sidebar" class="sidebar-wrapper mt-5 pt-3" v-if="isMobile">
       <div class="sidebar-menu my-lg-2 bg-white">
         <div class="h-full bg-white px-1 absolute" id="sidenavExample">
-          <h4 class="brownparagraph text-center my-3 mx-3" v-if="isInstructor">
-            Instructor Dashboard
-          </h4>
+          <h4 class="brownparagraph text-center my-3 mx-3"></h4>
           <ul class="relative">
             <li class="py-2 my-2">
               <nuxt-link
-                to="/dashboard/all-courses"
+                to="/profile-settings"
                 class="flex items-center medbrownparagraph text-dark mx-3 px-3"
               >
                 <span
                   class="iconify"
                   data-icon="simple-icons:googleclassroom"
                 ></span>
-                <span class="px-3">Courses</span>
+                <span class="px-3">Public profile</span>
               </nuxt-link>
             </li>
             <li class="py-2 my-2">
               <nuxt-link
-                to="/dashboard/all-instructors"
+                to="/account-settings"
                 class="flex items-center medbrownparagraph text-dark mx-3 px-3"
               >
                 <span class="iconify" data-icon="la:chalkboard-teacher"></span>
-                <span class="px-3">Instructors</span>
+                <span class="px-3">Account Settings</span>
               </nuxt-link>
             </li>
           </ul>
@@ -37,29 +35,27 @@
     <nav id="sidebar" class="sidebar-wrapper mt-lg-5 pt-lg-5 d-none d-lg-block">
       <div class="sidebar-menu bg-white">
         <div class="h-full px-1 absolute" id="sidenavExample">
-          <h4 class="brownparagraph text-center my-3 mx-3" v-if="isInstructor">
-            Instructor Dashboard
-          </h4>
+          <h4 class="brownparagraph text-center my-3 mx-3"></h4>
           <ul class="relative">
             <li class="py-2 my-2">
               <nuxt-link
-                to="/dashboard/all-courses"
-                class="flex items-center medbrownparagraph text-dark mx-3 px-3"
+                to="/profile-settings"
+                class="flex items-center medbrownparagraph text-dark px-3"
               >
                 <span
                   class="iconify"
                   data-icon="simple-icons:googleclassroom"
                 ></span>
-                <span class="px-3">Courses</span>
+                <span class="ml-2">Public Profile</span>
               </nuxt-link>
             </li>
             <li class="py-2 my-2">
               <nuxt-link
-                to="/dashboard/all-instructors"
-                class="flex items-center medbrownparagraph text-dark mx-3 px-3"
+                to="/account-settings"
+                class="flex items-center medbrownparagraph text-dark px-3"
               >
                 <span class="iconify" data-icon="la:chalkboard-teacher"></span>
-                <span class="px-3">Instructors</span>
+                <span class="ml-2">Account Settings</span>
               </nuxt-link>
             </li>
           </ul>
@@ -74,8 +70,6 @@ export default {
   props: {},
   data() {
     return {
-      isAdministrator: '',
-      isInstructor: '',
       currentMenu: null,
       isMobile: false,
     }
@@ -96,22 +90,7 @@ export default {
       console.log('opened')
     },
   },
-  mounted() {
-    const user = this.$store.state.auth.user
-    this.isAdministrator = user.is_administrator
-    this.isInstructor = user.is_instructor
-  },
-  // computed: {
-  //   user() {
-  //     return this.$store.state.auth.user
-  //   },
-  //   isAdministrator() {
-  //     return user.is_administrator
-  //   },
-  //   isInstructor() {
-  //     return user.is_instructor
-  //   },
-  // },
+  mounted() {},
 }
 </script>
 

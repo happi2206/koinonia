@@ -27,7 +27,7 @@
             <form class="px-md-5 px-2" @submit.prevent="submitFunction">
               <div class="my-4 py-2">
                 <label for="" class="d-block mainparagraph18 graytext"
-                  >Surname
+                  >Surname or Phone number
                   <span class="text-danger">*</span>
                 </label>
                 <input

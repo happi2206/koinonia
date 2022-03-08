@@ -1,13 +1,19 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex align-items-center justify-content-between">
+      <div
+        class="
+          d-flex
+          align-items-center
+          justify-content-between
+          flex-md-row flex-column
+        "
+      >
         <div
           class="
             d-flex
             align-items-center
             justify-content-between justify-content-md-start
-            flex-wrap
             firstwidth
           "
         >
@@ -21,14 +27,14 @@
                 :class="[visualization === 'grid' ? 'active' : '']"
                 @click="toggleVisualization()"
               >
-                <b-icon icon="grid"></b-icon>
+                <slot name="graphicon"> <b-icon icon="grid"></b-icon></slot>
               </div>
               <div
                 class="icon-wrapper"
                 :class="[visualization === 'list' ? 'active' : '']"
                 @click="toggleVisualization()"
               >
-                <b-icon icon="card-list"></b-icon>
+                <span class="iconify" data-icon="bi:list"></span>
               </div>
             </div>
           </div>
@@ -81,22 +87,8 @@
           <div class="my-md-0">
             <slot name="besideFilterButton"></slot>
           </div>
-          <div id="filters-container" class="filters-container d-none">
-            <div
-              class="filter-closer"
-              data-toggle-visibility="#filters-container"
-            ></div>
-
-            <div class="filters-container-content">
-              <div class="search-input mb-2">
-                <input
-                  type="text"
-                  class="forminputs"
-                  placeholder="Search for class"
-                />
-              </div>
-            </div>
-          </div>
+          <slot name="exportButton"></slot>
+          <slot name="importButton"></slot>
         </div>
       </div>
       <hr />

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <preloader :show="addPreloader" />
     <div v-if="isLoading">
       <b-row>
         <b-col cols="12" class="">
@@ -32,14 +33,16 @@
         <div class="my-2 d-flex flex-md-row flex-column">
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Start Date:</span>
-            <span class=""> {{ eventDetail.start_date | DateFormat }} </span>
+            <span class="">
+              {{ eventDetail.start_date | DateTimeFormat }}
+            </span>
           </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> End Date:</span>
             <span class=""> </span>
-            {{ eventDetail.end_date | DateFormat }}
+            {{ eventDetail.end_date | DateTimeFormat }}
           </p>
-          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> No in class:</span>
             <span class=""> {{ present + absent }}</span>
           </p>
@@ -95,6 +98,35 @@
             </table-component>
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
+
+          <template #exportButton>
+            <downloadexcel :fetch="exportData">
+              <button class="accentcolorbg button-height py-2 px-3 ml-3">
+                <span class="iconify" data-icon="entypo:export"></span>
+              </button>
+            </downloadexcel>
+          </template>
+
+          <template #importButton>
+            <input
+              @change="importData"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="accentcolorbg button-height py-2 px-3 ml-3"
+            >
+              <span
+                class="iconify"
+                data-icon="fa-solid:file-import"
+                data-width="16"
+                data-height="16"
+              ></span>
+            </button>
+          </template>
         </filter-component>
       </div>
     </div>
@@ -102,6 +134,9 @@
 </template>
 
 <script>
+import downloadexcel from 'vue-json-excel'
+// import JsonExcel from 'vue-json-excel'
+
 export default {
   props: {
     eventDetail: {
@@ -118,6 +153,7 @@ export default {
 
   data() {
     return {
+      addPreloader: false,
       newData: [],
       busy: false,
       newbusy: false,
@@ -158,16 +194,20 @@ export default {
       this.busy = true
       // this.isLoading = true
       let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
+
       if (this.check_in_method) {
         uri = uri + `&check_in_method=${this.check_in_method}`
       }
+
       if (this.search) {
         uri = uri + `&search=${this.search}`
       }
       const student = await this.$axios.$get(uri)
 
-      this.absent = student.total_number_of_student - student.students_present
+      console.log(student)
+
       this.present = student.students_present
+      this.absent = student.total_number_of_student - student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
       // this.newStuff = student.response.items
@@ -179,9 +219,43 @@ export default {
     }
   },
   methods: {
-    sortStudents(e) {
-      this.perPage = e
-      this.$fetch()
+    async exportData() {
+      this.addPreloader = true
+      try {
+        const response = await this.$axios.$get(
+          `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          this.studentArray
+        )
+        console.log(response)
+        return response
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.addPreloader = false
+      }
+    },
+
+    async importData(e) {
+      let file = e.target.files[0]
+
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLS.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLS.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+      console.log(students)
     },
     sortBy(e) {
       if (e !== 'all') {
@@ -259,8 +333,16 @@ export default {
     },
   },
 
+  components: {
+    downloadexcel,
+  },
+
   mounted() {},
 }
 </script>
 
-<style></style>
+<style scoped>
+.button-height {
+  height: 2.6rem;
+}
+</style>

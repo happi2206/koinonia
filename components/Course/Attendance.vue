@@ -1,6 +1,9 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
     <filter-component @search="SearchText" @view-by="sortEvents">
+      <template #graphicon>
+        <span class="iconify" data-icon="system-uicons:graph-bar"></span>
+      </template>
       <template #besideFilterButton>
         <div class="ml-md-5">
           <button
@@ -117,7 +120,7 @@
           </template> -->
 
           <template #Progress="{ data }">
-            <b-progress class="mt-2" :max="10">
+            <b-progress class="mt-2" :max="data.item.total_number_of_students">
               <b-progress-bar
                 :value="data.item.number_of_students_present"
                 variant="success"
@@ -133,12 +136,8 @@
           </template>
         </table-component>
 
-        <div class="row" v-else>
-          <grid-component
-            :data="events"
-            v-for="(event, index) in events"
-            :key="index"
-          ></grid-component>
+        <div v-else>
+          <progress-component :events="events"> </progress-component>
         </div>
       </template>
     </filter-component>
@@ -326,12 +325,13 @@ export default {
     },
 
     async submitEditedEvent() {
+      this.is_creating = true
       try {
         await this.$axios.$patch(
           `course-v/update-course-event?course_id=${this.$route.params.course}`,
           this.currentEvent
         )
-
+        this.is_creating = false
         this.$bvModal.hide('editEvent')
         this.get_all_course_events()
       } catch (e) {
