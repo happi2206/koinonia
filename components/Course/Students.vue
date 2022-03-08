@@ -5,12 +5,11 @@
       <template #besideFilterButton>
         <div class="">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-md-3"
             v-b-modal.addStudent
           >
             Add Student
           </button>
-
           <button
             class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
             v-b-modal.uploadModal
@@ -262,7 +261,7 @@ export default {
         { key: 'firstname', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
         { key: 'registration_number', sortable: true },
-        { key: 'email', sortable: true },
+        // { key: 'email', sortable: true },
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
         { key: 'phone', sortable: true },
@@ -328,6 +327,47 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    async uploadPhone(e) {
+      let file = e.target.files[0]
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLSX.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLSX.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+
+      let new_array = []
+      for (const iterator of students) {
+        if (iterator['Phone']) {
+          new_array.push({
+            phone: iterator['Phone'],
+            registration_number: iterator['Registration Number'],
+          })
+        }
+      }
+
+      await this.$axios.$post(
+        `course-v/add-phone-numbers-to-a-course?course_id=${this.$route.params.course}`,
+        new_array
+      )
+
+      this.$toast.success('Students added Successfully')
+    },
+
+    sortStudents(e) {
+      this.perPage = e
+      this.get_all_course_students()
     },
 
     async createStudent() {

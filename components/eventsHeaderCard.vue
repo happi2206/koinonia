@@ -1,5 +1,6 @@
 <template>
   <div>
+    <preloader :show="addPreloader" />
     <div v-if="isLoading">
       <b-row>
         <b-col cols="12" class="">
@@ -77,8 +78,9 @@
 
           <template #default="{ visualization }">
             <table-component
+              :paginate="true"
               :busy="busy"
-              :items="studentArray"
+              :items="itemsToShow"
               v-if="visualization === 'list'"
               :dropdownItem="dropdownItem"
               :fields="fields"
@@ -96,6 +98,36 @@
                 ></b-form-checkbox>
               </template>
             </table-component>
+            <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
+          </template>
+
+          <template #exportButton>
+            <downloadexcel :fetch="exportData">
+              <button class="accentcolorbg button-height py-2 px-3 ml-3">
+                <span class="iconify" data-icon="entypo:export"></span>
+              </button>
+            </downloadexcel>
+          </template>
+
+          <template #importButton>
+            <input
+              @change="importData"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="accentcolorbg button-height py-2 px-3 ml-3"
+            >
+              <span
+                class="iconify"
+                data-icon="fa-solid:file-import"
+                data-width="16"
+                data-height="16"
+              ></span>
+            </button>
           </template>
 
           <template #uploadButton>
@@ -138,6 +170,9 @@
 </template>
 
 <script>
+import downloadexcel from 'vue-json-excel'
+// import JsonExcel from 'vue-json-excel'
+
 export default {
   props: {
     eventDetail: {
@@ -154,7 +189,10 @@ export default {
 
   data() {
     return {
+      addPreloader: false,
+      newData: [],
       busy: false,
+      newbusy: false,
       students: [],
       studentelement: [],
       studentsInCourse: {},
@@ -207,6 +245,7 @@ export default {
       this.absent = student.total_number_of_student - student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
+      // this.newStuff = student.response.items
       this.totalItems = student.response.total
     } catch (e) {
       this.$toast.error(e)
@@ -275,15 +314,27 @@ export default {
       this.currentPage = 1
       this.$fetch()
     },
-    sortStudents(e) {
-      this.perPage = e
-      this.$fetch()
+  },
+  computed: {
+    itemsToShow() {
+      if (this.newData.length) {
+        return this.studentArray.concat(this.newData)
+      } else {
+        return this.studentArray
+      }
     },
   },
-  computed: {},
+
+  components: {
+    downloadexcel,
+  },
 
   mounted() {},
 }
 </script>
 
-<style></style>
+<style scoped>
+.button-height {
+  height: 2.6rem;
+}
+</style>
