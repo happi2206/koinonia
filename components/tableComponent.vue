@@ -159,7 +159,6 @@
         </b-dropdown>
       </template>
     </b-table>
-
     <b-pagination
       v-if="paginate"
       v-model="currentPage"
@@ -170,6 +169,7 @@
       class="my-0"
       @change="$emit('page-changed', $event)"
     ></b-pagination>
+    <!-- <div v-observe-visibility="fetchMore"></div> -->
   </div>
 </template>
 

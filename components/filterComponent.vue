@@ -7,7 +7,6 @@
             d-flex
             align-items-center
             justify-content-between justify-content-md-start
-            flex-wrap
             firstwidth
           "
         >
