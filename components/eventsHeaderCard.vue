@@ -69,6 +69,9 @@
                 <option class="medbrownparagraph" value="self">Self</option>
                 <option class="medbrownparagraph" value="admin">Admin</option>
               </select>
+              <button @click.prevent="exportAttendance"
+               class="btn ml-4 px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+              >Export CSV</button>
             </div>
           </template>
           <template #default="{ visualization }">
@@ -266,21 +269,17 @@ export default {
       this.$fetch()
     },
 
-    // async fetchMore(e) {
-    //   try {
-    //     this.newbusy = true
-    //     let uri = `course-v/get-all-students-in-an-event?course_id=${
-    //       this.$route.params.event
-    //     }&event_id=${this.$route.params.eventclicked}&page=${e + 1}&size=${
-    //       this.perPage
-    //     }&check_in_method=${this.check_in_method}`
-    //     const results = await this.$axios.$get(uri)
-    //     this.newData = results.response.items
-    //     console.log(results.response.items)
-    //     this.newbusy = false
-    //   } catch (error) {}
-    //   // alert(e)
-    // },
+    async exportAttendance() {
+      try {
+       
+        let uri = `course-v/export-course-attendance?course_id=${
+          this.$route.params.event
+        }&event_id=${this.$route.params.eventclicked}`
+        const results = await this.$axios.$get(uri)
+        console.log(results)
+      } catch (error) {}
+      // alert(e)
+    },
 
     async getChecked() {
       try {
