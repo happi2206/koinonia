@@ -27,28 +27,33 @@
             </div>
 
             <div class="mt-3 underline">
-              <download-excel :data="json_data" name="bulkupload.xls">
+              <!-- <download-excel :data="json_data" name="bulkupload.xls">
                 <button class="btn">
                   <p class="font-weight-bold">
                     <u> Download sample spreadsheet </u>
                   </p>
                 </button>
-              </download-excel>
+              </download-excel> -->
             </div>
-            <input
-              @change="uploadStudents"
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              ref="uploadcsv"
-              type="file"
-              class="hidden"
-            />
 
-            <button
-              @click.prevent="$refs.uploadcsv.click()"
-              class="btn py-2 mainbtndashboard medbrownparagraph"
-            >
-              Bulk Upload
-            </button>
+            <div class="d-flex justify-content-center">
+              <div class="div">
+                <input
+                  @change="uploadStudents"
+                  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                  ref="uploadcsv"
+                  type="file"
+                  class="hidden"
+                />
+
+                <button
+                  @click.prevent="$refs.uploadcsv.click()"
+                  class="btn py-2 mainbtndashboard medbrownparagraph"
+                >
+                  Bulk Upload
+                </button>
+              </div>
+            </div>
           </b-modal>
 
           <b-modal id="addStudent" title="Create Student" centered hide-footer>
@@ -308,7 +313,7 @@ export default {
         })
       }
       console.log(new_array)
-
+      this.$bvModal.hide('uploadModal')
       this.add_preloader = true
 
       await this.$axios.$post(
