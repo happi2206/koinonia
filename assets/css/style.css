@@ -776,6 +776,11 @@ th {
   text-align: left;
 }
 
+.customsizing {
+  height: 200px;
+  object-fit: cover;
+}
+
 .brown20 {
   font-family: 'Ancona-Ex';
   font-size: 20px;

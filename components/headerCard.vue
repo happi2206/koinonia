@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="headerheight mb-3">
     <div v-if="Object.keys(courseDetail)" class="bg-white rounded p-3">
       <div class="row">
         <div class="col-md-3 px-0 pl-md-2">
@@ -78,5 +78,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* .headerheight {
+  height: 200px;
+} */
 </style>

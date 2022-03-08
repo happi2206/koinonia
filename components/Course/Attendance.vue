@@ -5,7 +5,7 @@
         <span class="iconify" data-icon="system-uicons:graph-bar"></span>
       </template>
       <template #besideFilterButton>
-        <div class="ml-md-5">
+        <div class="ml-lg-5">
           <button
             class="btn py-2 mainbtndashboard medbrownparagraph text"
             v-b-modal.addEvent
@@ -120,7 +120,7 @@
           </template>
 
           <template #Progress="{ data }">
-            <b-progress class="mt-2" :max="data.item.total_number_of_students">
+            <b-progress class="mt-2" :max="10">
               <b-progress-bar
                 :value="data.item.no_of_students_present"
                 variant="success"

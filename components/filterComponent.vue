@@ -1,12 +1,21 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex align-items-center justify-content-between">
+      <div
+        class="
+          d-flex
+          flex-lg-row flex-column
+          align-items-lg-center
+          justify-content-between
+          flex-wrap
+        "
+      >
         <div
           class="
             d-flex
+            my-2
             align-items-center
-            justify-content-between justify-content-md-start
+            justify-content-between justify-content-lg-start
             firstwidth
           "
         >
@@ -53,14 +62,15 @@
         <div
           class="
             d-flex
-            align-items-md-center
-            justify-content-md-end
-            flex-md-row flex-column
+            my-2
+            align-items-lg-center
+            justify-content-lg-end
+            flex-lg-row flex-column
             secondwidth
-            mb-1 mb-md-0
+            mb-1 mb-lg-0
           "
         >
-          <div class="flex width100 my-md-0 my-3">
+          <div class="flex width100 my-lg-0 my-3">
             <input
               type="text"
               required
@@ -96,7 +106,7 @@
               </div>
             </div>
           </div>
-
+          <slot name="importButton"></slot>
           <slot name="uploadButton"></slot>
         </div>
       </div>
@@ -173,21 +183,21 @@ export default Vue.extend({
   fill: #1070b7;
 }
 
-.firstwidth {
+/* .firstwidth {
   width: 30%;
-}
+} */
 /* .secondwidth {
   width: 70%;
 } */
 
-@media (max-width: 900.5px) {
+/* @media (max-width: 900.5px) {
   .firstwidth {
     width: 20%;
   }
   .secondwidth {
     width: 80%;
   }
-}
+} */
 @media (max-width: 900.5px) {
   .firstwidth {
     width: 100%;

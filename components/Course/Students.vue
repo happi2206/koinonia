@@ -3,9 +3,9 @@
     <preloader :show="add_preloader" />
     <filter-component @search="SearchText" @view-by="sortStudents">
       <template #besideFilterButton>
-        <div class="">
+        <div class="d-flex flex-wrap">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph ml-md-3"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-lg-3"
             v-b-modal.addStudent
           >
             Add Student
@@ -325,10 +325,13 @@ export default {
           })
         }
       }
-
+      this.add_preloader = true
       try {
         await this.$axios.$post(`course-v/add-bulk-students-updates`, new_array)
         this.$toast.success('update successful')
+
+        this.add_preloader = false
+        this.get_all_course_students()
       } catch (e) {
         console.log(e)
       }
@@ -372,10 +375,9 @@ export default {
           `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.id}`,
           new_array
         )
-
-        this.add_preloader = false
-
         this.$toast.success('Students added Successfully')
+        this.get_all_course_students()
+        this.add_preloader = false
       } catch (e) {
         console.log(e)
       }

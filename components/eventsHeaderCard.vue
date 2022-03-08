@@ -101,13 +101,13 @@
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
 
-          <template #exportButton>
+          <!-- <template #exportButton>
             <downloadexcel :fetch="exportData">
               <button class="accentcolorbg button-height py-2 px-3 ml-3">
                 <span class="iconify" data-icon="entypo:export"></span>
               </button>
             </downloadexcel>
-          </template>
+          </template> -->
 
           <template #importButton>
             <input
@@ -130,7 +130,7 @@
             </button>
           </template>
 
-          <template #uploadButton>
+          <!-- <template #uploadButton>
             <input
               @change="recieveUpdate"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
@@ -149,7 +149,7 @@
                 data-height="16"
               ></span>
             </button>
-            <!-- <button
+            <button
               class="
                 btn
                 ml-5
@@ -161,8 +161,8 @@
               @click="recieveUpdate"
             >
               <span class="iconify" data-icon="charm:upload"></span>
-            </button> -->
-          </template>
+            </button>
+          </template> -->
         </filter-component>
       </div>
     </div>
@@ -254,6 +254,60 @@ export default {
     }
   },
   methods: {
+    async importData(e) {
+      let file = e.target.files[0]
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLS.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLS.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+      console.log(students)
+
+      let new_array = []
+      for (const iterator of students) {
+        if (iterator.check_in !== 'nill') {
+          const toIso = new Date(iterator.check_in).toISOString()
+
+          console.log(toIso)
+
+          new_array.push({
+            check_in: toIso,
+            status: iterator['status'],
+            by: iterator['by'],
+            device_type: iterator['device_type'],
+            registration_number: iterator['registration_number'],
+          })
+        }
+      }
+
+      console.log(new_array)
+
+      this.addPreloader = true
+
+      try {
+        await this.$axios.$patch(
+          `course-v/import-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          new_array
+        )
+        this.$toast.success('Students added Successfully')
+        this.addPreloader = false
+        this.$fetch()
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
     async recieveUpdate() {
       try {
         const response = await this.$axios.$get(
