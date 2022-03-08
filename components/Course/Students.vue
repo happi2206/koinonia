@@ -316,14 +316,18 @@ export default {
       this.$bvModal.hide('uploadModal')
       this.add_preloader = true
 
-      await this.$axios.$post(
-        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.id}`,
-        new_array
-      )
+      try {
+        await this.$axios.$post(
+          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.id}`,
+          new_array
+        )
 
-      this.add_preloader = false
+        this.add_preloader = false
 
-      this.$toast.success('Students added Successfully')
+        this.$toast.success('Students added Successfully')
+      } catch (e) {
+        console.log(e)
+      }
     },
 
     async createStudent() {
