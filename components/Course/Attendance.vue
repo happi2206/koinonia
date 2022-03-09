@@ -1,5 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
+    <preloader :show="addPreloader" />
     <filter-component @search="SearchText" @view-by="sortEvents">
       <template #graphicon>
         <span class="iconify" data-icon="system-uicons:graph-bar"></span>
@@ -108,6 +109,7 @@
           :fields="fields"
           :dropdownItem="dropdownItem"
           @Download_QR_Code="printQr"
+          @Download_Excel="downloadExcel"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -149,6 +151,8 @@
         :eventData="qrEvent"
       ></QRGenerator>
     </div>
+
+    <downloadexcel :fetch="downloadExcel">&nbsp;</downloadexcel>
 
     <b-modal id="editEvent" centered title="Edit Event" hide-footer>
       <preloader :show="is_creating" />
@@ -234,7 +238,11 @@
 </template>
 
 <script>
+import downloadexcel from 'vue-json-excel'
 export default {
+  components: {
+    downloadexcel,
+  },
   props: {
     events: {
       type: Array,
@@ -242,6 +250,7 @@ export default {
   },
   data() {
     return {
+      addPreloader: false,
       event: {
         name: '',
         description: '',
@@ -250,7 +259,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: ['Download_QR_Code', 'Edit'],
+      dropdownItem: ['Download_QR_Code', 'Download_Excel', 'Edit'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
@@ -307,15 +316,35 @@ export default {
       }
     },
 
+    async downloadExcel(e) {
+      this.addPreloader = true
+      console.log(e)
+      return
+      this.addPreloader = true
+      try {
+        const response = await this.$axios.$get(
+          `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          this.studentArray
+        )
+        console.log(response)
+        return response
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.addPreloader = false
+      }
+    },
+
     printQr(e) {
       console.log(e)
       this.qrEvent = e
       this.eventId = e.id
-      // this.openComponent = true
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
-      // this.$refs.qcode.html2Pdf.generatePdf()
-      //console.log('object')
     },
+
+    // downloadExcel(e) {
+    //   console.log(e)
+    // },
 
     handleEdit(e) {
       this.$bvModal.show('editEvent')

@@ -23,34 +23,27 @@
             <!-- <h3>CLASS OF 2022</h3> -->
 
             <h3 class="text-uppercase pt-4">{{ eventData.name }}</h3>
-
-            <!-- <div class="d-flex justify-content-center mx-5 px-5 my-3">
-              <h4 class="text-center">
-                {{ eventData.start_date | DateTimeFormat }}
-              </h4>
-            </div> -->
-            <!-- place-holderimage -->
-            <figure
-              class="d-flex justify-content-center align-items-center my-5"
-            >
-              <VueQRCodeComponent
-                :text="`${location}/checkIn/course/${courseId}/event/${eventId}`"
-              ></VueQRCodeComponent>
-            </figure>
+            <div>
+              <figure
+                class="d-flex justify-content-center align-items-center mb-3"
+              >
+                <img :src="waterMark" class="watermark" alt="" />
+              </figure>
+            </div>
             <h3 class="mb-3">SCAN TO CHECK IN</h3>
-            <div class="container ml-8">
+            <div class="container">
               <ol style="margin-left: 4rem">
-                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
+                <li style="font-size: 1rem; font-weight: 600">
                   1. Open your phone camera and point at the picture.
                 </li>
                 <li
                   class="d-flex align-items-center"
-                  style="font-size: 1rem; font-weight: 600; padding: 1rem"
+                  style="font-size: 1rem; font-weight: 600"
                 >
                   2.&nbsp;
                   <span>
                     Once focused on the picture it will show
-                    <b><i>Koinonia</i></b> or a</span
+                    <b><i>ksom.slate.ng</i></b> or a</span
                   >
 
                   <div class="pt-3 mx-2">
@@ -59,15 +52,15 @@
 
                   icon.
                 </li>
-                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
+                <li style="font-size: 1rem; font-weight: 600">
                   3. Tap on the name or the icon to open the attendance web
                   page.
                 </li>
-                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
+                <li style="font-size: 1rem; font-weight: 600">
                   4. Fill in your Surname and your 3 digit Registration Number
                   on the spaces provided.
                 </li>
-                <li style="font-size: 1rem; font-weight: 600; padding: 1rem">
+                <li style="font-size: 1rem; font-weight: 600">
                   5. Click on Check in button.
                 </li>
               </ol>
@@ -98,6 +91,8 @@ export default {
   data() {
     return {
       location: window.location.origin,
+      waterMark: '',
+      path: `${this.location}/checkIn/course/${this.courseId}/event/${this.eventId}`,
     }
   },
   props: {
@@ -120,9 +115,19 @@ export default {
     generateReport() {
       this.$refs.html2Pdf.generatePdf()
     },
+
+    async getWaterMark() {
+      try {
+        let response = await this.$axios.post(
+          `/course-v/generate-qrcode?qrcode_text=${this.location}`
+        )
+        this.waterMark = `data:image/jpeg;base64, ${response.data}`
+      } catch {}
+    },
   },
   mounted() {
     console.log('mounted qrcode')
+    this.getWaterMark()
   },
 
   components: {
@@ -194,5 +199,9 @@ h3 {
 ​ .icon {
   position: relative;
   top: 3px;
+}
+
+.watermark {
+  height: 34rem;
 }
 </style>

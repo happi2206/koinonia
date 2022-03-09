@@ -7,7 +7,7 @@
           <div class="card-header pt-4 pb-0">
             <div class="card-title">Create Exercise</div>
           </div>
-          <div class="card-body">
+          <div class="card-body d-flex">
             <div class="row mt-4">
               <div class="col-xl-6">
                 <div class="mb-2">
@@ -49,7 +49,7 @@
               <div class="col-12">
                 <hr />
               </div>
-              <div class="col-xl-6">
+              <div class="">
                 <div class="row">
                   <div class="col-md-6 mb-2">
                     <label class="form-control-label">Exercise Type</label>
@@ -67,36 +67,36 @@
                     <label class="form-control-label">Available Date</label>
                     <div class="input-group">
                       <input
-                        type="text"
-                        class="form-control border-right-0"
+                        type="date"
+                        class="form-control border-right"
                         placeholder="Available Date"
                       />
-                      <span class="input-group-text border-left-0 bg-white"
+                      <!-- <span class="input-group-text border-left-0 bg-white"
                         ><span
                           class="iconify"
                           data-inline="false"
                           data-icon="carbon:calendar"
                           style="font-size: 20px"
                         ></span
-                      ></span>
+                      ></span> -->
                     </div>
                   </div>
                   <div class="col-md-6 mb-2">
                     <label class="form-control-label">Due Date</label>
                     <div class="input-group">
                       <input
-                        type="text"
-                        class="form-control border-right-0"
+                        type="date"
+                        class="form-control border-right"
                         placeholder="Due Date"
                       />
-                      <span class="input-group-text border-left-0 bg-white"
+                      <!-- <span class="input-group-text border-left-0 bg-white"
                         ><span
                           class="iconify"
                           data-inline="false"
                           data-icon="carbon:calendar"
                           style="font-size: 20px"
                         ></span
-                      ></span>
+                      ></span> -->
                     </div>
                   </div>
                   <div class="col-md-6 mb-2">
@@ -121,6 +121,8 @@
                         accordion-header
                         target-icon
                         creation-accordion-header
+                        d-flex
+                        justify-content-between
                         px-3
                         py-3
                       "
@@ -172,7 +174,6 @@
                               fill="#51B8F4"
                             />
                           </svg>
-                          50%
                         </div>
                         <div class="material-type mr-4">Document / PDF</div>
                         <div class="line-height-0 mr-3">
@@ -998,7 +999,7 @@
                       </div>
                       <div class="d-flex align-items-center">
                         <div class="score mr-3">
-                          <svg
+                          <!-- <svg
                             width="20"
                             height="20"
                             viewBox="0 0 20 20"
@@ -1009,8 +1010,7 @@
                               d="M15.3569 11.5055C15.9872 11.6744 16.6458 11.2994 16.7076 10.6497C16.8186 9.48153 16.6378 8.29745 16.173 7.20657C15.5527 5.7512 14.4626 4.54569 13.0768 3.78266C11.691 3.01962 10.0894 2.74308 8.52789 2.99723C6.96642 3.25138 5.53518 4.02154 4.46285 5.18468C3.39052 6.34781 2.73897 7.83679 2.6123 9.41373C2.48563 10.9907 2.89115 12.5646 3.76407 13.884C4.63699 15.2033 5.92693 16.1921 7.42782 16.6922C8.5528 17.0671 9.74764 17.1513 10.903 16.9458C11.5455 16.8316 11.8658 16.1447 11.6464 15.5302C11.4269 14.9156 10.748 14.6117 10.0982 14.6718C9.45285 14.7314 8.79782 14.6577 8.17495 14.4501C7.17543 14.117 6.31638 13.4586 5.73505 12.5799C5.15373 11.7013 4.88367 10.6531 4.96803 9.60296C5.05238 8.55279 5.48629 7.56119 6.20041 6.78659C6.91454 6.012 7.86768 5.4991 8.90755 5.32985C9.94742 5.1606 11.014 5.34476 11.9369 5.85291C12.8598 6.36106 13.5858 7.16387 13.9988 8.13309C14.2562 8.73708 14.3828 9.38396 14.3757 10.032C14.3685 10.6846 14.7265 11.3366 15.3569 11.5055Z"
                               fill="#51B8F4"
                             />
-                          </svg>
-                          50%
+                          </svg> -->
                         </div>
                         <div class="material-type mr-4">Document / PDF</div>
                         <div class="line-height-0 mr-3">

@@ -144,7 +144,6 @@
 
 <script>
 import downloadexcel from 'vue-json-excel'
-// import JsonExcel from 'vue-json-excel'
 
 export default {
   props: {
