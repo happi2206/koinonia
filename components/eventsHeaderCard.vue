@@ -136,6 +136,69 @@
               ></span>
             </button>
           </template>
+
+          <!-- <template #exportButton>
+            <downloadexcel :fetch="exportData">
+              <button class="accentcolorbg button-height py-2 px-3 ml-3">
+                <span class="iconify" data-icon="entypo:export"></span>
+              </button>
+            </downloadexcel>
+          </template> -->
+
+          <!-- <template #importButton>
+            <input
+              @change="importData"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="accentcolorbg button-height py-2 px-3 ml-3"
+            >
+              <span
+                class="iconify"
+                data-icon="fa-solid:file-import"
+                data-width="16"
+                data-height="16"
+              ></span>
+            </button>
+          </template> -->
+
+          <template #uploadButton>
+            <input
+              @change="recieveUpdate"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="accentcolorbg button-height py-2 px-3 ml-3"
+            >
+              <span
+                class="iconify"
+                data-icon="fa-solid:file-import"
+                data-width="16"
+                data-height="16"
+              ></span>
+            </button>
+            <button
+              class="
+                btn
+                ml-5
+                px-md-4 px-3
+                py-2
+                mainbtndashboard
+                medbrownparagraph
+              "
+              @click="recieveUpdate"
+            >
+              <span class="iconify" data-icon="charm:upload"></span>
+            </button>
+          </template>
         </filter-component>
       </div>
     </div>

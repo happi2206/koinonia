@@ -1,27 +1,75 @@
 <template>
   <div v-observe-visibility="get_all_course_students">
+    <preloader :show="add_preloader" />
     <filter-component @search="SearchText" @view-by="sortStudents">
       <template #besideFilterButton>
-        <div class="">
+        <div class="d-flex flex-wrap">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-lg-3"
             v-b-modal.addStudent
           >
             Add Student
           </button>
-          <input
-            @change="uploadStudents"
-            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-            ref="uploadcsv"
-            type="file"
-            class="hidden"
-          />
           <button
-            @click.prevent="$refs.uploadcsv.click()"
             class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+            v-b-modal.uploadModal
           >
             Bulk Upload
           </button>
+
+          <input
+            @change="uploadPhone"
+            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+            ref="uploadcsvphone"
+            type="file"
+            class="hidden"
+          />
+
+          <button
+            @click.prevent="$refs.uploadcsvphone.click()"
+            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+          >
+            Upload Phone
+          </button>
+
+          <b-modal id="uploadModal" centered title="Bulk upload" hide-footer>
+            <div>
+              <p class="text-secondary">
+                Before you upload your files below, make sure your file is ready
+                to be imported
+              </p>
+            </div>
+
+            <div class="mt-3 underline">
+              <!-- <download-excel :data="json_data" name="bulkupload.xls">
+                <button class="btn">
+                  <p class="font-weight-bold">
+                    <u> Download sample spreadsheet </u>
+                  </p>
+                </button>
+              </download-excel> -->
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <div class="div">
+                <input
+                  @change="uploadStudents"
+                  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                  ref="uploadcsv"
+                  type="file"
+                  class="hidden"
+                />
+
+                <button
+                  @click.prevent="$refs.uploadcsv.click()"
+                  class="btn py-2 mainbtndashboard medbrownparagraph"
+                >
+                  Bulk Upload
+                </button>
+              </div>
+            </div>
+          </b-modal>
+
           <b-modal id="addStudent" title="Create Student" centered hide-footer>
             <form class="modabody p-4" @submit.prevent="createStudent">
               <div>
@@ -146,6 +194,7 @@
 
 <script>
 import { json2csv, csv2json } from 'json-2-csv'
+import JsonExcel from 'vue-json-excel'
 var csv = require('csvtojson')
 export default {
   data() {
@@ -159,6 +208,28 @@ export default {
         'Edit',
       ],
 
+      json_data: [
+        {
+          name: 'Tony Peña',
+          city: 'New York',
+          country: 'United States',
+          birthdate: '1978-03-15',
+          phone: {
+            mobile: '1-541-754-3010',
+            landline: '(541) 754-3010',
+          },
+        },
+        {
+          name: 'Thessaloniki',
+          city: 'Athens',
+          country: 'Greece',
+          birthdate: '1987-11-23',
+          phone: {
+            mobile: '+1 855 275 5071',
+            landline: '(2741) 2621-244',
+          },
+        },
+      ],
       // {
       //   "surname": "string",
       //   "other_name": "string",
@@ -205,7 +276,7 @@ export default {
         { key: 'firstname', label: 'First name', sortable: true },
         { key: 'surname', sortable: true },
         { key: 'registration_number', sortable: true },
-        { key: 'email', sortable: true },
+        // { key: 'email', sortable: true },
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
         { key: 'phone', sortable: true },
@@ -215,13 +286,55 @@ export default {
       perPage: 30,
       totalItems: 0,
       currentPage: 1,
+      add_preloader: false,
     }
   },
 
   methods: {
+    downloadSample() {},
     sortStudents(e) {
       this.perPage = e
       this.get_all_course_students()
+    },
+
+    async uploadPhone(e) {
+      let file = e.target.files[0]
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLSX.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLSX.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+      let new_array = []
+      for (const iterator of students) {
+        if (iterator['Phone']) {
+          new_array.push({
+            phone: iterator['Phone'],
+            registration_number: iterator['Registration Number'],
+            email: iterator['Email'],
+          })
+        }
+      }
+      this.add_preloader = true
+      try {
+        await this.$axios.$post(`course-v/add-bulk-students-updates`, new_array)
+        this.$toast.success('update successful')
+
+        this.add_preloader = false
+        this.get_all_course_students()
+      } catch (e) {
+        console.log(e)
+      }
     },
     async uploadStudents(e) {
       let file = e.target.files[0]
@@ -254,13 +367,61 @@ export default {
         })
       }
       console.log(new_array)
+      this.$bvModal.hide('uploadModal')
+      this.add_preloader = true
 
-      await this.$axios.$post(
-        `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.id}`,
-        new_array
-      )
+      try {
+        await this.$axios.$post(
+          `course-v/add-flat-students-to-a-course?course_id=${this.$route.params.id}`,
+          new_array
+        )
+        this.$toast.success('Students added Successfully')
+        this.get_all_course_students()
+        this.add_preloader = false
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    // async uploadPhone(e) {
+    //   let file = e.target.files[0]
+    //   let students = await new Promise((resolve) => {
+    //     if (file) {
+    //       let fileReader = new FileReader()
+    //       fileReader.readAsBinaryString(file)
+    //       fileReader.onload = (event) => {
+    //         let data = event.target.result
+    //         let workbook = XLSX.read(data, { type: 'binary' })
+    //         workbook.SheetNames.forEach((sheet) => {
+    //           let rowobject = XLSX.utils.sheet_to_row_object_array(
+    //             workbook.Sheets[sheet]
+    //           )
+    //           resolve(rowobject)
+    //         })
+    //       }
+    //     }
+    //   })
 
-      this.$toast.success('Students added Successfully')
+    //   let new_array = []
+    //   for (const iterator of students) {
+    //     if (iterator['Phone']) {
+    //       new_array.push({
+    //         phone: iterator['Phone'],
+    //         registration_number: iterator['Registration Number'],
+    //       })
+    //     }
+    //   }
+
+    //   await this.$axios.$post(
+    //     `course-v/add-phone-numbers-to-a-course?course_id=${this.$route.params.course}`,
+    //     new_array
+    //   )
+
+    //   this.$toast.success('Students added Successfully')
+    // },
+
+    sortStudents(e) {
+      this.perPage = e
+      this.get_all_course_students()
     },
 
     async createStudent() {

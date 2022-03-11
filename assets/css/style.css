@@ -776,6 +776,11 @@ th {
   text-align: left;
 }
 
+.customsizing {
+  height: 200px;
+  object-fit: cover;
+}
+
 .brown20 {
   font-family: 'Ancona-Ex';
   font-size: 20px;
@@ -1264,6 +1269,12 @@ th {
 .custom-tabs {
   border-bottom: 0.2px solid #828282;
   width: 100%;
+  flex-wrap: nowrap !important;
+}
+
+.custom-tabs .nav {
+  flex-wrap: nowrap !important;
+  overflow-x: scroll;
 }
 
 .custom-tabs .nav-tabs .nav-link {
@@ -1377,6 +1388,9 @@ th {
   }
 }
 @media (max-width: 768.5px) {
+  .customsizing {
+    height: 200px;
+  }
   .flwidth {
     width: 100%;
   }
@@ -1495,6 +1509,11 @@ th {
   .custom-tabs .nav-link.active {
     font-size: 10px;
     line-height: 17px;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .custom-tabs .nav {
+    justify-content: space-between !important;
   }
 
   .arialheader,

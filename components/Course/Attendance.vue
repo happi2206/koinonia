@@ -5,7 +5,7 @@
         <span class="iconify" data-icon="system-uicons:graph-bar"></span>
       </template>
       <template #besideFilterButton>
-        <div class="ml-md-5">
+        <div class="ml-lg-5">
           <button
             class="btn py-2 mainbtndashboard medbrownparagraph text"
             v-b-modal.addEvent
