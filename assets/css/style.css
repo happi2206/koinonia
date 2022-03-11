@@ -1274,7 +1274,7 @@ th {
 
 .custom-tabs .nav {
   flex-wrap: nowrap !important;
-  overflow-x: scroll;
+  overflow: hidden;
 }
 
 .custom-tabs .nav-tabs .nav-link {

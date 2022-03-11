@@ -1,176 +1,230 @@
 <template>
-  <div>
-    <!-- ****************************************************************************************** -->
+  <div v-observe-visibility="getAllAssignments">
     <preloader :show="addPreloader" />
-    <div class="site-container">
-      <div class="conatiner">
-        <div class="m-4">
-          <a
-            href="#"
-            @click.prevent="$router.go(-1)"
-            class="brownparagraph bold700 mainbluecolor"
-          >
-            <b-icon icon="arrow-left"></b-icon>
-            Courses
-          </a>
+    <filter-component
+      @search="SearchText"
+      @view-by="sortInstructors"
+      v-show="open"
+    >
+      <template #besideFilterButton>
+        <div class="ml-md-5" @click="openForm">
+          <button class="btn mainbtndashboard medbrownparagraph">
+            Add Assignment
+          </button>
         </div>
+      </template>
 
-        <div class="card bg-white mb-3">
-          <div class="card-header pt-5 pb-0">
-            <div class="card-title">Create Exercise</div>
-          </div>
-          <div class="card-body ml-6 d-flex">
-            <form>
-              <div class="row mt-4">
-                <div class="col-xl-6">
-                  <div class="mb-2">
-                    <label class="form-control-label">Exercise Name</label>
-                    <input
-                      v-model="name"
-                      class="form-control"
-                      placeholder="Enter Name"
-                    />
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-control-label"
-                      >Exercise Instruction</label
-                    >
-                    <textarea
-                      v-model="instruction"
-                      class="form-control"
-                      placeholder="Instruction"
-                    ></textarea>
-                    <!-- <small class="text-dark"
+      <!-- <template #default="{ visualization }">
+        <table-component
+          :items="assignments"
+          :fields="assignmentFields"
+          @row-clicked="onRowClicked"
+          v-if="visualization === 'list'"
+        />
+
+        <div class="row" v-else>
+          <student-instructors-grid
+            :data="instructors"
+            v-for="(instructor, index) in course_instructors"
+            :key="index"
+          ></student-instructors-grid>
+        </div>
+      </template> -->
+
+      <table-component
+        :items="assignments"
+        :fields="assignmentFields"
+        @row-clicked="onRowClicked"
+      >
+        <template #delete>
+          <span
+            class="iconify"
+            data-icon="gridicons:trash"
+            data-width="16"
+            data-height="16"
+          ></span>
+        </template>
+      </table-component>
+    </filter-component>
+
+    <div v-show="showForm">
+      <div>
+        <!-- ****************************************************************************************** -->
+
+        <div class="site-container">
+          <div class="conatiner">
+            <div class="m-3" @click="closeForm">
+              <button class="btn mainbtndashboard medbrownparagraph">
+                Back to assignments
+              </button>
+            </div>
+
+            <div class="card bg-white mb-3">
+              <div class="card-header pt-5 pb-0">
+                <div class="card-title">Create Exercise</div>
+              </div>
+              <div class="card-body ml-6 d-flex">
+                <form>
+                  <div class="row mt-4">
+                    <div class="col-xl-6">
+                      <div class="mb-2">
+                        <label class="form-control-label"
+                          >Exercise Name (Required)</label
+                        >
+                        <input
+                          v-model="name"
+                          class="form-control"
+                          placeholder="Enter Name"
+                          required
+                        />
+                      </div>
+                      <div class="mb-2">
+                        <label class="form-control-label"
+                          >Exercise Instruction (Required)</label
+                        >
+                        <textarea
+                          v-model="instruction"
+                          class="form-control"
+                          placeholder="Instruction"
+                          required
+                        ></textarea>
+                        <!-- <small class="text-dark"
                       >Let students know a little about the lesson in 500
                       characters or less.</small
                     > -->
-                  </div>
-                </div>
-                <div class="col-12">
-                  <hr />
-                </div>
-                <div class="">
-                  <div class="row">
-                    <div class="col-md-6 mb-2">
-                      <label class="form-control-label">Exercise Type</label>
-                      <select
-                        class="form-control w-100"
-                        aria-placeholder="Select excercise type"
-                        v-model="type"
-                      >
-                        <option value=""></option>
-                        <option>Essay</option>
-                        <option>Offline</option>
-                      </select>
-                    </div>
-
-                    <div class="col-md-6 mb-2">
-                      <label class="form-control-label">Available Date</label>
-                      <div class="input-group">
-                        <input
-                          type="date"
-                          v-model="available_date"
-                          class="form-control border-right"
-                          placeholder="Available Date"
-                        />
                       </div>
                     </div>
-                    <div class="col-md-6 mb-2">
-                      <label class="form-control-label">Obtainable Score</label>
-                      <input
-                        v-model="obtainable_score"
-                        type="number"
-                        class="form-control border-right"
-                        placeholder="eg 100"
-                      />
+                    <div class="col-12">
+                      <hr />
                     </div>
-                    <div class="col-md-6 mb-2">
-                      <label class="form-control-label">Due Date</label>
-                      <div class="input-group">
+                    <div class="">
+                      <div class="row w-100" style="min-width: 800px">
+                        <div class="col-6 mb-2">
+                          <label class="form-control-label"
+                            >Exercise Type (Required)</label
+                          >
+                          <select
+                            class="form-control"
+                            aria-placeholder="Select excercise type"
+                            v-model="type"
+                            required
+                          >
+                            <option value=""></option>
+                            <option value="essay">Essay</option>
+                            <option value="offline">Offline</option>
+                          </select>
+                        </div>
+                        <div class="col-6 mb-2">
+                          <label class="form-control-label"
+                            >Obtainable Score (Required)</label
+                          >
+                          <input
+                            v-model="obtainable_score"
+                            type="number"
+                            class="form-control border-right"
+                            placeholder="eg 100"
+                            required
+                          />
+                        </div>
+                        <div class="col-md-6 mb-2" v-if="dateHandle">
+                          <label class="form-control-label"
+                            >Available Date</label
+                          >
+                          <div class="input-group">
+                            <input
+                              type="date"
+                              v-model="available_date"
+                              class="form-control border-right"
+                              placeholder="Available Date"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-2" v-if="dateHandle">
+                          <label class="form-control-label">Due Date</label>
+                          <div class="input-group">
+                            <input
+                              v-model="due_date"
+                              type="date"
+                              class="form-control border-right"
+                              placeholder="Due Date"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <hr />
+                      <div class="my-4">
+                        <p>Upload Essay Sample (Required)</p>
+
                         <input
-                          v-model="due_date"
-                          type="date"
-                          class="form-control border-right"
-                          placeholder="Due Date"
+                          type="file"
+                          accept=".pptx,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*, .pdf"
+                          class="invisible"
+                          ref="uploadfile"
+                          @change="handleFileUpload($event)"
+                          required
                         />
+
+                        <div
+                          class="
+                            file-type-display
+                            w-25
+                            py-3
+                            px-3
+                            text-center
+                            bg-white
+                          "
+                          @click.prevent="$refs.uploadfile.click()"
+                        >
+                          <span>Click to Upload</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-12">
-                  <hr />
-                  <div class="my-4">
-                    <p>
-                      Upload Essay Sample
-                      <span class="text-grey">(Optional)</span>
-                    </p>
-
-                    <input
-                      type="file"
-                      accept=".pptx,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*, .pdf"
-                      class="invisible"
-                      ref="uploadfile"
-                      @change="handleFileUpload($event)"
-                      required
-                    />
-
-                    <div
-                      class="
-                        file-type-display
-                        w-25
-                        py-3
-                        px-3
-                        text-center
-                        bg-white
-                      "
-                      @click.prevent="$refs.uploadfile.click()"
-                    >
-                      <span>Click to Upload</span>
-                    </div>
-                  </div>
-
                   <b-dropdown
                     text="Save"
                     size="lg"
                     class="m-4 fmbt"
                     variant="warning"
                   >
-                    <b-dropdown-item-button @click.prevent="submitAssignment"
-                      >Publish</b-dropdown-item-button
-                    >
+                    <b-dropdown-item-button @click="submitAssignment">
+                      Publish
+                    </b-dropdown-item-button>
                   </b-dropdown>
-                </div>
+                  <!-- <button>Publish</button> -->
+                </form>
               </div>
-            </form>
-          </div>
 
-          <div
-            class="filters-container filter-wrapper d-none"
-            id="filters-container"
-          >
-            <div
-              class="filter-closer"
-              data-toggle-visibility="#filters-container"
-            >
-              <span
-                class="iconify"
-                data-inline="false"
-                data-icon="eva:close-outline"
-              ></span>
-            </div>
+              <div
+                class="filters-container filter-wrapper d-none"
+                id="filters-container"
+              >
+                <div
+                  class="filter-closer"
+                  data-toggle-visibility="#filters-container"
+                >
+                  <span
+                    class="iconify"
+                    data-inline="false"
+                    data-icon="eva:close-outline"
+                  ></span>
+                </div>
 
-            <div class="filters-container-content">
-              <div class="search-input mb-2">
-                <span
-                  class="iconify icon"
-                  data-inline="false"
-                  data-icon="carbon:search"
-                ></span>
-                <input
-                  type="text"
-                  class="form-control w-100"
-                  placeholder="Search for class"
-                />
+                <div class="filters-container-content">
+                  <div class="search-input mb-2">
+                    <span
+                      class="iconify icon"
+                      data-inline="false"
+                      data-icon="carbon:search"
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control w-100"
+                      placeholder="Search for class"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -182,68 +236,126 @@
 
 <script>
 export default {
-  layout: 'dashboard',
   data() {
     return {
+      assignmentFields: [
+        { key: 'name', sortable: true },
+        { key: 'instruction', sortable: true },
+        { key: 'obtainable_score', sortable: true },
+        { key: 'status', sortable: true },
+        { key: 'type', sortable: true },
+        { key: 'action', sortable: false },
+        {
+          action:
+            '<span class="iconify" data-icon="gridicons:trash" data-width="16" data-height="16"></span>',
+          sortable: false,
+        },
+      ],
+      open: true,
+      dateHandle: false,
+      showForm: false,
+      assignments: [],
+
       addPreloader: false,
       file: null,
-      course_id: '621f8eaea716ba0ddc4b7ba0',
+      course_id: this.$route.params.id,
       name: '',
       instruction: '',
       type: '',
       available_date: '',
       due_date: '',
       obtainable_score: '',
-      status: 'Publish',
+      status: 'publish',
     }
   },
   methods: {
+    async getAllAssignments() {
+      try {
+        let response = await this.$axios.get(
+          `course-v/get-all-course-assignment?course_id=${this.$route.params.id}`
+        )
+        this.assignments = response.data
+        console.log(this.assignments)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    openForm() {
+      this.showForm = true
+      this.open = false
+    },
+    closeForm() {
+      this.showForm = false
+      this.open = true
+    },
+
+    showDate() {
+      if (this.type === 'offline') {
+        this.dateHandle = true
+      } else {
+        this.dateHandle = false
+      }
+    },
+
+    onRowClicked(e) {
+      console.log(e.id)
+      this.$router.push(`assignment/${this.$route.params.id}/${e.id}`)
+    },
+
     handleFileUpload(event) {
       this.file = event.target.files[0]
       console.log(this.file)
     },
 
     async submitAssignment() {
-      this.addPreloader = true
-      let attachedFile = new FormData()
-      attachedFile.append('file', this.file, this.file.name)
-      attachedFile.append('course_id', this.course_id)
-      attachedFile.append('name', this.name)
-      attachedFile.append('instruction', this.instruction)
-      attachedFile.append('type', this.type)
-      attachedFile.append('available_date', this.available_date)
-      attachedFile.append('due_date', this.due_date)
-      attachedFile.append('obtainable_score', this.obtainable_score)
-      attachedFile.append('status', this.status)
-
-      console.log(attachedFile.get('name'))
-      console.log(attachedFile.get('obtainable_score'))
-
       try {
-        console.log('YayS')
-        let response = await this.$axios.post(`course-v/add-assignment`, {
-          attachedFile,
-          // course_id: this.course_id,
-          // name: this.name,
-          // instruction: this.instruction,
-          // type: this.type,
-          // available_date: this.available_date,
-          // due_date: this.due_date,
-          // obtainable_score: this.obtainable_score,
-          // status: this.status,
-        })
+        this.addPreloader = true
+        let attachedFile = new FormData()
+        let start = this.available_date.toString()
+        let end = this.due_date.toString()
+        attachedFile.append('course_id', this.course_id)
+        attachedFile.append('name', this.name)
+        attachedFile.append('instruction', this.instruction)
+        attachedFile.append('type', this.type)
+        attachedFile.append('available_date', start)
+        attachedFile.append('due_date', end)
+        attachedFile.append('obtainable_score', this.obtainable_score)
+        attachedFile.append('status', this.status)
+        attachedFile.append('file', this.file, this.file.name)
+        console.log(attachedFile)
 
-        this.$toast.success(response.data)
-      } catch {
+        let response = await this.$axios.post(
+          `course-v/add-assignment`,
+          attachedFile,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        )
+
+        console.log(response.data.message)
+
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error('Assignment could not be created')
       } finally {
+        this.getAllAssignments()
         this.addPreloader = false
+        this.open = true
+        this.showForm = false
       }
+    },
+  },
+  watch: {
+    type(value) {
+      this.showDate()
     },
   },
 }
 </script>
 
-<style scoped>
+<style>
 .file-type-display {
   background: #ecf7ff;
   border: 2px dashed #ffc107;
