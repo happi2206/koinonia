@@ -1,5 +1,6 @@
 <template>
   <div>
+    <preloader :show="addPreloader" />
     <div v-if="isLoading">
       <b-row>
         <b-col cols="12" class="">
@@ -45,13 +46,13 @@
             <span class="lightgraytext"> No in class:</span>
             <span class=""> {{ present + absent }}</span>
           </p>
-          <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Present: {{ present }}</span>
-            <span class=""> </span>
+          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Student Present: </span>
+            <span class=""> {{ present }}</span>
           </p>
-          <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Absent: {{ absent }}</span>
-            <span class=""> </span>
+          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Student Absent:</span>
+            <span class=""> {{ absent }}</span>
           </p>
         </div>
       </div>
@@ -59,27 +60,34 @@
         <filter-component @search="SearchText" @view-by="sortStudents">
           <template #filterby>
             <div class="records-count medbrownparagraph">
-              <span class="medbrownparagraph">Sort by: </span>
+              <span class="medbrownparagraph">Check in type: </span>
               <select
                 class="records-count medbrownparagraph medbrownparagraph"
                 @change="sortBy($event.target.value)"
               >
                 <option class="medbrownparagraph" value="all">All</option>
-                <option class="medbrownparagraph" value="self">
-                  Self checked-in
-                </option>
-                <option class="medbrownparagraph" value="admin">
-                  Admin Checked-in
-                </option>
+                <option class="medbrownparagraph" value="self">Self</option>
+                <option class="medbrownparagraph" value="admin">Admin</option>
               </select>
-              <button  class="btn ml-5 px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph">Update All</button>
+              <!-- <pre>{{ is_Present }}</pre> -->
+              <select
+                class="records-count medbrownparagraph medbrownparagraph"
+                v-model="is_Present"
+              >
+                <option class="medbrownparagraph" value="">All</option>
+                <option class="medbrownparagraph" value="true">Present</option>
+                <option class="medbrownparagraph" value="false">Absent</option>
+              </select>
+              <!-- <button @click.prevent="exportAttendance"
+               class="btn ml-4 px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+              >Export CSV</button> -->
             </div>
           </template>
-
           <template #default="{ visualization }">
             <table-component
+              :paginate="true"
               :busy="busy"
-              :items="studentArray"
+              :items="itemsToShow"
               v-if="visualization === 'list'"
               :dropdownItem="dropdownItem"
               :fields="fields"
@@ -97,6 +105,36 @@
                 ></b-form-checkbox>
               </template>
             </table-component>
+            <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
+          </template>
+
+          <template #exportButton>
+            <downloadexcel :fetch="exportData">
+              <button class="accentcolorbg button-height py-2 px-3 ml-3">
+                <span class="iconify" data-icon="entypo:export"></span>
+              </button>
+            </downloadexcel>
+          </template>
+
+          <template #importButton>
+            <input
+              @change="importData"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              ref="uploadcsv"
+              type="file"
+              class="hidden"
+            />
+            <button
+              @click.prevent="$refs.uploadcsv.click()"
+              class="accentcolorbg button-height py-2 px-3 ml-3"
+            >
+              <span
+                class="iconify"
+                data-icon="fa-solid:file-import"
+                data-width="16"
+                data-height="16"
+              ></span>
+            </button>
           </template>
         </filter-component>
       </div>
@@ -105,6 +143,8 @@
 </template>
 
 <script>
+import downloadexcel from 'vue-json-excel'
+
 export default {
   props: {
     eventDetail: {
@@ -121,7 +161,10 @@ export default {
 
   data() {
     return {
+      addPreloader: false,
+      newData: [],
       busy: false,
+      newbusy: false,
       students: [],
       studentelement: [],
       studentsInCourse: {},
@@ -131,7 +174,8 @@ export default {
       dropdownItem: ['Edit Event', 'Delete Event'],
       fields: [
         // { key: 'id', sortable: true },
-        { key: 'student.firstname', label: 'First Name', sortable: true },
+        { key: 'student.other_name', label: 'First Name', sortable: true },
+
         { key: 'student.surname', label: 'Surname', sortable: true },
         {
           key: 'student.registration_number',
@@ -149,6 +193,7 @@ export default {
       totalItems: 0,
       currentPage: 1,
       check_in_method: '',
+      is_Present: '',
     }
   },
 
@@ -163,6 +208,14 @@ export default {
         uri = uri + `&check_in_method=${this.check_in_method}`
       }
 
+      if (this.is_Present) {
+        let currentBool = true
+        if (this.is_Present === 'false') {
+          currentBool = false
+        }
+        uri = uri + `&is_present=${currentBool}`
+      }
+
       if (this.search) {
         uri = uri + `&search=${this.search}`
       }
@@ -174,6 +227,7 @@ export default {
       this.absent = student.total_number_of_student - student.students_present
       this.isLoading = false
       this.studentArray = student.response.items
+      // this.newStuff = student.response.items
       this.totalItems = student.response.total
     } catch (e) {
       this.$toast.error(e)
@@ -182,13 +236,64 @@ export default {
     }
   },
   methods: {
+    async exportData() {
+      this.addPreloader = true
+      try {
+        const response = await this.$axios.$get(
+          `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          this.studentArray
+        )
+        console.log(response)
+        return response
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.addPreloader = false
+      }
+    },
+
+    async importData(e) {
+      let file = e.target.files[0]
+
+      let students = await new Promise((resolve) => {
+        if (file) {
+          let fileReader = new FileReader()
+
+          fileReader.readAsBinaryString(file)
+          fileReader.onload = (event) => {
+            let data = event.target.result
+            let workbook = XLS.read(data, { type: 'binary' })
+            workbook.SheetNames.forEach((sheet) => {
+              let rowobject = XLS.utils.sheet_to_row_object_array(
+                workbook.Sheets[sheet]
+              )
+              resolve(rowobject)
+            })
+          }
+        }
+      })
+      console.log(students)
+    },
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
         this.$fetch()
+      } else {
+        this.check_in_method = ''
+        this.$fetch()
       }
-      console.log(e)
+
+      this.$fetch()
     },
+    async exportAttendance() {
+      try {
+        let uri = `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
+        const results = await this.$axios.$get(uri)
+        console.log(results)
+      } catch (error) {}
+      // alert(e)
+    },
+
     async getChecked() {
       try {
         let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
@@ -230,15 +335,33 @@ export default {
       this.currentPage = 1
       this.$fetch()
     },
-    sortStudents(e) {
-      this.perPage = e
+  },
+  computed: {
+    itemsToShow() {
+      if (this.newData.length) {
+        return this.studentArray.concat(this.newData)
+      } else {
+        return this.studentArray
+      }
+    },
+  },
+
+  watch: {
+    is_Present(value) {
       this.$fetch()
     },
   },
-  computed: {},
+
+  components: {
+    downloadexcel,
+  },
 
   mounted() {},
 }
 </script>
 
-<style></style>
+<style scoped>
+.button-height {
+  height: 2.6rem;
+}
+</style>
