@@ -2,7 +2,6 @@
   <div>
     <div class="py-3 px-md-5 px-3">
       <h2 class="brown24 my-1 graytext">Description</h2>
-      <pre>Hey</pre>
       <div
         class="brownparagraph darktext"
         v-html="courseDetail.long_description"
