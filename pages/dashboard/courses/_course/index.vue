@@ -51,9 +51,6 @@
             <b-tab title="Attendance">
               <CourseAttendance />
             </b-tab>
-            <!-- <b-tab title="Assignment1">
-              <CourseAssignment1 />
-            </b-tab> -->
             <b-tab title="Assignment">
               <CourseAssignment />
             </b-tab>
