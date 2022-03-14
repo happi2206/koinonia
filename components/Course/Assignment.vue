@@ -61,7 +61,7 @@
 
             <div class="card bg-white mb-3">
               <div class="card-header pt-5 pb-0">
-                <div class="card-title">Create Exercise</div>
+                <div class="card-title"><h3>Create Exercise</h3></div>
               </div>
               <div class="card-body ml-6 d-flex">
                 <form>

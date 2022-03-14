@@ -87,14 +87,12 @@
             <b-tab title="Attachments">
               <div class="pt-4 px-3 pb-5">
                 <p>Offline Sample</p>
-                <span>
-                  <span>
-                    Click below to access file &nbsp;
-                    <span
-                      class="iconify"
-                      data-icon="bi:arrow-down-circle-fill"
-                    ></span>
-                  </span>
+                <span class="d-flex align-items-center mb-2">
+                  Click below to access file &nbsp;
+                  <span
+                    class="iconify"
+                    data-icon="bi:arrow-down-circle-fill"
+                  ></span>
                 </span>
 
                 <div class="d-flex">
@@ -248,7 +246,7 @@
               mainbtndashboard
               medbrownparagraph
             "
-            @click.prevent="deletAssignment"
+            @click.prevent="deleteAssignment"
           >
             Yes
           </button>
@@ -268,6 +266,7 @@
 <script>
 export default {
   layout: 'dashboard',
+  scrollToTop: true,
   data() {
     return {
       file_path: '',
@@ -369,11 +368,13 @@ export default {
 
     async deleteAssignment() {
       try {
-        await this.$axios.delete(
+        let response = await this.$axios.delete(
           `course-v/delete-assignment?assignment_id=${this.$route.params.eventclicked}`
         )
 
         this.$toast.success(response.data.message)
+        this.$refs['deletePromptModal'].hide()
+        history.back()
       } catch (error) {
         this.$toast.error(error)
       }
