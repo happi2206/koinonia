@@ -54,6 +54,9 @@
             <b-tab title="Assignment" class="">
               <CourseAssignment />
             </b-tab>
+            <b-tab title="Resources" class="">
+              <CourseResources />
+            </b-tab>
           </b-tabs>
         </div>
       </div>

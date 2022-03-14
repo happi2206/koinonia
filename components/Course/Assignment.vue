@@ -69,7 +69,8 @@
                     <div class="col-xl-6">
                       <div class="mb-2">
                         <label class="form-control-label"
-                          >Exercise Name (Required)</label
+                          >Exercise Name
+                          <span class="font10 small">(Required)</span></label
                         >
                         <input
                           v-model="name"
@@ -80,7 +81,8 @@
                       </div>
                       <div class="mb-2">
                         <label class="form-control-label"
-                          >Exercise Instruction (Required)</label
+                          >Exercise Instruction
+                          <span class="font10 small">(Required)</span></label
                         >
                         <textarea
                           v-model="instruction"
@@ -101,7 +103,8 @@
                       <div class="row w-100" style="min-width: 800px">
                         <div class="col-6 mb-2">
                           <label class="form-control-label"
-                            >Exercise Type (Required)</label
+                            >Exercise Type
+                            <span class="font10 small">(Required)</span></label
                           >
                           <select
                             class="form-control"
@@ -116,7 +119,8 @@
                         </div>
                         <div class="col-6 mb-2">
                           <label class="form-control-label"
-                            >Obtainable Score (Required)</label
+                            >Obtainable Score
+                            <span class="small">(Required)</span></label
                           >
                           <input
                             v-model="obtainable_score"
@@ -155,7 +159,12 @@
                     <div class="col-12">
                       <hr />
                       <div class="my-4">
-                        <p>Upload Essay Sample (Required)</p>
+                        <p>
+                          Upload Essay Sample
+                          <span
+                            ><span class="font10 small">(Required)</span></span
+                          >
+                        </p>
 
                         <input
                           type="file"
@@ -179,6 +188,9 @@
                         >
                           <span>Click to Upload</span>
                         </div>
+                        <p class="text-grey font10">
+                          Formats: PPT, DOC, PDF, JPEG
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -192,39 +204,7 @@
                       Publish
                     </b-dropdown-item-button>
                   </b-dropdown>
-                  <!-- <button>Publish</button> -->
                 </form>
-              </div>
-
-              <div
-                class="filters-container filter-wrapper d-none"
-                id="filters-container"
-              >
-                <div
-                  class="filter-closer"
-                  data-toggle-visibility="#filters-container"
-                >
-                  <span
-                    class="iconify"
-                    data-inline="false"
-                    data-icon="eva:close-outline"
-                  ></span>
-                </div>
-
-                <div class="filters-container-content">
-                  <div class="search-input mb-2">
-                    <span
-                      class="iconify icon"
-                      data-inline="false"
-                      data-icon="carbon:search"
-                    ></span>
-                    <input
-                      type="text"
-                      class="form-control w-100"
-                      placeholder="Search for class"
-                    />
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -244,12 +224,6 @@ export default {
         { key: 'obtainable_score', sortable: true },
         { key: 'status', sortable: true },
         { key: 'type', sortable: true },
-        { key: 'action', sortable: false },
-        {
-          action:
-            '<span class="iconify" data-icon="gridicons:trash" data-width="16" data-height="16"></span>',
-          sortable: false,
-        },
       ],
       open: true,
       dateHandle: false,
@@ -275,7 +249,7 @@ export default {
           `course-v/get-all-course-assignment?course_id=${this.$route.params.id}`
         )
         this.assignments = response.data
-        console.log(this.assignments)
+        // console.log(this.assignments)
       } catch (error) {
         console.log(error)
       }
@@ -298,27 +272,44 @@ export default {
     },
 
     onRowClicked(e) {
-      console.log(e.id)
       this.$router.push(`assignment/${this.$route.params.id}/${e.id}`)
     },
 
     handleFileUpload(event) {
       this.file = event.target.files[0]
-      console.log(this.file)
     },
 
     async submitAssignment() {
       try {
         this.addPreloader = true
         let attachedFile = new FormData()
-        let start = this.available_date.toString()
-        let end = this.due_date.toString()
+        let isoFirstDate
+        let isoSecondDate
+
+        if (this.available_date !== '') {
+          let start = this.available_date
+          let dateStr = start
+          let date = new Date(dateStr)
+          isoFirstDate = date.toISOString()
+        } else {
+          isoFirstDate = ''
+        }
+
+        if (this.due_date !== '') {
+          let end = this.due_date
+          let dateString = end
+          let secondDate = new Date(dateString)
+          isoSecondDate = secondDate.toISOString()
+        } else {
+          isoSecondDate = ''
+        }
+
         attachedFile.append('course_id', this.course_id)
         attachedFile.append('name', this.name)
         attachedFile.append('instruction', this.instruction)
         attachedFile.append('type', this.type)
-        attachedFile.append('available_date', start)
-        attachedFile.append('due_date', end)
+        attachedFile.append('available_date', isoFirstDate)
+        attachedFile.append('due_date', isoSecondDate)
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
         attachedFile.append('file', this.file, this.file.name)

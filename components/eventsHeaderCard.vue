@@ -137,6 +137,8 @@
             </button>
           </template>
 
+          <!-- ************************************************************** -->
+
           <!-- <template #exportButton>
             <downloadexcel :fetch="exportData">
               <button class="accentcolorbg button-height py-2 px-3 ml-3">
@@ -166,7 +168,7 @@
             </button>
           </template> -->
 
-          <template #uploadButton>
+          <!-- <template #uploadButton>
             <input
               @change="recieveUpdate"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
@@ -198,7 +200,9 @@
             >
               <span class="iconify" data-icon="charm:upload"></span>
             </button>
-          </template>
+          </template> -->
+
+          <!-- ************************************************************************************* -->
         </filter-component>
       </div>
     </div>

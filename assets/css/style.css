@@ -1260,6 +1260,9 @@ th {
   background-color: #f5f6fa !important;
 }
 
+.table td{
+  cursor: pointer;
+}
 .whitelogocontainer {
   box-shadow: 0px 4px 10px 0px #00000014;
   background-color: #fff;
