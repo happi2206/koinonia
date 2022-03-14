@@ -46,11 +46,11 @@
             <span class="lightgraytext"> No in class:</span>
             <span class=""> {{ present + absent }}</span>
           </p>
-          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <p  class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Student Present: </span>
             <span class=""> {{ present }}</span>
           </p>
-          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+          <p  class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Student Absent:</span>
             <span class=""> {{ absent }}</span>
           </p>
@@ -241,7 +241,7 @@ export default {
       dropdownItem: ['Edit Event', 'Delete Event'],
       fields: [
         // { key: 'id', sortable: true },
-        { key: 'student.other_name', label: 'First Name', sortable: true },
+        { key: 'student.firstname', label: 'First Name', sortable: true },
 
         { key: 'student.surname', label: 'Surname', sortable: true },
         {
