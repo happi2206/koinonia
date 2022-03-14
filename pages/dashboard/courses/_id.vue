@@ -51,6 +51,12 @@
             <b-tab title="Attendance" class="">
               <CourseAttendance />
             </b-tab>
+            <b-tab title="Assignment" class="">
+              <CourseAssignment />
+            </b-tab>
+            <b-tab title="Resources" class="">
+              <CourseResources />
+            </b-tab>
           </b-tabs>
         </div>
       </div>
@@ -59,10 +65,10 @@
 </template>
 
 <script>
-import { json2csv, csv2json } from 'json-2-csv'
 var csv = require('csvtojson')
 export default {
   layout: 'dashboard',
+  scrollToTop: true,
 
   data() {
     return {
