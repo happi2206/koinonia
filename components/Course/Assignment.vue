@@ -60,13 +60,13 @@
             </div>
 
             <div class="card bg-white mb-3">
-              <div class="card-header pt-5 pb-0">
+              <div class="pt-4 pl-4 pb-0">
                 <div class="card-title"><h3>Create Exercise</h3></div>
               </div>
               <div class="card-body ml-6 d-flex">
                 <form>
                   <div class="row mt-4">
-                    <div class="col-xl-6">
+                    <div class="fix-width">
                       <div class="mb-2">
                         <label class="form-control-label"
                           >Exercise Name
@@ -75,6 +75,7 @@
                         <input
                           v-model="name"
                           class="form-control"
+                          style="background: #fbfdfe"
                           placeholder="Enter Name"
                           required
                         />
@@ -84,44 +85,44 @@
                           >Exercise Instruction
                           <span class="font10 small">(Required)</span></label
                         >
-                        <textarea
-                          v-model="instruction"
-                          class="form-control"
-                          placeholder="Instruction"
-                          required
-                        ></textarea>
+                        <client-only>
+                          <ckeditor-nuxt
+                            v-model="instruction"
+                            :config="editorConfigForSection"
+                          />
+                        </client-only>
                         <!-- <small class="text-dark"
                       >Let students know a little about the lesson in 500
                       characters or less.</small
                     > -->
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 pl-0">
                       <hr />
                     </div>
-                    <div class="">
-                      <div class="row w-100" style="min-width: 800px">
+                    <div class="w-100">
+                      <div class="row fix">
                         <div class="col-6 mb-2">
                           <label class="form-control-label"
                             >Exercise Type
-                            <span class="font10 small">(Required)</span></label
-                          >
-                          <select
-                            class="form-control"
-                            aria-placeholder="Select excercise type"
+                          </label>
+                          <v-select
                             v-model="type"
-                            required
-                          >
-                            <option value=""></option>
-                            <option value="essay">Essay</option>
-                            <option value="offline">Offline</option>
-                          </select>
+                            class="style-chooser"
+                            placeholder="Select exercise format"
+                            label="text"
+                            :reduce="(option) => option.value"
+                            :options="[
+                              { value: 'essay', text: 'Essay' },
+                              { value: 'offline', text: 'Offline' },
+                            ]"
+                          ></v-select>
                         </div>
-                        <div class="col-6 mb-2">
+
+                        <div class="col-md-6 mb-2">
                           <label class="form-control-label"
                             >Obtainable Score
-                            <span class="small">(Required)</span></label
-                          >
+                          </label>
                           <input
                             v-model="obtainable_score"
                             type="number"
@@ -130,45 +131,57 @@
                             required
                           />
                         </div>
-                        <div class="col-md-6 mb-2" v-if="dateHandle">
+
+                        <div class="col-md-6 mb-2">
                           <label class="form-control-label"
                             >Available Date</label
                           >
-                          <div class="input-group">
-                            <input
-                              type="date"
-                              v-model="available_date"
-                              class="form-control border-right"
-                              placeholder="Available Date"
-                            />
-                          </div>
+                          <v-date-picker
+                            v-model="available_date"
+                            :model-config="modelConfig"
+                            mode="date"
+                          >
+                            <template #default="{ togglePopover }">
+                              <span @click="togglePopover()">
+                                <input
+                                  v-model="available_date"
+                                  class="form-control form-control-md"
+                                  style="background: #fbfdfe"
+                                  placeholder="Available Date"
+                                />
+                              </span>
+                            </template>
+                          </v-date-picker>
                         </div>
-                        <div class="col-md-6 mb-2" v-if="dateHandle">
+                        <div class="col-md-6 mb-2">
                           <label class="form-control-label">Due Date</label>
-                          <div class="input-group">
-                            <input
-                              v-model="due_date"
-                              type="date"
-                              class="form-control border-right"
-                              placeholder="Due Date"
-                            />
-                          </div>
+                          <v-date-picker
+                            v-model="due_date"
+                            :model-config="modelConfig"
+                            mode="date"
+                          >
+                            <template #default="{ togglePopover }">
+                              <span @click="togglePopover()">
+                                <input
+                                  v-model="due_date"
+                                  class="form-control form-control-md"
+                                  style="background: #fbfdfe"
+                                  placeholder="Due Date"
+                                />
+                              </span>
+                            </template>
+                          </v-date-picker>
                         </div>
                       </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 pl-0">
                       <hr />
-                      <div class="my-4">
-                        <p>
-                          Upload Essay Sample
-                          <span
-                            ><span class="font10 small">(Required)</span></span
-                          >
-                        </p>
+                      <div v-if="fileUpload" class="my-3 ml-3">
+                        <p class="m-0">Upload Essay Sample</p>
 
                         <input
                           type="file"
-                          accept=".pptx,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*, .pdf"
+                          accept=".pptx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*, .pdf"
                           class="invisible"
                           ref="uploadfile"
                           @change="handleFileUpload($event)"
@@ -193,17 +206,45 @@
                         </p>
                       </div>
                     </div>
+                    <div v-if="file" class="file-indicator w-25 ml-2">
+                      <span class="cancel-btn" @click="deleteFile"
+                        ><span
+                          class="iconify"
+                          data-icon="ic:baseline-cancel"
+                          data-width="30"
+                          data-height="30"
+                        ></span
+                      ></span>
+                      <div class="d-flex justify-content-center p-3">
+                        <span
+                          class="iconify"
+                          data-icon="akar-icons:file"
+                          data-width="64"
+                          data-height="64"
+                        ></span>
+                      </div>
+                      <span
+                        class="d-flex justify-content-center"
+                        style="font-size: 14px"
+                        >{{ file.name }}</span
+                      >
+                    </div>
                   </div>
-                  <b-dropdown
-                    text="Save"
-                    size="lg"
-                    class="m-4 fmbt"
-                    variant="warning"
-                  >
-                    <b-dropdown-item-button @click="submitAssignment">
-                      Publish
-                    </b-dropdown-item-button>
-                  </b-dropdown>
+                  <div class="d-flex justify-content-end">
+                    <b-dropdown
+                      text="Save"
+                      size="lg"
+                      class="m-4 fmbt"
+                      variant="warning"
+                    >
+                      <b-dropdown-item-button @click="draftAssignment">
+                        Save as Draft
+                      </b-dropdown-item-button>
+                      <b-dropdown-item-button @click="publishAssignment">
+                        Save and Publish
+                      </b-dropdown-item-button>
+                    </b-dropdown>
+                  </div>
                 </form>
               </div>
             </div>
@@ -218,6 +259,17 @@
 export default {
   data() {
     return {
+      modelConfig: {
+        type: 'string',
+        mask: 'YYYY-MM-DD', // Uses 'iso' if missing
+      },
+      editorConfigForSection: {
+        title: {
+          // placeholder: 'h1',
+        },
+        placeholder: 'Add Header / Description / Instruction',
+        removePlugins: ['Title'],
+      },
       assignmentFields: [
         { key: 'name', sortable: true },
         { key: 'instruction', sortable: true },
@@ -229,6 +281,7 @@ export default {
       dateHandle: false,
       showForm: false,
       assignments: [],
+      fileUpload: true,
 
       addPreloader: false,
       file: null,
@@ -239,8 +292,15 @@ export default {
       available_date: '',
       due_date: '',
       obtainable_score: '',
-      status: 'publish',
+      status: '',
     }
+  },
+  components: {
+    'ckeditor-nuxt': () => {
+      if (process.client) {
+        return import('@blowstack/ckeditor-nuxt')
+      }
+    },
   },
   methods: {
     async getAllAssignments() {
@@ -277,9 +337,14 @@ export default {
 
     handleFileUpload(event) {
       this.file = event.target.files[0]
+      this.fileUpload = false
+    },
+    deleteFile() {
+      this.file = null
+      this.fileUpload = true
     },
 
-    async submitAssignment() {
+    async draftAssignment() {
       try {
         this.addPreloader = true
         let attachedFile = new FormData()
@@ -304,6 +369,67 @@ export default {
           isoSecondDate = ''
         }
 
+        this.status = 'draft'
+        attachedFile.append('course_id', this.course_id)
+        attachedFile.append('name', this.name)
+        attachedFile.append('instruction', this.instruction)
+        attachedFile.append('type', this.type)
+        attachedFile.append('available_date', isoFirstDate)
+        attachedFile.append('due_date', isoSecondDate)
+        attachedFile.append('obtainable_score', this.obtainable_score)
+        attachedFile.append('status', this.status)
+        attachedFile.append('file', this.file, this.file.name)
+        console.log(attachedFile)
+
+        let response = await this.$axios.post(
+          `course-v/add-assignment`,
+          attachedFile,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        )
+
+        console.log(response.data.message)
+
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error('Assignment could not be created')
+      } finally {
+        this.getAllAssignments()
+        this.addPreloader = false
+        this.open = true
+        this.showForm = false
+      }
+    },
+
+    async publishAssignment() {
+      try {
+        this.addPreloader = true
+        let attachedFile = new FormData()
+        let isoFirstDate
+        let isoSecondDate
+
+        if (this.available_date !== '') {
+          let start = this.available_date
+          let dateStr = start
+          let date = new Date(dateStr)
+          isoFirstDate = date.toISOString()
+        } else {
+          isoFirstDate = ''
+        }
+
+        if (this.due_date !== '') {
+          let end = this.due_date
+          let dateString = end
+          let secondDate = new Date(dateString)
+          isoSecondDate = secondDate.toISOString()
+        } else {
+          isoSecondDate = ''
+        }
+
+        this.status = 'publish'
         attachedFile.append('course_id', this.course_id)
         attachedFile.append('name', this.name)
         attachedFile.append('instruction', this.instruction)
@@ -366,5 +492,23 @@ export default {
 .fmbt {
   width: 170px;
   height: 40px;
+}
+
+.fix-width {
+  width: 97%;
+}
+.fix {
+  width: 100%;
+}
+
+.fileborder {
+  border: 1px dashed #ffc107;
+}
+
+.cancel-btn {
+  position: relative;
+  top: 5px;
+  left: 33px;
+  cursor: pointer;
 }
 </style>

@@ -4,7 +4,7 @@
       <template #besideFilterButton>
         <div class="ml-md-5">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph"
+            class="btn btn-height py-2 mainbtndashboard medbrownparagraph"
             v-b-modal.addInstructor
           >
             Add Instructor
@@ -36,7 +36,7 @@
 
             <div class="d-flex justify-content-center mx-5 my-3">
               <button
-                class="btn mainbtndashboard"
+                class="btn btn-height mainbtndashboard"
                 @click="addInstructortoCourse"
               >
                 Add Instructor

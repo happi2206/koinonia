@@ -143,14 +143,6 @@
           toggle-class="text-decoration-none text-center"
           no-caret
         >
-          <slot name="delete">
-            <span
-              class="iconify"
-              data-icon="gridicons:trash"
-              data-width="16"
-              data-height="16"
-            ></span>
-          </slot>
           <template class="p-0 mx-auto text-center" #button-content>
             <b-icon icon="three-dots-vertical" class="text-dark"></b-icon>
           </template>

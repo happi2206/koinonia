@@ -107,6 +107,7 @@
             </div>
           </div>
           <slot name="importButton"></slot>
+          <slot name="exportButton"></slot>
           <slot name="uploadButton"></slot>
         </div>
       </div>

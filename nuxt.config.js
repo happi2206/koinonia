@@ -69,6 +69,7 @@ export default {
     '~/plugins/luxon.js',
     '~/plugins/vue-html2pdf',
     '~/plugins/vue-html-to-paper.js',
+    '~/plugins/vcalendar.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

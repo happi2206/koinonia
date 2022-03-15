@@ -7,7 +7,7 @@
       <template #besideFilterButton>
         <div class="ml-lg-5">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph text"
+            class="btn py-2 btn-height mainbtndashboard medbrownparagraph text"
             v-b-modal.addEvent
           >
             Add Event
@@ -108,6 +108,7 @@
           :fields="fields"
           :dropdownItem="dropdownItem"
           @Download_as_PDF="downloadQr"
+          @Download_as_excel="downloadExcel"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -231,11 +232,20 @@
         </div>
       </form>
     </b-modal>
+    <div>
+      <downloadexcel ref="excel" :fetch="downloadExcel">
+        Download
+      </downloadexcel>
+    </div>
   </div>
 </template>
 
 <script>
+import downloadexcel from 'vue-json-excel'
 export default {
+  components: {
+    downloadexcel,
+  },
   props: {
     events: {
       type: Array,
@@ -251,7 +261,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: ['Edit', 'Download_as_PDF'],
+      dropdownItem: ['Edit', 'Print qr code', 'Download_as_excel'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
@@ -288,6 +298,7 @@ export default {
       eventId: '',
       studentPresent: '',
       studentAbsent: '',
+      all: '',
     }
   },
 
@@ -320,6 +331,21 @@ export default {
       this.qrEvent = e
       this.eventId = e.id
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
+    },
+
+    async downloadExcel() {
+      // console.log(e)
+      // this.qrEvent = e
+      // this.eventId = e.id
+      // let totalNumber = 100
+
+      let response = await this.$axios.get(
+        `course-v/get-all-students-in-an-event?course_id=622b2f95f9fe6808cb5fe8cd&event_id=622b38ec4cc75f393317081f&page=1&size=100`
+      )
+
+      this.all = response.data.response.items
+      console.log(this.all)
+      // return response.data.response.items
     },
     async printQr(e) {
       // Pass the element id here

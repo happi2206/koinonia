@@ -5,13 +5,19 @@
       <template #besideFilterButton>
         <div class="d-flex flex-wrap">
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph ml-lg-3"
+            class="
+              btn btn-height
+              py-2
+              mainbtndashboard
+              medbrownparagraph
+              ml-lg-3
+            "
             v-b-modal.addStudent
           >
             Add Student
           </button>
           <button
-            class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
+            class="btn btn-height py-2 mainbtndashboard medbrownparagraph ml-3"
             v-b-modal.uploadModal
           >
             Bulk Upload
@@ -25,12 +31,12 @@
             class="hidden"
           />
 
-          <button
+          <!-- <button
             @click.prevent="$refs.uploadcsvphone.click()"
             class="btn py-2 mainbtndashboard medbrownparagraph ml-3"
           >
             Upload Phone
-          </button>
+          </button> -->
 
           <b-modal id="uploadModal" centered title="Bulk upload" hide-footer>
             <div>

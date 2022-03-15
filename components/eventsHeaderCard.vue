@@ -60,17 +60,17 @@
         <filter-component @search="SearchText" @view-by="sortStudents">
           <template #filterby>
             <div class="records-count medbrownparagraph">
-              <span class="medbrownparagraph">Sort by: </span>
+              <span class="medbrownparagraph">Filter by: </span>
               <select
                 class="records-count medbrownparagraph medbrownparagraph"
                 @change="sortBy($event.target.value)"
               >
                 <option class="medbrownparagraph" value="all">All</option>
                 <option class="medbrownparagraph" value="self">
-                  Self checked-in
+                  Self Check-In
                 </option>
                 <option class="medbrownparagraph" value="admin">
-                  Admin Checked-in
+                  Admin Check-In
                 </option>
               </select>
             </div>
@@ -101,13 +101,13 @@
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
 
-          <!-- <template #exportButton>
+          <template #exportButton>
             <downloadexcel :fetch="exportData">
               <button class="accentcolorbg button-height py-2 px-3 ml-3">
                 <span class="iconify" data-icon="entypo:export"></span>
               </button>
             </downloadexcel>
-          </template> -->
+          </template>
 
           <template #importButton>
             <input
@@ -326,6 +326,11 @@ export default {
         this.$fetch()
       }
       console.log(e)
+    },
+
+    sortStudents(e) {
+      this.perPage = e
+      this.$fetch()
     },
     async getChecked() {
       try {

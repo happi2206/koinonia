@@ -375,9 +375,10 @@ input.subscribebtn {
   border-radius: 0;
 }
 input.subscribebtn:hover {
-  border: #000;
-  color: #000;
-  background: transparent;
+  /* border: #000; */
+  color: #fff;
+  opacity: 0.9;
+  /* background: transparent; */
 }
 button.subscribebtn {
   background-color: #000;
@@ -394,14 +395,18 @@ button.subscribebtn {
   border-radius: 0;
 }
 button.subscribebtn:hover {
-  border: 1px solid #000;
-  color: #000;
-  background: transparent;
+  /* border: #000; */
+  color: #fff;
+  opacity: 0.9;
+  /* background: transparent; */
 }
 button.subscribebtn.rad6 {
   border-radius: 6px;
 }
 
+.btn-height {
+  height: 42px;
+}
 button.loginbtn {
   font-family: 'Ancona-Ex';
   font-size: 14px;
