@@ -226,7 +226,7 @@ html body main {
 }
 
 button.mainbtn {
-  background-color: #d3a13b;
+  background-color: #FFCD06;
   font-family: 'Ancona-Ex';
   font-size: 14px;
   font-style: normal;
@@ -234,7 +234,7 @@ button.mainbtn {
   line-height: 16px;
   letter-spacing: 0em;
   text-align: left;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 button.tertiarybtn {
@@ -281,7 +281,7 @@ a:hover {
 }
 
 a.mainbtndashboard {
-  background-color: #d3a13b;
+  background-color: #FFCD06;
   color: black;
 
   text-align: left;
@@ -299,7 +299,7 @@ a.mainbtndashboard:hover {
 }
 
 button.mainbtndashboard {
-  background-color: #d3a13b;
+  background-color: #FFCD06;
   color: black;
 
   text-align: left;
@@ -406,6 +406,23 @@ button.subscribebtn.rad6 {
 
 .btn-height {
   height: 42px;
+}
+
+.text-14{
+  font-size: 14px;
+  font-family: 'Ancona-Ex';
+}
+.text-12{
+  font-size: 12px;
+  font-family: 'Ancona-Ex';
+}
+.text-18{
+  font-size: 18px;
+  font-family: 'Ancona-Ex';
+}
+.text-16{
+  font-size: 16px;
+  font-family: 'Ancona-Ex';
 }
 button.loginbtn {
   font-family: 'Ancona-Ex';
@@ -615,7 +632,7 @@ button.loginbtn {
 }
 
 .accentcolorbg {
-  background-color: #d3a13b;
+  background-color: #FFCD06;
 }
 .accentcolor {
   color: #d3a13b !important;
@@ -1276,6 +1293,8 @@ th {
 
 .custom-tabs {
   border-bottom: 0.2px solid #828282;
+  padding-left: 2rem;
+  padding-right: 2rem;
   width: 100%;
   flex-wrap: nowrap !important;
 }
@@ -1306,7 +1325,7 @@ th {
   text-align: left;
 }
 .custom-tabs .nav-link.active {
-  border-bottom: 7px solid #d3a13b;
+  border-bottom: 7px solid #FFCE31;
   color: #0734aa;
   font-family: 'Ancona-Ex';
   font-size: 14px;
@@ -1320,6 +1339,7 @@ th {
 .custom-tabs .nav-tabs {
   background-color: #fff !important;
   border-radius: 5px;
+  padding-inline: 0;
 }
 
 @media (max-width: 1200.5px) {

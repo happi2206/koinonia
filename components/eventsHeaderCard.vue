@@ -29,6 +29,27 @@
           <h2 class="brown24 py-3 bold700 text-capitalize mb-0">
             {{ eventDetail.name }}
           </h2>
+
+          <b-dropdown
+            text="Actions"
+            size="md"
+            class="m-4 fmbt accentcolorbg"
+            variant="warning"
+          >
+            <b-dropdown-item-button>
+              <downloadexcel :fetch="fetchData">
+                <button class="button-height text-12">Download as excel</button>
+              </downloadexcel>
+            </b-dropdown-item-button>
+            <b-dropdown-item-button>
+              <button
+                @click.prevent="$refs.uploadcsv.click()"
+                class="button-height text-12"
+              >
+                Upload excel file
+              </button>
+            </b-dropdown-item-button>
+          </b-dropdown>
         </div>
         <div class="my-2 d-flex flex-md-row flex-column">
           <p class="my-2 medparagraph mx-3">
@@ -101,14 +122,6 @@
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
 
-          <template #exportButton>
-            <downloadexcel :fetch="exportData">
-              <button class="accentcolorbg button-height py-2 px-3 ml-3">
-                <span class="iconify" data-icon="entypo:export"></span>
-              </button>
-            </downloadexcel>
-          </template>
-
           <template #importButton>
             <input
               @change="importData"
@@ -117,17 +130,6 @@
               type="file"
               class="hidden"
             />
-            <button
-              @click.prevent="$refs.uploadcsv.click()"
-              class="accentcolorbg button-height py-2 px-3 ml-3"
-            >
-              <span
-                class="iconify"
-                data-icon="fa-solid:file-import"
-                data-width="16"
-                data-height="16"
-              ></span>
-            </button>
           </template>
 
           <!-- <template #uploadButton>
@@ -254,6 +256,14 @@ export default {
     }
   },
   methods: {
+    async fetchData() {
+      this.addPreloader = true
+      let response = await this.$axios.get(
+        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
+      )
+      this.addPreloader = false
+      return response.data.response.items
+    },
     async importData(e) {
       let file = e.target.files[0]
       let students = await new Promise((resolve) => {
@@ -395,5 +405,10 @@ export default {
 <style scoped>
 .button-height {
   height: 2.6rem;
+}
+.btn-warning {
+  color: #212529;
+  background-color: #d3a13b;
+  border-color: #d3a13b;
 }
 </style>

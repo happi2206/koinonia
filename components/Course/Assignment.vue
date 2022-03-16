@@ -8,8 +8,8 @@
     >
       <template #besideFilterButton>
         <div class="ml-md-5" @click="openForm">
-          <button class="btn mainbtndashboard medbrownparagraph">
-            Add Assignment
+          <button class="btn btn-height mainbtndashboard medbrownparagraph">
+            Add Exercise
           </button>
         </div>
       </template>
@@ -36,52 +36,55 @@
         :fields="assignmentFields"
         @row-clicked="onRowClicked"
       >
-        <template #delete>
-          <span
-            class="iconify"
-            data-icon="gridicons:trash"
-            data-width="16"
-            data-height="16"
-          ></span>
+        <template #name="{ data }">
+          <span class="text-capitalize">{{ data.item.name }} </span>
+        </template>
+        <template #cell(check_in)="data">
+          <span>{{ data.item.available_date | DateFormat }}</span>
+        </template>
+        <template #cell(due_date)="data">
+          <span>{{ data.item.due_date | DateFormat }}</span>
         </template>
       </table-component>
+
+      <template #status> {{ data.item.status }}</template>
     </filter-component>
 
     <div v-show="showForm">
       <div>
         <!-- ****************************************************************************************** -->
 
-        <div class="site-container">
+        <div class="site-container font14">
           <div class="conatiner">
             <div class="m-3" @click="closeForm">
               <button class="btn mainbtndashboard medbrownparagraph">
-                Back to assignments
+                Back to exercises
               </button>
             </div>
 
             <div class="card bg-white mb-3">
               <div class="pt-4 pl-4 pb-0">
-                <div class="card-title"><h3>Create Exercise</h3></div>
+                <div class="card-title text-18 ml-0">Create Exercise</div>
               </div>
-              <div class="card-body ml-6 d-flex">
-                <form>
+              <div class="pl-0 ml-0 d-flex">
+                <form class="px-4 mx-3">
                   <div class="row mt-4">
                     <div class="fix-width">
                       <div class="mb-2">
-                        <label class="form-control-label"
+                        <label class="form-control-label text-12"
                           >Exercise Name
                           <span class="font10 small">(Required)</span></label
                         >
                         <input
                           v-model="name"
-                          class="form-control"
+                          class="form-control text-14"
                           style="background: #fbfdfe"
                           placeholder="Enter Name"
                           required
                         />
                       </div>
                       <div class="mb-2">
-                        <label class="form-control-label"
+                        <label class="form-control-label text-12"
                           >Exercise Instruction
                           <span class="font10 small">(Required)</span></label
                         >
@@ -103,12 +106,12 @@
                     <div class="w-100">
                       <div class="row fix">
                         <div class="col-6 mb-2">
-                          <label class="form-control-label"
+                          <label class="form-control-label text-12"
                             >Exercise Type
                           </label>
                           <v-select
                             v-model="type"
-                            class="style-chooser"
+                            class="style-chooser font-14"
                             placeholder="Select exercise format"
                             label="text"
                             :reduce="(option) => option.value"
@@ -120,20 +123,20 @@
                         </div>
 
                         <div class="col-md-6 mb-2">
-                          <label class="form-control-label"
+                          <label class="form-control-label text-12"
                             >Obtainable Score
                           </label>
                           <input
                             v-model="obtainable_score"
                             type="number"
-                            class="form-control border-right"
+                            class="form-control border-right text-12"
                             placeholder="eg 100"
                             required
                           />
                         </div>
 
                         <div class="col-md-6 mb-2">
-                          <label class="form-control-label"
+                          <label class="form-control-label text-12"
                             >Available Date</label
                           >
                           <v-date-picker
@@ -154,7 +157,9 @@
                           </v-date-picker>
                         </div>
                         <div class="col-md-6 mb-2">
-                          <label class="form-control-label">Due Date</label>
+                          <label class="form-control-label text-12"
+                            >Due Date</label
+                          >
                           <v-date-picker
                             v-model="due_date"
                             :model-config="modelConfig"
@@ -177,7 +182,13 @@
                     <div class="col-12 pl-0">
                       <hr />
                       <div v-if="fileUpload" class="my-3 ml-3">
-                        <p class="m-0">Upload Essay Sample</p>
+                        <p
+                          style="font-size: 0.95rem"
+                          class="m-0 form-control-label"
+                        >
+                          Upload Essay Sample
+                          <span class="font-12">(optional)</span>
+                        </p>
 
                         <input
                           type="file"
@@ -201,7 +212,7 @@
                         >
                           <span>Click to Upload</span>
                         </div>
-                        <p class="text-grey font10">
+                        <p class="text-grey text-14">
                           Formats: PPT, DOC, PDF, JPEG
                         </p>
                       </div>
@@ -234,7 +245,7 @@
                     <b-dropdown
                       text="Save"
                       size="lg"
-                      class="m-4 fmbt"
+                      class="m-4 font-14 fmbt"
                       variant="warning"
                     >
                       <b-dropdown-item-button @click="draftAssignment">
@@ -272,10 +283,11 @@ export default {
       },
       assignmentFields: [
         { key: 'name', sortable: true },
-        { key: 'instruction', sortable: true },
-        { key: 'obtainable_score', sortable: true },
-        { key: 'status', sortable: true },
         { key: 'type', sortable: true },
+        { key: 'available_date', sortable: true },
+        { key: 'due_date', sortable: true },
+        { key: 'number_of_submission', sortable: true },
+        { key: 'status', sortable: true },
       ],
       open: true,
       dateHandle: false,
@@ -309,7 +321,6 @@ export default {
           `course-v/get-all-course-assignment?course_id=${this.$route.params.id}`
         )
         this.assignments = response.data
-        // console.log(this.assignments)
       } catch (error) {
         console.log(error)
       }
@@ -356,6 +367,7 @@ export default {
           let dateStr = start
           let date = new Date(dateStr)
           isoFirstDate = date.toISOString()
+          console.log(isoFirstDate)
         } else {
           isoFirstDate = ''
         }
@@ -365,6 +377,7 @@ export default {
           let dateString = end
           let secondDate = new Date(dateString)
           isoSecondDate = secondDate.toISOString()
+          console.log(isoSecondDate)
         } else {
           isoSecondDate = ''
         }
@@ -510,5 +523,13 @@ export default {
   top: 5px;
   left: 33px;
   cursor: pointer;
+}
+
+.form-control-label {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 100%;
+  color: #8f9aa3;
+  margin-bottom: 0.25rem;
 }
 </style>

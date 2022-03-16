@@ -108,7 +108,7 @@
           :fields="fields"
           :dropdownItem="dropdownItem"
           @Download_as_PDF="downloadQr"
-          @Download_as_excel="downloadExcel"
+          @Download_as_excel="fetchData"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -233,9 +233,7 @@
       </form>
     </b-modal>
     <div>
-      <downloadexcel ref="excel" :fetch="downloadExcel">
-        Download
-      </downloadexcel>
+      <downloadexcel ref="excel" :data="json_data">&nbsp; </downloadexcel>
     </div>
   </div>
 </template>
@@ -298,7 +296,7 @@ export default {
       eventId: '',
       studentPresent: '',
       studentAbsent: '',
-      all: '',
+      json_data: '',
     }
   },
 
@@ -332,20 +330,17 @@ export default {
       this.eventId = e.id
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
     },
-
-    async downloadExcel() {
-      // console.log(e)
-      // this.qrEvent = e
-      // this.eventId = e.id
-      // let totalNumber = 100
-
+    // handler() {
+    //   this.fetchData()
+    //   console.log('yay')
+    // },
+    async fetchData() {
       let response = await this.$axios.get(
         `course-v/get-all-students-in-an-event?course_id=622b2f95f9fe6808cb5fe8cd&event_id=622b38ec4cc75f393317081f&page=1&size=100`
       )
 
-      this.all = response.data.response.items
-      console.log(this.all)
-      // return response.data.response.items
+      this.json_data = response.data.response.items
+      console.log(this.json_data)
     },
     async printQr(e) {
       // Pass the element id here

@@ -3,7 +3,17 @@
     <div>
       <div>
         <div>
-          <div class="px-md-5 px-3 pb-3">
+          <div class="px-md-3 px-2 pb-3">
+            <div class="my-3">
+              <h1 class="brown24">Description</h1>
+              <div class="text-14 pb-4">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Debitis, consequatur. Laudantium quidem iure, dolores, at
+                praesentium impedit nisi ratione velit porro soluta totam
+                nostrum esse? Ducimus dignissimos blanditiis nam veritatis!
+              </div>
+            </div>
+            <hr />
             <h2 class="brown24 my-3 graytext">Scheme of work</h2>
             <p
               class="lightgraytext medbrownparagraph d-flex align-items-center"
@@ -14,7 +24,7 @@
                 data-width="20"
                 data-height="20"
               ></span>
-              <span class="mx-2">
+              <span class="mx-2 text-12">
                 Here’s where you add course content—like lectures, course
                 sections, assignments, and more. Click a + icon on the left to
                 get started.</span
@@ -33,41 +43,62 @@
                 <div v-if="showSchemeOfWork" class="fullborder p-3 my-2">
                   <div>
                     <div class="row">
-                      <div class="col-md-2">
-                        <div class="d-flex align-items-center h-100">
-                          <h2 class="brown18 bold700">New Section</h2>
+                      <div class="col p-0">
+                        <div class="d-flex align-items-start pt-5 h-100">
+                          <h2 class="text-16 ml-4 bold700">New Section :</h2>
                         </div>
                       </div>
-                      <div class="form-group col-md-10" ref="clearscheme">
-                        <div class="my-2">
+                      <div
+                        class="form-group col-md-10 pl-0 pr-5"
+                        ref="clearscheme"
+                      >
+                        <div class="my-2 text-16">
                           <label>Title</label>
                           <input
-                            v-model="sections.title"
+                            v-model="sections[0].title"
                             type="text"
                             class="form-control"
+                            style="
+                              border: 1px solid #000000;
+                              border-radius: 0rem;
+                            "
                             placeholder="Enter A Title"
                           />
                         </div>
-                        <div class="my-2">
+                        <div class="my-2 text-16">
                           <label>Objective</label>
                           <input
-                            v-model="sections.objective"
+                            v-model="sections[0].objective"
                             type="text"
                             class="form-control"
+                            style="
+                              border: 1px solid #000000;
+                              border-radius: 0rem;
+                            "
                             placeholder="Objective"
                           />
                         </div>
                       </div>
                     </div>
-                    <div class="py-1 d-flex justify-content-end">
+                    <div class="py-1 pr-4 d-flex justify-content-end">
                       <button
                         class="btn medbrownparagraph"
+                        style="
+                          border-radius: none;
+                          width: 102px;
+                          text-align: center;
+                        "
                         @click="showSchemeOfWork = false"
                       >
                         Cancel
                       </button>
                       <button
-                        class="btn mainbtn medbrownparagraph py-2 rounded px-3"
+                        class="mainbtn rounded medbrownparagraph py-2 px-3"
+                        style="
+                          border-radius: none;
+                          width: 102px;
+                          text-align: center;
+                        "
                         @click="handleAdd"
                       >
                         Add
@@ -80,10 +111,10 @@
           </div>
 
           <!-- added section -->
-          <div class="corner second-section brown18 mb-4" v-if="sectionExist">
+          <div class="corner second-section mb-4" v-if="sectionExist">
             <div class="d-flex align-items-center mb-4">
-              <h2 class="brown18 bold700 mb-0 mx-3">{{ heading }}</h2>
-              <span style="color: #333333">{{ body }}</span>
+              <h2 class="text-14 bold700 mb-0 mx-3">{{ heading }}</h2>
+              <span style="color: #333333" class="text-14">{{ body }}</span>
               <span class="ml-5" style="cursor: pointer"
                 ><span class="iconify" data-icon="bxs:pencil"></span
               ></span>
@@ -92,7 +123,10 @@
               ></span>
             </div>
 
-            <div v-if="addSchemeType" class="newLecture fullborder ml-5 mb-5">
+            <div
+              v-if="addSchemeType"
+              class="newLecture fullborder text-14 ml-5 mb-5"
+            >
               <div
                 v-b-toggle.collapse-1
                 class="
@@ -173,22 +207,30 @@
               ></span>
               <div class="lecture-cover pl-3 pt-3 mt-3">
                 <div class="d-flex">
-                  <span style="font-size: 16px">Lecture: 1</span>
-                  <input
-                    v-model="lectureTitle"
-                    placeholder="Enter a title"
-                    type="text"
-                    class="form-control"
-                  />
+                  <div class="new d-flex">
+                    <div><p class="text-16 mt-2 mr-2">Lecture: 1</p></div>
+                    <div class="text-16">
+                      <input
+                        v-model="lectureTitle"
+                        placeholder="Enter a title"
+                        type="text"
+                        class="form-control"
+                        style="border: 1px solid #000000; border-radius: 0rem"
+                      />
+
+                      <div class="mt-4 text-16">
+                        <input
+                          v-model="lectureDescription"
+                          type="text"
+                          class="form-control"
+                          placeholder="Description"
+                          style="border: 1px solid #000000; border-radius: 0rem"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="ml-5 mt-4">
-                  <input
-                    v-model="lectureDescription"
-                    type="text"
-                    class="form-control formfix"
-                    placeholder="Description"
-                  />
-                </div>
+
                 <div class="d-flex justify-content-end py-3">
                   <button
                     class="btn medbrownparagraph mr-3"
@@ -196,8 +238,13 @@
                   >
                     Cancel
                   </button>
-                  <div class="mr-3">
+                  <div class="mr-4">
                     <button
+                      style="
+                        border-radius: none;
+                        width: 102px;
+                        text-align: center;
+                      "
                       class="
                         btn
                         mainbtn
@@ -228,27 +275,34 @@
               ></span>
               <div class="lecture-cover pl-3 pt-3 mt-3">
                 <div class="d-flex">
-                  <span style="font-size: 16px">Quiz</span>
-                  <input
-                    v-model="quizTitle"
-                    placeholder="Enter a title"
-                    type="text"
-                    class="form-control ml-2"
-                  />
-                </div>
-                <div class="ml-5 mt-4">
-                  <input
-                    v-model="quizDescription"
-                    type="text"
-                    class="form-control"
-                    placeholder="Description"
-                  />
+                  <div class="new d-flex">
+                    <div><p class="text-16 mt-2 mr-2">Quiz: 1</p></div>
+                    <div class="text-16">
+                      <input
+                        v-model="quizTitle"
+                        placeholder="Enter a title"
+                        type="text"
+                        class="form-control"
+                        style="border: 1px solid #000000; border-radius: 0rem"
+                      />
+
+                      <div class="mt-4 text-16">
+                        <input
+                          v-model="quizDescription"
+                          type="text"
+                          class="form-control"
+                          placeholder="Description"
+                          style="border: 1px solid #000000; border-radius: 0rem"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="d-flex justify-content-end py-3">
                   <button class="btn medbrownparagraph mr-3" @click="hideQuiz">
                     Cancel
                   </button>
-                  <div class="mr-5">
+                  <div class="mr-4">
                     <button
                       class="
                         btn
@@ -281,24 +335,29 @@
                   data-height="28"
                 ></span
               ></span>
-              <div class="lecture-cover pl-3 pt-3 mt-3">
+              <div class="lecture-cover pl-1 pt-3 mt-3">
                 <div class="d-flex">
-                  <span style="font-size: 16px">Assignment</span>
-                  <input
-                    v-model="assignmentTitle"
-                    placeholder="Enter a title"
-                    type="text"
-                    class="form-control ml-2"
-                  />
-                </div>
-                <div class="ml-5 mt-4">
-                  <div class="ml-3">
-                    <input
-                      v-model="assignmentDescription"
-                      type="text"
-                      class="form-control ml-5"
-                      placeholder="Description"
-                    />
+                  <div class="new d-flex">
+                    <div><p class="text-16 mt-2 mr-2">Assignment: 1</p></div>
+                    <div class="text-16">
+                      <input
+                        v-model="assignmentTitle"
+                        placeholder="Enter a title"
+                        type="text"
+                        class="form-control"
+                        style="border: 1px solid #000000; border-radius: 0rem"
+                      />
+
+                      <div class="mt-4 text-16">
+                        <input
+                          v-model="assignmentDescription"
+                          type="text"
+                          class="form-control"
+                          placeholder="Description"
+                          style="border: 1px solid #000000; border-radius: 0rem"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="d-flex justify-content-end py-3">
@@ -308,7 +367,7 @@
                   >
                     Cancel
                   </button>
-                  <div class="mr-3">
+                  <div class="mr-0">
                     <button
                       class="
                         btn
@@ -379,8 +438,8 @@ export default {
   methods: {
     addScheme() {},
     handleAdd() {
-      this.heading = this.section[i].title
-      this.body = this.section[i].objective
+      this.heading = this.sections[0].title
+      this.body = this.sections[0].objective
       this.sectionExist = true
       this.showSchemeOfWork = false
       this.sectionBorder = false

@@ -194,6 +194,16 @@
           ></grid-component>
         </div>
       </template>
+      <template #status="{ data }">
+        {{ data }}
+        <!-- <b-form-checkbox
+          :button-variant="'success'"
+          v-model=""
+          
+          size="lg"
+          switch
+        ></b-form-checkbox> -->
+      </template>
     </filter-component>
   </div>
 </template>
@@ -286,6 +296,7 @@ export default {
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
         { key: 'phone', sortable: true },
+        { key: 'status', sortable: true },
       ],
       busy: false,
       search: '',

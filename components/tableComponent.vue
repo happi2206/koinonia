@@ -75,8 +75,22 @@
         <slot name="submissions" :data="data">{{ data.value }}</slot>
       </template>
 
-      <template #cell(status)="data">
+      <!-- <template #cell(status)="data">
         <slot name="status" :data="data">{{ data.value }}</slot>
+      </template> -->
+
+      <!-- example -->
+
+      <template #cell(status)="data">
+        <slot name="status" :data="data">
+          <b-badge
+            :variant="data.item.status === 'publish' ? 'success' : 'danger'"
+            class="text-capitalize p-2"
+            >{{
+              data.item.status === 'publish' ? 'Published' : 'Drafted'
+            }}</b-badge
+          ></slot
+        >
       </template>
       <template #cell(avatar)="data">
         <slot name="avatar" :data="data">{{ data.value }}</slot>
@@ -95,23 +109,21 @@
           ><span>{{ data.item.end_date | DateTimeFormat }}</span></slot
         >
       </template>
+      <template #cell(available_date)="data">
+        <slot name="end_date" :data="data"
+          ><span>{{ data.item.available_date | DateFormat }}</span></slot
+        >
+      </template>
+      <template #cell(due_date)="data">
+        <slot name="due_date" :data="data"
+          ><span>{{ data.item.due_date | DateFormat }}</span></slot
+        >
+      </template>
+
       <template #cell(Progress)="data">
         <slot name="Progress" :data="data"></slot>
-        <!-- <b-progress class="mt-2" :max="10">
-          <b-progress-bar
-            :value="data.item.progress"
-            variant="success"
-          ></b-progress-bar>
-          <b-progress-bar
-            :value="10 - data.item.progress"
-            variant="danger"
-          ></b-progress-bar>
-        </b-progress> -->
       </template>
-      <!-- <template #cell(no_of_students)="data">
-        <slot name="no_of_students" :data="data"></slot>
-     
-      </template> -->
+
       <template #cell(actions)="row">
         <div class="text-left w-auto">
           <button
@@ -129,13 +141,6 @@
             <span class="iconify text-danger" data-icon="mi:delete"></span>
           </button>
         </div>
-
-        <!-- <button class="btn">
-          <span class="iconify text-danger" data-icon="mi:delete"></span>
-        </button> -->
-
-        <!-- <b-button size="sm" class="mr-1"> Info modal </b-button> -->
-        <!-- <b-button size="sm"> extra_icons </b-button> -->
       </template>
       <template #cell(dots)="row">
         <b-dropdown

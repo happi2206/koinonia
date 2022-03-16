@@ -1,6 +1,6 @@
 <template>
   <div class="bodylightgray">
-    <div class="mt-5 pt-3 pt-lg-5 horizontalspacing">
+    <div class="mt-4 pt-3 pt-lg-5 horizontalspacing">
       <div class="my-md-4">
         <a
           href="#"

@@ -213,12 +213,11 @@ export default {
           `admin/create-an-instructor`,
           payload
         )
-        this.userdetails = users.items.reverse()
-        this.perPage = users.size
-        this.totalItems = users.total
-        this.currentPage = users.page
+
+        this.getAllInstructors()
         this.$bvModal.hide('addInstructor')
-        this.$toast.success('Admin created Successfully')
+        this.$toast.success('Instructor created Successfully')
+        this.getAllInstructors()
       } catch (e) {
         this.$toast.error(e)
       } finally {
