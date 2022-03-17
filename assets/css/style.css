@@ -1,14 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
+/* Brown Font  */
 @font-face {
-  font-family: 'Ancona-Ex';
-  src: url('../font/AnconaEx.woff') format('woff'),
-    url('../font/AnconaEx.woff') format('woff2');
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-RegularItalic.woff2') format('woff2'),
+    url('../font/brown/Brown-RegularItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-Bold.woff2') format('woff2'),
+    url('../font/brown/Brown-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-Regular.woff2') format('woff2'),
+    url('../font/brown/Brown-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-LightItalic.woff2') format('woff2'),
+    url('../font/brown/Brown-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-BoldItalic.woff2') format('woff2'),
+    url('../font/brown/Brown-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
 
+@font-face {
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-Thin.woff2') format('woff2'),
+    url('../font/brown/Brown-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-Light.woff2') format('woff2'),
+    url('../font/brown/Brown-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brown';
+  src: url('../font/brown/Brown-ThinItalic.woff2') format('woff2'),
+    url('../font/brown/Brown-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
   font-display: swap;
 }
 /* @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/Ancona-Regular.ttf') format('ttf'),
     url('../font/Ancona-Ex-Regular.ttf') format('truetype'),
     url('../font/AnconaEx.svg') format('svg'),
@@ -21,7 +80,7 @@
 } */
 
 /* @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf'),
     url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf');
   font-weight: bold;
@@ -29,7 +88,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/brown/Ancona-Ex-Regular.ttf') format('ttf'),
     url('../font/brown/Brown-Regular.ttf') format('ttf');
   font-weight: normal;
@@ -37,7 +96,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/brown/Brown-LightItalic.ttf') format('ttf'),
     url('../font/brown/Brown-LightItalic.ttf') format('ttf');
   font-weight: 300;
@@ -45,7 +104,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/brown/Brown-BoldItalic.ttf') format('ttf'),
     url('../font/brown/Brown-BoldItalic.ttf') format('ttf');
   font-weight: bold;
@@ -54,7 +113,7 @@
 }
 
 @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/brown/Brown-Thin.ttf') format('ttf'),
     url('../font/brown/Brown-Thin.ttf') format('ttf');
   font-weight: 100;
@@ -62,7 +121,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/brown/Brown-Light.ttf') format('ttf'),
     url('../font/brown/Brown-Light.woff') format('woff');
   font-weight: 300;
@@ -70,7 +129,7 @@
   font-display: swap;
 }
 @font-face {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   src: url('../font/brown/Brown-ThinItalic.ttf') format('ttf'),
     url('../font/brown/Brown-ThinItalic.woff') format('woff');
   font-weight: 100;
@@ -226,8 +285,8 @@ html body main {
 }
 
 button.mainbtn {
-  background-color: #FFCD06;
-  font-family: 'Ancona-Ex';
+  background-color: #ffcd06;
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -239,7 +298,7 @@ button.mainbtn {
 
 button.tertiarybtn {
   background-color: #00b2ff;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -250,7 +309,7 @@ button.tertiarybtn {
 }
 
 .dashboardlink {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -281,7 +340,7 @@ a:hover {
 }
 
 a.mainbtndashboard {
-  background-color: #FFCD06;
+  background-color: #ffcd06;
   color: black;
 
   text-align: left;
@@ -299,7 +358,7 @@ a.mainbtndashboard:hover {
 }
 
 button.mainbtndashboard {
-  background-color: #FFCD06;
+  background-color: #ffcd06;
   color: black;
 
   text-align: left;
@@ -316,7 +375,7 @@ button.loginbtndashboard {
   border-radius: 10px;
   border: 1px solid #fff;
   color: #fff;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -327,7 +386,7 @@ button.loginbtndashboard {
 
 input.mainbtndashboard {
   background-color: #d3a13b;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -349,7 +408,7 @@ button.mainbtndashboard:hover {
 
 button.searchbtninside {
   background-color: #d3a13b;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -363,7 +422,7 @@ button.searchbtninside {
 input.subscribebtn {
   background-color: #000;
   color: #fff;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -383,7 +442,7 @@ input.subscribebtn:hover {
 button.subscribebtn {
   background-color: #000;
   color: #fff;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -408,24 +467,24 @@ button.subscribebtn.rad6 {
   height: 42px;
 }
 
-.text-14{
+.text-14 {
   font-size: 14px;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
 }
-.text-12{
+.text-12 {
   font-size: 12px;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
 }
-.text-18{
+.text-18 {
   font-size: 18px;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
 }
-.text-16{
+.text-16 {
   font-size: 16px;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
 }
 button.loginbtn {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -436,7 +495,7 @@ button.loginbtn {
 }
 
 .header {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
@@ -446,7 +505,7 @@ button.loginbtn {
 }
 
 .header2 {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
@@ -456,7 +515,7 @@ button.loginbtn {
 }
 
 .mainparagraph {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -466,7 +525,7 @@ button.loginbtn {
 }
 
 .mainparagraph18 {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -476,7 +535,7 @@ button.loginbtn {
 }
 
 .biggerparagraph {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 20px;
   font-style: normal;
   font-weight: 300;
@@ -486,7 +545,7 @@ button.loginbtn {
 }
 
 .roboto24 {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 24px;
   font-style: normal;
   line-height: 28px;
@@ -495,7 +554,7 @@ button.loginbtn {
 }
 
 .roboto22 {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 22px;
   font-style: normal;
   line-height: 22px;
@@ -504,7 +563,7 @@ button.loginbtn {
 }
 
 .medparagraph {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -524,7 +583,7 @@ button.loginbtn {
 }
 
 .rubikheader {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 49px;
   font-style: normal;
   font-weight: 400;
@@ -534,7 +593,7 @@ button.loginbtn {
 }
 
 .rubikheader2 {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 25px;
   font-style: normal;
   font-weight: 400;
@@ -544,7 +603,7 @@ button.loginbtn {
 }
 
 .roboto32 {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -554,7 +613,7 @@ button.loginbtn {
 }
 
 .roboto12 {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -578,7 +637,7 @@ button.loginbtn {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .newsletterinputs::placeholder {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -608,7 +667,7 @@ button.loginbtn {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .forminputs::placeholder {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -632,7 +691,7 @@ button.loginbtn {
 }
 
 .accentcolorbg {
-  background-color: #FFCD06;
+  background-color: #ffcd06;
 }
 .accentcolor {
   color: #d3a13b !important;
@@ -658,7 +717,7 @@ button.loginbtn {
 }
 
 .footerbottom {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-weight: 300;
   font-size: 16px;
   font-style: normal;
@@ -697,7 +756,7 @@ button.loginbtn {
 }
 
 .brownheader {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -706,7 +765,7 @@ button.loginbtn {
 }
 
 .brownheaderlarge {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
@@ -716,7 +775,7 @@ button.loginbtn {
 }
 
 .brownparagraph {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -726,7 +785,7 @@ button.loginbtn {
 }
 
 .medbrownparagraphlogo {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -734,7 +793,7 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 .medbrownparagraph {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -742,7 +801,7 @@ button.loginbtn {
   letter-spacing: 0em;
 }
 td {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -750,7 +809,7 @@ td {
   letter-spacing: 0em;
 }
 th {
-  font-family: Roboto;
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -759,7 +818,7 @@ th {
 }
 
 .smallbrownparagraph {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -769,7 +828,7 @@ th {
 }
 
 .largebrownparagraph {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -779,7 +838,7 @@ th {
 }
 
 .brown24 {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -789,7 +848,7 @@ th {
 }
 
 .brown18 {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -804,7 +863,7 @@ th {
 }
 
 .brown20 {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -813,7 +872,7 @@ th {
   text-align: left;
 }
 .brown28 {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 28px;
   font-style: normal;
   font-weight: 400;
@@ -830,7 +889,7 @@ th {
 
 .thirdcontent {
   list-style-type: none;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -977,7 +1036,7 @@ th {
   padding: 8px 20px;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -987,7 +1046,7 @@ th {
 }
 
 .upload-btn-wrapper input[type='file'] {
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -1282,7 +1341,7 @@ th {
   background-color: #f5f6fa !important;
 }
 
-.table td{
+.table td {
   cursor: pointer;
 }
 .whitelogocontainer {
@@ -1313,7 +1372,7 @@ th {
 
 .custom-tabs .nav-link {
   color: #333333;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   border-left: none;
   border-right: none;
@@ -1325,9 +1384,9 @@ th {
   text-align: left;
 }
 .custom-tabs .nav-link.active {
-  border-bottom: 7px solid #FFCE31;
+  border-bottom: 7px solid #ffce31;
   color: #0734aa;
-  font-family: 'Ancona-Ex';
+  font-family: Brown;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -1437,7 +1496,7 @@ th {
   }
 
   .brownheaderlarge {
-    font-family: 'Ancona-Ex';
+    font-family: Brown;
     font-size: 28px;
     line-height: 40px;
   }
@@ -1486,7 +1545,7 @@ th {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
   /* .forminputs::placeholder {
-    font-family: 'Ancona-Ex';
+    font-family: Brown;
     font-weight: 300;
     font-size: 10px !important;
     font-size: 16px;
