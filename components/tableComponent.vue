@@ -75,9 +75,9 @@
         <slot name="submissions" :data="data">{{ data.value }}</slot>
       </template>
 
-      <!-- <template #cell(status)="data">
-        <slot name="status" :data="data">{{ data.value }}</slot>
-      </template> -->
+      <template #cell(stats)="data">
+        <slot name="stats" :data="data">{{ data.value }}</slot>
+      </template>
 
       <!-- example -->
 
@@ -92,6 +92,7 @@
           ></slot
         >
       </template>
+
       <template #cell(avatar)="data">
         <slot name="avatar" :data="data">{{ data.value }}</slot>
       </template>
@@ -117,6 +118,11 @@
       <template #cell(due_date)="data">
         <slot name="due_date" :data="data"
           ><span>{{ data.item.due_date | DateFormat }}</span></slot
+        >
+      </template>
+      <template #cell(published_at)="data">
+        <slot name="published_at" :data="data"
+          ><span>{{ data.item.published_at | DateFormat }}</span></slot
         >
       </template>
 

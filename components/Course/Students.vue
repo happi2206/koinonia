@@ -184,6 +184,7 @@
           :perPage="perPage"
           :dropdownItem="dropdownItem"
           :totalItems="totalItems"
+          @delete_student="removeStudent"
         />
 
         <div class="row" v-else>
@@ -194,16 +195,14 @@
           ></grid-component>
         </div>
       </template>
-      <template #status="{ data }">
+      <!-- <template #stats>
         {{ data }}
-        <!-- <b-form-checkbox
+        <b-form-checkbox
           :button-variant="'success'"
-          v-model=""
-          
           size="lg"
           switch
-        ></b-form-checkbox> -->
-      </template>
+        ></b-form-checkbox>
+      </template> -->
     </filter-component>
   </div>
 </template>
@@ -216,13 +215,7 @@ export default {
   data() {
     return {
       students: [],
-      dropdownItem: [
-        'Share Link Code',
-        'Edit',
-        'Print_QR_Code',
-        'Delete',
-        'Edit',
-      ],
+      dropdownItem: ['ddit_student', 'delete_student'],
 
       json_data: [
         {
@@ -296,7 +289,7 @@ export default {
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
         { key: 'phone', sortable: true },
-        { key: 'status', sortable: true },
+        { key: 'dots', label: 'Action', sortable: false },
       ],
       busy: false,
       search: '',
@@ -492,6 +485,10 @@ export default {
     handlePage(e) {
       this.currentPage = e
       this.get_all_course_students()
+    },
+
+    removeStudent(e) {
+      console.log(e)
     },
   },
 }

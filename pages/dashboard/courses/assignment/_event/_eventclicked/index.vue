@@ -218,6 +218,7 @@
                         ></span>
                       </div>
                     </a>
+                    <span class="text-12">{{ file_name }}</span>
                   </div>
                 </div>
               </b-tab>
@@ -265,12 +266,6 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Exercise Instruction
               </label>
-
-              <!-- <textarea
-                v-model="instruction"
-                class="form-control"
-                placeholder="Instruction"
-              ></textarea> -->
 
               <client-only>
                 <ckeditor-nuxt
@@ -424,13 +419,7 @@ export default {
           }
         },
       },
-      editorConfigForSection: {
-        title: {
-          // placeholder: 'h1',
-        },
-        placeholder: 'Add Header / Description / Instruction',
-        removePlugins: ['Title'],
-      },
+
       editorConfigForSection: {
         title: {
           // placeholder: 'h1',
@@ -448,6 +437,7 @@ export default {
       temp_obtainable_score: '',
       status: '',
       temp_status: '',
+      file_name: '',
       type: '',
       temp_type: '',
       dateHandle: false,
@@ -489,6 +479,7 @@ export default {
       this.temp_available_date = assignmentContent.available_date
       this.status = assignmentContent.status
       this.temp_status = assignmentContent.status
+      this.file_name = assignmentContent.file_name
       this.due_date = assignmentContent.due_date
       this.temp_due_date = assignmentContent.due_date
       this.number_of_submission = assignmentContent.number_of_submission

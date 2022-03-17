@@ -14,23 +14,6 @@
         </div>
       </template>
 
-      <!-- <template #default="{ visualization }">
-        <table-component
-          :items="assignments"
-          :fields="assignmentFields"
-          @row-clicked="onRowClicked"
-          v-if="visualization === 'list'"
-        />
-
-        <div class="row" v-else>
-          <student-instructors-grid
-            :data="instructors"
-            v-for="(instructor, index) in course_instructors"
-            :key="index"
-          ></student-instructors-grid>
-        </div>
-      </template> -->
-
       <table-component
         :items="assignments"
         :fields="assignmentFields"
@@ -181,13 +164,12 @@
                     </div>
                     <div class="col-12 pl-0">
                       <hr />
-                      <div v-if="fileUpload" class="my-3 ml-3">
+                      <div class="my-3 ml-3">
                         <p
                           style="font-size: 0.95rem"
                           class="m-0 form-control-label"
                         >
                           Upload Essay Sample
-                          <span class="font-12">(optional)</span>
                         </p>
 
                         <input
@@ -391,7 +373,8 @@ export default {
         attachedFile.append('due_date', isoSecondDate)
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
-        attachedFile.append('file', this.file, this.file.name)
+        attachedFile.append('file', this.file)
+        attachedFile.append('file_name', this.file.name)
         console.log(attachedFile)
 
         let response = await this.$axios.post(
@@ -451,7 +434,8 @@ export default {
         attachedFile.append('due_date', isoSecondDate)
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
-        attachedFile.append('file', this.file, this.file.name)
+        attachedFile.append('file', this.file)
+        attachedFile.append('file_name', this.file.name)
         console.log(attachedFile)
 
         let response = await this.$axios.post(
