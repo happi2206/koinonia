@@ -30,7 +30,7 @@
             </h2>
           </div>
           <div class="my-md-2 my-0 p-1 row">
-            <div class="col-lg-4 pl-0 col-6">
+            <div class="col-lg-3 pl-0 pr-0 col-4">
               <p class="my-md-2 my-0 p-1 medbrownparagraph">
                 <span class="lightgraytext"> Course code:</span>
                 {{ courseDetail.course_code }}
@@ -41,7 +41,7 @@
                 {{ courseDetail.start_date | DateFormat }}
               </p>
             </div>
-            <div class="col-lg-4 pl-0 col-6">
+            <div class="col-lg-3 pl-0 col-4">
               <p class="my-md-2 my-0 p-1 medbrownparagraph">
                 <span class="lightgraytext"> No of student:</span>
                 {{ courseDetail.no_of_students }}
@@ -51,7 +51,7 @@
                 {{ courseDetail.end_date | DateFormat }}
               </p>
             </div>
-            <div class="col-lg-12 col-6">
+            <div class="col-lg-12 pl-0 col-4">
               <p class="my-md-2 my-0 p-1 medbrownparagraph">
                 {{ courseDetail.short_description | shortTextFilter }}
               </p>

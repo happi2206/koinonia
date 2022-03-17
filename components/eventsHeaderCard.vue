@@ -51,7 +51,19 @@
             </b-dropdown-item-button>
           </b-dropdown>
         </div>
-        <div class="my-2 d-flex flex-md-row flex-column">
+        <div class="my-2 d-flex flex-wrap">
+          <p class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Course name:</span>
+            <span class="">
+              {{ eventDetail.course_name }}
+            </span>
+          </p>
+          <p class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Course code:</span>
+            <span class="">
+              {{ eventDetail.course_code }}
+            </span>
+          </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Start Date:</span>
             <span class="">

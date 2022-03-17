@@ -19,6 +19,7 @@
         :fields="resourcesFields"
         :dropdownItem="dropdownItem"
         @Delete="deleteResource"
+        @Download="downloadResource"
         @View="viewResource"
       >
         <template #cell(published_at)="data">
@@ -70,7 +71,10 @@
           <div class="w-100 fix">
             <div class="row">
               <div class="col mb-2">
-                <label class="form-control-label text-12">Date published</label>
+                <label class="form-control-label text-12"
+                  >Date published
+                  <span class="font10 small">(Required)</span></label
+                >
                 <v-date-picker
                   v-model="publish_date"
                   :model-config="modelConfig"
@@ -95,6 +99,7 @@
             <div class="my-3 ml-3">
               <p style="font-size: 0.95rem" class="m-0 form-control-label">
                 Upload Resource Sample
+                <span class="font10 small">(Required)</span>
               </p>
 
               <input
@@ -107,7 +112,15 @@
               />
 
               <div
-                class="file-type-display w-25 py-3 px-3 text-center bg-white"
+                class="
+                  file-type-display
+                  w-75
+                  mb-2
+                  py-3
+                  px-3
+                  text-center
+                  bg-white
+                "
                 @click.prevent="$refs.uploadfile.click()"
               >
                 <span>Click to Upload</span>
@@ -256,6 +269,26 @@ export default {
     viewResource(e) {
       window.open(e.file_path)
     },
+    downloadResource(e) {
+      const link = document.createElement('a')
+      link.style.display = 'none'
+      console.log(e.file_path)
+      link.href = URL.createObjectURL(file)
+      link.href = `https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80`
+
+      document.body.appendChild(link)
+      link.click()
+
+      setTimeout(() => {
+        URL.revokeObjectURL(link.href)
+        link.parentNode.removeChild(link)
+      }, 0)
+
+      const myFile = new File([`${new Date()}: Meow!`], 'my-cat.pdf')
+
+      // Download it using our function
+      downloadResource(myFile)
+    },
   },
 }
 </script>
@@ -270,15 +303,15 @@ export default {
 
 ::-webkit-input-placeholder {
   /* Edge */
-  font-family: 'Ancona-Ex';
+  font-family: 'Brown';
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  font-family: 'Ancona-Ex';
+  font-family: 'Brown';
 }
 
 ::placeholder {
-  font-family: 'Ancona-Ex';
+  font-family: 'Brown';
 }
 </style>

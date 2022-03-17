@@ -268,7 +268,11 @@ export default {
         { key: 'type', sortable: true },
         { key: 'available_date', sortable: true },
         { key: 'due_date', sortable: true },
-        { key: 'number_of_submission', sortable: true },
+        {
+          key: 'number_of_submission',
+          label: 'Number of submissions',
+          sortable: true,
+        },
         { key: 'status', sortable: true },
       ],
       open: true,
@@ -432,6 +436,8 @@ export default {
         attachedFile.append('type', this.type)
         attachedFile.append('available_date', isoFirstDate)
         attachedFile.append('due_date', isoSecondDate)
+        console.log(this.obtainable_score)
+        return
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
         attachedFile.append('file', this.file)

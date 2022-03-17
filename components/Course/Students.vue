@@ -215,7 +215,7 @@ export default {
   data() {
     return {
       students: [],
-      dropdownItem: ['ddit_student', 'delete_student'],
+      dropdownItem: ['Edit_student', 'delete_student'],
 
       json_data: [
         {

@@ -18,7 +18,7 @@
 
     <div v-else>
       <div class="d-flex mynav align-items-center justify-content-between">
-        <div class="d-flex" style="font-size: 0.95rem; font-family: Ancona-Ex">
+        <div class="d-flex" style="font-size: 0.95rem; font-family: Brown">
           <span
             ><b-icon icon="arrow-left" class="mx-2 mainbluecolor"></b-icon
           ></span>
@@ -293,12 +293,22 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Start Date
               </label>
-              <input
-                type="date"
+              <v-date-picker
                 v-model="start_date"
-                class="form-control border-right"
-                placeholder="Available Date"
-              />
+                :model-config="modelConfig"
+                mode="date"
+              >
+                <template #default="{ togglePopover }">
+                  <span @click="togglePopover()">
+                    <input
+                      v-model="start_date"
+                      class="form-control form-control-md"
+                      style="background: #fbfdfe"
+                      placeholder="Start Date"
+                    />
+                  </span>
+                </template>
+              </v-date-picker>
             </div>
             <div class="my-4">
               <label for="" class="d-block medbrownparagraph graytext"
@@ -315,24 +325,42 @@
               <label for="" class="d-block medbrownparagraph graytext"
                 >Due Date
               </label>
-              <input
-                type="date"
+              <v-date-picker
                 v-model="due_date"
-                class="form-control border-right"
-                placeholder="Available Date"
-              />
-            </div>
-            <div class="my-4">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Available Date
-              </label>
-              <div class="input-group">
-                <input
+                :model-config="modelConfig"
+                mode="date"
+              >
+                <template #default="{ togglePopover }">
+                  <span @click="togglePopover()">
+                    <input
+                      v-model="due_date"
+                      class="form-control form-control-md"
+                      style="background: #fbfdfe"
+                      placeholder="Due Date"
+                    />
+                  </span>
+                </template>
+              </v-date-picker>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Available Date
+                </label>
+                <v-date-picker
                   v-model="available_date"
-                  type="date"
-                  class="form-control border-right"
-                  placeholder="Due Date"
-                />
+                  :model-config="modelConfig"
+                  mode="date"
+                >
+                  <template #default="{ togglePopover }">
+                    <span @click="togglePopover()">
+                      <input
+                        v-model="available_date"
+                        class="form-control form-control-md"
+                        style="background: #fbfdfe"
+                        placeholder="Available Date"
+                      />
+                    </span>
+                  </template>
+                </v-date-picker>
               </div>
             </div>
             <div class="my-4">
@@ -412,6 +440,10 @@ export default {
   scrollToTop: true,
   data() {
     return {
+      modelConfig: {
+        type: 'string',
+        mask: 'YYYY-MM-DD', // Uses 'iso' if missing
+      },
       components: {
         'ckeditor-nuxt': () => {
           if (process.client) {
@@ -475,12 +507,12 @@ export default {
       this.temp_name = assignmentContent.name
       this.obtainable_score = assignmentContent.obtainable_score
       this.temp_obtainable_score = assignmentContent.obtainable_score
-      this.available_date = assignmentContent.available_date
+      // this.available_date = assignmentContent.available_date
       this.temp_available_date = assignmentContent.available_date
       this.status = assignmentContent.status
       this.temp_status = assignmentContent.status
       this.file_name = assignmentContent.file_name
-      this.due_date = assignmentContent.due_date
+      // this.due_date = assignmentContent.due_date
       this.temp_due_date = assignmentContent.due_date
       this.number_of_submission = assignmentContent.number_of_submission
       this.temp_number_of_submission = assignmentContent.number_of_submission

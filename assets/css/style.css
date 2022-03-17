@@ -136,6 +136,26 @@
   font-style: italic;
   font-display: swap;
 } */
+
+
+@font-face {
+  font-family: 'Ancona-Ex';
+  src: url('../font/Ancona-Ex-Regular.ttf') format('ttf'),
+    url('../font/Ancona-Ex-Regular.ttf') format('ttf');
+  font-weight: regular;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Ancona-Ex';
+  src: url('../font/Ancona-Ex-Regular.ttf') format('ttf'),
+    url('../font/Ancona-Ex-Regular.ttf') format('ttf');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -785,12 +805,12 @@ button.loginbtn {
 }
 
 .medbrownparagraphlogo {
-  font-family: Brown;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 19px;
-  letter-spacing: 0em;
+  font-family: "Ancona-Ex";
+    font-style: normal;
+    line-height: 19px;
+    letter-spacing: 0;
+    font-size: 18px;
+    font-weight: 500;
 }
 .medbrownparagraph {
   font-family: Brown;
