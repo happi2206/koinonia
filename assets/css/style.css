@@ -66,8 +66,8 @@
   font-style: italic;
   font-display: swap;
 }
-/* @font-face {
-  font-family: Brown;
+@font-face {
+  font-family: 'Ancona-ex';
   src: url('../font/Ancona-Regular.ttf') format('ttf'),
     url('../font/Ancona-Ex-Regular.ttf') format('truetype'),
     url('../font/AnconaEx.svg') format('svg'),
@@ -77,7 +77,7 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-} */
+}
 
 /* @font-face {
   font-family: Brown;
@@ -137,8 +137,7 @@
   font-display: swap;
 } */
 
-
-@font-face {
+/* @font-face {
   font-family: 'Ancona-Ex';
   src: url('../font/Ancona-Ex-Regular.ttf') format('ttf'),
     url('../font/Ancona-Ex-Regular.ttf') format('ttf');
@@ -153,8 +152,7 @@
   font-weight: bold;
   font-style: normal;
   font-display: swap;
-}
-
+} */
 
 * {
   margin: 0;
@@ -302,6 +300,10 @@ html body main {
 
 .verticalspacing {
   margin-top: 100px;
+}
+
+.goldcolor {
+  color: #ffcd06;
 }
 
 button.mainbtn {
@@ -805,12 +807,17 @@ button.loginbtn {
 }
 
 .medbrownparagraphlogo {
-  font-family: "Ancona-Ex";
-    font-style: normal;
-    line-height: 19px;
-    letter-spacing: 0;
-    font-size: 18px;
-    font-weight: 500;
+  font-family: Ancona-ex;
+  src: url('../font/brown/Brown-Regular.woff2') format('woff2'),
+    url('../font/brown/Brown-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  font-style: normal;
+
+  letter-spacing: 0;
+  font-size: 20px;
+  font-weight: 500;
 }
 .medbrownparagraph {
   font-family: Brown;
