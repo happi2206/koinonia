@@ -185,7 +185,7 @@
                 href="#"
               >
                 <span class="mb-0 medbrownparagraphlogo text-white">
-                  KOINONIA</span
+                  KOINO<span class="goldcolor">NIA</span></span
                 >
               </nuxt-link>
             </div>
