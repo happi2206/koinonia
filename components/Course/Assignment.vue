@@ -111,7 +111,7 @@
                           </label>
                           <input
                             v-model="obtainable_score"
-                            type="number"
+                            type="text"
                             class="form-control border-right text-12"
                             placeholder="eg 100"
                             required
@@ -345,6 +345,7 @@ export default {
       try {
         this.addPreloader = true
         let attachedFile = new FormData()
+        this.status = 'draft'
         let isoFirstDate
         let isoSecondDate
 
@@ -368,7 +369,8 @@ export default {
           isoSecondDate = ''
         }
 
-        this.status = 'draft'
+        attachedFile.append('file', this.file)
+        attachedFile.append('file_name', this.file.name)
         attachedFile.append('course_id', this.course_id)
         attachedFile.append('name', this.name)
         attachedFile.append('instruction', this.instruction)
@@ -377,8 +379,7 @@ export default {
         attachedFile.append('due_date', isoSecondDate)
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
-        attachedFile.append('file', this.file)
-        attachedFile.append('file_name', this.file.name)
+
         console.log(attachedFile)
 
         let response = await this.$axios.post(
@@ -408,6 +409,7 @@ export default {
       try {
         this.addPreloader = true
         let attachedFile = new FormData()
+        this.status = 'publish'
         let isoFirstDate
         let isoSecondDate
 
@@ -429,19 +431,17 @@ export default {
           isoSecondDate = ''
         }
 
-        this.status = 'publish'
+        attachedFile.append('file', this.file)
+        attachedFile.append('file_name', this.file.name)
         attachedFile.append('course_id', this.course_id)
         attachedFile.append('name', this.name)
         attachedFile.append('instruction', this.instruction)
         attachedFile.append('type', this.type)
         attachedFile.append('available_date', isoFirstDate)
         attachedFile.append('due_date', isoSecondDate)
-        console.log(this.obtainable_score)
-        return
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
-        attachedFile.append('file', this.file)
-        attachedFile.append('file_name', this.file.name)
+
         console.log(attachedFile)
 
         let response = await this.$axios.post(

@@ -303,6 +303,17 @@
           ></grid-component>
         </div>
       </template>
+
+      <template #stats>
+        <b-form-checkbox
+          :button-variant="'success'"
+          v-model="data.value"
+          @change="updateAttendance(data.item.student.id, $event)"
+          size="lg"
+          switch
+        ></b-form-checkbox>
+      </template>
+
       <!-- <template #stats>
         {{ data }}
         <b-form-checkbox
@@ -323,7 +334,7 @@ export default {
   data() {
     return {
       students: [],
-      dropdownItem: ['Edit_student', 'delete_student'],
+      dropdownItem: ['Edit_student', 'delete_student', 'Make_Class_Captain'],
 
       json_data: [
         {
@@ -379,6 +390,7 @@ export default {
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
         { key: 'phone', sortable: true },
+        { key: 'stats', label: 'Status', sortable: true },
         { key: 'dots', label: 'Action', sortable: false },
       ],
       busy: true,

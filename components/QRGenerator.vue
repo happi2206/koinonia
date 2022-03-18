@@ -123,7 +123,9 @@ export default {
         )
         console.log(response.data)
         this.waterMark = `data:image/jpeg;base64, ${response.data}`
-      } catch {}
+      } catch (error) {
+        this.$toast.error(error)
+      }
     },
   },
   mounted() {

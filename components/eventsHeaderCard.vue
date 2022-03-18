@@ -29,41 +29,8 @@
           <h2 class="brown24 py-3 bold700 text-capitalize mb-0">
             {{ eventDetail.name }}
           </h2>
-
-          <b-dropdown
-            text="Actions"
-            size="md"
-            class="m-4 fmbt accentcolorbg"
-            variant="warning"
-          >
-            <b-dropdown-item-button>
-              <downloadexcel :fetch="fetchData">
-                <button class="button-height text-12">Download as excel</button>
-              </downloadexcel>
-            </b-dropdown-item-button>
-            <b-dropdown-item-button>
-              <button
-                @click.prevent="$refs.uploadcsv.click()"
-                class="button-height text-12"
-              >
-                Upload excel file
-              </button>
-            </b-dropdown-item-button>
-          </b-dropdown>
         </div>
-        <div class="my-2 d-flex flex-wrap">
-          <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Course name:</span>
-            <span class="">
-              {{ eventDetail.course_name }}
-            </span>
-          </p>
-          <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Course code:</span>
-            <span class="">
-              {{ eventDetail.course_code }}
-            </span>
-          </p>
+        <div class="my-2 d-flex flex-md-row flex-column">
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Start Date:</span>
             <span class="">
@@ -79,13 +46,13 @@
             <span class="lightgraytext"> No in class:</span>
             <span class=""> {{ present + absent }}</span>
           </p>
-          <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Present: {{ present }}</span>
-            <span class=""> </span>
+          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Student Present: </span>
+            <span class=""> {{ present }}</span>
           </p>
-          <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Absent: {{ absent }}</span>
-            <span class=""> </span>
+          <p v-if="eventDetail.students" class="my-2 medparagraph mx-3">
+            <span class="lightgraytext"> Student Absent:</span>
+            <span class=""> {{ absent }}</span>
           </p>
         </div>
       </div>
@@ -93,22 +60,29 @@
         <filter-component @search="SearchText" @view-by="sortStudents">
           <template #filterby>
             <div class="records-count medbrownparagraph">
-              <span class="medbrownparagraph">Filter by: </span>
+              <span class="medbrownparagraph">Check in type: </span>
               <select
                 class="records-count medbrownparagraph medbrownparagraph"
                 @change="sortBy($event.target.value)"
               >
                 <option class="medbrownparagraph" value="all">All</option>
-                <option class="medbrownparagraph" value="self">
-                  Self Check-In
-                </option>
-                <option class="medbrownparagraph" value="admin">
-                  Admin Check-In
-                </option>
+                <option class="medbrownparagraph" value="self">Self</option>
+                <option class="medbrownparagraph" value="admin">Admin</option>
               </select>
+              <!-- <pre>{{ is_Present }}</pre> -->
+              <select
+                class="records-count medbrownparagraph medbrownparagraph"
+                v-model="is_Present"
+              >
+                <option class="medbrownparagraph" value="">All</option>
+                <option class="medbrownparagraph" value="true">Present</option>
+                <option class="medbrownparagraph" value="false">Absent</option>
+              </select>
+              <!-- <button @click.prevent="exportAttendance"
+               class="btn ml-4 px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+              >Export CSV</button> -->
             </div>
           </template>
-
           <template #default="{ visualization }">
             <table-component
               :paginate="true"
@@ -134,19 +108,17 @@
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
 
+          <template #exportButton>
+            <downloadexcel :fetch="exportData">
+              <button class="accentcolorbg button-height py-2 px-3 ml-3">
+                <span class="iconify" data-icon="entypo:export"></span>
+              </button>
+            </downloadexcel>
+          </template>
+
           <template #importButton>
             <input
               @change="importData"
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              ref="uploadcsv"
-              type="file"
-              class="hidden"
-            />
-          </template>
-
-          <!-- <template #uploadButton>
-            <input
-              @change="recieveUpdate"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
               ref="uploadcsv"
               type="file"
@@ -163,20 +135,7 @@
                 data-height="16"
               ></span>
             </button>
-            <button
-              class="
-                btn
-                ml-5
-                px-md-4 px-3
-                py-2
-                mainbtndashboard
-                medbrownparagraph
-              "
-              @click="recieveUpdate"
-            >
-              <span class="iconify" data-icon="charm:upload"></span>
-            </button>
-          </template> -->
+          </template>
         </filter-component>
       </div>
     </div>
@@ -185,7 +144,6 @@
 
 <script>
 import downloadexcel from 'vue-json-excel'
-// import JsonExcel from 'vue-json-excel'
 
 export default {
   props: {
@@ -216,7 +174,8 @@ export default {
       dropdownItem: ['Edit Event', 'Delete Event'],
       fields: [
         // { key: 'id', sortable: true },
-        { key: 'student.firstname', label: 'First Name', sortable: true },
+        { key: 'student.other_name', label: 'First Name', sortable: true },
+
         { key: 'student.surname', label: 'Surname', sortable: true },
         {
           key: 'student.registration_number',
@@ -234,6 +193,7 @@ export default {
       totalItems: 0,
       currentPage: 1,
       check_in_method: '',
+      is_Present: '',
     }
   },
 
@@ -246,6 +206,14 @@ export default {
 
       if (this.check_in_method) {
         uri = uri + `&check_in_method=${this.check_in_method}`
+      }
+
+      if (this.is_Present) {
+        let currentBool = true
+        if (this.is_Present === 'false') {
+          currentBool = false
+        }
+        uri = uri + `&is_present=${currentBool}`
       }
 
       if (this.search) {
@@ -268,21 +236,29 @@ export default {
     }
   },
   methods: {
-    async fetchData() {
+    async exportData() {
       this.addPreloader = true
-      let response = await this.$axios.get(
-        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&pagination=false`
-      )
-      this.addPreloader = false
-
-      console.log(response)
-      return response.data.response
+      try {
+        const response = await this.$axios.$get(
+          `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
+          this.studentArray
+        )
+        console.log(response)
+        return response
+      } catch (e) {
+        console.log(e)
+      } finally {
+        this.addPreloader = false
+      }
     },
+
     async importData(e) {
       let file = e.target.files[0]
+
       let students = await new Promise((resolve) => {
         if (file) {
           let fileReader = new FileReader()
+
           fileReader.readAsBinaryString(file)
           fileReader.onload = (event) => {
             let data = event.target.result
@@ -297,65 +273,27 @@ export default {
         }
       })
       console.log(students)
-
-      let new_array = []
-      for (const iterator of students) {
-        if (iterator.check_in !== 'nill') {
-          const toIso = new Date(iterator.check_in).toISOString()
-
-          console.log(toIso)
-
-          new_array.push({
-            check_in: toIso,
-            status: iterator['status'],
-            by: iterator['by'],
-            device_type: iterator['device_type'],
-            registration_number: iterator['registration_number'],
-          })
-        }
-      }
-
-      console.log(new_array)
-
-      this.addPreloader = true
-
-      try {
-        await this.$axios.$patch(
-          `course-v/import-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
-          new_array
-        )
-        this.$toast.success('Students added Successfully')
-        this.addPreloader = false
-        this.$fetch()
-      } catch (e) {
-        console.log(e)
-      }
-    },
-
-    async recieveUpdate() {
-      try {
-        const response = await this.$axios.$get(
-          `course-v/update-attendance-list?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`,
-          this.studentArray
-        )
-        console.log(response)
-        return response
-      } catch (e) {
-        console.log(e)
-      }
     },
     sortBy(e) {
       if (e !== 'all') {
         this.check_in_method = e
         this.$fetch()
+      } else {
+        this.check_in_method = ''
+        this.$fetch()
       }
-      console.log(e)
-    },
 
-    sortStudents(e) {
-      this.perPage = e
       this.$fetch()
     },
+    async exportAttendance() {
+      try {
+        let uri = `course-v/export-course-attendance?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
+        const results = await this.$axios.$get(uri)
+        console.log(results)
+      } catch (error) {}
+      // alert(e)
+    },
+
     async getChecked() {
       try {
         let uri = `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&page=${this.currentPage}&size=${this.perPage}`
@@ -408,6 +346,12 @@ export default {
     },
   },
 
+  watch: {
+    is_Present(value) {
+      this.$fetch()
+    },
+  },
+
   components: {
     downloadexcel,
   },
@@ -419,10 +363,5 @@ export default {
 <style scoped>
 .button-height {
   height: 2.6rem;
-}
-.btn-warning {
-  color: #212529;
-  background-color: #d3a13b;
-  border-color: #d3a13b;
 }
 </style>
