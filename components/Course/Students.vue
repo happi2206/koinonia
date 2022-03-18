@@ -171,10 +171,117 @@
               </div>
             </form>
           </b-modal>
+
+          <b-modal
+            id="editStudent"
+            title="Edit Student"
+            v-b-modal.editModal
+            centered
+            hide-footer
+          >
+            <form class="modabody p-4" @submit.prevent="editStudent">
+              <div>
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Student Email
+                </label>
+
+                <input
+                  type="email"
+                  v-model="temp_student.email"
+                  required
+                  placeholder="Email"
+                  class="forminputs text-dark"
+                />
+              </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Student Name
+                </label>
+
+                <input
+                  type="text"
+                  v-model="temp_student.firstname"
+                  required
+                  placeholder="Name of student"
+                  class="forminputs text-dark"
+                />
+              </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Last Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  v-model="temp_student.surname"
+                  placeholder="Surname"
+                  class="forminputs text-dark"
+                />
+              </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Registration Number
+                </label>
+                <input
+                  type="text"
+                  required
+                  v-model="temp_student.registration_number"
+                  placeholder="Registration Number"
+                  class="forminputs text-dark"
+                />
+              </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Phone Number
+                </label>
+                <input
+                  type="text"
+                  required
+                  v-model="temp_student.phone"
+                  placeholder="Phone Number"
+                  class="forminputs text-dark"
+                />
+              </div>
+
+              <!-- <div class="my-4">
+                        <div class="form-check">
+                          <label class="form-check-label medbrownparagraph">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              required
+                              v-model="student.send_lastest_updates"
+                            />
+                          </label>
+                        </div>
+                      </div> -->
+
+              <div class="my-4">
+                <div class="d-flex justify-content-center">
+                  <button
+                    @click="editStudent"
+                    class="btn px-md-4 px-5 mainbtndashboard medbrownparagraph"
+                  >
+                    <span v-if="isbusy">
+                      <b-spinner
+                        label="loading"
+                        variant="primary"
+                        style="width: 2.5rem; height: 2.5rem"
+                        class="text-center"
+                      >
+                      </b-spinner>
+                    </span>
+                    <span v-else> Update Student </span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </b-modal>
         </div>
       </template>
       <template #default="{ visualization }">
         <table-component
+          :key="index"
           :items="students"
           :fields="studentfields"
           :busy="busy"
@@ -185,6 +292,7 @@
           :dropdownItem="dropdownItem"
           :totalItems="totalItems"
           @delete_student="removeStudent"
+          @Edit_student="openEditStudent"
         />
 
         <div class="row" v-else>
@@ -239,47 +347,29 @@ export default {
           },
         },
       ],
-      // {
-      //   "surname": "string",
-      //   "other_name": "string",
-      //   "avatar": "string",
-      //   "marital_status": "single",
-      //   "gender": "male",
-      //   "phone": "string",
-      //   "registration_number": "string",
-      //   "salutation": "string",
-      //   "send_lastest_updates": false,
-      //   "user_type": {
-      //     "user_type": "flat_user",
-      //     "link_code": "string",
-      //     "type": "student",
-      //     "email": "user@example.com"
-      //   }
-      // }
+
+      id: '',
+      isbusy: false,
 
       student: {
-        surname: '',
-        middlename: '',
-        firstname: '',
-        phone: '',
         email: '',
+        firstname: '',
+        id: '',
+        link_code: '',
+        phone: '',
         registration_number: '',
-        // surname: '',
-        // other_name: '',
-        // avatar: '',
-        // marital_status: 'single',
-        // gender: 'male',
-        // phone: 'string',
-        // registration_number: '',
-        // salutation: 'string',
-        // send_latest_updates: false,
-        // user_type: {
-        //   user_type: 'flat_user',
-        //   link_code: '',
-        //   email: '',
-        //   type: 'student',
-        // },
+        surname: '',
       },
+      temp_student: {
+        email: '',
+        firstname: '',
+        id: '',
+        link_code: '',
+        phone: '',
+        registration_number: '',
+        surname: '',
+      },
+      index: '',
       addStudent: '',
       studentfields: [
         { key: 'firstname', label: 'First name', sortable: true },
@@ -291,7 +381,7 @@ export default {
         { key: 'phone', sortable: true },
         { key: 'dots', label: 'Action', sortable: false },
       ],
-      busy: false,
+      busy: true,
       search: '',
       perPage: 30,
       totalItems: 0,
@@ -464,9 +554,8 @@ export default {
         }
         const students = await this.$axios.$get(uri)
 
-        console.log('students are ', students)
-
         this.students = students.items
+        // this.temp_student = students.items[this.index]
 
         this.perPage = students.size
         this.totalItems = students.total
@@ -487,8 +576,42 @@ export default {
       this.get_all_course_students()
     },
 
-    removeStudent(e) {
+    async removeStudent(e) {
       console.log(e)
+      try {
+        this.add_preloader = true
+        let response = await this.$axios.delete(
+          `course-v/remove-students-from-a-course?course_id=${this.$route.params.id}&id=${e.id}`
+        )
+
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error(error)
+      } finally {
+        this.add_preloader = false
+      }
+    },
+    openEditStudent(e) {
+      this.id = e.id
+      this.$bvModal.show('editStudent')
+      this.temp_student = e
+    },
+
+    async editStudent() {
+      try {
+        this.isbusy = true
+        let response = await this.$axios.patch(
+          `course-v/edit-student?student_id=${this.id}`,
+          this.temp_student
+        )
+
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error(error)
+      } finally {
+        this.isbusy = false
+        this.$bvModal.hide('editStudent')
+      }
     },
   },
 }

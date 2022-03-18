@@ -271,10 +271,12 @@ export default {
     async fetchData() {
       this.addPreloader = true
       let response = await this.$axios.get(
-        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}`
+        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&pagination=false`
       )
       this.addPreloader = false
-      return response.data.response.items
+
+      console.log(response)
+      return response.data.response
     },
     async importData(e) {
       let file = e.target.files[0]
