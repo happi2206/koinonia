@@ -293,7 +293,17 @@
           :totalItems="totalItems"
           @delete_student="removeStudent"
           @Edit_student="openEditStudent"
-        />
+        >
+          <template #makecaptain="{ data }">
+            <b-form-checkbox
+              :button-variant="'success'"
+              @change="sendId(data.item.id, $event)"
+              v-model="data.item.is_course_rep"
+              size="lg"
+              switch
+            ></b-form-checkbox>
+          </template>
+        </table-component>
 
         <div class="row" v-else>
           <grid-component
@@ -303,25 +313,6 @@
           ></grid-component>
         </div>
       </template>
-
-      <template #stats>
-        <b-form-checkbox
-          :button-variant="'success'"
-          v-model="data.value"
-          @change="updateAttendance(data.item.student.id, $event)"
-          size="lg"
-          switch
-        ></b-form-checkbox>
-      </template>
-
-      <!-- <template #stats>
-        {{ data }}
-        <b-form-checkbox
-          :button-variant="'success'"
-          size="lg"
-          switch
-        ></b-form-checkbox>
-      </template> -->
     </filter-component>
   </div>
 </template>
@@ -334,7 +325,7 @@ export default {
   data() {
     return {
       students: [],
-      dropdownItem: ['Edit_student', 'delete_student', 'Make_Class_Captain'],
+      dropdownItem: ['Edit_student', 'delete_student'],
 
       json_data: [
         {
@@ -390,7 +381,7 @@ export default {
         { key: 'link_code', sortable: true },
         // { key: 'gender', sortable: true },
         { key: 'phone', sortable: true },
-        { key: 'stats', label: 'Status', sortable: true },
+        { key: 'makecaptain', label: 'Assign Captain', sortable: true },
         { key: 'dots', label: 'Action', sortable: false },
       ],
       busy: true,
@@ -589,7 +580,6 @@ export default {
     },
 
     async removeStudent(e) {
-      console.log(e)
       try {
         this.add_preloader = true
         let response = await this.$axios.delete(
@@ -601,6 +591,22 @@ export default {
         this.$toast.error(error)
       } finally {
         this.add_preloader = false
+      }
+    },
+
+    async sendId(id, state) {
+      let url = state
+        ? 'course-v/assign-student-as-course-rep'
+        : 'course-v/un-assign-student-as-course-rep'
+      try {
+        let response = await this.$axios.$post(
+          `${url}?student_id=${id}&course_id=${this.$route.params.id}`
+        )
+        console.log(response)
+        this.$toast.success(response.message)
+        // this.get_all_course_students()
+      } catch (error) {
+        this.$toast.error(error.message)
       }
     },
     openEditStudent(e) {

@@ -55,7 +55,7 @@
                         <div class="my-2 text-16">
                           <label>Title</label>
                           <input
-                            v-model="sections[0].title"
+                            v-model="title"
                             type="text"
                             class="form-control"
                             style="
@@ -68,7 +68,7 @@
                         <div class="my-2 text-16">
                           <label>Objective</label>
                           <input
-                            v-model="sections[0].objective"
+                            v-model="objective"
                             type="text"
                             class="form-control"
                             style="
@@ -181,13 +181,11 @@
                 <div
                   class="d-flex align-items-center headings-border fullborder"
                 >
-                  <p class="mb-0 heading bold700" @click="showLecture">
-                    Lecture
-                  </p>
-                  <p class="mb-0 headings bold700" @click="showquiz">Quiz</p>
-                  <p class="mb-0 headings bold700" @click="showAssignment">
+                  <p class="mb-0 heading bold700" @click="showLecture">Title</p>
+                  <p class="mb-0 headings bold700" @click="showquiz">Items</p>
+                  <!-- <p class="mb-0 headings bold700" @click="showAssignment">
                     Assignment
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -323,7 +321,7 @@
 
             <!-- *******************Assignmentcover****************** -->
 
-            <div class="d-flex" v-if="assignmentCover">
+            <!-- <div class="d-flex" v-if="assignmentCover">
               <span
                 v-if="times"
                 class="plus mt-5 mr-3"
@@ -384,7 +382,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

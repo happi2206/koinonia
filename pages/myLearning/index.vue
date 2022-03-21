@@ -1,5 +1,8 @@
 <template>
-  <div class="px-4 pt-3 bodylightgray height">
+  <div
+    class="px-4 pt-3 bodylightgray height"
+    v-observe-visibility="getAllCourses"
+  >
     <div class="mt-5 pt-4">
       <h2 class="largebrownparagraph">My learning</h2>
     </div>
@@ -15,6 +18,18 @@
                   Link to a course by asking an administrator for the link code
                 </p>
               </div>
+            </div>
+
+            <div>
+              <table-component
+                :items="events"
+                v-if="visualization === 'list'"
+                :fields="fields"
+                :busy="busy"
+                :perPage="perPage"
+                :totalItems="totalItems"
+              >
+              </table-component>
             </div>
           </b-tab>
           <b-tab title="On-going">
@@ -66,6 +81,17 @@
 <script>
 export default {
   middleware: 'auth',
+  data() {
+    return {
+      busy: false,
+    }
+  },
+
+  methods: {
+    getAllCourses() {
+      console.log(`yay`)
+    },
+  },
 }
 </script>
 

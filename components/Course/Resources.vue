@@ -152,9 +152,21 @@
             >
           </div>
         </div>
-        <div class="m-3">
-          <button class="btn mainbtndashboard medbrownparagraph">
-            Add Resource
+        <div class="m-3 flex justify-content-end">
+          <button
+            class="btn mainbtndashboard medbrownparagraph"
+            style="height: 40px; width: 12rem; text-align: center"
+          >
+            <span v-if="isbusy">
+              <b-spinner
+                label="loading"
+                variant="primary"
+                style="width: 1.5rem; height: 1.5rem"
+                class="text-center"
+              >
+              </b-spinner>
+            </span>
+            <span v-else>Add Resource</span>
           </button>
         </div>
       </form>
@@ -171,6 +183,7 @@ export default {
         mask: 'YYYY-MM-DD', // Uses 'iso' if missing
       },
       file: null,
+      isbusy: false,
       publish_date: '',
       fileUpload: true,
       resources: '',
@@ -196,7 +209,7 @@ export default {
 
     async addResource() {
       try {
-        this.addPreloader = true
+        this.isbusy = true
         let isoFirstDate
         let attachedFile = new FormData()
         if (this.publish_date !== '') {
@@ -225,7 +238,7 @@ export default {
         this.$toast.error(error)
       } finally {
         this.getAllResources()
-        this.addPreloader = false
+        this.isbusy = false
         this.$refs['resourceModal'].hide()
       }
     },
@@ -272,9 +285,9 @@ export default {
     downloadResource(e) {
       const link = document.createElement('a')
       link.style.display = 'none'
-      console.log(e.file_path)
-      link.href = URL.createObjectURL(file)
-      link.href = `https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80`
+      // link.href = URL.createObjectURL(file)
+      link.href = e.file_path
+      link.target = '_blank'
 
       document.body.appendChild(link)
       link.click()
@@ -287,7 +300,7 @@ export default {
       const myFile = new File([`${new Date()}: Meow!`], 'my-cat.pdf')
 
       // Download it using our function
-      downloadResource(myFile)
+      // this.downloadResource(myFile)
     },
   },
 }
