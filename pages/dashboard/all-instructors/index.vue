@@ -95,6 +95,99 @@
             </div>
           </form>
         </b-modal>
+
+        <b-modal
+          id="editInstructor"
+          title="Edit Instructor"
+          v-b-modal.editModal
+          centered
+          hide-footer
+        >
+          <form class="modabody p-4">
+            <div>
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Student Email
+              </label>
+
+              <input
+                type="email"
+                v-model="temp_instructor.email"
+                required
+                placeholder="Email"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Student Name
+              </label>
+
+              <input
+                type="text"
+                v-model="temp_instructor.firstname"
+                required
+                placeholder="Name of student"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Last Name
+              </label>
+              <input
+                type="text"
+                required
+                v-model="temp_instructor.surname"
+                placeholder="Surname"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Middle Name
+              </label>
+              <input
+                type="text"
+                required
+                v-model="temp_instructor.middlename"
+                placeholder="Middle Name"
+                class="forminputs text-dark"
+              />
+            </div>
+            <div class="my-4">
+              <label for="" class="d-block medbrownparagraph graytext"
+                >Phone Number
+              </label>
+              <input
+                type="text"
+                required
+                v-model="temp_instructor.phone"
+                placeholder="Phone Number"
+                class="forminputs text-dark"
+              />
+            </div>
+
+            <div class="my-4">
+              <div class="d-flex justify-content-center">
+                <button
+                  @click.prevent="updateInstructor"
+                  class="btn px-md-4 px-5 mainbtndashboard medbrownparagraph"
+                >
+                  <span v-if="isbusy">
+                    <b-spinner
+                      label="loading"
+                      variant="primary"
+                      style="width: 1.5rem; height: 1.5rem"
+                      class="text-center"
+                    >
+                    </b-spinner>
+                  </span>
+                  <span v-else> Update Instructor </span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </b-modal>
       </div>
     </div>
 
@@ -111,6 +204,7 @@
             :dropdownItem="dropdownItem"
             @Share_Link_Code="shareLinkCode"
             @Delete_Instructor="handleDelete"
+            @Edit_Instructor="openEditModal"
           >
           </table-component>
         </filter-component>
@@ -126,7 +220,7 @@ export default {
 
   data() {
     return {
-      dropdownItem: ['Share_Link_Code', 'Delete_Instructor'],
+      dropdownItem: ['Share_Link_Code', 'Edit_Instructor', 'Delete_Instructor'],
       fields: [
         // { key: 'id', sortable: true },
         { key: 'firstname', label: 'First Name', sortable: true },
@@ -141,6 +235,8 @@ export default {
       alluserdetails: [],
       user: ['sample', 'no'],
       busy: true,
+      isbusy: false,
+      instructor_id: '',
       instructor: {
         firstname: '',
         middlename: '',
@@ -148,6 +244,14 @@ export default {
         email: '',
         password: '',
         phone: '',
+      },
+
+      temp_instructor: {
+        email: '',
+        firstname: '',
+        phone: '',
+        middlename: '',
+        surname: '',
       },
       search: '',
       perPage: 50,
@@ -185,7 +289,6 @@ export default {
     },
 
     async shareLinkCode(e) {
-      console.log('on change', e)
       try {
         await this.$axios.$post(
           `admin-v/generate-instructor-invite-code?user_id=${e.id}`
@@ -213,7 +316,6 @@ export default {
           `admin/create-an-instructor`,
           payload
         )
-
         this.getAllInstructors()
         this.$bvModal.hide('addInstructor')
         this.$toast.success('Instructor created Successfully')
@@ -243,15 +345,42 @@ export default {
           uri = uri + `&search=${this.search}`
         }
         const users = await this.$axios.$get(uri)
-        console.log(users)
         this.userdetails = users
-        this.perPage = users.size
-        this.totalItems = users.total
-        this.currentPage = users.page
+        // this.perPage = users.size
+        // this.totalItems = users.total
+        // this.currentPage = users.page
       } catch (error) {
         this.$toast.error(error)
       } finally {
         this.busy = false
+      }
+    },
+
+    openEditModal(e) {
+      this.instructor_id = e._id
+      this.temp_instructor.firstname = e.firstname
+      this.temp_instructor.email = e.email
+      this.temp_instructor.surname = e.surname
+      this.temp_instructor.middlename = e.middlename
+      this.temp_instructor.phone = e.phone
+      this.$bvModal.show('editInstructor')
+    },
+
+    async updateInstructor() {
+      try {
+        this.isbusy = true
+        let response = await this.$axios.$patch(
+          `course-v/edit-instructor?instructor_id=${this.instructor_id}`,
+          this.temp_instructor
+        )
+        console.log(response)
+        this.$toast.success(response.message)
+      } catch (error) {
+        this.$toast.error(error.message)
+      } finally {
+        this.getAllInstructors()
+        this.isbusy = false
+        this.$bvModal.hide('editInstructor')
       }
     },
     // searchtable

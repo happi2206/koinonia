@@ -282,25 +282,26 @@ export default {
     viewResource(e) {
       window.open(e.file_path)
     },
-    downloadResource(e) {
-      const link = document.createElement('a')
-      link.style.display = 'none'
-      // link.href = URL.createObjectURL(file)
-      link.href = e.file_path
-      link.target = '_blank'
-
-      document.body.appendChild(link)
-      link.click()
-
-      setTimeout(() => {
+    async downloadResource(e) {
+      // the response you get after submitting a file
+      try {
+        this.addPreloader = true
+        const response = await this.$axios.get(e.file_path, {
+          responseType: 'blob',
+        })
+        const blob = new Blob([response.data])
+        const link = document.createElement('a')
+        // ignore the above code if you already have a blob
+        // if you have a base 64 image, convert it to a blob and continue
+        link.href = URL.createObjectURL(blob)
+        link.download = `Report card.pdf`
+        link.click()
         URL.revokeObjectURL(link.href)
-        link.parentNode.removeChild(link)
-      }, 0)
-
-      const myFile = new File([`${new Date()}: Meow!`], 'my-cat.pdf')
-
-      // Download it using our function
-      // this.downloadResource(myFile)
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.addPreloader = false
+      }
     },
   },
 }

@@ -121,7 +121,6 @@ export default {
         let response = await this.$axios.post(
           `course-v/generate-qrcode?url_string=${this.location}`
         )
-        console.log(response.data)
         this.waterMark = `data:image/jpeg;base64, ${response.data}`
       } catch (error) {
         this.$toast.error(error)

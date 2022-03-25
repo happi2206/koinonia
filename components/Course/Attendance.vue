@@ -1,5 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
+    <preloader :show="addPreloader" />
     <filter-component @search="SearchText" @view-by="sortEvents">
       <template #graphicon>
         <span class="iconify" data-icon="system-uicons:graph-bar"></span>
@@ -296,8 +297,8 @@ export default {
       eventId: '',
       studentPresent: '',
       studentAbsent: '',
-      json_data: '',
       id: '',
+      addPreloader: false,
     }
   },
 
@@ -333,12 +334,26 @@ export default {
     },
 
     async fetchData() {
+      this.addPreloader = true
       let response = await this.$axios.get(
-        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.id}&event_id=${this.$route.params.eventId}&pagination=false`
+        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.id}&event_id=${this.id}&pagination=false`
       )
 
-      console.log(response)
-      return response.data.response
+      let newArray = []
+
+      for (const iterator of await response.data.response) {
+        newArray.push({
+          by: iterator.by ? iterator.by : 'nill',
+          check_in: iterator.check_in ? iterator.check_in : 'nill',
+          device_type: iterator.device_type ? iterator.device_type : 'nill',
+          status: iterator.status,
+          firstname: iterator.student.firstname,
+          surname: iterator.student.surname,
+          registration_number: iterator.student.registration_number,
+        })
+      }
+      this.addPreloader = false
+      return newArray
     },
     async printQr(e) {
       // Pass the element id here

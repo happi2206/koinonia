@@ -266,7 +266,7 @@
                       <b-spinner
                         label="loading"
                         variant="primary"
-                        style="width: 2.5rem; height: 2.5rem"
+                        style="width: 1.5rem; height: 1.5rem"
                         class="text-center"
                       >
                       </b-spinner>
@@ -365,7 +365,6 @@ export default {
       temp_student: {
         email: '',
         firstname: '',
-        id: '',
         link_code: '',
         phone: '',
         registration_number: '',
@@ -558,6 +557,7 @@ export default {
         const students = await this.$axios.$get(uri)
 
         this.students = students.items
+        // this.temp_students = students.items
         // this.temp_student = students.items[this.index]
 
         this.perPage = students.size
@@ -611,8 +611,12 @@ export default {
     },
     openEditStudent(e) {
       this.id = e.id
+      this.temp_student.firstname = e.firstname
+      this.temp_student.email = e.email
+      this.temp_student.surname = e.surname
+      this.temp_student.registration_number = e.registration_number
+      this.temp_student.phone = e.phone
       this.$bvModal.show('editStudent')
-      this.temp_student = e
     },
 
     async editStudent() {
@@ -628,6 +632,7 @@ export default {
         this.$toast.error(error)
       } finally {
         this.isbusy = false
+        this.get_all_course_students()
         this.$bvModal.hide('editStudent')
       }
     },

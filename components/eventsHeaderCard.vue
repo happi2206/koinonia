@@ -184,6 +184,7 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon'
 import downloadexcel from 'vue-json-excel'
 // import JsonExcel from 'vue-json-excel'
 
@@ -273,10 +274,22 @@ export default {
       let response = await this.$axios.get(
         `course-v/get-all-students-in-an-event?course_id=${this.$route.params.event}&event_id=${this.$route.params.eventclicked}&pagination=false`
       )
-      this.addPreloader = false
 
-      console.log(response.data)
-      return response.data.response
+      let newArray = []
+
+      for (const iterator of await response.data.response) {
+        newArray.push({
+          by: iterator.by ? iterator.by : 'nill',
+          check_in: iterator.check_in ? iterator.check_in : 'nill',
+          device_type: iterator.device_type ? iterator.device_type : 'nill',
+          status: iterator.status,
+          firstname: iterator.student.firstname,
+          surname: iterator.student.surname,
+          registration_number: iterator.student.registration_number,
+        })
+      }
+      this.addPreloader = false
+      return newArray
     },
     async importData(e) {
       let file = e.target.files[0]
