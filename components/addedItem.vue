@@ -3,15 +3,18 @@
     <div>
       <div>
         <div class="mx-3 my-2 d-flex justify-content-end">
-          <span @click="editInnerSection" class="mr-2" style="cursor: pointer"
-            ><span class="iconify" data-icon="bxs:pencil"></span
-          ></span>
-          <span
-            style="cursor: pointer"
-            @click="deleteInnerSection"
-            class="iconify"
-            data-icon="bxs:trash-alt"
-          ></span>
+          <div class="mr-2" @click="editItem">
+            <span style="cursor: pointer"
+              ><span class="iconify" data-icon="bxs:pencil"></span>
+            </span>
+          </div>
+          <div @click="deleteItem">
+            <span
+              style="cursor: pointer"
+              class="iconify"
+              data-icon="bxs:trash-alt"
+            ></span>
+          </div>
         </div>
         <div class="newLecture fullborder text-14 ml-5 mb-5">
           <div
@@ -42,7 +45,27 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    editItem() {
+      this.$emit('editItem', true)
+    },
+    deleteItem() {
+      this.$emit('deleteItem', this.index)
+    },
+  },
+  props: {
+    item: {
+      type: Object,
+    },
+    index: {
+      type: Number,
+    },
+  },
+}
 </script>
 
 <style>

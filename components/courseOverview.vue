@@ -45,8 +45,15 @@
               @deleteEmit="deleteEmit"
               @section="sectionsfunc($event, index)"
               :sections="sections"
+              v-show="renderScheme"
+              @innerSections="innerSectionsFunc($event, index)"
+              @items="itemsFunc($event, index)"
             />
           </div>
+
+          <button @click="sendDataModel" class="btn btn-outline-primary">
+            Save
+          </button>
         </div>
       </div>
     </div>
@@ -62,7 +69,12 @@ export default {
       sectionExist: false,
       addedInnerSection: true,
       sectionContent: false,
+      renderScheme: true,
       sections: [],
+      section: null,
+      item: null,
+      text: '',
+      list: '',
     }
   },
   props: {
@@ -72,10 +84,28 @@ export default {
     },
   },
   methods: {
+    async sendDataModel() {
+      try {
+        let dataModel = {
+          course_id: this.$route.params.id,
+          section: this.sections,
+        }
+        let response = await this.$axios.post(
+          `course-v/add-scheme-of-work`,
+          dataModel
+        )
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error(error)
+      } finally {
+      }
+    },
     createSection() {
       this.sections.push({
         title: '',
         objective: '',
+        section: this.section,
+        item: this.item,
       })
       console.log(this.sections)
     },
@@ -83,6 +113,15 @@ export default {
     sectionsfunc(e, i) {
       this.sections[i].title = e.title
       this.sections[i].objective = e.objective
+    },
+
+    innerSectionsFunc(e, i) {
+      this.text = e
+      this.section[i] = this.text
+    },
+    itemsFunc(e, i) {
+      this.list = e
+      this.item[i] = this.list
     },
 
     deleteScheme(e) {

@@ -48,12 +48,21 @@
     <subsection-input
       v-for="(sec, index) in innerSections"
       :key="index"
-      :innerIndex="index"
+      :index="index"
       @innerSection="innerSectionfunc($event, index)"
       @innerIndex="deleteInnerScheme($event)"
       @deleteInnerSection="deleteSubsection"
+      v-show="showInnersection"
     />
-    <items-input-field v-for="(item, index) in items" :key="index" />
+    <items-input-field
+      v-for="(item, index) in items"
+      :key="index"
+      :index="index"
+      @item="itemFunc($event, index)"
+      @emitIndex="deleteInstance($event)"
+      @deleteItem="deleteItemIndex"
+      v-show="showItems"
+    />
   </div>
 </template>
 
@@ -62,6 +71,8 @@ export default {
   data() {
     return {
       subSection: false,
+      showInnersection: true,
+      showItems: true,
       innerSections: [],
       items: [],
     }
@@ -96,6 +107,12 @@ export default {
     innerSectionfunc(e, i) {
       this.innerSections[i].title = e.title
       this.innerSections[i].objective = e.objective
+      this.$emit('innerSections', this.innerSections)
+    },
+    itemFunc(e, i) {
+      this.items[i].title = e.title
+      this.items[i].objective = e.objective
+      this.$emit('items', this.items)
     },
     deleteInnerScheme(e) {
       this.innerSections.splice(e, 1)
@@ -103,11 +120,14 @@ export default {
     deleteSubsection(e) {
       this.innerSections.splice(e, 1)
     },
+    deleteInstance(e) {
+      this.items.splice(e, 1)
+    },
+    deleteItemIndex(e) {
+      this.items.splice(e, 1)
+    },
   },
   props: {
-    index: {
-      type: Number,
-    },
     section: {
       type: Object,
     },

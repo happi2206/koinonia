@@ -37,7 +37,7 @@
         </div>
         <div class="card mt-3">
           <b-tabs content-class="mt-3" class="custom-tabs">
-            <b-tab title="Course Overiew" active>
+            <b-tab title="Course Overiew">
               <div>
                 <course-overview :courseDetail="courseDetail"></course-overview>
               </div>
@@ -51,8 +51,8 @@
             <b-tab title="Attendance" class="">
               <CourseAttendance />
             </b-tab>
-            <b-tab title="Assignment" class="">
-              <CourseAssignment />
+            <b-tab title="Exercise" class="">
+              <CourseExercise />
             </b-tab>
             <b-tab title="Resources" class="">
               <CourseResources />

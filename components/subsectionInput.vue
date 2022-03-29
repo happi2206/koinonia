@@ -88,7 +88,7 @@
     <added-inner-section
       v-show="showInnerSection"
       :innerSection="innerSection"
-      :index="innerIndex"
+      :index="index"
       @deleteIndex="deleteHandler"
       @editInnerSection="editHandler"
     />
@@ -108,7 +108,7 @@ export default {
     }
   },
   props: {
-    innerIndex: {
+    index: {
       type: Number,
     },
   },
@@ -131,7 +131,7 @@ export default {
   watch: {
     innerSection: {
       handler(newVal) {
-        this.$emit('section', newVal)
+        this.$emit('innerSection', newVal)
       },
       deep: true,
     },
