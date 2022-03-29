@@ -1,5 +1,6 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
+    <preloader :show="addPreloader" />
     <filter-component @search="SearchText" @view-by="sortEvents">
       <template #graphicon>
         <span class="iconify" data-icon="system-uicons:graph-bar"></span>
@@ -107,8 +108,8 @@
           v-if="visualization === 'list'"
           :fields="fields"
           :dropdownItem="dropdownItem"
-          @Download_as_PDF="downloadQr"
-          @Download_as_excel="fetchData"
+          @Print_qr_code="downloadQr"
+          @Download_as_excel="downloadexcel"
           @row-clicked="onRowClicked"
           :busy="busy"
           @page-changed="handlePage"
@@ -233,7 +234,7 @@
       </form>
     </b-modal>
     <div>
-      <downloadexcel ref="excel" :data="json_data">&nbsp; </downloadexcel>
+      <downloadexcel ref="excel" :fetch="fetchData">&nbsp; </downloadexcel>
     </div>
   </div>
 </template>
@@ -259,7 +260,7 @@ export default {
       },
       currentEvent: {},
       openComponent: false,
-      dropdownItem: ['Edit', 'Print qr code', 'Download_as_excel'],
+      dropdownItem: ['Edit', 'Print_qr_code', 'Download_as_excel'],
       fields: [
         { key: 'name', sortable: true },
         { key: 'start_date', label: 'Start Date/Time', sortable: true },
@@ -296,7 +297,8 @@ export default {
       eventId: '',
       studentPresent: '',
       studentAbsent: '',
-      json_data: '',
+      id: '',
+      addPreloader: false,
     }
   },
 
@@ -330,17 +332,28 @@ export default {
       this.eventId = e.id
       this.$refs.qcode.$refs.html2Pdf.generatePdf()
     },
-    // handler() {
-    //   this.fetchData()
-    //   console.log('yay')
-    // },
+
     async fetchData() {
+      this.addPreloader = true
       let response = await this.$axios.get(
-        `course-v/get-all-students-in-an-event?course_id=622b2f95f9fe6808cb5fe8cd&event_id=622b38ec4cc75f393317081f&page=1&size=100`
+        `course-v/get-all-students-in-an-event?course_id=${this.$route.params.id}&event_id=${this.id}&pagination=false`
       )
 
-      this.json_data = response.data.response.items
-      console.log(this.json_data)
+      let newArray = []
+
+      for (const iterator of await response.data.response) {
+        newArray.push({
+          by: iterator.by ? iterator.by : 'nill',
+          check_in: iterator.check_in ? iterator.check_in : 'nill',
+          device_type: iterator.device_type ? iterator.device_type : 'nill',
+          status: iterator.status,
+          firstname: iterator.student.firstname,
+          surname: iterator.student.surname,
+          registration_number: iterator.student.registration_number,
+        })
+      }
+      this.addPreloader = false
+      return newArray
     },
     async printQr(e) {
       // Pass the element id here
@@ -354,19 +367,24 @@ export default {
       console.log(this.currentEvent)
       console.log(editForm)
     },
+    downloadexcel(e) {
+      this.id = e.id
+      this.$refs.excel.$el.click()
+    },
 
     async submitEditedEvent() {
       this.is_creating = true
       try {
-        await this.$axios.$patch(
+        let response = await this.$axios.$patch(
           `course-v/update-course-event?course_id=${this.$route.params.id}&event_id=${this.currentEvent.id}`,
           this.currentEvent
         )
         this.is_creating = false
+        this.$toast.success(response.message)
         this.$bvModal.hide('editEvent')
         this.get_all_course_events()
       } catch (e) {
-        console.log(e)
+        this.$toast.error(e)
       }
     },
 

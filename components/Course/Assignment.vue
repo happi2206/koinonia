@@ -91,6 +91,7 @@
                         <div class="col-6 mb-2">
                           <label class="form-control-label text-12"
                             >Exercise Type
+                            <span class="font10 small">(Required)</span>
                           </label>
                           <v-select
                             v-model="type"
@@ -108,11 +109,13 @@
                         <div class="col-md-6 mb-2">
                           <label class="form-control-label text-12"
                             >Obtainable Score
+                            <span class="font10 small">(Required)</span>
                           </label>
                           <input
                             v-model="obtainable_score"
-                            type="number"
+                            type="text"
                             class="form-control border-right text-12"
+                            style="height: 35px"
                             placeholder="eg 100"
                             required
                           />
@@ -120,7 +123,8 @@
 
                         <div class="col-md-6 mb-2">
                           <label class="form-control-label text-12"
-                            >Available Date</label
+                            >Available Date
+                            <span class="font10 small">(Required)</span></label
                           >
                           <v-date-picker
                             v-model="available_date"
@@ -141,7 +145,8 @@
                         </div>
                         <div class="col-md-6 mb-2">
                           <label class="form-control-label text-12"
-                            >Due Date</label
+                            >Due Date
+                            <span class="font10 small">(Required)</span></label
                           >
                           <v-date-picker
                             v-model="due_date"
@@ -159,6 +164,42 @@
                               </span>
                             </template>
                           </v-date-picker>
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                          <label class="form-control-label text-12"
+                            >Start Date</label
+                          >
+                          <v-date-picker
+                            v-model="start_date"
+                            :model-config="modelConfig"
+                            mode="date"
+                          >
+                            <template #default="{ togglePopover }">
+                              <span @click="togglePopover()">
+                                <input
+                                  v-model="start_date"
+                                  class="form-control form-control-md"
+                                  style="background: #fbfdfe"
+                                  placeholder="Start Date"
+                                />
+                              </span>
+                            </template>
+                          </v-date-picker>
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                          <label class="form-control-label text-12"
+                            >Set duration
+                          </label>
+                          <input
+                            v-model="set_duration"
+                            type="text"
+                            class="form-control border-right text-12"
+                            style="height: 35px"
+                            placeholder="Set duration"
+                            required
+                          />
                         </div>
                       </div>
                     </div>
@@ -291,6 +332,8 @@ export default {
       due_date: '',
       obtainable_score: '',
       status: '',
+      start_date: '',
+      set_duration: '',
     }
   },
   components: {
@@ -345,15 +388,16 @@ export default {
       try {
         this.addPreloader = true
         let attachedFile = new FormData()
+        this.status = 'draft'
         let isoFirstDate
         let isoSecondDate
+        let isoStartDate
 
         if (this.available_date !== '') {
           let start = this.available_date
           let dateStr = start
           let date = new Date(dateStr)
           isoFirstDate = date.toISOString()
-          console.log(isoFirstDate)
         } else {
           isoFirstDate = ''
         }
@@ -363,12 +407,32 @@ export default {
           let dateString = end
           let secondDate = new Date(dateString)
           isoSecondDate = secondDate.toISOString()
-          console.log(isoSecondDate)
         } else {
           isoSecondDate = ''
         }
 
-        this.status = 'draft'
+        if (this.start_date !== '') {
+          let end = this.start_date
+          let dateString = end
+          let startDate = new Date(dateString)
+          isoStartDate = startDate.toISOString()
+        } else {
+          isoStartDate = ''
+        }
+
+        if (this.file !== null) {
+          attachedFile.append('file', this.file)
+          attachedFile.append('file_name', this.file.name)
+        }
+
+        if (this.start_date !== '') {
+          attachedFile.append('start_date', isoStartDate)
+        }
+
+        if (this.set_duration !== '') {
+          attachedFile.append('set_duration', this.set_duration)
+        }
+
         attachedFile.append('course_id', this.course_id)
         attachedFile.append('name', this.name)
         attachedFile.append('instruction', this.instruction)
@@ -377,9 +441,6 @@ export default {
         attachedFile.append('due_date', isoSecondDate)
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
-        attachedFile.append('file', this.file)
-        attachedFile.append('file_name', this.file.name)
-        console.log(attachedFile)
 
         let response = await this.$axios.post(
           `course-v/add-assignment`,
@@ -408,8 +469,10 @@ export default {
       try {
         this.addPreloader = true
         let attachedFile = new FormData()
+        this.status = 'publish'
         let isoFirstDate
         let isoSecondDate
+        let isoStartDate
 
         if (this.available_date !== '') {
           let start = this.available_date
@@ -429,20 +492,36 @@ export default {
           isoSecondDate = ''
         }
 
-        this.status = 'publish'
+        if (this.start_date !== '') {
+          let end = this.start_date
+          let dateString = end
+          let startDate = new Date(dateString)
+          isoStartDate = startDate.toISOString()
+        } else {
+          isoStartDate = ''
+        }
+
+        if (this.file !== null) {
+          attachedFile.append('file', this.file)
+          attachedFile.append('file_name', this.file.name)
+        }
+
+        if (this.start_date !== '') {
+          attachedFile.append('start_date', isoStartDate)
+        }
+
+        if (this.set_duration !== '') {
+          attachedFile.append('set_duration', this.set_duration)
+        }
+
         attachedFile.append('course_id', this.course_id)
         attachedFile.append('name', this.name)
         attachedFile.append('instruction', this.instruction)
         attachedFile.append('type', this.type)
         attachedFile.append('available_date', isoFirstDate)
         attachedFile.append('due_date', isoSecondDate)
-        console.log(this.obtainable_score)
-        return
         attachedFile.append('obtainable_score', this.obtainable_score)
         attachedFile.append('status', this.status)
-        attachedFile.append('file', this.file)
-        attachedFile.append('file_name', this.file.name)
-        console.log(attachedFile)
 
         let response = await this.$axios.post(
           `course-v/add-assignment`,

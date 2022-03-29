@@ -103,23 +103,7 @@
           <div class="card mt-3">
             <b-tabs content-class="mt-3" class="custom-tabs">
               <b-tab title="Details" active>
-                <!-- <div
-                  class="container p-3"
-                  style="font-size: 0.95rem; font-family: Ancona-Ex"
-                >
-                  <div>
-                    <h3 class="m-0 form-control-label">Instruction</h3>
-                    <p class="my-4" style="font-size: 0.95rem">
-                      {{ instruction }}
-                    </p>
-                  </div>
-                </div> -->
-
-                <div
-                  id="pills-tabContent"
-                  class="tab-content card-body"
-                  style="font-family: Ancona-Ex"
-                >
+                <div id="pills-tabContent" class="tab-content card-body">
                   <div>
                     <div>
                       <div class="row">
@@ -140,14 +124,6 @@
                         </div>
                         <div class="col-xl-5 border-xl-left border-gray">
                           <div class="row">
-                            <!-- <div
-                              class="col-xl-6 col-lg-4 col-md-3 col-sm-4 mb-3"
-                              style=""
-                            >
-                              <div class="text-12 text-light">Duration</div>
-                              <div class="text-14 text-dark">1 Minutes</div>
-                            </div> -->
-
                             <div
                               class="col-xl-6 col-lg-4 col-md-3 col-sm-4 mb-3"
                             >
@@ -158,14 +134,6 @@
                                 {{ temp_obtainable_score }} Marks
                               </div>
                             </div>
-                            <!-- <div
-                              class="col-xl-6 col-lg-4 col-md-3 col-sm-4 mb-3"
-                            >
-                              <div class="text-12 text-light">
-                                Total Number of Students
-                              </div>
-                              <div class="text-14 text-dark"> Student(s)</div>
-                            </div> -->
                             <div
                               class="col-xl-6 col-lg-4 col-md-3 col-sm-4 mb-3"
                             >
@@ -207,7 +175,7 @@
                     </div>
                   </div> -->
 
-                  <div class="file-indicator w-25 ml-2">
+                  <div v-if="file_path" class="file-indicator w-25 ml-2">
                     <a :href="file_path" target="_blank">
                       <div class="p-3">
                         <span
@@ -219,6 +187,10 @@
                       </div>
                     </a>
                     <span class="text-12">{{ file_name }}</span>
+                  </div>
+
+                  <div v-else>
+                    <p class="text-14">No file attached to this exercise</p>
                   </div>
                 </div>
               </b-tab>

@@ -105,18 +105,32 @@
 
             <div>
               <b-modal id="link" centered hide-header hide-footer>
-                <h2 class="brownparagraph bold700 my-3">Link a course</h2>
-                <div class="content px-1">
-                  <input
-                    type="text"
-                    class="forminputs"
-                    placeholder="enter code"
-                  />
-                </div>
+                <form @submit.prevent="linkToAcourse">
+                  <h2 class="brownparagraph bold700 my-3">Link a course</h2>
+                  <div class="content px-1">
+                    <input
+                      type="text"
+                      class="forminputs"
+                      placeholder="enter code"
+                      v-model="linkcode"
+                    />
+                  </div>
 
-                <div class="d-flex justify-content-center w-full my-2">
-                  <button class="btn py-2 rounded subscribebtn">Link</button>
-                </div>
+                  <div class="d-flex justify-content-center w-full my-2">
+                    <button class="btn py-2 rounded subscribebtn">
+                      <span v-if="isbusy">
+                        <b-spinner
+                          label="loading"
+                          variant="primary"
+                          style="width: 1.5rem; height: 1.5rem"
+                          class="text-center"
+                        >
+                        </b-spinner>
+                      </span>
+                      <span v-else>Link</span>
+                    </button>
+                  </div>
+                </form>
               </b-modal>
             </div>
           </div>
@@ -314,25 +328,6 @@
                     Logout
                   </b-dropdown-item>
                 </b-dropdown>
-
-                <div>
-                  <b-modal id="link" centered hide-header hide-footer>
-                    <h2 class="brownparagraph bold700 my-3">Link a course</h2>
-                    <div class="content px-1">
-                      <input
-                        type="text"
-                        class="forminputs"
-                        placeholder="enter code"
-                      />
-                    </div>
-
-                    <div class="d-flex justify-content-center w-full my-2">
-                      <button class="btn py-2 rounded subscribebtn">
-                        Link
-                      </button>
-                    </div>
-                  </b-modal>
-                </div>
               </div>
             </div>
           </div>
@@ -352,6 +347,8 @@ export default {
       isMobile: false,
       firstLetter: '',
       lastLetter: '',
+      linkcode: '',
+      isbusy: false,
     }
   },
   computed: {
@@ -396,6 +393,23 @@ export default {
       }
       if (!this.user.is_administrator) {
         this.titlecontent = 'Administrator'
+      }
+    },
+
+    async linkToAcourse() {
+      try {
+        this.isbusy = true
+        let response = await this.$axios.post(
+          `user/connect-to-an-student-using-link-code?invite_code=${this.linkcode}`
+        )
+
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        console.log(error)
+        this.$toast.error(error.data.detail.message)
+      } finally {
+        this.isbusy = false
+        this.$bvModal.hide('link')
       }
     },
   },

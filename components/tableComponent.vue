@@ -75,11 +75,29 @@
         <slot name="submissions" :data="data">{{ data.value }}</slot>
       </template>
 
-      <template #cell(stats)="data">
-        <slot name="stats" :data="data">{{ data.value }}</slot>
+      <template #cell(makecaptain)="data">
+        <slot name="makecaptain" :data="data">
+          <!-- <pre>{{ data }}</pre> -->
+          <b-form-checkbox
+            :button-variant="'success'"
+            v-model="data.value"
+            size="lg"
+            switch
+          ></b-form-checkbox>
+        </slot>
       </template>
 
       <!-- example -->
+
+      <!-- <template #status="{ data }">
+        <b-form-checkbox
+          :button-variant="'success'"
+          v-model="data.value"
+          @change="updateAttendance(data.item.student.id, $event)"
+          size="lg"
+          switch
+        ></b-form-checkbox>
+      </template> -->
 
       <template #cell(status)="data">
         <slot name="status" :data="data">
@@ -293,6 +311,11 @@ export default {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+
+    sendId: function (id) {
+      console.log(id)
+      this.$emit('sendId', id)
     },
   },
 }

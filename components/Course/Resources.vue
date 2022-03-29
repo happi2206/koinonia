@@ -152,9 +152,21 @@
             >
           </div>
         </div>
-        <div class="m-3">
-          <button class="btn mainbtndashboard medbrownparagraph">
-            Add Resource
+        <div class="m-3 flex justify-content-end">
+          <button
+            class="btn mainbtndashboard medbrownparagraph"
+            style="height: 40px; width: 12rem; text-align: center"
+          >
+            <span v-if="isbusy">
+              <b-spinner
+                label="loading"
+                variant="primary"
+                style="width: 1.5rem; height: 1.5rem"
+                class="text-center"
+              >
+              </b-spinner>
+            </span>
+            <span v-else>Add Resource</span>
           </button>
         </div>
       </form>
@@ -171,6 +183,7 @@ export default {
         mask: 'YYYY-MM-DD', // Uses 'iso' if missing
       },
       file: null,
+      isbusy: false,
       publish_date: '',
       fileUpload: true,
       resources: '',
@@ -196,7 +209,7 @@ export default {
 
     async addResource() {
       try {
-        this.addPreloader = true
+        this.isbusy = true
         let isoFirstDate
         let attachedFile = new FormData()
         if (this.publish_date !== '') {
@@ -225,7 +238,7 @@ export default {
         this.$toast.error(error)
       } finally {
         this.getAllResources()
-        this.addPreloader = false
+        this.isbusy = false
         this.$refs['resourceModal'].hide()
       }
     },
@@ -269,25 +282,26 @@ export default {
     viewResource(e) {
       window.open(e.file_path)
     },
-    downloadResource(e) {
-      const link = document.createElement('a')
-      link.style.display = 'none'
-      console.log(e.file_path)
-      link.href = URL.createObjectURL(file)
-      link.href = `https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80`
-
-      document.body.appendChild(link)
-      link.click()
-
-      setTimeout(() => {
+    async downloadResource(e) {
+      // the response you get after submitting a file
+      try {
+        this.addPreloader = true
+        const response = await this.$axios.get(e.file_path, {
+          responseType: 'blob',
+        })
+        const blob = new Blob([response.data])
+        const link = document.createElement('a')
+        // ignore the above code if you already have a blob
+        // if you have a base 64 image, convert it to a blob and continue
+        link.href = URL.createObjectURL(blob)
+        link.download = `Report card.pdf`
+        link.click()
         URL.revokeObjectURL(link.href)
-        link.parentNode.removeChild(link)
-      }, 0)
-
-      const myFile = new File([`${new Date()}: Meow!`], 'my-cat.pdf')
-
-      // Download it using our function
-      downloadResource(myFile)
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.addPreloader = false
+      }
     },
   },
 }
