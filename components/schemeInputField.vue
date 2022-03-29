@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div>
-      <form v-show="collapse">
+    <div v-if="collapse">
+      <form>
         <div>
           <div class="fullborder p-3 my-2">
             <div>
@@ -57,11 +57,17 @@
           </div>
         </div>
       </form>
+    </div>
+
+    <!-- *******************Output******************* -->
+    <div v-else>
       <added-scheme
         :section="section"
         @editScheme="editScheme"
         :showAddedScheme="showAddedScheme"
         @deleteAddedScheme="deleteInstance"
+        @innerSections="innerSectionsfunc"
+        @items="itemsfunc"
       />
     </div>
   </div>
@@ -102,6 +108,14 @@ export default {
     editScheme(e) {
       this.collapse = e
       this.showAddedScheme = false
+    },
+
+    innerSectionsfunc(e) {
+      this.$emit('innerSections', e)
+    },
+    itemsfunc(e) {
+      console.trace(e)
+      this.$emit('items', e)
     },
   },
 

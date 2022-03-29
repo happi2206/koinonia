@@ -68,7 +68,7 @@
                             width: 102px;
                             text-align: center;
                           "
-                          @click.prevent="removeInnerSection"
+                          @click.prevent="removeItem"
                         >
                           Cancel
                         </button>
@@ -79,7 +79,7 @@
                             width: 102px;
                             text-align: center;
                           "
-                          @click.prevent="openInnerSection"
+                          @click.prevent="openAddedItem"
                         >
                           Add
                         </button>
@@ -92,7 +92,13 @@
           </div>
         </div>
       </div>
-      <!-- <added-inner-section :item="item" /> -->
+      <added-item
+        @editItem="setItemState"
+        @deleteItem="deleteItem"
+        v-show="showInnerSection"
+        :index="index"
+        :item="item"
+      />
     </div>
   </div>
 </template>
@@ -101,12 +107,45 @@
 export default {
   data() {
     return {
-      subItem: false,
+      subItem: true,
+      showInnerSection: false,
       item: {
         title: '',
         objective: '',
       },
     }
+  },
+
+  methods: {
+    openAddedItem() {
+      this.showInnerSection = true
+      this.subItem = false
+    },
+    removeItem() {
+      this.$emit('emitIndex', this.index)
+    },
+    setItemState() {
+      this.subItem = true
+      this.showInnerSection = false
+    },
+    deleteItem(e) {
+      this.$emit('deleteItem', e)
+    },
+  },
+
+  props: {
+    index: {
+      type: Number,
+    },
+  },
+
+  watch: {
+    item: {
+      handler(newVal) {
+        this.$emit('item', newVal)
+      },
+      deep: true,
+    },
   },
 }
 </script>

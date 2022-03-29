@@ -6,12 +6,13 @@
           <span @click="editInnerSection" class="mr-2" style="cursor: pointer"
             ><span class="iconify" data-icon="bxs:pencil"></span
           ></span>
-          <span
-            style="cursor: pointer"
-            @click="deleteInnerSection"
-            class="iconify"
-            data-icon="bxs:trash-alt"
-          ></span>
+          <div @click="deleteInnerSection">
+            <span
+              style="cursor: pointer"
+              class="iconify"
+              data-icon="bxs:trash-alt"
+            ></span>
+          </div>
         </div>
         <div class="newLecture fullborder text-14 ml-5 mb-5">
           <div

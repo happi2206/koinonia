@@ -105,7 +105,7 @@
             :variant="data.item.status === 'publish' ? 'success' : 'danger'"
             class="text-capitalize p-2"
             >{{
-              data.item.status === 'publish' ? 'Published' : 'Drafted'
+              data.item.status === 'publish' ? 'Published' : 'Draft'
             }}</b-badge
           ></slot
         >

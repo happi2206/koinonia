@@ -29,6 +29,7 @@
     "luxon": "^2.3.1",
     "nuxt": "^2.15.8",
     "v-calendar": "^2.4.1",
+    "vee-validate": "3",
     "vue": "^2.6.14",
     "vue-flickity": "^1.2.1",
     "vue-html-to-paper": "^1.4.4",
@@ -43,6 +44,7 @@
     "vue-template-compiler": "^2.6.14",
     "vue-ui-preloader": "^1.2.1",
     "vue2-editor": "^2.10.3",
+    "vuelidate": "^0.7.7",
     "webpack": "^4.46.0"
   },
   "devDependencies": {

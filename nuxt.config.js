@@ -70,6 +70,7 @@ export default {
     '~/plugins/vue-html2pdf',
     '~/plugins/vue-html-to-paper.js',
     '~/plugins/vcalendar.js',
+    '~/plugins/veevalidate.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
