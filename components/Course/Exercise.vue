@@ -322,13 +322,14 @@
                     <div class="d-flex justify-content-end">
                       <b-dropdown
                         text="Save"
-                        size="lg"
-                        class="m-4 font-14 fmbt"
+                        size="md"
+                        class="m-4 text-14 fmbt"
                         variant="warning"
                       >
                         <b-dropdown-item-button>
                           <button
                             @click.prevent="draftAssignment"
+                            class="text-14"
                             type="submit"
                           >
                             Save as Draft
@@ -337,6 +338,7 @@
                         <b-dropdown-item-button>
                           <button
                             @click.prevent="publishAssignment"
+                            class="text-14"
                             type="submit"
                           >
                             Save and Publish
@@ -706,7 +708,7 @@ export default {
 }
 
 .fmbt {
-  width: 170px;
+  width: 110px;
   height: 40px;
 }
 

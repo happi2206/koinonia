@@ -20,5 +20,9 @@ extend('digits', {
     ...digits,
     message: 'Must be a number',
 })
+extend('phone', {
+    ...digits,
+    message: 'Enter a valid phone number',
+})
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)

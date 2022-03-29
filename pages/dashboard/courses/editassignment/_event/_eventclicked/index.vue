@@ -520,7 +520,6 @@ export default {
 
         if (assignmentContent.start_date) {
           let start_date = new Date(assignmentContent.start_date)
-          console.log(start_date)
           let year = start_date.getFullYear()
           let month = start_date.getMonth() + 1
           let dt = start_date.getDate()

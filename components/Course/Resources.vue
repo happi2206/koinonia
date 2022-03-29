@@ -21,6 +21,7 @@
         @Delete="deleteResource"
         @Download="downloadResource"
         @View="viewResource"
+        @row-clicked="viewResource"
       >
         <template #cell(published_at)="data">
           <span>{{ data.item.published_at | DateFormat }}</span>
@@ -35,141 +36,135 @@
       hide-footer
       ref="resourceModal"
     >
-      <form @submit.prevent="addResource" class="px-4 mx-3">
-        <div class="row mt-4">
-          <div class="fix-width">
-            <div class="mb-2">
-              <label class="form-control-label text-12"
-                >Resource title
-                <span class="font10 small">(Required)</span></label
-              >
-              <input
-                v-model="title"
-                class="form-control text-14"
-                style="background: #fbfdfe"
-                placeholder="Enter title"
-                required
-              />
-            </div>
-            <div class="mb-2">
-              <label class="form-control-label text-12"
-                >Resource description
-                <span class="font10 small">(Required)</span></label
-              >
-
-              <textarea
-                v-model="description"
-                class="form-control"
-                placeholder="Instruction"
-                required
-              ></textarea>
-            </div>
-          </div>
-          <div class="col-12 pl-0">
-            <hr />
-          </div>
-          <div class="w-100 fix">
-            <div class="row">
-              <div class="col mb-2">
+      <ValidationObserver v-slot="{ validate }">
+        <form @submit.prevent="addResource" class="px-4 mx-3">
+          <div class="row mt-4">
+            <div class="w-100">
+              <div class="mb-2">
                 <label class="form-control-label text-12"
-                  >Date published
+                  >Resource title
                   <span class="font10 small">(Required)</span></label
                 >
-                <v-date-picker
-                  v-model="publish_date"
-                  :model-config="modelConfig"
-                  mode="date"
+                <validation-provider rules="required" v-slot="{ errors }">
+                  <input
+                    v-model="title"
+                    class="form-control text-14"
+                    style="background: #fbfdfe"
+                    placeholder="Enter title"
+                    required
+                  />
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
+              </div>
+              <div class="mb-2">
+                <label class="form-control-label text-12"
+                  >Resource description
+                  <span class="font10 small">(Required)</span></label
                 >
-                  <template #default="{ togglePopover }">
-                    <span @click="togglePopover()">
-                      <input
-                        v-model="publish_date"
-                        class="form-control form-control-md"
-                        style="background: #fbfdfe"
-                        placeholder="Publish Date"
-                      />
-                    </span>
-                  </template>
-                </v-date-picker>
+                <validation-provider rules="required" v-slot="{ errors }">
+                  <textarea
+                    v-model="description"
+                    class="form-control"
+                    placeholder="Instruction"
+                    required
+                  ></textarea>
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
+              </div>
+            </div>
+            <div class="col-12 px-0">
+              <hr />
+            </div>
+            <div class="w-100">
+              <div class="row">
+                <div class="col mb-2">
+                  <label class="form-control-label text-12"
+                    >Date published
+                    <span class="font10 small">(Required)</span></label
+                  >
+                  <validation-provider rules="required" v-slot="{ errors }">
+                    <v-date-picker
+                      v-model="publish_date"
+                      :model-config="modelConfig"
+                      mode="date"
+                    >
+                      <template #default="{ togglePopover }">
+                        <span @click="togglePopover()">
+                          <input
+                            v-model="publish_date"
+                            class="form-control form-control-md"
+                            style="background: #fbfdfe"
+                            placeholder="Publish Date"
+                          />
+                        </span>
+                      </template>
+                    </v-date-picker>
+                    <span class="text-12" style="color: red">{{
+                      errors[0]
+                    }}</span>
+                  </validation-provider>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 px-0">
+              <hr />
+              <div class="my-3">
+                <p style="font-size: 0.95rem" class="m-0 form-control-label">
+                  Upload Resource Sample
+                  <span class="font10 small">(Required)</span>
+                </p>
+
+                <input
+                  type="file"
+                  accept=".pptx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*, .pdf"
+                  class="invisible"
+                  ref="uploadfile"
+                  @change="handleFileUpload($event)"
+                  required
+                />
+
+                <div
+                  class="file-type-display w-75 py-3 px-3 text-center bg-white"
+                  @click.prevent="$refs.uploadfile.click()"
+                >
+                  <div v-if="file" class="file-indicator">
+                    <span class="text-14">{{ file.name }}</span>
+                  </div>
+                  <span v-else>Click to Upload</span>
+                </div>
+                <p class="text-grey text-14">Formats: PPT, DOC, PDF, JPEG</p>
               </div>
             </div>
           </div>
-          <div class="col-12 pl-0">
-            <hr />
-            <div class="my-3 ml-3">
-              <p style="font-size: 0.95rem" class="m-0 form-control-label">
-                Upload Resource Sample
-                <span class="font10 small">(Required)</span>
-              </p>
-
-              <input
-                type="file"
-                accept=".pptx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*, .pdf"
-                class="invisible"
-                ref="uploadfile"
-                @change="handleFileUpload($event)"
-                required
-              />
-
-              <div
-                class="
-                  file-type-display
-                  w-75
-                  mb-2
-                  py-3
-                  px-3
-                  text-center
-                  bg-white
-                "
-                @click.prevent="$refs.uploadfile.click()"
-              >
-                <span>Click to Upload</span>
-              </div>
-              <p class="text-grey text-14">Formats: PPT, DOC, PDF, JPEG</p>
-            </div>
-          </div>
-          <div v-if="file" class="file-indicator w-75 ml-2">
-            <span class="cancel-btn" @click="deleteFile"
-              ><span
-                class="iconify"
-                data-icon="ic:baseline-cancel"
-                data-width="30"
-                data-height="30"
-              ></span
-            ></span>
-            <div class="d-flex justify-content-start p-3">
-              <span
-                class="iconify"
-                data-icon="akar-icons:file"
-                data-width="64"
-                data-height="64"
-              ></span>
-            </div>
-            <span
-              class="d-flex justify-content-start"
-              style="font-size: 14px"
-              >{{ file.name }}</span
+          <div class="my-3 flex justify-content-end">
+            <button
+              class="btn mainbtndashboard medbrownparagraph"
+              style="height: 40px; width: 9rem; text-align: center"
             >
+              <span v-if="isbusy">
+                <b-spinner
+                  label="loading"
+                  variant="primary"
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="text-center"
+                >
+                </b-spinner>
+              </span>
+              <span v-else>Add Resource</span>
+            </button>
           </div>
-        </div>
-        <div class="m-3 flex justify-content-end">
-          <button
-            class="btn mainbtndashboard medbrownparagraph"
-            style="height: 40px; width: 12rem; text-align: center"
-          >
-            <span v-if="isbusy">
-              <b-spinner
-                label="loading"
-                variant="primary"
-                style="width: 1.5rem; height: 1.5rem"
-                class="text-center"
-              >
-              </b-spinner>
-            </span>
-            <span v-else>Add Resource</span>
-          </button>
-        </div>
-      </form>
+          <div
+            type="button"
+            ref="runValidation"
+            id="runValidation"
+            @click="validate"
+          ></div>
+        </form>
+      </ValidationObserver>
     </b-modal>
   </div>
 </template>
@@ -208,38 +203,47 @@ export default {
     },
 
     async addResource() {
-      try {
-        this.isbusy = true
-        let isoFirstDate
-        let attachedFile = new FormData()
-        if (this.publish_date !== '') {
-          let start = this.publish_date
-          let dateStr = start
-          let date = new Date(dateStr)
-          isoFirstDate = date.toISOString()
-          console.log(isoFirstDate)
-        } else {
-          isoFirstDate = ''
+      if (this.$refs.runValidation) {
+        this.$refs.runValidation.click()
+      }
+      if (
+        this.file !== null &&
+        this.publish_date !== '' &&
+        this.description !== '' &&
+        this.title
+      ) {
+        try {
+          this.isbusy = true
+          let isoFirstDate
+          let attachedFile = new FormData()
+          if (this.publish_date !== '') {
+            let start = this.publish_date
+            let dateStr = start
+            let date = new Date(dateStr)
+            isoFirstDate = date.toISOString()
+            console.log(isoFirstDate)
+          } else {
+            isoFirstDate = ''
+          }
+
+          attachedFile.append('created_at', isoFirstDate)
+          attachedFile.append('description', this.description)
+          attachedFile.append('title', this.title)
+          attachedFile.append('file', this.file, this.file.name)
+
+          let response = await this.$axios.post(
+            `course-v/add-resource-to-a-course?course_id=${this.$route.params.id}`,
+            attachedFile
+          )
+
+          this.$toast.success(response.data.message)
+        } catch (error) {
+          this.$toast.error(error)
+        } finally {
+          this.getAllResources()
+          this.isbusy = false
+          this.$refs['resourceModal'].hide()
         }
-
-        attachedFile.append('created_at', isoFirstDate)
-        attachedFile.append('description', this.description)
-        attachedFile.append('title', this.title)
-        attachedFile.append('file', this.file, this.file.name)
-
-        let response = await this.$axios.post(
-          `course-v/add-resource-to-a-course?course_id=${this.$route.params.id}`,
-          attachedFile
-        )
-
-        this.$toast.success(response.data.message)
-      } catch (error) {
-        console.log(error)
-        this.$toast.error(error)
-      } finally {
-        this.getAllResources()
-        this.isbusy = false
-        this.$refs['resourceModal'].hide()
       }
     },
 

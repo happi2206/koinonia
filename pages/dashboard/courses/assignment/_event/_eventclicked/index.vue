@@ -581,7 +581,13 @@ export default {
   margin-left: 0rem;
   padding-bottom: 2rem;
 }
-
+.custom-tabs {
+  border-bottom: 0.2px solid #828282;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 100%;
+  flex-wrap: nowrap !important;
+}
 .file-display {
   background: #ecf7ff;
   border: 2px dashed #ffc107;

@@ -240,6 +240,7 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon'
 import downloadexcel from 'vue-json-excel'
 export default {
   components: {
@@ -342,14 +343,15 @@ export default {
       let newArray = []
 
       for (const iterator of await response.data.response) {
+        let timeIn = new Date(iterator.check_in)
+        let year = timeIn.toDateString()
+        let checkIn = year
         newArray.push({
-          by: iterator.by ? iterator.by : 'nill',
-          check_in: iterator.check_in ? iterator.check_in : 'nill',
-          device_type: iterator.device_type ? iterator.device_type : 'nill',
-          status: iterator.status,
-          firstname: iterator.student.firstname,
-          surname: iterator.student.surname,
-          registration_number: iterator.student.registration_number,
+          // by: iterator.by ? iterator.by : 'nill',
+          Registration_number: iterator.student.registration_number,
+          Surname: iterator.student.surname,
+          Firstname: iterator.student.firstname,
+          Time_in: iterator.check_in ? checkIn : 'nill',
         })
       }
       this.addPreloader = false

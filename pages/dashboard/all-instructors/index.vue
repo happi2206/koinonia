@@ -1,5 +1,6 @@
 <template>
   <div class="mt-5 horizontalspacing pt-3">
+    <preloader :show="addPreloader" />
     <div class="d-flex align-items-center pt-5 justify-content-between mb-4">
       <h2 class="largebrownparagraph bold700 mb-0">Instructors</h2>
       <div>
@@ -12,88 +13,127 @@
 
         <b-modal id="addInstructor" centered title="Add Instructor" hide-footer>
           <preloader :show="preloader_main" />
-          <form class="modabody px-3" @submit.prevent="addInstructor">
-            <div class="my-2">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Instructors First Name
-              </label>
-              <input
-                type="text"
-                v-model="instructor.firstname"
-                required
-                placeholder="e.g Name"
-                class="forminputs"
-              />
-            </div>
-            <div class="my-2">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Instructors Middle Name
-              </label>
-              <input
-                type="text"
-                v-model="instructor.middlename"
-                required
-                placeholder="e.g Name"
-                class="forminputs"
-              />
-            </div>
-            <div class="my-2">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Instructors Surname
-              </label>
-              <input
-                type="text"
-                v-model="instructor.surname"
-                required
-                placeholder="e.g Daniel"
-                class="forminputs"
-              />
-            </div>
-            <div class="my-2">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Email
-              </label>
-              <input
-                type="email"
-                v-model="instructor.email"
-                required
-                placeholder="e.g john@gmail.com"
-                class="forminputs"
-              />
-            </div>
-            <div class="my-2">
-              <div class="row">
-                <div class="col-md-12">
+          <div>
+            <ValidationObserver v-slot="{ validate }">
+              <form class="modabody px-3">
+                <div class="my-2">
                   <label for="" class="d-block medbrownparagraph graytext"
-                    >Phone
+                    >Instructors First Name
                   </label>
-                  <input
-                    type="text"
-                    v-model="instructor.phone"
-                    required
-                    placeholder="e.g 08032644455"
-                    class="forminputs text-dark"
-                  />
+                  <validation-provider rules="required" v-slot="{ errors }">
+                    <input
+                      type="text"
+                      v-model="instructor.firstname"
+                      placeholder="e.g Name"
+                      class="forminputs"
+                    />
+                    <span class="text-12" style="color: red">{{
+                      errors[0]
+                    }}</span>
+                  </validation-provider>
                 </div>
-              </div>
-            </div>
+                <div class="my-2">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Instructors Middle Name
+                  </label>
+                  <validation-provider rules="required" v-slot="{ errors }">
+                    <input
+                      type="text"
+                      v-model="instructor.middlename"
+                      placeholder="e.g Name"
+                      class="forminputs"
+                    />
+                    <span class="text-12" style="color: red">{{
+                      errors[0]
+                    }}</span>
+                  </validation-provider>
+                </div>
+                <div class="my-2">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Instructors Surname
+                  </label>
+                  <validation-provider rules="required" v-slot="{ errors }">
+                    <input
+                      type="text"
+                      v-model="instructor.surname"
+                      placeholder="e.g Daniel"
+                      class="forminputs"
+                    />
+                    <span class="text-12" style="color: red">{{
+                      errors[0]
+                    }}</span>
+                  </validation-provider>
+                </div>
+                <div class="my-2">
+                  <label for="" class="d-block medbrownparagraph graytext"
+                    >Email
+                  </label>
+                  <validation-provider
+                    rules="required|email"
+                    v-slot="{ errors }"
+                  >
+                    <input
+                      type="email"
+                      v-model="instructor.email"
+                      placeholder="e.g john@gmail.com"
+                      class="forminputs"
+                    />
+                    <span class="text-12" style="color: red">{{
+                      errors[0]
+                    }}</span>
+                  </validation-provider>
+                </div>
+                <div class="my-2">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="" class="d-block medbrownparagraph graytext"
+                        >Phone
+                      </label>
+                      <validation-provider
+                        rules="required|digits"
+                        v-slot="{ errors }"
+                      >
+                        <input
+                          type="text"
+                          v-model="instructor.phone"
+                          placeholder="e.g 08032644455"
+                          class="forminputs text-dark"
+                        />
+                        <span class="text-12" style="color: red">{{
+                          errors[0]
+                        }}</span>
+                      </validation-provider>
+                    </div>
+                  </div>
+                </div>
 
-            <div class="my-4">
-              <div class="flex gap-3 justify-content-center">
-                <input
-                  class="
-                    btn
-                    px-md-4 px-3
-                    py-2
-                    mainbtndashboard
-                    medbrownparagraph
-                  "
-                  type="submit"
-                  value="Create Instructor"
-                />
-              </div>
-            </div>
-          </form>
+                <div class="my-4">
+                  <div
+                    @click.prevent="onSubmit"
+                    class="flex gap-3 justify-content-center"
+                  >
+                    <input
+                      class="
+                        btn
+                        px-md-4 px-3
+                        py-2
+                        mainbtndashboard
+                        medbrownparagraph
+                      "
+                      type="submit"
+                      value="Create Instructor"
+                    />
+                  </div>
+                  <div
+                    type="button"
+                    ref="runValidation"
+                    id="runValidation"
+                    @click="validate"
+                  ></div>
+                </div>
+              </form>
+            </ValidationObserver>
+          </div>
         </b-modal>
 
         <b-modal
@@ -103,90 +143,125 @@
           centered
           hide-footer
         >
-          <form class="modabody p-4">
-            <div>
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Student Email
-              </label>
-
-              <input
-                type="email"
-                v-model="temp_instructor.email"
-                required
-                placeholder="Email"
-                class="forminputs text-dark"
-              />
-            </div>
-            <div class="my-4">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Student Name
-              </label>
-
-              <input
-                type="text"
-                v-model="temp_instructor.firstname"
-                required
-                placeholder="Name of student"
-                class="forminputs text-dark"
-              />
-            </div>
-            <div class="my-4">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Last Name
-              </label>
-              <input
-                type="text"
-                required
-                v-model="temp_instructor.surname"
-                placeholder="Surname"
-                class="forminputs text-dark"
-              />
-            </div>
-            <div class="my-4">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Middle Name
-              </label>
-              <input
-                type="text"
-                required
-                v-model="temp_instructor.middlename"
-                placeholder="Middle Name"
-                class="forminputs text-dark"
-              />
-            </div>
-            <div class="my-4">
-              <label for="" class="d-block medbrownparagraph graytext"
-                >Phone Number
-              </label>
-              <input
-                type="text"
-                required
-                v-model="temp_instructor.phone"
-                placeholder="Phone Number"
-                class="forminputs text-dark"
-              />
-            </div>
-
-            <div class="my-4">
-              <div class="d-flex justify-content-center">
-                <button
-                  @click.prevent="updateInstructor"
-                  class="btn px-md-4 px-5 mainbtndashboard medbrownparagraph"
-                >
-                  <span v-if="isbusy">
-                    <b-spinner
-                      label="loading"
-                      variant="primary"
-                      style="width: 1.5rem; height: 1.5rem"
-                      class="text-center"
-                    >
-                    </b-spinner>
-                  </span>
-                  <span v-else> Update Instructor </span>
-                </button>
+          <ValidationObserver v-slot="{ validate }">
+            <form class="modabody px-4 pb-4">
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Last Name
+                </label>
+                <validation-provider rules="required" v-slot="{ errors }">
+                  <input
+                    type="text"
+                    required
+                    v-model="temp_instructor.surname"
+                    placeholder="Surname"
+                    class="forminputs text-dark"
+                  />
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
               </div>
-            </div>
-          </form>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Name
+                </label>
+                <validation-provider rules="required" v-slot="{ errors }">
+                  <input
+                    type="text"
+                    v-model="temp_instructor.firstname"
+                    required
+                    placeholder="First name"
+                    class="forminputs text-dark"
+                  />
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
+              </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Middle Name
+                </label>
+                <validation-provider rules="required" v-slot="{ errors }">
+                  <input
+                    type="text"
+                    required
+                    v-model="temp_instructor.middlename"
+                    placeholder="Middle Name"
+                    class="forminputs text-dark"
+                  />
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
+              </div>
+              <div>
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Email
+                </label>
+                <validation-provider rules="required|email" v-slot="{ errors }">
+                  <input
+                    type="email"
+                    v-model="temp_instructor.email"
+                    required
+                    placeholder="Email"
+                    class="forminputs text-dark"
+                  />
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
+              </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Phone Number
+                </label>
+                <validation-provider
+                  rules="required|digits"
+                  v-slot="{ errors }"
+                >
+                  <input
+                    type="digit"
+                    required
+                    v-model="temp_instructor.phone"
+                    placeholder="Phone Number"
+                    class="forminputs text-dark"
+                  />
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
+              </div>
+
+              <div class="my-4">
+                <div class="d-flex justify-content-center">
+                  <button
+                    @click.prevent="updateInstructor"
+                    class="btn px-md-4 px-5 mainbtndashboard medbrownparagraph"
+                    style="width: 180px; text-align: center; height: 2.5rem"
+                  >
+                    <span v-if="isbusy">
+                      <b-spinner
+                        label="loading"
+                        variant="primary"
+                        style="width: 1.5rem; height: 1.5rem"
+                        class="text-center"
+                      >
+                      </b-spinner>
+                    </span>
+                    <span v-else> Update Instructor </span>
+                  </button>
+                </div>
+                <div
+                  type="button"
+                  ref="runValidation"
+                  id="runValidation"
+                  @click="validate"
+                ></div>
+              </div>
+            </form>
+          </ValidationObserver>
         </b-modal>
       </div>
     </div>
@@ -203,7 +278,6 @@
             :busy="busy"
             :dropdownItem="dropdownItem"
             @Share_Link_Code="shareLinkCode"
-            @Delete_Instructor="handleDelete"
             @Edit_Instructor="openEditModal"
           >
           </table-component>
@@ -220,7 +294,7 @@ export default {
 
   data() {
     return {
-      dropdownItem: ['Share_Link_Code', 'Edit_Instructor', 'Delete_Instructor'],
+      dropdownItem: ['Share_Link_Code', 'Edit_Instructor'],
       fields: [
         // { key: 'id', sortable: true },
         { key: 'firstname', label: 'First Name', sortable: true },
@@ -231,6 +305,7 @@ export default {
         { key: 'link_code', sortable: true },
         { key: 'dots', label: 'Action', sortable: false },
       ],
+      addPreloader: false,
       userdetails: [],
       alluserdetails: [],
       user: ['sample', 'no'],
@@ -279,14 +354,20 @@ export default {
         console.log(e)
       }
     },
-    async handleDelete(e) {
-      try {
-        await this.$axios.delete(`admin-v/delete-user?user_id=${e.id}`)
-        this.getAllInstructors()
-      } catch (e) {
-        console.log(e)
-      }
-    },
+    // async handleDelete(e) {
+    //   try {
+    //     this.addPreloader = true
+    //     let response = await this.$axios.delete(
+    //       `admin-v/delete-user?user_id=${e._id}`
+    //     )
+    //     this.$toast.success(response.data)
+    //   } catch (e) {
+    //     this.$toast.error(e)
+    //   } finally {
+    //     this.getAllInstructors()
+    //     this.addPreloader = false
+    //   }
+    // },
 
     async shareLinkCode(e) {
       try {
@@ -301,29 +382,41 @@ export default {
 
       console.log(e)
     },
-    async addInstructor() {
-      try {
-        this.preloader_main = true
-        let payload = {
-          surname: this.instructor.surname,
-          firstname: this.instructor.firstname,
-          middlename: this.instructor.middlename,
-          phone: this.instructor.phone,
-          email: this.instructor.email,
-          school_id: process.env.SCHOOL_ID,
+    async onSubmit() {
+      if (this.$refs.runValidation) {
+        this.$refs.runValidation.click()
+      }
+      if (
+        this.instructor.firstname !== '' &&
+        this.instructor.middlename !== '' &&
+        this.instructor.surname !== '' &&
+        this.instructor.phone !== '' &&
+        this.instructor.email !== ''
+      ) {
+        try {
+          this.preloader_main = true
+          let payload = {
+            surname: this.instructor.surname,
+            firstname: this.instructor.firstname,
+            middlename: this.instructor.middlename,
+            phone: this.instructor.phone,
+            email: this.instructor.email,
+            school_id: process.env.SCHOOL_ID,
+          }
+          const users = await this.$axios.$post(
+            `admin/create-an-instructor`,
+            payload
+          )
+          this.getAllInstructors()
+          this.$bvModal.hide('addInstructor')
+          this.$toast.success('Instructor created Successfully')
+          this.getAllInstructors()
+        } catch (e) {
+          this.$toast.error(e)
+          console.log(e)
+        } finally {
+          this.preloader_main = false
         }
-        const users = await this.$axios.$post(
-          `admin/create-an-instructor`,
-          payload
-        )
-        this.getAllInstructors()
-        this.$bvModal.hide('addInstructor')
-        this.$toast.success('Instructor created Successfully')
-        this.getAllInstructors()
-      } catch (e) {
-        this.$toast.error(e)
-      } finally {
-        this.preloader_main = false
       }
     },
     async getUsers() {
@@ -367,20 +460,26 @@ export default {
     },
 
     async updateInstructor() {
-      try {
-        this.isbusy = true
-        let response = await this.$axios.$patch(
-          `course-v/edit-instructor?instructor_id=${this.instructor_id}`,
-          this.temp_instructor
-        )
-        console.log(response)
-        this.$toast.success(response.message)
-      } catch (error) {
-        this.$toast.error(error.message)
-      } finally {
-        this.getAllInstructors()
-        this.isbusy = false
-        this.$bvModal.hide('editInstructor')
+      if (this.$refs.runValidation) {
+        this.$refs.runValidation.click()
+      }
+
+      if (this.temp_instructor) {
+        try {
+          this.isbusy = true
+          let response = await this.$axios.$patch(
+            `course-v/edit-instructor?instructor_id=${this.instructor_id}`,
+            this.temp_instructor
+          )
+          console.log(response)
+          this.$toast.success(response.message)
+        } catch (error) {
+          this.$toast.error(error.message)
+        } finally {
+          this.getAllInstructors()
+          this.isbusy = false
+          this.$bvModal.hide('editInstructor')
+        }
       }
     },
     // searchtable
@@ -398,4 +497,9 @@ export default {
 </script>
 
 <style>
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 0rem 1rem 1rem;
+}
 </style>
