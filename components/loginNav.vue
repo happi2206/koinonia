@@ -19,14 +19,21 @@
         darkborderbottom
       "
     >
-      <div class="d-block d-lg-none w-25">
-        <div class="d-flex align-items-center">
+      <div class="d-block d-lg-none w-65">
+        <div class="d-flex justify-content-between align-items-center">
           <div
             class="pr-2"
             @click="$nuxt.$emit('openSidebar')"
             v-if="authenticated"
           >
-            <b-icon icon="list" class="text-white"></b-icon>
+            <span class="text-white">
+              <span
+                class="iconify"
+                data-icon="heroicons-outline:menu-alt-1"
+                data-width="24"
+                data-height="24"
+              ></span>
+            </span>
           </div>
 
           <div class="d-block d-lg-none mr-3">
@@ -427,5 +434,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.w-65 {
+  width: 65%;
+}
 </style>
