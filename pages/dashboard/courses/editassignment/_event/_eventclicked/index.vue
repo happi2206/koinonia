@@ -282,7 +282,7 @@
                             >
                               <input
                                 v-model="set_duration"
-                                type="text"
+                                type="digit"
                                 class="form-control border-right text-12"
                                 style="height: 35px"
                                 placeholder="eg. 30mins"
@@ -555,20 +555,6 @@ export default {
         this.isLoading = false
       }
     },
-    closeForm() {
-      this.showForm = false
-      this.open = true
-      this.name = ''
-      this.instruction = ''
-      this.type = ''
-      this.available_date = ''
-      this.due_date = ''
-      this.obtainable_score = ''
-      this.status = ''
-      this.start_date = ''
-      this.set_duration = ''
-      this.file = null
-    },
 
     handleFileUpload(event) {
       this.file = event.target.files[0]
@@ -668,6 +654,7 @@ export default {
         } catch (error) {
           this.$toast.error(error)
         } finally {
+          this.fetch()
           this.addPreloader = false
         }
       }
@@ -766,7 +753,7 @@ export default {
         } catch (error) {
           this.$toast.error(error)
         } finally {
-          this.$fetch()
+          this.fetch()
           this.addPreloader = false
         }
       }
