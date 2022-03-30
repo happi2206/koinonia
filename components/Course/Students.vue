@@ -458,17 +458,26 @@ export default {
       })
 
       let new_array = []
+      let default_value = 'Nill'
       for (const iterator of students) {
-        new_array.push({
-          surname: iterator['Surname'],
-          middlename: iterator['Middle Name'],
-          firstname: iterator['First Name'],
-          phone: iterator['Phone'],
-          // email: iterator['Email'],
-          registration_number: iterator['Registration Number'],
-        })
+        let reg = iterator['Registration Number']
+        if (reg) {
+          if (!reg.includes('KSOM/2022/ABUJA/')) {
+            reg = 'KSOM/2022/ABUJA/' + reg
+          }
+          new_array.push({
+            surname: iterator['Surname'] || default_value,
+            middlename: iterator['Middle Name'] || default_value,
+            firstname: iterator['First Name'] || default_value,
+            phone: iterator['Phone'] || default_value,
+            email: iterator['Email'] || default_value,
+            gender: iterator['Gender'] || default_value,
+            registration_number: reg,
+            photo: iterator['Photo'] || default_value
+          })
+        }
       }
-      console.log(new_array)
+
       this.$bvModal.hide('uploadModal')
       this.add_preloader = true
 
