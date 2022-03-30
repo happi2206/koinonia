@@ -88,8 +88,8 @@ export default {
     async sendDataModel() {
       console.log(this.temp_index)
       for (let i = 0; i <= this.temp_index; i++) {
-        this.sections[i].section = this.section
-        this.sections[i].item = this.item
+        this.sections[i].section = this.section[i]
+        this.sections[i].item = this.item[i]
       }
       console.log(this.sections)
       return
@@ -112,8 +112,8 @@ export default {
       this.sections.push({
         title: '',
         objective: '',
-        section: null,
-        item: null,
+        section: [],
+        item: [],
       })
     },
 
