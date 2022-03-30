@@ -40,7 +40,7 @@
         <div class="site-container font14">
           <div class="conatiner">
             <div class="m-3" @click="closeForm">
-              <button class="btn mainbtndashboard medbrownparagraph">
+              <button class="btn btn-height mainbtndashboard medbrownparagraph">
                 Back to Exercises
               </button>
             </div>
