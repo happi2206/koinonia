@@ -51,7 +51,7 @@
             />
           </div>
 
-          <button @click="sendDataModel" class="btn btn-outline-primary">
+          <button @click="sendDataModel" class="btn mb-3 btn-outline-primary">
             Save
           </button>
         </div>
@@ -90,9 +90,8 @@ export default {
       for (let i = 0; i <= this.temp_index; i++) {
         this.sections[i].section = this.section
         this.sections[i].item = this.item
-        console.log(this.sections)
       }
-
+      console.log(this.sections)
       return
       try {
         let dataModel = {
