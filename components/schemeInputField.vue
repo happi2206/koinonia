@@ -114,7 +114,6 @@ export default {
       this.$emit('innerSections', e)
     },
     itemsfunc(e) {
-      console.trace(e)
       this.$emit('items', e)
     },
   },

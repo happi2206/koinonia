@@ -96,7 +96,7 @@
         @editItem="setItemState"
         @deleteItem="deleteItem"
         v-show="showInnerSection"
-        :index="index"
+        :index="i"
         :item="item"
       />
     </div>
@@ -122,7 +122,7 @@ export default {
       this.subItem = false
     },
     removeItem() {
-      this.$emit('emitIndex', this.index)
+      this.$emit('emitIndex', this.i)
     },
     setItemState() {
       this.subItem = true
@@ -134,7 +134,7 @@ export default {
   },
 
   props: {
-    index: {
+    i: {
       type: Number,
     },
   },

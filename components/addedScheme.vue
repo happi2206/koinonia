@@ -46,19 +46,19 @@
 
     <!-- **************************************************** -->
     <subsection-input
-      v-for="(sec, index) in innerSections"
-      :key="index"
-      :index="index"
-      @innerSection="innerSectionfunc($event, index)"
+      v-for="sec in innerSections"
+      :key="sec.index"
+      :index="sec.index"
+      @innerSection="innerSectionfunc($event, sec.index)"
       @innerIndex="deleteInnerScheme($event)"
       @deleteInnerSection="deleteSubsection"
       v-show="showInnersection"
     />
     <items-input-field
-      v-for="(item, index) in items"
-      :key="index"
-      :index="index"
-      @item="itemFunc($event, index)"
+      v-for="item in items"
+      :key="item.index"
+      :i="item.index"
+      @item="itemFunc($event, item.index)"
       @emitIndex="deleteInstance($event)"
       @deleteItem="deleteItemIndex"
       v-show="showItems"
@@ -92,26 +92,33 @@ export default {
     },
     createInnerSection() {
       this.subSection = false
+      const random = Math.random()
+
       this.innerSections.push({
         title: '',
         objective: '',
+        index: random,
       })
     },
     createItems() {
       this.subSection = false
+      const random = Math.random()
       this.items.push({
         title: '',
         objective: '',
+        index: random,
       })
     },
     innerSectionfunc(e, i) {
-      this.innerSections[i].title = e.title
-      this.innerSections[i].objective = e.objective
+      const item = this.innerSections.find((elem) => elem.index === i)
+      item.title = e.title
+      item.objective = e.objective
       this.$emit('innerSections', this.innerSections)
     },
     itemFunc(e, i) {
-      this.items[i].title = e.title
-      this.items[i].objective = e.objective
+      const item = this.items.find((elem) => elem.index === i)
+      item.title = e.title
+      item.objective = e.objective
       this.$emit('items', this.items)
     },
     deleteInnerScheme(e) {

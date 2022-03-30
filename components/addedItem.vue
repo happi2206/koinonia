@@ -16,7 +16,7 @@
             ></span>
           </div>
         </div>
-        <div class="newLecture fullborder text-14 ml-5 mb-5">
+        <div class="newLecture bg-primary fullborder text-14 ml-5 mb-5">
           <div
             v-b-toggle="`collapse-${index}`"
             class="py-3 px-4 d-flex align-items-center justify-content-between"
@@ -34,7 +34,7 @@
             ></span>
           </div>
           <b-collapse :id="`collapse-${index}`" class="mt-2">
-            <b-card class="mx-3 controlborder">
+            <b-card class="mx-3 bg-primary controlborder">
               <p class="text-14">{{ item.objective }}</p>
             </b-card>
           </b-collapse>

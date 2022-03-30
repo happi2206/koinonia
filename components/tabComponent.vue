@@ -98,4 +98,8 @@ export default {}
 </script>
 
 <style>
+.nav-link {
+  display: block;
+  padding: 1rem 1rem;
+}
 </style>

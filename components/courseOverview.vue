@@ -71,10 +71,11 @@ export default {
       sectionContent: false,
       renderScheme: true,
       sections: [],
-      section: null,
-      item: null,
+      section: [],
+      item: [],
       text: '',
       list: '',
+      temp_index: null,
     }
   },
   props: {
@@ -85,6 +86,14 @@ export default {
   },
   methods: {
     async sendDataModel() {
+      console.log(this.temp_index)
+      for (let i = 0; i <= this.temp_index; i++) {
+        this.sections[i].section = this.section
+        this.sections[i].item = this.item
+        console.log(this.sections)
+      }
+
+      return
       try {
         let dataModel = {
           course_id: this.$route.params.id,
@@ -104,24 +113,23 @@ export default {
       this.sections.push({
         title: '',
         objective: '',
-        section: this.section,
-        item: this.item,
+        section: null,
+        item: null,
       })
-      console.log(this.sections)
     },
 
     sectionsfunc(e, i) {
       this.sections[i].title = e.title
       this.sections[i].objective = e.objective
+      this.temp_index = i
+      console.log(this.temp_index)
     },
 
-    innerSectionsFunc(e, i) {
-      this.text = e
-      this.section[i] = this.text
+    innerSectionsFunc(e) {
+      this.section = e
     },
-    itemsFunc(e, i) {
-      this.list = e
-      this.item[i] = this.list
+    itemsFunc(e) {
+      this.item = e
     },
 
     deleteScheme(e) {
