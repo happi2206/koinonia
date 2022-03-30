@@ -90,7 +90,7 @@
                         >Phone
                       </label>
                       <validation-provider
-                        rules="required|digits"
+                        rules="required|digits:11"
                         v-slot="{ errors }"
                       >
                         <input
@@ -218,7 +218,7 @@
                   >Phone Number
                 </label>
                 <validation-provider
-                  rules="required|digits"
+                  rules="required|digits:11"
                   v-slot="{ errors }"
                 >
                   <input

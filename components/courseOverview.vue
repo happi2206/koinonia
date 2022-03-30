@@ -50,10 +50,21 @@
               @items="itemsFunc($event, index)"
             />
           </div>
-
-          <button @click="sendDataModel" class="btn mb-3 btn-outline-primary">
-            Save
-          </button>
+          <div class="d-flex justify-content-end">
+            <button
+              @click="sendDataModel"
+              class="
+                btn
+                text-14
+                mr-4
+                btn-height btn-width
+                mb-3
+                mainbtndashboard
+              "
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -88,11 +99,9 @@ export default {
     async sendDataModel() {
       console.log(this.temp_index)
       for (let i = 0; i <= this.temp_index; i++) {
-        this.sections[i].section = this.section[i]
-        this.sections[i].item = this.item[i]
+        this.sections[i].section = this.section
+        this.sections[i].item = this.item
       }
-      console.log(this.sections)
-      return
       try {
         let dataModel = {
           course_id: this.$route.params.id,
@@ -220,5 +229,9 @@ export default {
 
 .form-control-width {
   max-width: 98%;
+}
+.btn-width {
+  width: 110px;
+  text-align: center;
 }
 </style>

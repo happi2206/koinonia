@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
-import { required, email, confirmed, alpha_spaces, digits } from 'vee-validate/dist/rules'
+import { required, email, confirmed, alpha_spaces, digits, numeric } from 'vee-validate/dist/rules'
 extend('required', {
     ...required,
     message: 'This field is required',
@@ -18,6 +18,10 @@ extend('alpha_spaces', {
 })
 extend('digits', {
     ...digits,
+    message: 'Number must be 11 digits',
+})
+extend('numeric', {
+    ...numeric,
     message: 'Must be a number',
 })
 extend('phone', {

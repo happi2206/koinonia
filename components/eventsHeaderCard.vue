@@ -330,7 +330,6 @@ export default {
       }
 
       console.log(new_array)
-
       this.addPreloader = true
 
       try {

@@ -1,5 +1,5 @@
 <template>
-  <div v-observe-visibility="fetch">
+  <div>
     <preloader :show="addPreloader" />
     <div v-if="isLoading" style="margin-top: 10rem; margin-left: 2rem">
       <b-row>
@@ -462,8 +462,11 @@ export default {
       }
     },
   },
+  mounted() {
+    this.getExercise()
+  },
   methods: {
-    async fetch() {
+    async getExercise() {
       this.isLoading = true
 
       try {
@@ -653,7 +656,7 @@ export default {
         } catch (error) {
           this.$toast.error(error)
         } finally {
-          this.fetch()
+          this.getExercise()
           this.addPreloader = false
         }
       }
@@ -752,7 +755,7 @@ export default {
         } catch (error) {
           this.$toast.error(error)
         } finally {
-          this.fetch()
+          this.getExercise()
           this.addPreloader = false
         }
       }

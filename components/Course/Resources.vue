@@ -43,7 +43,7 @@
               <div class="mb-2">
                 <label class="form-control-label text-12"
                   >Resource title
-                  <span class="font10 small">(Required)</span></label
+                  <span class="font10 small" style="color: red">*</span></label
                 >
                 <validation-provider rules="required" v-slot="{ errors }">
                   <input
@@ -61,13 +61,13 @@
               <div class="mb-2">
                 <label class="form-control-label text-12"
                   >Resource description
-                  <span class="font10 small">(Required)</span></label
+                  <span class="font10 small" style="color: red">*</span></label
                 >
                 <validation-provider rules="required" v-slot="{ errors }">
                   <textarea
                     v-model="description"
                     class="form-control"
-                    placeholder="Instruction"
+                    placeholder="Description"
                     required
                   ></textarea>
                   <span class="text-12" style="color: red">{{
@@ -76,16 +76,13 @@
                 </validation-provider>
               </div>
             </div>
-            <div class="col-12 px-0">
-              <hr />
-            </div>
+            <div class="col-12 px-0"></div>
             <div class="w-100">
               <div class="row">
                 <div class="col mb-2">
                   <label class="form-control-label text-12"
-                    >Date published
-                    <span class="font10 small">(Required)</span></label
-                  >
+                    >Date published <span class="font10 small"></span
+                  ></label>
                   <validation-provider rules="required" v-slot="{ errors }">
                     <v-date-picker
                       v-model="publish_date"
@@ -111,11 +108,10 @@
               </div>
             </div>
             <div class="col-12 px-0">
-              <hr />
               <div class="my-3">
                 <p style="font-size: 0.95rem" class="m-0 form-control-label">
-                  Upload Resource Sample
-                  <span class="font10 small">(Required)</span>
+                  Upload Resource
+                  <span class="font10 small" style="color: red">*</span>
                 </p>
 
                 <input
@@ -189,7 +185,7 @@ export default {
       resourcesFields: [
         { key: 'title', sortable: true },
         { key: 'description', sortable: true },
-        { key: 'published_at', label: 'Publish date', sortable: true },
+        { key: 'published_at', label: 'Date published', sortable: true },
         { key: 'dots', label: 'Action', sortable: false },
       ],
     }
@@ -268,7 +264,7 @@ export default {
         )
 
         this.getAllResources()
-        this.$toast.success(response.data.message)
+        this.$toast.success(`Resource deleted successfully`)
       } catch (error) {
         this.$toast.error(error)
       } finally {
@@ -284,21 +280,33 @@ export default {
       this.open = false
     },
     viewResource(e) {
-      window.open(e.file_path)
+      window.open(
+        `https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80`
+      )
     },
     async downloadResource(e) {
       // the response you get after submitting a file
+      let first = e.file_path.charAt(e.file_path.length - 3)
+      let second = e.file_path.charAt(e.file_path.length - 2)
+      let third = e.file_path.charAt(e.file_path.length - 1)
+      let extension = `${first}${second}${third}`
+      console.log(extension)
+      let replace = e.file_path.replace('.pdf', '')
+      console.log(replace)
       try {
         this.addPreloader = true
-        const response = await this.$axios.get(e.file_path, {
-          responseType: 'blob',
-        })
+        const response = await this.$axios.get(
+          `https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80`,
+          {
+            responseType: 'blob',
+          }
+        )
         const blob = new Blob([response.data])
         const link = document.createElement('a')
         // ignore the above code if you already have a blob
         // if you have a base 64 image, convert it to a blob and continue
         link.href = URL.createObjectURL(blob)
-        link.download = `Report card.pdf`
+        link.download = `Report card.jpg`
         link.click()
         URL.revokeObjectURL(link.href)
       } catch (e) {
