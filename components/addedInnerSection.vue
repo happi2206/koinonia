@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-for="(inner, index) in innersections" :key="index">
       <div v-if="sectionContent">
         <div class="mx-3 my-2 d-flex justify-content-end">
           <span @click="editInnerSection" class="mr-2" style="cursor: pointer"
@@ -21,7 +21,7 @@
           >
             <div>
               <span style="font-weight: 600" class="text-16">
-                {{ innerSection.title }}
+                {{ innerSection.title || inner.title }}
               </span>
             </div>
             <span
@@ -33,7 +33,9 @@
           </div>
           <b-collapse :id="`collapse-${index}`" class="mt-2">
             <b-card class="mx-3 controlborder">
-              <p class="text-14">{{ innerSection.objective }}</p>
+              <p class="text-14">
+                {{ innerSection.objective || inner.objective }}
+              </p>
             </b-card>
           </b-collapse>
         </div>
@@ -64,6 +66,10 @@ export default {
     },
     index: {
       type: Number,
+    },
+    innersections: {
+      type: Array,
+      default: [],
     },
   },
 }

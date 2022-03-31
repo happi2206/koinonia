@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-observe-visibility="getSchemeOfWork">
       <div>
         <div>
           <div class="px-md-3 px-2 pb-3">
@@ -45,11 +45,15 @@
               @deleteEmit="deleteEmit"
               @section="sectionsfunc($event, index)"
               :sections="sections"
-              v-show="renderScheme"
               @innerSections="innerSectionsFunc($event, index)"
               @items="itemsFunc($event, index)"
+              :sectionTitle="sectionTitle"
+              :sectionObjective="sectionObjective"
+              :collapse="collapse"
+              :showAddedScheme="showAddedScheme"
             />
           </div>
+
           <div class="d-flex justify-content-end">
             <button
               @click="sendDataModel"
@@ -75,10 +79,8 @@
 export default {
   data() {
     return {
-      addedSection: false,
-      addSchemeType: false,
-      sectionExist: false,
-      addedInnerSection: true,
+      collapse: true,
+      showAddedScheme: false,
       sectionContent: false,
       renderScheme: true,
       sections: [],
@@ -87,6 +89,8 @@ export default {
       text: '',
       list: '',
       temp_index: null,
+      sectionTitle: '',
+      sectionObjective: '',
     }
   },
   props: {
@@ -95,6 +99,7 @@ export default {
       default: () => {},
     },
   },
+
   methods: {
     async sendDataModel() {
       console.log(this.temp_index)
@@ -114,6 +119,26 @@ export default {
         this.$toast.success(response.data.message)
       } catch (error) {
         this.$toast.error(error)
+      } finally {
+      }
+    },
+    async getSchemeOfWork() {
+      try {
+        let response = await this.$axios.$get(
+          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+        )
+
+        for (const iterator of await response.section) {
+          this.sections.push(iterator.section)
+          this.sectionTitle = iterator.title
+          this.sectionObjective = iterator.objective
+        }
+        if (this.sections.length === 1) {
+          this.collapse = false
+          this.showAddedScheme = true
+        }
+      } catch (error) {
+        console.log(error)
       } finally {
       }
     },

@@ -88,6 +88,7 @@
     <added-inner-section
       v-show="showInnerSection"
       :innerSection="innerSection"
+      :innersections="innersections"
       :index="index"
       @deleteIndex="deleteHandler"
       @editInnerSection="editHandler"
@@ -103,6 +104,7 @@ export default {
         title: '',
         objective: '',
       },
+      innersections: [],
       showInnerSection: false,
       subSection: true,
     }
@@ -112,7 +114,31 @@ export default {
       type: Number,
     },
   },
+  beforeCreate() {
+    this.getSchemeOfWork()
+  },
   methods: {
+    async getSchemeOfWork() {
+      try {
+        let response = await this.$axios.$get(
+          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+        )
+
+        for (const iterator of await response.section) {
+          this.innersections = iterator.section
+
+          console.log(`subInput`, this.innersections)
+        }
+
+        if (this.innersections.length > 0) {
+          this.subSection = false
+          this.showInnerSection = true
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+      }
+    },
     removeInnerSection() {
       this.$emit('innerIndex', this.innerIndex)
     },

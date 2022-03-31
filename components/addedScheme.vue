@@ -2,9 +2,11 @@
   <div class="corner second-section mb-4" v-show="showAddedScheme">
     <div class="d-flex corner align-items-center justify-content-between mb-4">
       <div class="d-flex align-items-center">
-        <h2 class="text-16 bold700 mb-0 mx-3">{{ section.title }}:</h2>
+        <h2 class="text-16 bold700 mb-0 mx-3">
+          {{ section.title || sectionTitle }}:
+        </h2>
         <span style="color: #333333" class="text-14">{{
-          section.objective
+          section.objective || sectionObjective
         }}</span>
       </div>
       <div class="d-flex align-items-center">
@@ -77,7 +79,25 @@ export default {
       items: [],
     }
   },
+  beforeMount() {
+    this.getSchemeOfWork()
+  },
   methods: {
+    async getSchemeOfWork() {
+      try {
+        let response = await this.$axios.$get(
+          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+        )
+
+        for (const iterator of await response.section) {
+          this.items.push(iterator.item)
+          console.log(`itemInput`, iterator.item)
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+      }
+    },
     deleteScheme() {
       this.$emit('deleteAddedScheme', this.index)
     },
@@ -141,6 +161,12 @@ export default {
     showAddedScheme: {
       type: Boolean,
       default: false,
+    },
+    sectionTitle: {
+      type: String,
+    },
+    sectionObjective: {
+      type: String,
     },
   },
 }

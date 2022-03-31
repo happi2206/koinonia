@@ -61,8 +61,7 @@
               <div class="mb-2">
                 <label class="form-control-label text-12"
                   >Resource description
-                  <span class="font10 small" style="color: red">*</span></label
-                >
+                </label>
                 <validation-provider rules="required" v-slot="{ errors }">
                   <textarea
                     v-model="description"
@@ -81,7 +80,7 @@
               <div class="row">
                 <div class="col mb-2">
                   <label class="form-control-label text-12"
-                    >Date published <span class="font10 small"></span
+                    >Published Date<span class="font10 small"></span
                   ></label>
                   <validation-provider rules="required" v-slot="{ errors }">
                     <v-date-picker

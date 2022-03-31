@@ -250,7 +250,7 @@
                             </validation-provider>
                           </div>
 
-                          <div class="col-md-6 mb-2">
+                          <!-- <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Start Date</label
                             >
@@ -270,7 +270,7 @@
                                 </span>
                               </template>
                             </v-date-picker>
-                          </div>
+                          </div> -->
 
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"

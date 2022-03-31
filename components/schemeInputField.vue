@@ -68,6 +68,8 @@
         @deleteAddedScheme="deleteInstance"
         @innerSections="innerSectionsfunc"
         @items="itemsfunc"
+        :sectionTitle="sectionTitle"
+        :sectionObjective="sectionObjective"
       />
     </div>
   </div>
@@ -77,8 +79,6 @@
 export default {
   data() {
     return {
-      collapse: true,
-      showAddedScheme: false,
       section: {
         title: '',
         objective: '',
@@ -91,6 +91,20 @@ export default {
     },
     sections: {
       type: Array,
+    },
+    sectionTitle: {
+      type: String,
+    },
+    sectionObjective: {
+      type: String,
+    },
+    collapse: {
+      type: Boolean,
+      default: true,
+    },
+    showAddedScheme: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
@@ -124,6 +138,14 @@ export default {
         this.$emit('section', newVal)
       },
       deep: true,
+    },
+    sectionTitle: {
+      handler(newVal) {
+        if (newVal) {
+          this.collapse = false
+          this.showAddedScheme = true
+        }
+      },
     },
   },
 }
