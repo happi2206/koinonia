@@ -118,9 +118,9 @@ export default {
     }
   },
 
-  beforeMount() {
-    this.getSchemeOfWork()
-  },
+  // beforeMount() {
+  //   this.getSchemeOfWork()
+  // },
 
   methods: {
     openAddedItem() {
@@ -137,27 +137,27 @@ export default {
     deleteItem(e) {
       this.$emit('deleteItem', e)
     },
-    async getSchemeOfWork() {
-      try {
-        let response = await this.$axios.$get(
-          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
-        )
+    // async getSchemeOfWork() {
+    //   try {
+    //     let response = await this.$axios.$get(
+    //       `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+    //     )
 
-        for (const iterator of await response.section) {
-          this.items = iterator.item
+    //     for (const iterator of await response.section) {
+    //       this.items = iterator.item
 
-          console.log(`itemInput`, this.items)
-        }
+    //       console.log(`itemInput`, this.items)
+    //     }
 
-        if (this.items.length > 0) {
-          this.subItem = false
-          this.showInnerSection = true
-        }
-      } catch (error) {
-        console.log(error)
-      } finally {
-      }
-    },
+    //     if (this.items.length > 0) {
+    //       this.showInnerSection = true
+    //       this.subItem = false
+    //     }
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //   }
+    // },
   },
 
   props: {

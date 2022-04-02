@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(single, index) in items" :key="index">
+    <div>
       <div>
         <div class="mx-3 my-2 d-flex justify-content-end">
           <div class="mr-2" @click="editItem">
@@ -23,7 +23,7 @@
           >
             <div>
               <span style="font-weight: 600" class="text-16">
-                {{ item.title || single.title }}
+                {{ item.title }}
               </span>
             </div>
             <span
@@ -35,7 +35,7 @@
           </div>
           <b-collapse :id="`collapse-${index}`" class="mt-2">
             <b-card class="mx-3 bg-primary controlborder">
-              <p class="text-14">{{ item.objective || single.objective }}</p>
+              <p class="text-14">{{ item.objective }}</p>
             </b-card>
           </b-collapse>
         </div>

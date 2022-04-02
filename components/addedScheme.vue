@@ -79,9 +79,9 @@ export default {
       items: [],
     }
   },
-  beforeMount() {
-    this.getSchemeOfWork()
-  },
+  // beforeMount() {
+  //   this.getSchemeOfWork()
+  // },
   methods: {
     async getSchemeOfWork() {
       try {

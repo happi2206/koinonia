@@ -114,9 +114,9 @@ export default {
       type: Number,
     },
   },
-  beforeCreate() {
-    this.getSchemeOfWork()
-  },
+  // beforeCreate() {
+  //   this.getSchemeOfWork()
+  // },
   methods: {
     async getSchemeOfWork() {
       try {

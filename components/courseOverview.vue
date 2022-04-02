@@ -122,26 +122,26 @@ export default {
       } finally {
       }
     },
-    async getSchemeOfWork() {
-      try {
-        let response = await this.$axios.$get(
-          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
-        )
+    // async getSchemeOfWork() {
+    //   try {
+    //     let response = await this.$axios.$get(
+    //       `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+    //     )
 
-        for (const iterator of await response.section) {
-          this.sections.push(iterator.section)
-          this.sectionTitle = iterator.title
-          this.sectionObjective = iterator.objective
-        }
-        if (this.sections.length === 1) {
-          this.collapse = false
-          this.showAddedScheme = true
-        }
-      } catch (error) {
-        console.log(error)
-      } finally {
-      }
-    },
+    //     for (const iterator of await response.section) {
+    //       this.sections.push(iterator.section)
+    //       this.sectionTitle = iterator.title
+    //       this.sectionObjective = iterator.objective
+    //     }
+    //     if (this.sections.length === 1) {
+    //       this.collapse = false
+    //       this.showAddedScheme = true
+    //     }
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //   }
+    // },
     createSection() {
       this.sections.push({
         title: '',
