@@ -1,16 +1,13 @@
 <template>
   <div>
-    <div v-observe-visibility="getSchemeOfWork">
+    <div>
       <div>
         <div>
           <div class="px-md-3 px-2 pb-3">
             <div class="my-3">
               <h1 class="brown24">Description</h1>
               <div class="text-14 pb-4">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Debitis, consequatur. Laudantium quidem iure, dolores, at
-                praesentium impedit nisi ratione velit porro soluta totam
-                nostrum esse? Ducimus dignissimos blanditiis nam veritatis!
+                {{ courseDetail.description }}
               </div>
             </div>
             <hr />
@@ -34,27 +31,22 @@
             <!-- ************SchemeInputComponent************* -->
 
             <div class="plus">
-              <b-icon @click="createSection()" icon="plus-square"></b-icon>
+              <b-icon @click="createScheme()" icon="plus-square"></b-icon>
             </div>
 
             <scheme-input-field
-              v-for="(section, index) in sections"
+              v-for="(sch, index) in section"
               :key="index"
               :index="index"
-              @i="deleteScheme($event)"
-              @deleteEmit="deleteEmit"
-              @section="sectionsfunc($event, index)"
-              :sections="sections"
-              @innerSections="innerSectionsFunc($event, index)"
-              @items="itemsFunc($event, index)"
-              :sectionTitle="sectionTitle"
-              :sectionObjective="sectionObjective"
+              :schema="section"
               :collapse="collapse"
               :showAddedScheme="showAddedScheme"
+              @deleteScheme="deleteScheme($event)"
+              @scheme="schemeAdd($event, index)"
             />
           </div>
 
-          <div class="d-flex justify-content-end">
+          <div v-if="saveButton || init" class="d-flex justify-content-end">
             <button
               @click="sendDataModel"
               class="
@@ -69,6 +61,22 @@
               Save
             </button>
           </div>
+
+          <div v-if="updateButton" class="d-flex justify-content-end">
+            <button
+              @click="updateSchema"
+              class="
+                btn
+                text-14
+                mr-4
+                btn-height btn-width
+                mb-3
+                mainbtndashboard
+              "
+            >
+              Update
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -79,18 +87,19 @@
 export default {
   data() {
     return {
-      collapse: true,
+      collapse: false,
       showAddedScheme: false,
       sectionContent: false,
       renderScheme: true,
-      sections: [],
       section: [],
-      item: [],
-      text: '',
-      list: '',
-      temp_index: null,
-      sectionTitle: '',
-      sectionObjective: '',
+      scheme: {
+        title: '',
+        objective: '',
+        section: [],
+      },
+      updateButton: false,
+      saveButton: false,
+      init: false,
     }
   },
   props: {
@@ -100,17 +109,16 @@ export default {
     },
   },
 
+  created() {
+    this.getSchemeOfWork()
+  },
+
   methods: {
     async sendDataModel() {
-      console.log(this.temp_index)
-      for (let i = 0; i <= this.temp_index; i++) {
-        this.sections[i].section = this.section
-        this.sections[i].item = this.item
-      }
       try {
         let dataModel = {
           course_id: this.$route.params.id,
-          section: this.sections,
+          section: this.section,
         }
         let response = await this.$axios.post(
           `course-v/add-scheme-of-work`,
@@ -122,62 +130,62 @@ export default {
       } finally {
       }
     },
-    // async getSchemeOfWork() {
-    //   try {
-    //     let response = await this.$axios.$get(
-    //       `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
-    //     )
 
-    //     for (const iterator of await response.section) {
-    //       this.sections.push(iterator.section)
-    //       this.sectionTitle = iterator.title
-    //       this.sectionObjective = iterator.objective
-    //     }
-    //     if (this.sections.length === 1) {
-    //       this.collapse = false
-    //       this.showAddedScheme = true
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //   } finally {
-    //   }
-    // },
-    createSection() {
-      this.sections.push({
-        title: '',
-        objective: '',
-        section: [],
-        item: [],
-      })
-    },
+    async updateSchema() {
+      try {
+        let updateDataModel = {
+          course_id: `${this.$route.params.id}`,
+          section: this.section,
+        }
+        console.log(updateDataModel)
 
-    sectionsfunc(e, i) {
-      this.sections[i].title = e.title
-      this.sections[i].objective = e.objective
-      this.temp_index = i
-      console.log(this.temp_index)
-    },
-
-    innerSectionsFunc(e) {
-      this.section = e
-    },
-    itemsFunc(e) {
-      this.item = e
-    },
-
-    deleteScheme(e) {
-      console.log(e)
-      this.sections.splice(e, 1)
-    },
-    deleteEmit(e) {
-      this.sections.splice(e, 1)
-    },
-
-    deleteInnerSection(index) {
-      this.innerSection.splice(index, 1)
-      if (this.innerSection.length === 0) {
-        this.sectionContent = false
+        let response = await this.$axios.patch(
+          `course-v/edit-scheme-of-work`,
+          updateDataModel
+        )
+        this.$toast.success(response.data)
+      } catch (error) {
+        this.$toast.error(error)
+        console.log(error)
+      } finally {
+        this.getSchemeOfWork()
       }
+    },
+
+    async getSchemeOfWork() {
+      try {
+        let response = await this.$axios.$get(
+          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+        )
+
+        if (response.section.length === 0) {
+          this.saveButton = true
+        }
+
+        if (response.section.length !== 0) {
+          this.updateButton = true
+        }
+
+        this.section = response.section
+
+        console.log(this.sectionssss)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    createScheme() {
+      this.collapse = true
+      this.section.push(this.scheme)
+      if (this.section.length !== 0) {
+        this.init = true
+      }
+    },
+    schemeAdd(e, i) {
+      this.section[i] = e
+    },
+    deleteScheme(e) {
+      this.section.splice(e, 1)
     },
   },
 }

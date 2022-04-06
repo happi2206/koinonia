@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div v-show="subItem" class="lecture-cover pl-3 pt-3 mt-3 mx-3">
+      <div v-show="subItem" class="lecture-cover mb-3 pl-3 pt-3 mt-3 mx-3">
         <div>
           <div>
             <div>
@@ -47,7 +47,7 @@
                           </div>
                           <div class="my-2 text-16">
                             <input
-                              v-model="item.objective"
+                              v-model="item.description"
                               required
                               type="text"
                               class="form-control form-control-width"
@@ -55,7 +55,7 @@
                                 border: 1px solid #000000;
                                 border-radius: 0rem;
                               "
-                              placeholder="Objective"
+                              placeholder="Description"
                             />
                           </div>
                         </div>
@@ -92,14 +92,13 @@
           </div>
         </div>
       </div>
-      <added-item
+      <!-- <added-item
         @editItem="setItemState"
         @deleteItem="deleteItem"
         v-show="showInnerSection"
         :index="i"
         :item="item"
-        :items="items"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -108,24 +107,28 @@
 export default {
   data() {
     return {
-      subItem: true,
-      showInnerSection: false,
+      subItem: false,
       item: {
         title: '',
-        objective: '',
+        description: '',
       },
-      items: [],
     }
   },
 
-  // beforeMount() {
-  //   this.getSchemeOfWork()
-  // },
+  created() {
+    if (this.item) {
+      this.item = this.itemz
+    }
+
+    if (this.showItemInput == true) {
+      this.subItem = true
+    }
+  },
 
   methods: {
     openAddedItem() {
-      this.showInnerSection = true
       this.subItem = false
+      this.$emit('item', this.item)
     },
     removeItem() {
       this.$emit('emitIndex', this.i)
@@ -137,32 +140,17 @@ export default {
     deleteItem(e) {
       this.$emit('deleteItem', e)
     },
-    // async getSchemeOfWork() {
-    //   try {
-    //     let response = await this.$axios.$get(
-    //       `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
-    //     )
-
-    //     for (const iterator of await response.section) {
-    //       this.items = iterator.item
-
-    //       console.log(`itemInput`, this.items)
-    //     }
-
-    //     if (this.items.length > 0) {
-    //       this.showInnerSection = true
-    //       this.subItem = false
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //   } finally {
-    //   }
-    // },
   },
 
   props: {
     i: {
       type: Number,
+    },
+    showItemInput: {
+      type: Boolean,
+    },
+    itemz: {
+      type: Object,
     },
   },
 
@@ -185,7 +173,6 @@ export default {
 }
 .second-section {
   max-width: 1000px;
-  /* margin-left: 3rem; */
 }
 .form-control-width {
   max-width: 100%;

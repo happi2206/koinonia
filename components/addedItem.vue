@@ -3,7 +3,7 @@
     <div>
       <div>
         <div class="mx-3 my-2 d-flex justify-content-end">
-          <div class="mr-2" @click="editItem">
+          <div class="" @click="editItem">
             <span style="cursor: pointer"
               ><span class="iconify" data-icon="bxs:pencil"></span>
             </span>
@@ -16,15 +16,15 @@
             ></span>
           </div>
         </div>
-        <div class="newLecture bg-primary fullborder text-14 ml-5 mb-5">
+        <div class="newLecture bg-primary fullborder text-14 mx-2 mb-5">
           <div
             v-b-toggle="`collapse-${index}`"
             class="py-3 px-4 d-flex align-items-center justify-content-between"
           >
-            <div>
-              <span style="font-weight: 600" class="text-16">
+            <div class="w-100">
+              <div style="font-weight: 600" class="text-16 w-100">
                 {{ item.title }}
-              </span>
+              </div>
             </div>
             <span
               class="iconify"
@@ -33,7 +33,10 @@
               data-height="22"
             ></span>
           </div>
-          <b-collapse :id="`collapse-${index}`" class="mt-2">
+          <b-collapse :id="`collapse-${index}`" class="w-100 mt-2">
+            <b-card class="mx-3 bg-primary controlborder">
+              <p class="text-14">{{ item.objective }}</p>
+            </b-card>
             <b-card class="mx-3 bg-primary controlborder">
               <p class="text-14">{{ item.objective }}</p>
             </b-card>
@@ -63,10 +66,6 @@ export default {
     },
     index: {
       type: Number,
-    },
-    items: {
-      type: Array,
-      default: [],
     },
   },
 }
