@@ -95,13 +95,6 @@
           </div>
         </div>
       </div>
-      <!-- <added-item
-        @editItem="setItemState"
-        @deleteItem="deleteItem"
-        v-show="showInnerSection"
-        :index="i"
-        :item="item"
-      /> -->
     </div>
   </div>
 </template>
@@ -120,10 +113,10 @@ export default {
   },
 
   created() {
-    if (this.item) {
-      this.item = this.itemz
-      this.index = this.i
-    }
+    // if (this.item) {
+    //   this.item = this.itemz
+    //   this.index = this.i
+    // }
 
     if (this.showItemInput == true) {
       this.subItem = true
@@ -132,11 +125,13 @@ export default {
 
   methods: {
     openAddedItem() {
+      // this.$emit('input', false)
       this.subItem = false
       this.$emit('item', this.item)
     },
     removeItem() {
-      this.$emit('emitIndex', this.index)
+      this.$emit('emitIndex', this.i)
+      console.log(this.i)
     },
     setItemState() {
       this.subItem = true

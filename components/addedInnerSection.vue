@@ -53,12 +53,16 @@
               :key="index"
               class="mx-3 my-2"
             >
-              <div class="">
-                <p class="text-14 mb-2" style="font-weight: 600">
-                  {{ item.title }} &nbsp;
-                </p>
+              <!-- <div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p class="text-14 mb-2" style="font-weight: 600">
+                    {{ item.title }}
+                  </p>
+                </div>
+
                 <p class="text-14 mb-2">{{ item.description }}</p>
-              </div>
+              </div> -->
+              <added-item v-if="item" :item="item" />
             </b-card>
           </b-collapse>
           <div class="mt-2 mb-2 ml-3">
@@ -71,9 +75,11 @@
             :itemz="item"
             :key="index"
             :i="index"
+            :subItem="edit"
+            @input="closeInput"
             :showItemInput="showItemInput"
             @item="populateItem($event, index)"
-            @emitIndex="deleteItem($event)"
+            @emitIndex="deleteIteme($event)"
           />
         </div>
       </div>
@@ -89,6 +95,7 @@ export default {
     return {
       sectionContent: true,
       showItemInput: false,
+      edit: false,
       item: {
         title: '',
         description: '',
@@ -118,8 +125,18 @@ export default {
       }
       this.$emit('items', this.items)
     },
-    deleteItem(i) {
-      this.items.splice(i, 1)
+    deleteIteme(e) {
+      this.items.splice(e, 1)
+    },
+    editItem() {
+      console.log(`yay`)
+      this.edit = true
+    },
+    closeInput(e) {
+      this.edit = e
+    },
+    deleteItem() {
+      console.log(`yay`)
     },
   },
 

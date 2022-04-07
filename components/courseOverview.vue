@@ -38,6 +38,19 @@
                 icon="plus-square"
               ></b-icon>
             </div>
+
+            <!-- <div v-if="section.length > 0">
+              <div @click="openWarningModal" style="cursor: pointer">
+                <span
+                  class="iconify"
+                  data-icon="bytesize:trash"
+                  style="color: #2f2f2f"
+                  data-width="16"
+                  data-height="16"
+                ></span>
+              </div>
+            </div> -->
+
             <div
               v-if="updateButton && section.length > 0"
               class="d-flex justify-content-end"
@@ -56,6 +69,7 @@
                 Preview
               </button>
             </div>
+
             <div v-if="showInput">
               <scheme-input-field
                 v-for="(sch, index) in section"
@@ -86,7 +100,7 @@
               <span v-if="isbusyCreating">
                 <b-spinner
                   label="loading"
-                  variant="primary"
+                  variant="success"
                   style="width: 1.5rem; height: 1.5rem"
                   class="text-center"
                 >
@@ -127,7 +141,7 @@
               <span v-if="isbusy">
                 <b-spinner
                   label="loading"
-                  variant="primary"
+                  variant="success"
                   style="width: 1.5rem; height: 1.5rem"
                   class="text-center"
                 >
@@ -139,6 +153,7 @@
         </div>
       </div>
       <!-- <list-scheme :section="section" /> -->
+
       <div v-if="this.section.length > 0">
         <div v-if="display">
           <render-scheme :section="section" @view="editMode" />
@@ -199,6 +214,9 @@ export default {
       this.display = false
       this.showInput = true
     },
+    openWarningModal() {
+      console.log(`yay`)
+    },
     async sendDataModel() {
       try {
         this.isbusyCreating = true
@@ -239,6 +257,17 @@ export default {
       } finally {
         this.getSchemeOfWork()
         this.isbusy = false
+      }
+    },
+
+    async deleteSchemeOfWork() {
+      try {
+        let response = await this.$axios.delete(
+          `course-v/delete-scheme-of-work?scheme_id=${schemeId}`
+        )
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error(error)
       }
     },
 
