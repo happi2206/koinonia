@@ -34,18 +34,18 @@
       </div>
     </div>
 
-    <div class="mb-0">
+    <div class="my-2">
       <b-icon icon="plus-square" class="plus" @click="optionsDialogue"></b-icon>
     </div>
 
     <div class="pl-3 align-items-center">
       <div class="d-flex align-items-center" v-if="subSections">
-        <span @click="closeDialogue"
+        <span @click="closeDialogue" style="cursor: pointer"
           ><span
             class="iconify"
             data-icon="la:times"
-            data-width="28"
-            data-height="28"
+            data-width="22"
+            data-height="22"
           ></span
         ></span>
         <div
@@ -58,7 +58,7 @@
             fullborder
           "
         >
-          <p @click="createInnerSection" class="size text-16 mb-0 bold700">
+          <p @click="createInnerSection" class="size text-14 mb-0 bold700">
             Create New Section
           </p>
         </div>
@@ -147,7 +147,9 @@ export default {
     deleteInnerScheme(e) {
       this.sections.splice(e, 1)
     },
-    deleteSubsection(e, i) {
+    deleteSubsection(e) {
+      console.log(e)
+      console.log(this.sections)
       this.sections.splice(e, 1)
     },
     deleteInstance(e) {
@@ -219,7 +221,8 @@ export default {
 .headings-border {
   border: 0.5px solid #333333;
   background: #fff8dc;
-  max-width: 228px;
+  border-radius: 4px;
+  max-width: 170px;
   height: 45px;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="subSectionsInput">
-      <div class="lecture-cover pl-3 pt-2 mt-0 mx-3">
+      <div class="lecture-cover bg-light pl-3 pt-2 mt-0 mx-3">
         <div>
           <div>
             <div>
@@ -142,7 +142,7 @@ export default {
       this.$emit('items', this.items)
     },
     removeInnerSection() {
-      this.$emit('innerIndex', this.innerIndex)
+      this.$emit('innerIndex', this.index)
     },
     openInnerSection() {
       this.subSectionsInput = false
@@ -202,7 +202,7 @@ export default {
 .heading {
   font-size: 18px;
   color: #0734aa;
-  margin-left: 2rem;
+  margin-left: 1rem;
   cursor: pointer;
 }
 
@@ -214,7 +214,7 @@ export default {
 }
 
 .lecture-cover {
-  background: #fff8dc;
+  /* background: #fff8dc; */
   max-width: 95%;
   border: 0.5px solid #333333;
 }

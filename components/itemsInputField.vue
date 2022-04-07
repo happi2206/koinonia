@@ -1,7 +1,10 @@
 <template>
   <div>
     <div>
-      <div v-show="subItem" class="lecture-cover mb-3 pl-3 pt-3 mt-3 mx-3">
+      <div
+        v-show="subItem"
+        class="lecture-cover bg-light mb-3 pl-3 pt-3 mt-3 mx-3"
+      >
         <div>
           <div>
             <div>
@@ -112,12 +115,14 @@ export default {
         title: '',
         description: '',
       },
+      index: '',
     }
   },
 
   created() {
     if (this.item) {
       this.item = this.itemz
+      this.index = this.i
     }
 
     if (this.showItemInput == true) {
@@ -131,15 +136,15 @@ export default {
       this.$emit('item', this.item)
     },
     removeItem() {
-      this.$emit('emitIndex', this.i)
+      this.$emit('emitIndex', this.index)
     },
     setItemState() {
       this.subItem = true
       this.showInnerSection = false
     },
-    deleteItem(e) {
-      this.$emit('deleteItem', e)
-    },
+    // deleteItem(e) {
+    //   this.$emit('deleteItem', e)
+    // },
   },
 
   props: {
@@ -167,7 +172,7 @@ export default {
 
 <style>
 .lecture-cover {
-  background: #fff8dc;
+  /* background: #fff8dc; */
   max-width: 95%;
   border: 0.5px solid #333333;
 }

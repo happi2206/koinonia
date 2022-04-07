@@ -98,7 +98,8 @@ export default {
         section: [],
       },
       showAddedScheme: false,
-      isLoading: true,
+      saveButton: false,
+      isLoading: false,
     }
   },
   props: {
@@ -127,6 +128,7 @@ export default {
     },
     deleteScheme() {
       this.$emit('deleteScheme', this.index)
+      this.$emit('saveButton', this.saveButton)
     },
     deleteInstance(e) {
       this.$emit('deleteEmit', e)

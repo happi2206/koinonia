@@ -2,7 +2,7 @@
   <div>
     <div>
       <div v-if="sectionContent">
-        <div class="mx-3 my-1 d-flex justify-content-end">
+        <div class="mx-3 my-2 d-flex justify-content-end">
           <span @click="editInnerSection" class="mr-2" style="cursor: pointer"
             ><span
               class="iconify"
@@ -23,12 +23,12 @@
           </div>
         </div>
         <div
-          class="newLecture fullborder text-14 ml-4 mb-2"
+          class="newLecture fullborder text-14 ml-4 mb-3"
           style="border-radius: 4px"
         >
           <div
             v-b-toggle="`collapse-${index}`"
-            class="py-1 px-4 d-flex align-items-center justify-content-between"
+            class="py-3 px-4 d-flex align-items-center justify-content-between"
           >
             <div>
               <div style="font-weight: 600" class="text-16">
@@ -38,35 +38,42 @@
                 {{ section.objective }}
               </p>
             </div>
-            <span
-              class="iconify"
-              data-icon="ph:caret-down"
-              data-width="22"
-              data-height="22"
-            ></span>
+            <div>
+              <span
+                class="iconify"
+                data-icon="ph:caret-down"
+                data-width="22"
+                data-height="22"
+              ></span>
+            </div>
           </div>
           <b-collapse :id="`collapse-${index}`" class="mt-2">
             <b-card
               v-for="(item, index) in items"
               :key="index"
-              class="mx-3 controlborder"
+              class="mx-3 my-2"
             >
-              <p class="text-14 mb-2" style="font-weight: 600">
-                {{ item.title }}
-              </p>
-              <p class="text-14 mb-2">{{ item.description }}</p>
+              <div class="">
+                <p class="text-14 mb-2" style="font-weight: 600">
+                  {{ item.title }} &nbsp;
+                </p>
+                <p class="text-14 mb-2">{{ item.description }}</p>
+              </div>
             </b-card>
           </b-collapse>
-          <div class="plus mt-0 mb-1 ml-3">
-            <b-icon @click="addItem()" icon="plus-square"></b-icon>
+          <div class="mt-2 mb-2 ml-3">
+            <b-icon @click="addItem()" icon="plus-square" class="plus"></b-icon>
+            &nbsp;
+            <span class="text-12 py-2 text-primary">Add Items</span>
           </div>
           <items-input-field
             v-for="(item, index) in items"
             :itemz="item"
             :key="index"
+            :i="index"
             :showItemInput="showItemInput"
             @item="populateItem($event, index)"
-            @emitIndex="deleteItem"
+            @emitIndex="deleteItem($event)"
           />
         </div>
       </div>
@@ -94,7 +101,6 @@ export default {
   },
   methods: {
     deleteInnerSection() {
-      console.log(this.index)
       this.$emit('deleteIndex', this.index)
     },
     editInnerSection() {
@@ -128,7 +134,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .second-section {
   max-width: 950px;
 }

@@ -305,7 +305,7 @@ export default {
         // ignore the above code if you already have a blob
         // if you have a base 64 image, convert it to a blob and continue
         link.href = URL.createObjectURL(blob)
-        link.download = `Report card.jpg`
+        link.download = `File.jpg`
         link.click()
         URL.revokeObjectURL(link.href)
       } catch (e) {
