@@ -148,7 +148,7 @@
             <input
               @change="recieveUpdate"
               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              ref="uploadcsv"
+              ref="uploadcsvs"
               type="file"
               class="hidden"
             />
