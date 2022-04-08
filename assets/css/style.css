@@ -9,6 +9,7 @@
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Brown';
   src: url('../font/brown/Brown-Bold.woff2') format('woff2'),
@@ -17,6 +18,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Brown';
   src: url('../font/brown/Brown-Regular.woff2') format('woff2'),
@@ -25,6 +27,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Brown';
   src: url('../font/brown/Brown-LightItalic.woff2') format('woff2'),
@@ -33,6 +36,7 @@
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Brown';
   src: url('../font/brown/Brown-BoldItalic.woff2') format('woff2'),
@@ -50,6 +54,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Brown';
   src: url('../font/brown/Brown-Light.woff2') format('woff2'),
@@ -58,6 +63,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Brown';
   src: url('../font/brown/Brown-ThinItalic.woff2') format('woff2'),
@@ -66,6 +72,7 @@
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Ancona-ex';
   src: url('../font/Ancona-Regular.ttf') format('ttf'),
@@ -164,6 +171,7 @@
 html {
   overflow-x: hidden !important;
 }
+
 html body {
   overflow-x: hidden !important;
   min-height: 100%;
@@ -271,6 +279,7 @@ html body main {
 .bodygray {
   background-color: #e5e5e5;
 }
+
 .bodylightgray {
   background-color: #f5f6f7;
 }
@@ -288,6 +297,7 @@ html body main {
   margin-left: 40px;
   margin-right: 40px;
 }
+
 .horizontalspacing.slider {
   margin-left: 100px;
   margin-right: 100px;
@@ -348,6 +358,7 @@ a.loginbtndashboard {
   text-decoration: none;
   outline: none;
 }
+
 /* a.loginbtndashboard:hover {
   background-color: white;
   color: #0734aa;
@@ -369,6 +380,7 @@ a.mainbtndashboard {
   text-decoration: none;
   outline: none;
 }
+
 a.mainbtndashboard:hover {
   background-color: 10203f;
   color: black;
@@ -387,6 +399,7 @@ button.mainbtndashboard {
   text-decoration: none;
   outline: none;
 }
+
 button.mainbtndashboard:hover {
   background-color: 10203f;
   color: black;
@@ -455,12 +468,14 @@ input.subscribebtn {
   text-align: center;
   border-radius: 0;
 }
+
 input.subscribebtn:hover {
   /* border: #000; */
   color: #fff;
   opacity: 0.9;
   /* background: transparent; */
 }
+
 button.subscribebtn {
   background-color: #000;
   color: #fff;
@@ -475,12 +490,14 @@ button.subscribebtn {
   text-align: center;
   border-radius: 0;
 }
+
 button.subscribebtn:hover {
   /* border: #000; */
   color: #fff;
   opacity: 0.9;
   /* background: transparent; */
 }
+
 button.subscribebtn.rad6 {
   border-radius: 6px;
 }
@@ -493,18 +510,22 @@ button.subscribebtn.rad6 {
   font-size: 14px;
   font-family: Brown;
 }
+
 .text-12 {
   font-size: 12px;
   font-family: Brown;
 }
+
 .text-18 {
   font-size: 18px;
   font-family: Brown;
 }
+
 .text-16 {
   font-size: 16px;
   font-family: Brown;
 }
+
 button.loginbtn {
   font-family: Brown;
   font-size: 14px;
@@ -658,6 +679,7 @@ button.loginbtn {
   border: 1px solid #d3a13b;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .newsletterinputs::placeholder {
   font-family: Brown;
   font-weight: 300;
@@ -668,6 +690,7 @@ button.loginbtn {
   letter-spacing: 0.002em;
   color: #d3a13b !important;
 }
+
 .newsletterinputs:focus {
   outline: none;
   box-shadow: 0 0 5px #719ece;
@@ -688,6 +711,7 @@ button.loginbtn {
   border: 1px solid #000;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .forminputs::placeholder {
   font-family: Brown;
   font-weight: 300;
@@ -698,13 +722,16 @@ button.loginbtn {
   letter-spacing: 0.002em;
   color: #aeb5bc !important;
 }
+
 .forminputs:focus {
   outline: none;
   box-shadow: 0 0 5px #d3a13b;
 }
+
 .forminputs.textarea {
   height: calc(8.5em + 0.75rem + 2px);
 }
+
 .forminputs.searchbar {
   height: calc(2.2em + 0.75rem + 2px);
   border-top-right-radius: 0;
@@ -715,6 +742,7 @@ button.loginbtn {
 .accentcolorbg {
   background-color: #ffcd06;
 }
+
 .accentcolor {
   color: #d3a13b !important;
 }
@@ -761,6 +789,7 @@ button.loginbtn {
 .lightgreen {
   color: #6fcf97;
 }
+
 .lightred {
   color: #f15c78;
 }
@@ -819,6 +848,7 @@ button.loginbtn {
   font-size: 20px;
   font-weight: 500;
 }
+
 .medbrownparagraph {
   font-family: Brown;
   font-size: 14px;
@@ -827,6 +857,7 @@ button.loginbtn {
   line-height: 19px;
   letter-spacing: 0em;
 }
+
 td {
   font-family: Brown;
   font-size: 14px;
@@ -835,6 +866,7 @@ td {
   line-height: 19px;
   letter-spacing: 0em;
 }
+
 th {
   font-family: Brown;
   font-size: 14px;
@@ -898,6 +930,7 @@ th {
   letter-spacing: 0em;
   text-align: left;
 }
+
 .brown28 {
   font-family: Brown;
   font-size: 28px;
@@ -924,6 +957,7 @@ th {
   letter-spacing: 0em;
   text-align: left;
 }
+
 .thirdcontent li a {
   color: #828282;
 }
@@ -932,6 +966,7 @@ th {
   height: 33px;
   width: 33px;
 }
+
 .dropdowncontainer img {
   border-radius: 50%;
 }
@@ -961,14 +996,17 @@ th {
 .z1000 {
   z-index: 999 !important;
 }
+
 .sidebar-wrapper .sidebar-menu {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
+
 .sidebar-wrapper .sidebar-menu li {
   list-style-type: none;
 }
+
 .sidebar-wrapper .sidebar-menu li.active {
   background: #d3a13b24;
   margin: 0px 10px;
@@ -1012,6 +1050,7 @@ th {
   height: 60vh;
   background: RGBA(211, 161, 59, 0.17);
 }
+
 .imagesection img {
   width: 100%;
   object-fit: cover;
@@ -1149,35 +1188,44 @@ th {
   from {
     stroke-dashoffset: 326.56;
   }
+
   to {
     stroke-dashoffset: 60;
   }
 }
+
 @keyframes one {
   from {
     stroke-dashoffset: 232.36;
   }
+
   to {
     stroke-dashoffset: 80;
   }
 }
+
 @keyframes two {
   from {
     stroke-dashoffset: 232.36;
   }
+
   to {
     stroke-dashoffset: 140;
   }
 }
+
 @keyframes appear {
+
   0%,
   50% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 .videofigure {
   height: 585px;
   width: 100%;
@@ -1190,7 +1238,7 @@ th {
 }
 
 .fullborder {
-  border: 1px solid #000;
+  border: 1px solid #DFDFDF;
 }
 
 .courseplaceholder img {
@@ -1246,14 +1294,17 @@ th {
 .relativecontainer {
   position: relative;
 }
+
 .relativecontainer .mainbadge {
   position: absolute;
   left: 10px;
   top: 20px;
 }
+
 .relativecontainer .mainbadge.green {
   background: #26a69a;
 }
+
 .relativecontainer .mainbadge.red {
   background: #e1002a;
 }
@@ -1285,17 +1336,21 @@ th {
 .absolutecontainer {
   position: absolute;
 }
+
 .absolutecontainer.camimg {
   bottom: 0;
   right: 20px;
 }
+
 .absolutecontainer.blockquote {
   right: 280px;
   top: -50px;
 }
+
 .absolutecontainer.blockblue {
   left: -12px;
 }
+
 .absolutecontainer.online {
   width: 10px;
   height: 10px;
@@ -1304,41 +1359,51 @@ th {
   border-radius: 50%;
   color: yellow;
 }
+
 .absolutecontainer.eyeicon {
   bottom: 18px;
   right: 13px;
 }
+
 .absolutecontainer.absolutes img {
   border-radius: 50%;
 }
+
 .absolutecontainer.absolutes.absolute1 {
   top: 40px;
   left: 40px;
 }
+
 .absolutecontainer.absolutes.absolute1 img {
   height: 133px;
   width: 133px;
 }
+
 .absolutecontainer.absolutes.absolute2 {
   top: 80px;
   right: 180px;
 }
+
 .absolutecontainer.absolutes.absolute2 img {
   height: 100px;
   width: 100px;
 }
+
 .absolutecontainer.absolutes.absolute3 {
   top: 200px;
   left: 200px;
 }
+
 .absolutecontainer.absolutes.absolute3 img {
   height: 250px;
   width: 250px;
 }
+
 .absolutecontainer.absolutes.absolute4 {
   top: 500px;
   left: 100px;
 }
+
 .absolutecontainer.absolutes.absolute4 img {
   height: 200px;
   width: 200px;
@@ -1357,11 +1422,9 @@ th {
 }
 
 .gradientbg {
-  background: linear-gradient(
-    180deg,
-    rgba(17, 43, 112, 0.9) 0%,
-    rgba(9, 60, 171, 0.9) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(17, 43, 112, 0.9) 0%,
+      rgba(9, 60, 171, 0.9) 100%);
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -1371,6 +1434,7 @@ th {
 .table td {
   cursor: pointer;
 }
+
 .whitelogocontainer {
   box-shadow: 0px 4px 10px 0px #00000014;
   background-color: #fff;
@@ -1409,6 +1473,7 @@ th {
   letter-spacing: 0em;
   text-align: left;
 }
+
 .custom-tabs .nav-link.active {
   border-bottom: 7px solid #ffce31;
   color: #0734aa;
@@ -1435,19 +1500,23 @@ th {
   .customscroll {
     overflow-x: scroll !important;
   }
+
   .customscroll::-webkit-scrollbar-track {
     height: 5px;
     background-color: none;
   }
+
   .customscroll::-webkit-scrollbar {
     height: 5px;
     background-color: none;
   }
+
   .customscroll::-webkit-scrollbar-thumb {
     height: 5px;
     background-color: #fff8dc;
   }
 }
+
 @media (max-width: 991.5px) {
   .customscroll .horizontalspacing {
     margin-left: 20px;
@@ -1457,6 +1526,7 @@ th {
   .sidebar-wrapper {
     width: 28%;
   }
+
   .verticalspacing {
     margin-top: 20px;
   }
@@ -1500,10 +1570,12 @@ th {
     display: none;
   }
 }
+
 @media (max-width: 768.5px) {
   .customsizing {
     height: 200px;
   }
+
   .flwidth {
     width: 100%;
   }
@@ -1516,6 +1588,7 @@ th {
     font-size: 11px;
     line-height: 19px;
   }
+
   th {
     font-size: 11px;
     line-height: 19px;
@@ -1531,6 +1604,7 @@ th {
     top: 100px;
     width: 80%;
   }
+
   .logoplaceholder img {
     width: 28px;
     height: 28px;
@@ -1570,6 +1644,7 @@ th {
     font-size: 16px !important;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+
   /* .forminputs::placeholder {
     font-family: Brown;
     font-weight: 300;
@@ -1585,6 +1660,7 @@ th {
     outline: none;
     box-shadow: 0 0 5px #d3a13b;
   }
+
   .forminputs.textarea {
     height: calc(8.5em + 0.75rem + 2px);
   }
@@ -1632,7 +1708,7 @@ th {
   .arialheader,
   .header2,
   .roboto22,
-  .roboto24 {
+  .roboto24 .text-24 {
     font-size: 22px;
   }
 
@@ -1664,6 +1740,7 @@ th {
     margin-left: 10px;
     margin-right: 10px;
   }
+
   .horizontalspacing.slider {
     margin-left: 20px;
     margin-right: 20px;
@@ -1703,11 +1780,13 @@ th {
     font-size: 12px !important;
   }
 }
+
 @media (max-width: 691.5px) {
   .sidebar-wrapper {
     width: 50%;
   }
 }
+
 @media (max-width: 576.5px) {
   .coursewidth1 {
     width: 100%;
@@ -1721,6 +1800,7 @@ th {
     width: 100%;
   }
 }
+
 @media (max-width: 500.5px) {
   .forminputpadding {
     padding-left: 20px;
@@ -1740,6 +1820,7 @@ th {
     margin-right: 5px;
   } */
 }
+
 @media (max-width: 400.5px) {
   .sidebar-wrapper {
     width: 60%;

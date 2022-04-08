@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-show="subSection">
-      <div class="lecture-cover pl-3 pt-3 mt-3 mx-3">
+    <div v-if="subSectionsInput">
+      <div class="lecture-cover bg-light pl-3 pt-2 mt-0 mx-3">
         <div>
           <div>
             <div>
@@ -26,7 +26,7 @@
                         >
                           <div class="my-2 text-16">
                             <input
-                              v-model="innerSection.title"
+                              v-model="section.title"
                               required
                               type="text"
                               class="form-control form-control-width"
@@ -39,7 +39,7 @@
                           </div>
                           <div class="my-2 text-16">
                             <input
-                              v-model="innerSection.objective"
+                              v-model="section.objective"
                               required
                               type="text"
                               class="form-control form-control-width"
@@ -85,13 +85,15 @@
         </div>
       </div>
     </div>
-    <added-inner-section
-      v-show="showInnerSection"
-      :innerSection="innerSection"
-      :index="index"
-      @deleteIndex="deleteHandler"
-      @editInnerSection="editHandler"
-    />
+    <div v-else>
+      <added-inner-section
+        :section="section"
+        :index="index"
+        @deleteIndex="deleteHandler"
+        @editInnerSection="editHandler"
+        @items="itemsAdd"
+      />
+    </div>
   </div>
 </template>
 
@@ -99,39 +101,65 @@
 export default {
   data() {
     return {
-      innerSection: {
+      section: {
         title: '',
         objective: '',
+        items: [],
       },
+      sections: [],
       showInnerSection: false,
-      subSection: true,
+      items: [],
+      subSectionsInput: true,
     }
   },
   props: {
     index: {
       type: Number,
     },
+    sec: {
+      type: Array,
+    },
+    sectionx: {
+      type: Object,
+    },
+    subSection: {
+      type: Boolean,
+      default: false,
+    },
   },
+  created() {
+    this.sections = this.sec
+    this.section = this.sectionx
+    if (this.sectionx) {
+      this.subSectionsInput = this.subSection
+    }
+  },
+
   methods: {
+    itemsAdd(e) {
+      this.items = e
+      this.section.items = e
+      this.$emit('items', this.items)
+    },
     removeInnerSection() {
-      this.$emit('innerIndex', this.innerIndex)
+      this.$emit('innerIndex', this.index)
     },
     openInnerSection() {
-      this.showInnerSection = true
-      this.subSection = false
+      this.subSectionsInput = false
+      this.$emit('section', this.section)
     },
     deleteHandler(e) {
       this.$emit('deleteInnerSection', e)
     },
     editHandler(e) {
-      this.subSection = e
+      this.subSectionsInput = e
       this.showInnerSection = false
     },
   },
   watch: {
-    innerSection: {
+    subSection: {
       handler(newVal) {
-        this.$emit('innerSection', newVal)
+        this.subSections = newVal
       },
       deep: true,
     },
@@ -174,7 +202,7 @@ export default {
 .heading {
   font-size: 18px;
   color: #0734aa;
-  margin-left: 2rem;
+  margin-left: 1rem;
   cursor: pointer;
 }
 
@@ -186,7 +214,7 @@ export default {
 }
 
 .lecture-cover {
-  background: #fff8dc;
+  /* background: #fff8dc; */
   max-width: 95%;
   border: 0.5px solid #333333;
 }

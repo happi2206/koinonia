@@ -9,7 +9,7 @@
       <template #besideFilterButton>
         <div class="ml-md-5" @click="openForm">
           <button class="btn btn-height mainbtndashboard medbrownparagraph">
-            Add Exercise
+            New Exercise
           </button>
         </div>
       </template>
@@ -40,8 +40,8 @@
         <div class="site-container font14">
           <div class="conatiner">
             <div class="m-3" @click="closeForm">
-              <button class="btn mainbtndashboard medbrownparagraph">
-                Back to exercises
+              <button class="btn btn-height mainbtndashboard medbrownparagraph">
+                Back to Exercises
               </button>
             </div>
 
@@ -57,7 +57,9 @@
                         <div class="mb-2">
                           <label class="form-control-label text-12"
                             >Exercise Name
-                            <span class="font10 small">(Required)</span></label
+                            <span class="font10 small" style="color: red"
+                              >*</span
+                            ></label
                           >
                           <validation-provider
                             rules="required"
@@ -78,7 +80,9 @@
                         <div class="mb-2" style="max-width: 940px">
                           <label class="form-control-label text-12"
                             >Exercise Instruction
-                            <span class="font10 small">(Required)</span></label
+                            <span class="font10 small" style="color: red"
+                              >*</span
+                            ></label
                           >
                           <validation-provider
                             rules="required"
@@ -108,7 +112,9 @@
                           <div class="col-6 mb-2">
                             <label class="form-control-label text-12"
                               >Exercise Type
-                              <span class="font10 small">(Required)</span>
+                              <span class="font10 small" style="color: red"
+                                >*</span
+                              >
                             </label>
                             <validation-provider
                               rules="required"
@@ -134,10 +140,12 @@
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Obtainable Score
-                              <span class="font10 small">(Required)</span>
+                              <span class="font10 small" style="color: red"
+                                >*</span
+                              >
                             </label>
                             <validation-provider
-                              rules="required|digits"
+                              rules="required|numeric"
                               v-slot="{ errors }"
                             >
                               <input
@@ -156,8 +164,8 @@
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Available Date
-                              <span class="font10 small"
-                                >(Required)</span
+                              <span class="font10 small" style="color: red"
+                                >*</span
                               ></label
                             >
                             <validation-provider
@@ -168,6 +176,7 @@
                                 v-model="available_date"
                                 :model-config="modelConfig"
                                 mode="date"
+                                :min-date="new Date()"
                               >
                                 <template #default="{ togglePopover }">
                                   <span @click="togglePopover()">
@@ -188,8 +197,8 @@
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Due Date
-                              <span class="font10 small"
-                                >(Required)</span
+                              <span class="font10 small" style="color: red"
+                                >*</span
                               ></label
                             >
                             <validation-provider
@@ -200,6 +209,7 @@
                                 v-model="due_date"
                                 :model-config="modelConfig"
                                 mode="date"
+                                :min-date="new Date()"
                               >
                                 <template #default="{ togglePopover }">
                                   <span @click="togglePopover()">
@@ -218,7 +228,7 @@
                             </validation-provider>
                           </div>
 
-                          <div class="col-md-6 mb-2">
+                          <!-- <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Start Date</label
                             >
@@ -226,6 +236,7 @@
                               v-model="start_date"
                               :model-config="modelConfig"
                               mode="date"
+                              :min-date="new Date()"
                             >
                               <template #default="{ togglePopover }">
                                 <span @click="togglePopover()">
@@ -238,14 +249,14 @@
                                 </span>
                               </template>
                             </v-date-picker>
-                          </div>
+                          </div> -->
 
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
-                              >Set duration
+                              >Set duration(minutes)
                             </label>
                             <validation-provider
-                              rules="digits"
+                              rules="numeric"
                               v-slot="{ errors }"
                             >
                               <input
@@ -253,7 +264,7 @@
                                 type="text"
                                 class="form-control border-right text-12"
                                 style="height: 35px"
-                                placeholder="Time in minutes"
+                                placeholder="eg. 30"
                               />
                               <span class="text-12" style="color: red">{{
                                 errors[0]
@@ -274,7 +285,7 @@
 
                           <input
                             type="file"
-                            accept=".pptx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, image/*, .pdf"
+                            accept=".pptx,.doc, application/pdf, application/vnd.ms-excel, image/*, "
                             class="invisible"
                             ref="uploadfile"
                             @change="handleFileUpload($event)"
@@ -314,7 +325,7 @@
                             <span v-else>Click to Upload</span>
                           </div>
                           <p class="text-grey text-14">
-                            Formats: PPT, DOC, PDF, JPEG, PNG
+                            Formats: PPTX, DOC, PDF, XLXS, e.t.c
                           </p>
                         </div>
                       </div>
@@ -375,7 +386,7 @@ export default {
         title: {
           // placeholder: 'h1',
         },
-        placeholder: 'Add Header / Description / Instruction',
+        placeholder: 'Exercise Instruction',
         removePlugins: ['Title'],
       },
       assignmentFields: [

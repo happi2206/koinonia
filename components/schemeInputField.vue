@@ -1,9 +1,23 @@
 <template>
   <div>
     <div v-if="collapse">
+      <div v-if="isLoading">
+        <b-row>
+          <b-col cols="12" class="">
+            <b-skeleton animation="wave" width="85%"></b-skeleton>
+            <b-skeleton animation="wave" width="55%"></b-skeleton>
+            <b-skeleton animation="wave" width="70%"></b-skeleton>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="12" class="">
+            <b-skeleton-img no-aspect height="150px"></b-skeleton-img>
+          </b-col>
+        </b-row>
+      </div>
       <form>
         <div>
-          <div class="fullborder p-3 my-2">
+          <div class="fullborder p-1 my-0">
             <div>
               <div class="row">
                 <div class="col p-0">
@@ -15,7 +29,7 @@
                   <div class="my-2 text-16">
                     <label>Title</label>
                     <input
-                      v-model="section.title"
+                      v-model="scheme.title"
                       required
                       type="text"
                       class="form-control"
@@ -26,7 +40,7 @@
                   <div class="my-2 text-16">
                     <label>Objective</label>
                     <input
-                      v-model="section.objective"
+                      v-model="scheme.objective"
                       required
                       type="text"
                       class="form-control"
@@ -62,12 +76,13 @@
     <!-- *******************Output******************* -->
     <div v-else>
       <added-scheme
-        :section="section"
+        :scheme="scheme"
         @editScheme="editScheme"
         :showAddedScheme="showAddedScheme"
         @deleteAddedScheme="deleteInstance"
         @innerSections="innerSectionsfunc"
         @items="itemsfunc"
+        @sections="sectionsAdd"
       />
     </div>
   </div>
@@ -77,30 +92,43 @@
 export default {
   data() {
     return {
-      collapse: true,
-      showAddedScheme: false,
-      section: {
+      scheme: {
         title: '',
         objective: '',
+        section: [],
       },
+      showAddedScheme: false,
+      saveButton: false,
+      isLoading: false,
     }
   },
   props: {
     index: {
       type: Number,
     },
-    sections: {
+    collapse: {
+      type: Boolean,
+      default: false,
+    },
+    schema: {
       type: Array,
     },
+  },
+  created() {
+    this.scheme = this.schema[0]
   },
   methods: {
     addScheme() {
       this.collapse = false
       this.showAddedScheme = true
-      this.$emit('switch', this.showScheme)
+      this.$emit('scheme', this.scheme)
+    },
+    sectionsAdd(e) {
+      this.scheme.section = e
     },
     deleteScheme() {
-      this.$emit('i', this.index)
+      this.$emit('deleteScheme', this.index)
+      this.$emit('saveButton', this.saveButton)
     },
     deleteInstance(e) {
       this.$emit('deleteEmit', e)
@@ -115,15 +143,6 @@ export default {
     },
     itemsfunc(e) {
       this.$emit('items', e)
-    },
-  },
-
-  watch: {
-    section: {
-      handler(newVal) {
-        this.$emit('section', newVal)
-      },
-      deep: true,
     },
   },
 }

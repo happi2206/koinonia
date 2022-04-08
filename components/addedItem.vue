@@ -1,43 +1,35 @@
 <template>
   <div>
     <div>
-      <div>
-        <div class="mx-3 my-2 d-flex justify-content-end">
-          <div class="mr-2" @click="editItem">
-            <span style="cursor: pointer"
-              ><span class="iconify" data-icon="bxs:pencil"></span>
-            </span>
+      <div class="mb-2">
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="text-14 mb-2" style="font-weight: 600">
+              {{ item.title }}
+            </p>
+            <!-- <div class="d-flex">
+              <span @click="editItem" class="mr-2" style="cursor: pointer"
+                ><span
+                  class="iconify"
+                  data-icon="bi:pencil-square"
+                  style="color: #2f2f2f"
+                  data-width="14"
+                  data-height="16"
+                ></span
+              ></span>
+              <div @click="deleteItem" style="cursor: pointer">
+                <span
+                  class="iconify"
+                  data-icon="bytesize:trash"
+                  style="color: #2f2f2f"
+                  data-width="16"
+                  data-height="16"
+                ></span>
+              </div>
+            </div> -->
           </div>
-          <div @click="deleteItem">
-            <span
-              style="cursor: pointer"
-              class="iconify"
-              data-icon="bxs:trash-alt"
-            ></span>
-          </div>
-        </div>
-        <div class="newLecture bg-primary fullborder text-14 ml-5 mb-5">
-          <div
-            v-b-toggle="`collapse-${index}`"
-            class="py-3 px-4 d-flex align-items-center justify-content-between"
-          >
-            <div>
-              <span style="font-weight: 600" class="text-16">
-                {{ item.title }}
-              </span>
-            </div>
-            <span
-              class="iconify"
-              data-icon="ph:caret-down"
-              data-width="22"
-              data-height="22"
-            ></span>
-          </div>
-          <b-collapse :id="`collapse-${index}`" class="mt-2">
-            <b-card class="mx-3 bg-primary controlborder">
-              <p class="text-14">{{ item.objective }}</p>
-            </b-card>
-          </b-collapse>
+
+          <p class="text-14 mb-2">{{ item.description }}</p>
         </div>
       </div>
     </div>

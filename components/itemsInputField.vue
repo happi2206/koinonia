@@ -1,7 +1,10 @@
 <template>
   <div>
     <div>
-      <div v-show="subItem" class="lecture-cover pl-3 pt-3 mt-3 mx-3">
+      <div
+        v-show="subItem"
+        class="lecture-cover bg-light mb-3 pl-3 pt-3 mt-3 mx-3"
+      >
         <div>
           <div>
             <div>
@@ -47,7 +50,7 @@
                           </div>
                           <div class="my-2 text-16">
                             <input
-                              v-model="item.objective"
+                              v-model="item.description"
                               required
                               type="text"
                               class="form-control form-control-width"
@@ -55,7 +58,7 @@
                                 border: 1px solid #000000;
                                 border-radius: 0rem;
                               "
-                              placeholder="Objective"
+                              placeholder="Description"
                             />
                           </div>
                         </div>
@@ -92,13 +95,6 @@
           </div>
         </div>
       </div>
-      <added-item
-        @editItem="setItemState"
-        @deleteItem="deleteItem"
-        v-show="showInnerSection"
-        :index="i"
-        :item="item"
-      />
     </div>
   </div>
 </template>
@@ -107,35 +103,54 @@
 export default {
   data() {
     return {
-      subItem: true,
-      showInnerSection: false,
+      subItem: false,
       item: {
         title: '',
-        objective: '',
+        description: '',
       },
+      index: '',
+    }
+  },
+
+  created() {
+    // if (this.item) {
+    //   this.item = this.itemz
+    //   this.index = this.i
+    // }
+
+    if (this.showItemInput == true) {
+      this.subItem = true
     }
   },
 
   methods: {
     openAddedItem() {
-      this.showInnerSection = true
+      // this.$emit('input', false)
       this.subItem = false
+      this.$emit('item', this.item)
     },
     removeItem() {
       this.$emit('emitIndex', this.i)
+      console.log(this.i)
     },
     setItemState() {
       this.subItem = true
       this.showInnerSection = false
     },
-    deleteItem(e) {
-      this.$emit('deleteItem', e)
-    },
+    // deleteItem(e) {
+    //   this.$emit('deleteItem', e)
+    // },
   },
 
   props: {
     i: {
       type: Number,
+    },
+    showItemInput: {
+      type: Boolean,
+    },
+    itemz: {
+      type: Object,
     },
   },
 
@@ -152,13 +167,12 @@ export default {
 
 <style>
 .lecture-cover {
-  background: #fff8dc;
+  /* background: #fff8dc; */
   max-width: 95%;
   border: 0.5px solid #333333;
 }
 .second-section {
   max-width: 1000px;
-  /* margin-left: 3rem; */
 }
 .form-control-width {
   max-width: 100%;

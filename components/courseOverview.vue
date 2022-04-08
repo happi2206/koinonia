@@ -6,16 +6,14 @@
           <div class="px-md-3 px-2 pb-3">
             <div class="my-3">
               <h1 class="brown24">Description</h1>
-              <div class="text-14 pb-4">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Debitis, consequatur. Laudantium quidem iure, dolores, at
-                praesentium impedit nisi ratione velit porro soluta totam
-                nostrum esse? Ducimus dignissimos blanditiis nam veritatis!
+              <div class="text-14 pb-3">
+                {{ courseDetail.description }}
               </div>
             </div>
-            <hr />
+            <hr class="my-2" />
             <h2 class="brown24 my-3 graytext">Scheme of work</h2>
             <p
+              v-if="section.length === 0"
               class="lightgraytext medbrownparagraph d-flex align-items-center"
             >
               <span
@@ -33,27 +31,132 @@
 
             <!-- ************SchemeInputComponent************* -->
 
-            <div class="plus">
-              <b-icon @click="createSection()" icon="plus-square"></b-icon>
+            <div v-if="section.length === 0">
+              <b-icon
+                class="plus"
+                @click="createScheme()"
+                icon="plus-square"
+              ></b-icon>
             </div>
 
-            <scheme-input-field
-              v-for="(section, index) in sections"
-              :key="index"
-              :index="index"
-              @i="deleteScheme($event)"
-              @deleteEmit="deleteEmit"
-              @section="sectionsfunc($event, index)"
-              :sections="sections"
-              v-show="renderScheme"
-              @innerSections="innerSectionsFunc($event, index)"
-              @items="itemsFunc($event, index)"
-            />
+            <!-- <div v-if="section.length > 0">
+              <div @click="openWarningModal" style="cursor: pointer">
+                <span
+                  class="iconify"
+                  data-icon="bytesize:trash"
+                  style="color: #2f2f2f"
+                  data-width="16"
+                  data-height="16"
+                ></span>
+              </div>
+            </div> -->
+
+            <div
+              v-if="updateButton && section.length > 0"
+              class="d-flex justify-content-end"
+            >
+              <button
+                @click.prevent="listView"
+                class="
+                  btn
+                  text-14
+                  btn-height btn-width
+                  mr-0
+                  mb-3
+                  mainbtndashboard
+                "
+              >
+                Preview
+              </button>
+            </div>
+
+            <div v-if="showInput">
+              <scheme-input-field
+                v-for="(sch, index) in section"
+                :key="index"
+                :index="index"
+                :schema="section"
+                :collapse="collapse"
+                :showAddedScheme="showAddedScheme"
+                @deleteScheme="deleteScheme($event)"
+                @scheme="schemeAdd($event, index)"
+                @saveButton="saveButtonHandler"
+              />
+            </div>
           </div>
 
-          <button @click="sendDataModel" class="btn mb-3 btn-outline-primary">
-            Save
-          </button>
+          <div v-if="saveButton" class="d-flex justify-content-end">
+            <button
+              @click="sendDataModel"
+              class="
+                btn
+                text-14
+                mr-4
+                btn-height btn-width
+                mb-3
+                mainbtndashboard
+              "
+            >
+              <span v-if="isbusyCreating">
+                <b-spinner
+                  label="loading"
+                  variant="success"
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="text-center"
+                >
+                </b-spinner>
+              </span>
+              <span v-else> Save </span>
+            </button>
+          </div>
+
+          <div
+            v-if="updateButton && section.length > 0"
+            class="d-flex justify-content-end"
+          >
+            <button
+              @click.prevent="listView"
+              class="
+                btn
+                text-14
+                btn-height btn-width
+                mr-3
+                mb-3
+                mainbtndashboard
+              "
+            >
+              Preview
+            </button>
+            <button
+              @click="updateSchema"
+              class="
+                btn
+                text-14
+                mx-3
+                btn-height btn-width
+                mb-3
+                mainbtndashboard
+              "
+            >
+              <span v-if="isbusy">
+                <b-spinner
+                  label="loading"
+                  variant="success"
+                  style="width: 1.5rem; height: 1.5rem"
+                  class="text-center"
+                >
+                </b-spinner>
+              </span>
+              <span v-else> Update </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- <list-scheme :section="section" /> -->
+
+      <div v-if="this.section.length > 0">
+        <div v-if="display">
+          <render-scheme :section="section" @view="editMode" />
         </div>
       </div>
     </div>
@@ -61,21 +164,28 @@
 </template>
 
 <script>
+import listScheme from './listScheme.vue'
 export default {
+  components: { listScheme },
   data() {
     return {
-      addedSection: false,
-      addSchemeType: false,
-      sectionExist: false,
-      addedInnerSection: true,
+      collapse: false,
+      showAddedScheme: false,
       sectionContent: false,
       renderScheme: true,
-      sections: [],
       section: [],
-      item: [],
-      text: '',
-      list: '',
-      temp_index: null,
+      scheme: {
+        title: '',
+        objective: '',
+        section: [],
+      },
+      updateButton: false,
+      saveButton: false,
+      display: true,
+      showInput: false,
+      isbusy: false,
+      isbusyCreating: false,
+      schemeId: '',
     }
   },
   props: {
@@ -84,19 +194,35 @@ export default {
       default: () => {},
     },
   },
+
+  created() {
+    this.getSchemeOfWork()
+  },
+
   methods: {
+    listView() {
+      ;(this.display = !this.display) &&
+        (this.updateButton = !this.updateButton)
+
+      this.showInput = !this.showInput
+    },
+    saveButtonHandler(e) {
+      this.saveButton = e
+    },
+    editMode(e) {
+      this.updateButton = e
+      this.display = false
+      this.showInput = true
+    },
+    openWarningModal() {
+      console.log(`yay`)
+    },
     async sendDataModel() {
-      console.log(this.temp_index)
-      for (let i = 0; i <= this.temp_index; i++) {
-        this.sections[i].section = this.section[i]
-        this.sections[i].item = this.item[i]
-      }
-      console.log(this.sections)
-      return
       try {
+        this.isbusyCreating = true
         let dataModel = {
           course_id: this.$route.params.id,
-          section: this.sections,
+          section: this.section,
         }
         let response = await this.$axios.post(
           `course-v/add-scheme-of-work`,
@@ -106,44 +232,77 @@ export default {
       } catch (error) {
         this.$toast.error(error)
       } finally {
+        this.getSchemeOfWork()
+        this.isbusyCreating = false
       }
     },
-    createSection() {
-      this.sections.push({
-        title: '',
-        objective: '',
-        section: [],
-        item: [],
-      })
+
+    async updateSchema() {
+      try {
+        this.isbusy = true
+        let updateDataModel = {
+          id: `${this.schemeId}`,
+          section: this.section,
+        }
+        console.log(updateDataModel)
+
+        let response = await this.$axios.patch(
+          `course-v/edit-scheme-of-work`,
+          updateDataModel
+        )
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error(error)
+        console.log(error)
+      } finally {
+        this.getSchemeOfWork()
+        this.isbusy = false
+      }
     },
 
-    sectionsfunc(e, i) {
-      this.sections[i].title = e.title
-      this.sections[i].objective = e.objective
-      this.temp_index = i
-      console.log(this.temp_index)
+    async deleteSchemeOfWork() {
+      try {
+        let response = await this.$axios.delete(
+          `course-v/delete-scheme-of-work?scheme_id=${schemeId}`
+        )
+        this.$toast.success(response.data.message)
+      } catch (error) {
+        this.$toast.error(error)
+      }
     },
 
-    innerSectionsFunc(e) {
-      this.section = e
-    },
-    itemsFunc(e) {
-      this.item = e
+    async getSchemeOfWork() {
+      try {
+        let response = await this.$axios.$get(
+          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+        )
+
+        if (response.section.length === 0) {
+          this.saveButton = true
+        }
+
+        this.section = response.section
+        this.schemeId = response.id
+      } catch (error) {
+        console.log(error)
+      }
     },
 
+    createScheme() {
+      this.collapse = true
+      this.showInput = true
+      this.display = false
+      this.saveButton = true
+      this.section.push(this.scheme)
+      // if (this.section.length !== 0) {
+      //   this.init = true
+      // }
+    },
+    schemeAdd(e, i) {
+      this.section[i] = e
+    },
     deleteScheme(e) {
-      console.log(e)
-      this.sections.splice(e, 1)
-    },
-    deleteEmit(e) {
-      this.sections.splice(e, 1)
-    },
-
-    deleteInnerSection(index) {
-      this.innerSection.splice(index, 1)
-      if (this.innerSection.length === 0) {
-        this.sectionContent = false
-      }
+      this.section.splice(e, 1)
     },
   },
 }
@@ -220,5 +379,9 @@ export default {
 
 .form-control-width {
   max-width: 98%;
+}
+.btn-width {
+  width: 110px;
+  text-align: center;
 }
 </style>

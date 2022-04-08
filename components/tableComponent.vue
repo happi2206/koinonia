@@ -103,7 +103,7 @@
         <slot name="status" :data="data">
           <b-badge
             :variant="data.item.status === 'publish' ? 'success' : 'danger'"
-            class="text-capitalize p-2"
+            class="text-capitalize text-12 py-2 px-3"
             >{{
               data.item.status === 'publish' ? 'Published' : 'Draft'
             }}</b-badge

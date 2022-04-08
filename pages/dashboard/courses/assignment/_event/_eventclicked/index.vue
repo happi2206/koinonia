@@ -528,7 +528,7 @@ export default {
           }
         )
 
-        this.$toast.success('Exercise drafted successfully')
+        this.$toast.success('Exercise unpublished successfully')
       } catch (error) {
         console.log(error)
         this.$toast.error(error)
