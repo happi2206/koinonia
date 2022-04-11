@@ -53,7 +53,7 @@
               :key="index"
               class="mx-3 my-2"
             >
-              <added-item v-if="item" :item="item" />
+              <added-item v-if="item.title !== ''" :item="item" />
             </b-card>
           </b-collapse>
           <div class="mt-2 mb-2 ml-3">
