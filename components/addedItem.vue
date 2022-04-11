@@ -41,6 +41,7 @@ export default {
   data() {
     return {}
   },
+
   methods: {
     editItem() {
       this.$emit('editItem', true)
@@ -55,6 +56,14 @@ export default {
     },
     index: {
       type: Number,
+    },
+  },
+  watch: {
+    item: {
+      handler(newVal) {
+        this.item = newVal
+        console.log(newVal)
+      },
     },
   },
 }

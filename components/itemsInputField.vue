@@ -113,10 +113,9 @@ export default {
   },
 
   created() {
-    // if (this.item) {
-    //   this.item = this.itemz
-    //   this.index = this.i
-    // }
+    if (this.item) {
+      this.index = this.i
+    }
 
     if (this.showItemInput == true) {
       this.subItem = true
@@ -125,7 +124,6 @@ export default {
 
   methods: {
     openAddedItem() {
-      // this.$emit('input', false)
       this.subItem = false
       this.$emit('item', this.item)
     },
@@ -149,19 +147,16 @@ export default {
     showItemInput: {
       type: Boolean,
     },
-    itemz: {
-      type: Object,
-    },
   },
 
-  watch: {
-    item: {
-      handler(newVal) {
-        this.$emit('item', newVal)
-      },
-      deep: true,
-    },
-  },
+  // watch: {
+  //   item: {
+  //     handler(newVal) {
+  //       this.$emit('item', newVal)
+  //     },
+  //     deep: true,
+  //   },
+  // },
 }
 </script>
 
