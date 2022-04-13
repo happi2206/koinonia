@@ -62,25 +62,31 @@ export default {
     }
   },
   created() {
-    this.getAllInstructors()
+    this.get_all_course_students()
   },
   methods: {
-    async getAllInstructors() {
+    async get_all_course_students() {
       try {
         this.isLoading = true
-        let uri = `instructors-v/get-all-instructors?page=${this.currentPage}&size=${this.perPage}`
+        let uri = `course-v/get-all-course-students?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
+
         if (this.search) {
           uri = uri + `&search=${this.search}`
         }
-        const instructors = await this.$axios.$get(uri)
-        this.instructors = instructors
-      } catch (error) {
-        console.log(error)
+        const students = await this.$axios.$get(uri)
+
+        this.students = students.items
+
+        this.perPage = students.size
+        this.totalItems = students.total
+        this.currentPage = students.page
+      } catch (e) {
+        this.$toast.error(e)
       } finally {
         this.isLoading = false
       }
     },
-    filterInstructors(e) {
+    filterCourseMates(e) {
       this.perPage = e
       this.getAllInstructors()
     },
