@@ -118,7 +118,7 @@
                   <div>
                     <div>
                       <div class="row">
-                        <div class="col-xl-7 mb-3 mb-xl-0">
+                        <div class="col-xl-7 w-50 mb-3 mb-xl-0">
                           <div class="mb-2" style="font-size: 0.95rem">
                             <label class="form-control-label mb-2"
                               >Instruction</label
@@ -134,7 +134,7 @@
                           </div>
                         </div>
                         <div
-                          class="col-xl-5 py-4"
+                          class="col-xl-5 w-50 py-4"
                           style="border-left: 0.5px solid #dfe3e7"
                         >
                           <div class="row">

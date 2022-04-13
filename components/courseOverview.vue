@@ -281,7 +281,7 @@ export default {
           this.saveButton = true
         }
 
-        // this.section = response.section
+        this.section = response.section
         this.schemeId = response.id
       } catch (error) {
         console.log(error)

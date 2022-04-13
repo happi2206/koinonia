@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-4 pt-3 bodylightgray height"
+    class="px-3 pt-3 bodylightgray height"
     v-observe-visibility="getAllCourses"
   >
     <div class="mt-5 pt-4">
@@ -10,28 +10,7 @@
     <div>
       <div class="card mt-3">
         <b-tabs content-class="mt-3" class="custom-tabs">
-          <b-tab title="All courses" active>
-            <div class="d-flex justify-content-center align-items-center p-4">
-              <div class="h-100">
-                <h2 class="text-center header2 my-4">No Class found</h2>
-                <p class="my-4 medbrownparagraph text-center">
-                  Link to a course by asking an administrator for the link code
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <table-component
-                :items="events"
-                v-if="visualization === 'list'"
-                :fields="fields"
-                :busy="busy"
-                :perPage="perPage"
-                :totalItems="totalItems"
-              >
-              </table-component>
-            </div>
-          </b-tab>
+          <b-tab title="All courses"><MyLearningAllcourses /></b-tab>
           <b-tab title="On-going">
             <div class="d-flex justify-content-center align-items-center p-4">
               <div class="h-100">
@@ -95,5 +74,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.custom-tabs {
+  /* border-bottom: 0.2px solid #828282; */
+  width: 100%;
+  flex-wrap: nowrap !important;
+}
 </style>

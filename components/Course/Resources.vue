@@ -4,7 +4,7 @@
     <preloader :show="addPreloader" />
     <filter-component @search="SearchText" @view-by="sortInstructors">
       <template #besideFilterButton>
-        <div class="ml-md-5" @click="openForm">
+        <div class="ml-3" @click="openForm">
           <button
             v-b-modal.Add-resources
             class="btn btn-height mainbtndashboard medbrownparagraph"

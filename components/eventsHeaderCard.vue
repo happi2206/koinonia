@@ -154,7 +154,8 @@
             />
             <button
               @click.prevent="$refs.uploadcsv.click()"
-              class="accentcolorbg button-height py-2 px-3 ml-3"
+              style="max-width: 48px"
+              class="accentcolorbg upload-margin button-height py-2 px-3 ml-3"
             >
               <span
                 class="iconify"
@@ -163,7 +164,7 @@
                 data-height="16"
               ></span>
             </button>
-            <button
+            <!-- <button
               class="
                 btn
                 ml-5
@@ -175,7 +176,7 @@
               @click="recieveUpdate"
             >
               <span class="iconify" data-icon="charm:upload"></span>
-            </button>
+            </button> -->
           </template>
         </filter-component>
       </div>
@@ -431,17 +432,31 @@ export default {
 </script>
 
 <style scoped>
+.margin-fix {
+  margin-right: 11rem;
+}
 .button-height {
   height: 2.6rem;
 }
 .btn-warning {
   color: #212529;
-  background-color: #d3a13b;
-  border-color: #d3a13b;
+  background-color: #ffcd06;
+  border-color: #ffcd06;
 }
 
 .fmbt {
   width: 100px;
+  height: 35px;
   background: #ffcd06;
+}
+
+@media screen and (max-width: 1116px) {
+  .margin-fix {
+    margin-right: 11rem;
+    margin-left: 0rem;
+  }
+  .upload-margin {
+    margin: 0px;
+  }
 }
 </style>

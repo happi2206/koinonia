@@ -76,7 +76,7 @@
         <!-- ****************************************************************************************** -->
 
         <div class="site-container headerview font14">
-          <div class="conatiner">
+          <div class="conatiner w-100">
             <div class="card trojan bg-white mb-3">
               <div class="pt-6 pl-6 ml-4 mt-6 pb-0">
                 <div class="card-title text-18 ml-0">Edit Exercise</div>
@@ -85,7 +85,7 @@
                 <ValidationObserver v-slot="{ validate }">
                   <form class="pl-6 fix-width ml-6">
                     <div class="row mt-4" style="max-width: 1020px">
-                      <div>
+                      <div class="w-100">
                         <div class="mb-2">
                           <label class="form-control-label text-12"
                             >Exercise Name
@@ -107,7 +107,7 @@
                             }}</span>
                           </validation-provider>
                         </div>
-                        <div class="mb-2" style="max-width: 996px">
+                        <div class="mb-2 w-100">
                           <label class="form-control-label text-12"
                             >Exercise Instruction
                             <span class="font10 small">(Required)</span></label

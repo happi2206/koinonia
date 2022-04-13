@@ -382,7 +382,7 @@ a.mainbtndashboard {
 }
 
 a.mainbtndashboard:hover {
-  background-color: 10203f;
+  background-color: #10203f;
   color: black;
 }
 
@@ -391,17 +391,17 @@ a.mainbtndashboard:hover {
   left: -140px !important;
 }
 
-button.mainbtndashboard {
+.mainbtndashboard {
   background-color: #ffcd06;
   color: black;
-
+  height: 35px;
   text-align: left;
   text-decoration: none;
   outline: none;
 }
 
 button.mainbtndashboard:hover {
-  background-color: 10203f;
+  background-color: #10203f;
   color: black;
 }
 
@@ -511,6 +511,11 @@ button.subscribebtn.rad6 {
   font-family: Brown;
 }
 
+.text-13 {
+  font-size: 13px;
+  font-family: Brown;
+}
+
 .text-12 {
   font-size: 12px;
   font-family: Brown;
@@ -518,6 +523,11 @@ button.subscribebtn.rad6 {
 
 .text-18 {
   font-size: 18px;
+  font-family: Brown;
+}
+
+.text-24 {
+  font-size: 24px;
   font-family: Brown;
 }
 
@@ -1442,8 +1452,8 @@ th {
 }
 
 .custom-tabs {
-  border-bottom: 0.2px solid #828282;
-  padding: 1rem .5rem;
+  /* border-bottom: 0.2px solid #828282; */
+  /* padding: 1rem .5rem; */
   width: 100%;
   flex-wrap: nowrap !important;
 }
@@ -1708,7 +1718,7 @@ th {
   .arialheader,
   .header2,
   .roboto22,
-  .roboto24 .text-24 {
+  .roboto24 {
     font-size: 22px;
   }
 

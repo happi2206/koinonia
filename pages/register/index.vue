@@ -298,15 +298,13 @@ export default {
       try {
         this.$nuxt.$loading.start()
         this.preloader = true
-        if (this.legal_check) {
-          this.registerInputs.user_type.legal = [
-            {
-              type: 'Term&Condition',
-              version: '0.0.1',
-              stamp: new Date().toISOString(),
-            },
-          ]
-        }
+        this.registerInputs.legal = [
+          {
+            type: 'Term&Condition',
+            version: '0.0.1',
+            stamp: new Date().toISOString(),
+          },
+        ]
         await this.register(this.registerInputs)
         this.$router.push({ path: '/' })
       } catch (e) {

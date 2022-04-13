@@ -7,7 +7,7 @@
       v-show="open"
     >
       <template #besideFilterButton>
-        <div class="ml-md-5" @click="openForm">
+        <div class="ml-3" @click="openForm">
           <button class="btn btn-height mainbtndashboard medbrownparagraph">
             New Exercise
           </button>
@@ -52,8 +52,8 @@
               <div class="pl-0 ml-0 d-flex">
                 <ValidationObserver v-slot="{ validate }">
                   <form class="px-4 mx-3">
-                    <div class="row mt-4" style="max-width: 920px">
-                      <div>
+                    <div class="row mt-4 w-100" style="max-width: 1020px">
+                      <div class="w-100">
                         <div class="mb-2">
                           <label class="form-control-label text-12"
                             >Exercise Name
@@ -77,7 +77,7 @@
                             }}</span>
                           </validation-provider>
                         </div>
-                        <div class="mb-2" style="max-width: 940px">
+                        <div class="mb-2 w-100" style="width: 500px">
                           <label class="form-control-label text-12"
                             >Exercise Instruction
                             <span class="font10 small" style="color: red"
@@ -107,7 +107,7 @@
                       <div class="col-12 pr-0 pl-0">
                         <hr />
                       </div>
-                      <div class="w-100">
+                      <div class="">
                         <div class="row">
                           <div class="col-6 mb-2">
                             <label class="form-control-label text-12"
@@ -273,7 +273,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 pl-0">
+                      <div class="col-12 px-0">
                         <hr />
                         <div class="my-3 ml-3">
                           <p
@@ -693,7 +693,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .custom-tabs {
   border-bottom: 0.2px solid #828282;
   padding-left: 2rem;
