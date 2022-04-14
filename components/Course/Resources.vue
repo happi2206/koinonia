@@ -319,6 +319,17 @@ export default {
 </script>
 
 <style scoped>
+.file-type-display {
+  background: #ecf7ff;
+  border: 2px dashed #ffc107;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 14px;
+  color: #8b9eb0;
+  cursor: pointer;
+}
 .p-3 {
   padding: 1rem !important;
 }

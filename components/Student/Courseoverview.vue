@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="mt-4 mb-2">
-      <h1 class="text-24 mb-3 ml-3">Scheme of work</h1>
+      <h1 class="text-24 mb-3 ml-5">Scheme of work</h1>
       <list-schemefor-students />
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded">
-    <div class="row">
+    <div class="d-flex">
       <div class="col-md-3 px-0 pl-md-3">
         <div class="rounded">
           <img

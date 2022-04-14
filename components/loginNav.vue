@@ -101,7 +101,6 @@
               <b-dropdown-item
                 class="medparagraph"
                 @click.prevent="linkToContent"
-                v-else
               >
                 Link a Course
               </b-dropdown-item>
@@ -317,7 +316,7 @@
                     v-if="!user.is_administrator"
                     @click.prevent="linkToContent"
                   >
-                    Link as Administrator
+                    Link a Course
                   </b-dropdown-item>
                   <b-dropdown-item
                     href="#"
@@ -325,7 +324,7 @@
                     @click.prevent="linkToContent"
                     v-else
                   >
-                    Link a Course
+                    Link as Administrator
                   </b-dropdown-item>
                   <b-dropdown-item
                     @click="signOut"

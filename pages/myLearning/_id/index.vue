@@ -48,6 +48,7 @@
             /></b-tab>
             <b-tab title="Instructors"><StudentInstructors /></b-tab>
             <b-tab title="Course Mates"><student-courseMates /></b-tab>
+            <b-tab title="Attendance"><student-attendance /></b-tab>
           </b-tabs>
         </div>
       </b-card>
@@ -92,7 +93,7 @@ export default {
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  padding: 0rem;
   padding-top: 0;
 }
 .custom-tabs {

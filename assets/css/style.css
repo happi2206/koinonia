@@ -1453,14 +1453,15 @@ th {
 
 .custom-tabs {
   /* border-bottom: 0.2px solid #828282; */
-  /* padding: 1rem .5rem; */
+  padding: 1rem .5rem;
   width: 100%;
   flex-wrap: nowrap !important;
 }
 
 .custom-tabs .nav {
   flex-wrap: nowrap !important;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .custom-tabs .nav-tabs .nav-link {

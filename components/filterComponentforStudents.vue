@@ -3,6 +3,7 @@
     <div class="card-body">
       <div
         class="
+          mb-3
           d-flex
           flex-lg-row
           justify-content-between

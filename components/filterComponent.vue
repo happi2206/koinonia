@@ -74,6 +74,7 @@
               type="text"
               required
               placeholder="Search"
+              v-model="searchtag"
               @change="$emit('search', $event.target.value)"
               class="px-md-3 px-2 py-2 border rounded widthfullsearch"
             />
@@ -134,6 +135,7 @@ export default Vue.extend({
   data() {
     return {
       visualization: 'list',
+      searchtag: '',
     }
   },
   methods: {
@@ -142,6 +144,11 @@ export default Vue.extend({
       this.$emit('visualization', this.visualization)
     },
   },
+  // watch: {
+  //   searchtag() {
+  //     this.$emit('searchtag', this.searchtag)
+  //   },
+  // },
 })
 </script>
 

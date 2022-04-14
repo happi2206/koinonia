@@ -1,7 +1,11 @@
 <template>
   <div v-observe-visibility="get_all_course_events">
     <preloader :show="addPreloader" />
-    <filter-component @search="SearchText" @view-by="sortEvents">
+    <filter-component
+      @search="SearchText"
+      @view-by="sortEvents"
+      @searchtag="querytag"
+    >
       <template #graphicon>
         <span class="iconify" data-icon="system-uicons:graph-bar"></span>
       </template>
@@ -362,6 +366,9 @@ export default {
       await this.$htmlToPaper('printMe', { e })
     },
 
+    // querytag(e) {
+    //   this.get_all_course_events(e)
+    // },
     handleEdit(e) {
       this.$bvModal.show('editEvent')
       const editForm = e
@@ -397,10 +404,9 @@ export default {
     async get_all_course_events() {
       try {
         this.busy = true
-
         let uri = `course-v/get-all-course-event?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
 
-        if (this.search) {
+        if (this.search !== '') {
           uri = uri + `&search=${this.search}`
         }
         const events = await this.$axios.$get(uri)

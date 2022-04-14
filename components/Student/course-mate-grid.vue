@@ -11,12 +11,11 @@
       >
         <div class="d-flex flex-column" style="text-align: center">
           <p class="text-14 pt-3 pb-2 m-0">
-            {{ instructor ? instructor.firstname : '' }}
-            {{ instructor ? instructor.surname : '' }}
+            {{ coursemate.firstname }} {{ coursemate.surname }}
           </p>
           <div style="max-height: 6rem; min-height: 5.9rem" class="x mb-2">
             <p class="text-13">
-              <!-- {{ instructor.biodata }} -->
+              {{ coursemate.biodata }}
             </p>
           </div>
 
@@ -62,7 +61,7 @@
 <script>
 export default {
   props: {
-    instructor: {
+    coursemate: {
       type: Object,
     },
   },

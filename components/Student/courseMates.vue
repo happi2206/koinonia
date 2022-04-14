@@ -2,10 +2,10 @@
   <div>
     <div style="background: #e5e5e5">
       <filter-componentfor-students
-        @view-by="filterInstructors"
-        @search="queryInstructors"
+        @view-by="filterCourseMates"
+        @search="queryCourseMates"
         :placeholder="placeholder"
-      />
+      ></filter-componentfor-students>
       <div v-if="isLoading" class="p-5 w-75" style="margin: auto">
         <b-row>
           <b-col cols="4">
@@ -28,19 +28,37 @@
 
       <div v-else class="row gap-5 py-3 margin-fix">
         <instructor-grid
-          v-for="(instructor, index) in instructors"
+          v-for="(coursemate, index) in coursemates"
           :key="index"
-          :instructor="instructor"
+          :coursemate="coursemate"
         ></instructor-grid>
         <div
           style="text-align: center; margin: auto"
           class="w-50 p-5"
-          v-if="instructors.length === 0"
+          v-if="searchQuery"
         >
-          <p class="text-18">Oops</p>
-          <p class="text-16">No Instructor matched your search parameters</p>
+          <p class="text-16">No Course mate matched your search parameters</p>
+        </div>
+        <div
+          style="text-align: center; margin: auto"
+          class="w-50 p-5"
+          v-if="coursemates.length === 0"
+        >
+          <p class="text-16">No Course mate linked to this course</p>
         </div>
       </div>
+      <div style="padding: 0 7.7rem">
+        <hr />
+      </div>
+
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="totalItems"
+        :per-page="perPage"
+        align="center"
+        class="my-0 pb-3"
+        @click="changePage"
+      ></b-pagination>
     </div>
   </div>
 </template>
@@ -52,15 +70,18 @@ export default {
   components: { instructorGrid, FilterComponentforStudents },
   data() {
     return {
-      instructors: [],
+      coursemates: [],
       placeholder: 'Course mates',
       isLoading: false,
       visualization: 'grid',
       currentPage: 1,
-      perPage: 50,
+      perPage: 6,
+      totalItems: 1,
       filterby: 6,
+      searchQuery: false,
     }
   },
+
   created() {
     this.get_all_course_students()
   },
@@ -75,7 +96,7 @@ export default {
         }
         const students = await this.$axios.$get(uri)
 
-        this.students = students.items
+        this.coursemates = students.items
 
         this.perPage = students.size
         this.totalItems = students.total
@@ -88,11 +109,16 @@ export default {
     },
     filterCourseMates(e) {
       this.perPage = e
-      this.getAllInstructors()
+      this.get_all_course_students()
     },
-    queryInstructors(e) {
+    queryCourseMates(e) {
       this.search = e
-      this.getAllInstructors()
+      this.get_all_course_students()
+    },
+  },
+  watch: {
+    currentPage() {
+      this.get_all_course_students()
     },
   },
 }

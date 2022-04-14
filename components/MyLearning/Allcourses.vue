@@ -28,43 +28,46 @@
           </p>
         </div>
       </div>
-      <div class="row gap-5 align-items-center flex-wrap mx-4">
+      <div
+        v-if="courses.length > 0"
+        class="row gap-5 align-items-center flex-wrap mx-4"
+      >
         <b-card
           v-for="(course, index) in courses"
           :key="index"
-          class="w-50 card-width"
+          class="col card-width"
           @click="gridClicked(index)"
         >
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
               <img
-                class="img-fluid m-0"
-                style="height: 100%"
-                :src="course.feature_image"
+                class="img-fluid img-control m-0"
+                :src="course ? course.feature_image : ''"
                 alt=""
               />
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <div class="d-flex flex-column">
                 <h3 class="text-18">{{ course.title }}</h3>
                 <p class="mb-1 medbrownparagraph">
                   <span class="lightgraytext">
-                    Class code: {{ course.course_code }}</span
+                    Class code: {{ course ? course.course_code : '' }}</span
                   >
                 </p>
                 <p class="my-md-2 my-0 medbrownparagraph">
                   <span class="lightgraytext">
-                    Start Date: {{ course.start_date | DateTimeFormat }}</span
+                    Start Date:
+                    {{ course.start_date | DateTimeFormat }}</span
                   >
                 </p>
                 <div class="van">
                   <p class="text-14">
-                    {{ course.description }}
+                    {{ course ? course.description : '' }}
                   </p>
                 </div>
 
                 <p class="mb-0 mt-4 text-14">
-                  {{ course.no_of_students }} Enrolled
+                  {{ course ? course.no_of_students : '' }} Enrolled
                 </p>
               </div>
             </div>
@@ -72,6 +75,14 @@
         </b-card>
       </div>
     </div>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="totalItems"
+      :per-page="perPage"
+      align="center"
+      class="my-0 pb-3"
+      @click="changePage"
+    ></b-pagination>
   </div>
 </template>
 
@@ -94,7 +105,7 @@ export default {
       this.isLoading = true
       try {
         const courses = await this.$axios.$get(
-          `course-v/get-my-courses?page=${this.page}&size=${this.perPage}`
+          `course-v/get-all-course?page=${this.page}&size=${this.perPage}`
         )
         this.courses = courses.items
         if (this.courses.length <= 0) {
@@ -125,7 +136,7 @@ export default {
   margin-right: 0px;
   margin-left: 0px;
 }
-.custom-tabs[data-v-7e4b0d66] {
+.custom-tabs {
   /* border-bottom: 0.2px solid #828282; */
   margin: 0rem 0rem;
   width: 100%;
@@ -134,7 +145,11 @@ export default {
   background: #e5e5e5;
 }
 .card-width {
-  max-width: 600px;
+  min-width: 365px;
+  max-width: 610px;
   cursor: pointer;
+}
+.img-control {
+  height: 100%;
 }
 </style>

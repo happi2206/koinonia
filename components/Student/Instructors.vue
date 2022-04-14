@@ -35,10 +35,16 @@
         <div
           style="text-align: center; margin: auto"
           class="w-50 p-5"
-          v-if="instructors.length === 0"
+          v-if="searchQuery"
         >
-          <p class="text-18">Oops</p>
           <p class="text-16">No Instructor matched your search parameters</p>
+        </div>
+        <div
+          style="text-align: center; margin: auto"
+          class="w-50 p-5"
+          v-if="Instructor && instructors.length === 0"
+        >
+          <p class="text-16">No Instructor linked to this course.</p>
         </div>
       </div>
     </div>
@@ -55,10 +61,12 @@ export default {
       instructors: [],
       placeholder: 'Instructors',
       isLoading: false,
+      Instructor: true,
       visualization: 'grid',
       currentPage: 1,
       perPage: 50,
       filterby: 6,
+      searchQuery: false,
     }
   },
   props: {},
@@ -69,12 +77,23 @@ export default {
     async getAllInstructors() {
       try {
         this.isLoading = true
-        let uri = `instructors-v/get-all-instructors?page=${this.currentPage}&size=${this.perPage}`
+        let uri = `course-v/get-all-course-instructors?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
         if (this.search) {
           uri = uri + `&search=${this.search}`
         }
         const instructors = await this.$axios.$get(uri)
-        this.instructors = instructors
+        if (instructors.items.length === 0) {
+          this.searchQuery = true
+        } else {
+          this.searchQuery = false
+        }
+        console.log(instructors)
+        this.instructors = instructors.items
+        if (instructors.items.length !== 0) {
+          this.Instructor = false
+        } else {
+          this.Instructor = true
+        }
       } catch (error) {
         console.log(error)
       } finally {
@@ -97,5 +116,11 @@ export default {
 .margin-fix {
   margin: 0 auto;
   max-width: 47.5rem;
+}
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 0rem;
+  padding-top: 0;
 }
 </style>

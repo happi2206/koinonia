@@ -764,7 +764,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .custom-tabs {
   border-bottom: 0.2px solid #828282;
   padding-left: 2rem;
