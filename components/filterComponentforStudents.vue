@@ -1,8 +1,9 @@
 <template>
-  <div class="card">
+  <div class="card px-0">
     <div class="card-body">
       <div
         class="
+          mb-3
           d-flex
           flex-lg-row
           justify-content-between
@@ -49,9 +50,10 @@
               class="records-count medbrownparagraph medbrownparagraph"
               @change="$emit('view-by', $event.target.value)"
             >
+              <option class="medbrownparagraph" value="6">6 Records</option>
               <option class="medbrownparagraph" value="10">10 Records</option>
               <option class="medbrownparagraph" value="20">20 Records</option>
-              <option class="medbrownparagraph" value="25">25 Records</option>
+              <option class="medbrownparagraph" value="40">40 Records</option>
               <option class="medbrownparagraph" value="50">50 Records</option>
               <option class="medbrownparagraph" value="100">100 Records</option>
             </select>
@@ -73,8 +75,7 @@
             <input
               type="text"
               required
-              placeholder="Search"
-              v-model="searchtag"
+              :placeholder="`Search ${placeholder}`"
               @change="$emit('search', $event.target.value)"
               class="px-md-3 px-2 py-2 border rounded widthfullsearch"
             />
@@ -110,7 +111,6 @@
           <slot name="uploadButton"></slot>
         </div>
       </div>
-      <hr />
       <slot :visualization="visualization"></slot>
     </div>
   </div>
@@ -131,11 +131,13 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    placeholder: {
+      type: String,
+    },
   },
   data() {
     return {
       visualization: 'list',
-      searchtag: '',
     }
   },
   methods: {
@@ -144,11 +146,6 @@ export default Vue.extend({
       this.$emit('visualization', this.visualization)
     },
   },
-  // watch: {
-  //   searchtag() {
-  //     this.$emit('searchtag', this.searchtag)
-  //   },
-  // },
 })
 </script>
 

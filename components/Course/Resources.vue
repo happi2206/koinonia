@@ -4,7 +4,7 @@
     <preloader :show="addPreloader" />
     <filter-component @search="SearchText" @view-by="sortInstructors">
       <template #besideFilterButton>
-        <div class="ml-md-5" @click="openForm">
+        <div class="ml-3" @click="openForm">
           <button
             v-b-modal.Add-resources
             class="btn btn-height mainbtndashboard medbrownparagraph"
@@ -319,6 +319,17 @@ export default {
 </script>
 
 <style scoped>
+.file-type-display {
+  background: #ecf7ff;
+  border: 2px dashed #ffc107;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 14px;
+  color: #8b9eb0;
+  cursor: pointer;
+}
 .p-3 {
   padding: 1rem !important;
 }

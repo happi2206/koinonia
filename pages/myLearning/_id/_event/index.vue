@@ -16,8 +16,36 @@
       </b-row>
     </div>
 
-    <div v-else>
-      <div class="bg-white rounded p-3 my-2">
+    <div class="pt-md-5 horizontalspacing">
+      <div class="my-4 pt-4 d-flex align-items-center">
+        <b-icon icon="arrow-left" class="mx-2 mainbluecolor"></b-icon>
+        <a
+          href="#"
+          @click.prevent="$router.go(-1)"
+          class="
+            brownparagraph
+            bold700
+            mainbluecolor
+            mb-0
+            d-flex
+            align-items-center
+          "
+        >
+          <!-- <span>{{ courseTitle }}</span> -->
+          <span
+            class="iconify mainbluecolor"
+            data-icon="dashicons:arrow-left-alt2"
+          ></span>
+
+          <span>
+            <!-- {{ eventDetail.name }} -->
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="pt-3">
+      <div class="bg-white rounded px-5 pt-0 pb-4">
         <div
           class="
             border-bottom
@@ -27,71 +55,54 @@
           "
         >
           <h2 class="brown24 py-3 bold700 text-capitalize mb-0">
-            {{ eventDetail.name }}
+            <!-- {{ eventDetail.name ? eventDetail.name : '' }} -->
           </h2>
-          <div></div>
-          <b-dropdown
-            text="Actions"
-            size="sm"
-            class="m-4 fmbt accentcolorbg"
-            variant="warning"
-          >
-            <b-dropdown-item-button>
-              <downloadexcel :fetch="fetchData">
-                <button class="button-height text-12">Download as excel</button>
-              </downloadexcel>
-            </b-dropdown-item-button>
-            <b-dropdown-item-button>
-              <button
-                @click.prevent="$refs.uploadcsv.click()"
-                class="button-height text-12"
-              >
-                Upload excel file
-              </button>
-            </b-dropdown-item-button>
-          </b-dropdown>
         </div>
         <div class="my-2 d-flex flex-wrap">
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Course name:</span>
             <span class="">
-              {{ eventDetail.course_name }}
+              <!-- {{ eventDetail.course_name ? eventDetail.course_name : '' }} -->
             </span>
           </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Course code:</span>
             <span class="">
-              {{ eventDetail.course_code }}
+              <!-- {{ eventDetail.course_code ? eventDetail.course_code : '' }} -->
             </span>
           </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> Start Date:</span>
             <span class="">
-              {{ eventDetail.start_date | DateTimeFormat }}
+              <!-- {{ eventDetail.start_date | DateTimeFormat }} -->
             </span>
           </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> End Date:</span>
             <span class=""> </span>
-            {{ eventDetail.end_date | DateTimeFormat }}
+            <!-- {{ eventDetail.end_date | DateTimeFormat }} -->
           </p>
           <p class="my-2 medparagraph mx-3">
             <span class="lightgraytext"> No in class:</span>
             <span class=""> {{ present + absent }}</span>
           </p>
           <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Present: {{ present }}</span>
+            <!-- <span class="lightgraytext"> Student Present: {{ present }}</span> -->
             <span class=""> </span>
           </p>
           <p class="my-2 medparagraph mx-3">
-            <span class="lightgraytext"> Student Absent: {{ absent }}</span>
+            <!-- <span class="lightgraytext"> Student Absent: {{ absent }}</span> -->
             <span class=""> </span>
           </p>
         </div>
       </div>
-      <div class="bg-white rounded p-md-3 my-2">
-        <filter-component @search="SearchText" @view-by="sortStudents">
-          <template #filterby>
+      <div class="bg-white rounded pt-0 px-5 pb-5 my-2">
+        <filter-componentfor-students
+          @search="SearchText"
+          @view-by="sortStudents"
+          :placeholder="placeholder"
+        >
+          <!-- <template #filterby>
             <div class="records-count medbrownparagraph">
               <span class="medbrownparagraph">Filter by: </span>
               <select
@@ -107,7 +118,7 @@
                 </option>
               </select>
             </div>
-          </template>
+          </template> -->
 
           <template #default="{ visualization }">
             <table-component
@@ -133,52 +144,7 @@
             </table-component>
             <b-overlay :show="newbusy" opacity="0.5"> </b-overlay>
           </template>
-
-          <template #importButton>
-            <input
-              @change="importData"
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              ref="uploadcsv"
-              type="file"
-              class="hidden"
-            />
-          </template>
-
-          <template #uploadButton>
-            <input
-              @change="recieveUpdate"
-              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-              ref="uploadcsvs"
-              type="file"
-              class="hidden"
-            />
-            <button
-              @click.prevent="$refs.uploadcsv.click()"
-              style="max-width: 48px"
-              class="accentcolorbg upload-margin button-height py-2 px-3 ml-3"
-            >
-              <span
-                class="iconify"
-                data-icon="fa-solid:file-import"
-                data-width="16"
-                data-height="16"
-              ></span>
-            </button>
-            <!-- <button
-              class="
-                btn
-                ml-5
-                px-md-4 px-3
-                py-2
-                mainbtndashboard
-                medbrownparagraph
-              "
-              @click="recieveUpdate"
-            >
-              <span class="iconify" data-icon="charm:upload"></span>
-            </button> -->
-          </template>
-        </filter-component>
+        </filter-componentfor-students>
       </div>
     </div>
   </div>
@@ -186,8 +152,6 @@
 
 <script>
 import { DateTime } from 'luxon'
-import downloadexcel from 'vue-json-excel'
-// import JsonExcel from 'vue-json-excel'
 
 export default {
   props: {
@@ -206,6 +170,7 @@ export default {
   data() {
     return {
       addPreloader: false,
+      placeholder: 'Attendance',
       newData: [],
       busy: false,
       newbusy: false,
@@ -215,7 +180,6 @@ export default {
       studentsTable: [],
       studentArray: [],
       isLoading: false,
-      dropdownItem: ['Edit Event', 'Delete Event'],
       fields: [
         // { key: 'id', sortable: true },
         { key: 'student.firstname', label: 'First Name', sortable: true },
@@ -421,10 +385,6 @@ export default {
         return this.studentArray
       }
     },
-  },
-
-  components: {
-    downloadexcel,
   },
 
   mounted() {},

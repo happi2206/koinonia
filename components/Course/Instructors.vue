@@ -3,7 +3,7 @@
     <preloader :show="add_preloader" />
     <filter-component @search="SearchText" @view-by="sortInstructors">
       <template #besideFilterButton>
-        <div class="ml-md-5">
+        <div class="ml-3">
           <button
             class="btn btn-height py-2 mainbtndashboard medbrownparagraph"
             v-b-modal.addInstructor

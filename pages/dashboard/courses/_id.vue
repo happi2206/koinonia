@@ -57,6 +57,9 @@
             <b-tab title="Resources" class="">
               <CourseResources />
             </b-tab>
+            <b-tab title="Gradebook" class="">
+              <CourseGradebook />
+            </b-tab>
           </b-tabs>
         </div>
       </div>
@@ -78,13 +81,7 @@ export default {
       currentTab: 0,
       students: [],
       isLoading: false,
-      // dropdownItem: [
-      //   // 'Print_QR_Code',
-      //   'Edit',
-      //   // 'Download_As_PDF',
-      //   // 'Download_As_XLS',
-      //   // 'Download_As_CSV',
-      // ],
+
       fields: [
         { key: 'Name', sortable: true },
         { key: 'Start Date', sortable: true },
@@ -122,14 +119,6 @@ export default {
       designations: ['Lead Instructor', 'Teacher'],
 
       addStudent: '',
-      // event: {
-      //   name: '',
-      //   description: '',
-      //   start_date: '',
-      //   end_date: '',
-      //   start_time: '',
-      //   end_time: '',
-      // },
     }
   },
 

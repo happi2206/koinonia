@@ -53,16 +53,7 @@
               :key="index"
               class="mx-3 my-2"
             >
-              <!-- <div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <p class="text-14 mb-2" style="font-weight: 600">
-                    {{ item.title }}
-                  </p>
-                </div>
-
-                <p class="text-14 mb-2">{{ item.description }}</p>
-              </div> -->
-              <added-item v-if="item" :item="item" />
+              <added-item v-if="item.title !== ''" :item="item" />
             </b-card>
           </b-collapse>
           <div class="mt-2 mb-2 ml-3">
@@ -72,7 +63,7 @@
           </div>
           <items-input-field
             v-for="(item, index) in items"
-            :itemz="item"
+            :item="item"
             :key="index"
             :i="index"
             :subItem="edit"
@@ -118,7 +109,11 @@ export default {
       this.items.push(this.item)
     },
     populateItem(e, i) {
+      console.log(e)
       this.items[i] = e
+      this.addItem()
+      this.items.splice(i + 1, 1)
+      console.log(this.items)
       this.item = {
         title: '',
         description: '',

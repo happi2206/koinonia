@@ -198,7 +198,6 @@
       class="my-0"
       @change="$emit('page-changed', $event)"
     ></b-pagination>
-    <!-- <div v-observe-visibility="fetchMore"></div> -->
   </div>
 </template>
 
@@ -296,15 +295,13 @@ export default {
     this.totalRows = this.perPage * this.pages
     const tableScrollBody = this.$refs.scrollingtable.$el
 
-    console.log(tableScrollBody)
-
     tableScrollBody.addEventListener('scroll', this.onScroll)
   },
   methods: {
     onScroll(e) {
       this.$emit('handle-scroll', e)
       if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
-        console.log('hey')
+        console.log()
       }
     },
     onFiltered(filteredItems) {
@@ -314,7 +311,6 @@ export default {
     },
 
     sendId: function (id) {
-      console.log(id)
       this.$emit('sendId', id)
     },
   },

@@ -66,6 +66,22 @@
                 </div>
                 <div class="my-2">
                   <label for="" class="d-block medbrownparagraph graytext"
+                    >Bio Data
+                  </label>
+                  <validation-provider rules="required" v-slot="{ errors }">
+                    <input
+                      type="text"
+                      v-model="instructor.biodata"
+                      placeholder="Introduce yourself"
+                      class="forminputs"
+                    />
+                    <span class="text-12" style="color: red">{{
+                      errors[0]
+                    }}</span>
+                  </validation-provider>
+                </div>
+                <div class="my-2">
+                  <label for="" class="d-block medbrownparagraph graytext"
                     >Email
                   </label>
                   <validation-provider
@@ -196,6 +212,23 @@
                   }}</span>
                 </validation-provider>
               </div>
+              <div class="my-4">
+                <label for="" class="d-block medbrownparagraph graytext"
+                  >Bio Data
+                </label>
+                <validation-provider rules="required" v-slot="{ errors }">
+                  <input
+                    type="text"
+                    required
+                    v-model="temp_instructor.biodata"
+                    placeholder="Introduce yourself"
+                    class="forminputs text-dark"
+                  />
+                  <span class="text-12" style="color: red">{{
+                    errors[0]
+                  }}</span>
+                </validation-provider>
+              </div>
               <div>
                 <label for="" class="d-block medbrownparagraph graytext"
                   >Email
@@ -316,6 +349,7 @@ export default {
         firstname: '',
         middlename: '',
         surname: '',
+        biodata: '',
         email: '',
         password: '',
         phone: '',
@@ -327,6 +361,7 @@ export default {
         phone: '',
         middlename: '',
         surname: '',
+        biodata: '',
       },
       search: '',
       perPage: 50,
@@ -471,7 +506,6 @@ export default {
             `course-v/edit-instructor?instructor_id=${this.instructor_id}`,
             this.temp_instructor
           )
-          console.log(response)
           this.$toast.success(response.message)
         } catch (error) {
           this.$toast.error(error.message)
