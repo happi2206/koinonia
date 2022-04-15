@@ -4,6 +4,7 @@
       <filter-componentfor-students
         @view-by="filterInstructors"
         @search="queryInstructors"
+        @emptySearch="forceSearch"
         :placeholder="placeholder"
       />
       <div v-if="isLoading" class="p-5 w-75" style="margin: auto">
@@ -26,7 +27,10 @@
         </b-row>
       </div>
 
-      <div v-else class="row gap-5 py-3 margin-fix">
+      <div
+        v-else
+        class="row gap-5 d-flex justify-content-center py-3 margin-fix"
+      >
         <instructor-grid
           v-for="(instructor, index) in instructors"
           :key="index"
@@ -34,16 +38,23 @@
         ></instructor-grid>
         <div
           style="text-align: center; margin: auto"
-          class="w-50 p-5"
+          class="w-50 d-flex justify-content-center p-5"
           v-if="searchQuery"
         >
           <p class="text-16">No Instructor matched your search parameters</p>
         </div>
         <div
           style="text-align: center; margin: auto"
-          class="w-50 p-5"
-          v-if="Instructor && instructors.length === 0"
+          class="w-50 p-5 d-flex justify-content-center"
+          v-if="request"
         >
+          <span
+            class="iconify"
+            data-icon="clarity:help-info-solid"
+            style="color: #ffcd06"
+            data-width="25"
+            data-height="25"
+          ></span>
           <p class="text-16">No Instructor linked to this course.</p>
         </div>
       </div>
@@ -67,9 +78,10 @@ export default {
       perPage: 50,
       filterby: 6,
       searchQuery: false,
+      request: false,
+      search: '',
     }
   },
-  props: {},
   created() {
     this.getAllInstructors()
   },
@@ -77,25 +89,28 @@ export default {
     async getAllInstructors() {
       try {
         this.isLoading = true
-        let uri = `course-v/get-all-course-instructors?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
+        let uri = `course-v/get-my-course-instructors?course_id=${this.$route.params.id}`
         if (this.search) {
           uri = uri + `&search=${this.search}`
         }
         const instructors = await this.$axios.$get(uri)
-        if (instructors.items.length === 0) {
-          this.searchQuery = true
-        } else {
+        this.instructors = instructors.items
+        if (this.instructors.length === 0) {
+          this.request = true
           this.searchQuery = false
         }
-        console.log(instructors)
-        this.instructors = instructors.items
-        if (instructors.items.length !== 0) {
-          this.Instructor = false
-        } else {
-          this.Instructor = true
+        if (
+          this.search !== '' &&
+          instructors.items.length === 0 &&
+          this.instructors.length === 0
+        ) {
+          this.searchQuery = true
+          this.request = false
         }
       } catch (error) {
-        console.log(error)
+        this.$toast.error(e.detail.message)
+        this.request = true
+        this.searchQuery = false
       } finally {
         this.isLoading = false
       }
@@ -107,6 +122,11 @@ export default {
     queryInstructors(e) {
       this.search = e
       this.getAllInstructors()
+    },
+    forceSearch() {
+      this.search = ''
+      this.getAllInstructors()
+      this.searchQuery = false
     },
   },
 }

@@ -116,12 +116,15 @@
       </template>
       <template #cell(start_date)="data">
         <slot name="start_date" :data="data">
-          <span>{{ data.item.start_date | DateTimeFormat }}</span></slot
+          <span>{{ data.start_date | DateFormat }}</span></slot
         >
+      </template>
+      <template #cell(start_date_time)="data">
+        <span>{{ data.item.start_date_time | DateFormat }}</span>
       </template>
 
       <template #cell(check_in)="data">
-        <span>{{ data.item.check_in | DateTimeFormat }}</span>
+        <span>{{ data.item.check_in | DateFormat }}</span>
       </template>
       <template #cell(end_date)="data">
         <slot name="end_date" :data="data"

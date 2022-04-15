@@ -87,7 +87,6 @@ export default {
     },
     openSide() {
       this.isMobile = !this.isMobile
-      console.log('opened')
     },
   },
   mounted() {},

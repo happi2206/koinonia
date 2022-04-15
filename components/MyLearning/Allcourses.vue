@@ -28,10 +28,7 @@
           </p>
         </div>
       </div>
-      <div
-        v-if="courses.length > 0"
-        class="row gap-5 align-items-center flex-wrap mx-4"
-      >
+      <div class="row gap-5 align-items-center flex-wrap mx-4">
         <b-card
           v-for="(course, index) in courses"
           :key="index"
@@ -51,7 +48,8 @@
                 <h3 class="text-18">{{ course.title }}</h3>
                 <p class="mb-1 medbrownparagraph">
                   <span class="lightgraytext">
-                    Class code: {{ course ? course.course_code : '' }}</span
+                    Class code:
+                    {{ course.course_code ? course.course_code : '' }}</span
                   >
                 </p>
                 <p class="my-md-2 my-0 medbrownparagraph">
@@ -67,7 +65,7 @@
                 </div>
 
                 <p class="mb-0 mt-4 text-14">
-                  {{ course ? course.no_of_students : '' }} Enrolled
+                  {{ course ? course.number_of_student_enrolled : '' }} Enrolled
                 </p>
               </div>
             </div>
@@ -105,14 +103,15 @@ export default {
       this.isLoading = true
       try {
         const courses = await this.$axios.$get(
-          `course-v/get-all-course?page=${this.page}&size=${this.perPage}`
+          `course-v/get-my-courses?=${this.page}&size=${this.perPage}`
         )
-        this.courses = courses.items
+        this.courses = courses
         if (this.courses.length <= 0) {
           this.noCourse = true
         }
       } catch (e) {
         console.log(e)
+        this.noCourse = true
       } finally {
         this.isLoading = false
       }

@@ -1,5 +1,5 @@
 <template>
-  <div v-observe-visibility="get_all_course_events">
+  <div>
     <preloader :show="addPreloader" />
     <filter-componentfor-students
       :placeholder="placeholder"
@@ -11,7 +11,7 @@
       </template>
       <template #default="{ visualization }">
         <table-component
-          :items="myevents"
+          :items="events"
           v-if="visualization === 'list'"
           :fields="fields"
           :busy="busy"
@@ -19,24 +19,10 @@
           :perPage="perPage"
           :totalItems="totalItems"
         >
-          <template #no_of_students="{ data }">
-            <span>{{ data }}</span>
-          </template>
-
-          <template #Progress="{ data }">
-            <b-progress class="mt-2" :max="10">
-              <b-progress-bar
-                :value="data.item.no_of_students_present"
-                variant="success"
-              ></b-progress-bar>
-              <b-progress-bar
-                :value="
-                  data.item.total_number_of_student -
-                  data.item.no_of_students_present
-                "
-                variant="danger"
-              ></b-progress-bar>
-            </b-progress>
+          <template #cell(start_date_time)="data">
+            <slot name="start_date_time" :data="data">
+              <span>{{ data.item.start_date_time }}</span></slot
+            >
           </template>
         </table-component>
 
@@ -50,17 +36,12 @@
 
 <script>
 export default {
-  props: {
-    events: {
-      type: Array,
-    },
-  },
   data() {
     return {
       placeholder: 'Attendance',
       fields: [
         { key: 'name', sortable: true },
-        { key: 'start_date', label: 'Start Date/Time', sortable: true },
+        { key: 'start_date_time', label: 'Start Date/Time', sortable: true },
         {
           key: 'check_in',
           label: 'Check in Time',
@@ -75,7 +56,6 @@ export default {
 
       busy: false,
       events: [],
-      myevents: [],
       is_creating: false,
       search: '',
       perPage: 50,
@@ -85,7 +65,7 @@ export default {
     }
   },
   mounted() {
-    this.getMyEvents()
+    this.get_all_course_events()
   },
 
   methods: {
@@ -93,14 +73,16 @@ export default {
       try {
         this.busy = true
 
-        let uri = `course-v/get-all-course-event?course_id=${this.$route.params.id}&page=${this.currentPage}&size=${this.perPage}`
+        let uri = `course-v/get-my-event-record?course_id=${this.$route.params.id}`
 
         if (this.search) {
           uri = uri + `&search=${this.search}`
         }
         const events = await this.$axios.$get(uri)
 
-        this.events = events.items
+        this.events = events
+
+        console.log(this.events[3])
         this.perPage = events.size
         this.totalItems = events.total
         this.currentPage = events.page
@@ -110,29 +92,18 @@ export default {
         this.busy = false
       }
     },
-    async getMyEvents() {
-      try {
-        const events = await this.$axios.get(
-          `get-my-event-record?course_id=${this.$route.params.id}`
-        )
-        this.myevents = events
-        console.log(this.myevents)
-      } catch (error) {
-        console.warn(error)
-      }
-    },
     handlePage(e) {
       this.currentPage = e
-      this.getMyEvents()
+      this.get_all_course_events()
     },
     SearchText(e) {
       this.search = e
-      this.getMyEvents()
+      this.get_all_course_events()
     },
 
     sortEvents(e) {
       this.perPage = e
-      this.getMyEvents()
+      this.get_all_course_events()
     },
   },
 }

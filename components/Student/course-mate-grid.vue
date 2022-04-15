@@ -2,7 +2,7 @@
   <div>
     <div>
       <b-card
-        img-src="~assets/images/mancourse.png"
+        :img-src="coursemate.profile_picture"
         img-alt="Instructor's Image"
         img-top
         tag="article"
@@ -11,11 +11,11 @@
       >
         <div class="d-flex flex-column" style="text-align: center">
           <p class="text-14 pt-3 pb-2 m-0">
-            {{ coursemate.firstname }} {{ coursemate.surname }}
+            {{ coursemate.other_name }} {{ coursemate.surname }}
           </p>
           <div style="max-height: 6rem; min-height: 5.9rem" class="x mb-2">
             <p class="text-13">
-              {{ coursemate.biodata }}
+              {{ coursemate.biography }}
             </p>
           </div>
 

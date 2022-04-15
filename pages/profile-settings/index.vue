@@ -1,7 +1,7 @@
 <template>
   <div>
     <profile-sidebar />
-
+    <preloader :show="addPreloader" />
     <div class="page-content mt-0 height">
       <div class="bodylightgray horizontalspacing">
         <div class="pt-5 horizontalspacing">
@@ -171,6 +171,7 @@ export default {
         socials: [],
       },
       isLoading: false,
+      addPreloader: false,
     }
   },
   methods: {
@@ -182,7 +183,6 @@ export default {
         )
 
         this.isLoading = false
-        console.log(userprofile)
         if (Object.keys(userprofile).length > 0) {
           this.public_detail = userprofile
         }
@@ -209,15 +209,22 @@ export default {
       this.public_detail.profile_picture = url
     },
     async updatePublicProfile() {
-      try {
-        const userprofile = await this.$axios.$patch(
-          `user-v/update-user-public-profile`,
-          this.public_detail
-        )
-        console.log(userprofile)
-        this.getUserProfile()
-      } catch (error) {
-        this.$toast.error(error)
+      if (this.public_detail.profile_picture) {
+        try {
+          this.addPreloader = true
+
+          const userprofile = await this.$axios.$patch(
+            `user-v/update-user-public-profile`,
+            this.public_detail
+          )
+          console.log(userprofile)
+          this.$toast.success(userprofile.message)
+          this.getUserProfile()
+        } catch (error) {
+          this.$toast.error(error)
+        } finally {
+          this.addPreloader = false
+        }
       }
     },
   },

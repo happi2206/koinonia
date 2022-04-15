@@ -74,9 +74,9 @@
           <div class="flex width100 my-lg-0 my-3">
             <input
               type="text"
-              required
+              v-model="searchParam"
               :placeholder="`Search ${placeholder}`"
-              @change="$emit('search', $event.target.value)"
+              @change="$emit('search', searchParam)"
               class="px-md-3 px-2 py-2 border rounded widthfullsearch"
             />
 
@@ -138,12 +138,20 @@ export default Vue.extend({
   data() {
     return {
       visualization: 'list',
+      searchParam: '',
     }
   },
   methods: {
     toggleVisualization() {
       this.visualization = this.visualization === 'grid' ? 'list' : 'grid'
       this.$emit('visualization', this.visualization)
+    },
+  },
+  watch: {
+    searchParam() {
+      if (this.searchParam === '') {
+        this.$emit(`emptySearch`, this.searchParam)
+      }
     },
   },
 })

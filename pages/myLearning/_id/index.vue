@@ -75,10 +75,10 @@ export default {
       this.isLoading = true
       try {
         const course = await this.$axios.$get(
-          `course-v/get-a-course?course_id=${this.$route.params.id}`
+          `course-v/get-my-course-details?course_id=${this.$route.params.id}`
         )
         this.courseDetails = course
-        console.log('courses', this.courseDetails)
+        console.log('courses', course)
       } catch (e) {
         console.log(e)
       } finally {

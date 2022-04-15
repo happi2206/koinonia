@@ -1,5 +1,6 @@
 <template>
   <div class="bodylightgray">
+    <preloader :show="addPreloader" />
     <div class="d-block d-lg-none" v-if="authenticated">
       <side-bar />
     </div>
@@ -611,6 +612,7 @@ export default {
       },
       courses: [],
       isMobile: false,
+      addPreloader: false,
     }
   },
   computed: {

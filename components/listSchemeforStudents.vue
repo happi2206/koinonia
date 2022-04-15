@@ -139,6 +139,7 @@ export default {
       items: [],
       view: true,
       rotateArrow: false,
+      schemeExist: false,
     }
   },
   created() {
@@ -151,6 +152,10 @@ export default {
           `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
         )
         this.section = response.section
+        if (this.section.length > 0) {
+          this.schemeExist = true
+          this.$emit('schemeExist', this.schemeExist)
+        }
         this.subsection = response.section[0].section
 
         for (const iterator of this.subsection) {
