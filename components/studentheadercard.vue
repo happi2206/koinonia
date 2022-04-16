@@ -22,7 +22,7 @@
           "
         >
           <h2 class="largebrownparagraph py-1 bold700 text-capitalize mb-0">
-            efewffrfwes
+            {{ courseDetails.title }}
           </h2>
           <p class="text-14 mb-0">Opened</p>
         </div>

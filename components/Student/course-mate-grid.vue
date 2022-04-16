@@ -19,7 +19,7 @@
             </p>
           </div>
 
-          <div class="d-flex justify-content-between">
+          <div class="d-flex mt-3 justify-content-between">
             <div class="w-50 d-flex justify-content-between">
               <span
                 class="iconify icons"
@@ -43,13 +43,8 @@
                 data-height="22"
               ></span>
             </div>
-            <div class="link">
-              <nuxt-link
-                style="text-decoration: underline"
-                class="text-12"
-                to="#"
-                >See more</nuxt-link
-              >
+            <div class="link" style="text-decoration: underline">
+              <nuxt-link class="text-14" to="#">See more</nuxt-link>
             </div>
           </div>
         </div>
