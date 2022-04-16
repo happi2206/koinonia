@@ -28,7 +28,7 @@
           ></span>
           <a
             href="#"
-            class="bold700 mainbluecolor mb-0 d-flex align-items-center"
+            class="bold700 mainbluecolor text-16 mb-0 d-flex align-items-center"
           >
             <span>Exercise</span>
             <span
@@ -85,7 +85,7 @@
                 </div>
               </div>
 
-              <div class="row text-14">
+              <div class="row w-100 text-14">
                 <!-- <div class="col-md-6 mb-2 text-capitalize">Class: {{}}</div> -->
                 <div class="col-md-6 mb-2 text-capitalize">
                   Type: {{ temp_type }}
@@ -238,7 +238,9 @@
         ref="publishPromptModal"
       >
         <div>
-          <p>Are you sure you sure you want to publish this exercise?</p>
+          <p class="text-16">
+            Are you sure you sure you want to publish this exercise?
+          </p>
           <div class="d-flex justify-content-center">
             <button
               class="
@@ -249,6 +251,7 @@
                 btn-width
                 mainbtndashboard
                 medbrownparagraph
+                text-16
               "
               style="height: 40px; width: 5rem; text-align: center"
               @click.prevent="makePublish"
@@ -283,7 +286,9 @@
         ref="unpublishPromptModal"
       >
         <div>
-          <p>Are you sure you sure you want to unpublish this exercise?</p>
+          <p class="text-16">
+            Are you sure you sure you want to unpublish this exercise?
+          </p>
           <div class="d-flex justify-content-center">
             <button
               style="height: 40px; width: 5rem; text-align: center"
@@ -294,6 +299,7 @@
                 mr-4
                 mainbtndashboard
                 medbrownparagraph
+                text-16
               "
               @click.prevent="makeDraft"
             >
@@ -310,7 +316,14 @@
             </button>
 
             <button
-              class="btn px-md-4 px-3 py-2 mainbtndashboard medbrownparagraph"
+              class="
+                text-16
+                btn
+                px-md-4 px-3
+                py-2
+                mainbtndashboard
+                medbrownparagraph
+              "
               style="height: 40px; width: 5rem; text-align: center"
               @click="closeModal"
             >
@@ -575,7 +588,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .mynav {
   margin-top: 6rem;
   margin-left: 0rem;

@@ -45,7 +45,7 @@
         </div>
         <div
           style="text-align: center; margin: auto"
-          class="w-50 p-5 d-flex justify-content-center"
+          class="w-75 p-5 d-flex justify-content-center"
           v-if="request"
         >
           <span

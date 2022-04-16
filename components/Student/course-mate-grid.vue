@@ -6,7 +6,7 @@
         img-alt="Instructor's Image"
         img-top
         tag="article"
-        style="max-width: 15rem; border-radius: 10px, max-height: 369px; min-height: 367px"
+        style="max-width: 15rem; border-radius: 10px, max-height: 369px; min-height: 18rem"
         class="mb-2 p-3"
       >
         <div class="d-flex flex-column" style="text-align: center">

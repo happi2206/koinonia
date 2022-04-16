@@ -151,4 +151,25 @@ export default {
 .img-control {
   height: 100%;
 }
+@media (max-width: 382px) {
+  .card-width {
+    min-width: 120px;
+    max-width: 610px;
+    cursor: pointer;
+  }
+  .px-4 {
+    padding-left: 0rem;
+  }
+
+  .modal-body {
+    position: relative;
+    /* flex: 1 1 auto; */
+    /* padding: 1rem; */
+  }
+
+  .pl-5,
+  .px-5 {
+    padding-left: 0.5rem !important;
+  }
+}
 </style>

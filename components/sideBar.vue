@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="backdropfscreen" @click="openSide" v-show="isMobile"></div>
+    <div
+      class="backdropfscreen"
+      @click="openSide"
+      v-show="isMobile && isAdministrator"
+    ></div>
 
     <nav id="sidebar" class="sidebar-wrapper mt-5 pt-3" v-if="isMobile">
       <div class="sidebar-menu my-lg-2 bg-white">
@@ -82,7 +86,9 @@ export default {
   },
   created() {
     this.$nuxt.$on('openSidebar', () => {
-      this.isMobile = !this.isMobile
+      if (this.isAdministrator) {
+        this.isMobile = !this.isMobile
+      }
     })
   },
   methods: {

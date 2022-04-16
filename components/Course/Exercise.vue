@@ -295,7 +295,7 @@
                           <div
                             class="
                               file-type-display
-                              w-25
+                              w-75
                               py-3
                               px-3
                               text-center

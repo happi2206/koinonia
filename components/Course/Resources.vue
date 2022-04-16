@@ -75,11 +75,11 @@
                 </validation-provider>
               </div>
             </div>
-            <div class="col-12 px-0"></div>
+            <div class="px-0"></div>
             <div class="w-100">
               <div class="row">
-                <div class="col mb-2">
-                  <label class="form-control-label text-12"
+                <div class="">
+                  <label class="form-control-label w-100 text-12"
                     >Published Date<span class="font10 small"></span
                   ></label>
                   <validation-provider rules="required" v-slot="{ errors }">
@@ -123,7 +123,7 @@
                 />
 
                 <div
-                  class="file-type-display w-75 py-3 px-3 text-center bg-white"
+                  class="file-type-display py-3 px-3 text-center bg-white"
                   @click.prevent="$refs.uploadfile.click()"
                 >
                   <div v-if="file" class="file-indicator">

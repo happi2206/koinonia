@@ -1,12 +1,12 @@
 <template>
   <div class="bg-white rounded">
-    <div class="d-flex">
+    <div class="d-flex flex-wrap">
       <div class="col-md-3 px-0 pl-md-3">
-        <div class="rounded">
+        <div class="rounded w-100">
           <img
             :src="courseDetails.feature_image"
             alt=""
-            class="img-fluid mt-4 rounded customsizing"
+            class="w-100 fold img-fluid mt-4 rounded customsizing"
           />
         </div>
       </div>
@@ -55,46 +55,48 @@
             <p class="text-14 p-1 mt-1 medbrownparagph" style="color: #222529">
               {{ courseDetails.no_of_students }} Enrolled
             </p>
+          </div>
+
+          <div
+            style="margin: 0 0 0 1px"
+            class="text-14 row align-items-center"
+            v-if="onGoingClass"
+          >
+            <div style="color: #0734aa" class="px-1">
+              There is an on-going event, scan QR Code
+            </div>
             <div
-              style="margin: 0 0 0 1px"
-              class="text-14 row align-items-center"
-              v-if="onGoingClass"
+              style="he"
+              class="
+                qrcodebutton
+                align-items-center
+                ml-4
+                btn
+                mainbtndashboard
+                d-flex
+              "
             >
-              <div style="color: #0734aa" class="px-1">
-                There is an on-going event, scan QR Code
-              </div>
+              <span
+                class="iconify"
+                data-icon="ic:outline-qr-code-scanner"
+                style="color: black"
+                data-width="20"
+                data-height="20"
+              ></span
+              ><span class="text-13 ml-1">Scan QR Code</span>
+            </div>
+            <div
+              class="joinlive d-flex justify-content-center align-items-center"
+            >
               <div
-                style="he"
-                class="qrcodebutton ml-4 btn mainbtndashboard d-flex"
-              >
-                <span
-                  class="iconify"
-                  data-icon="ic:outline-qr-code-scanner"
-                  style="color: black"
-                  data-width="20"
-                  data-height="20"
-                ></span
-                ><span class="text-13 ml-1">Scan QR Code</span>
-              </div>
-              <div
-                class="
-                  joinlive
-                  d-flex
-                  justify-content-center
-                  align-items-center
-                  ml-3
+                style="
+                  width: 8px;
+                  height: 8px;
+                  background-color: #e1002a;
+                  border-radius: 50%;
                 "
-              >
-                <div
-                  style="
-                    width: 8px;
-                    height: 8px;
-                    background-color: #e1002a;
-                    border-radius: 50%;
-                  "
-                ></div>
-                <span class="text-13 ml-2">Join live</span>
-              </div>
+              ></div>
+              <span class="text-13 ml-2">Join live</span>
             </div>
           </div>
         </div>
@@ -126,5 +128,12 @@ export default {
   background: #333333;
   border-radius: 5px;
   color: #fff;
+  margin-left: 1rem;
+}
+@media screen and (max-width: 342.5px) {
+  .qrcodebutton {
+    margin-left: 0;
+    /* margin-top: 3rem; */
+  }
 }
 </style>
