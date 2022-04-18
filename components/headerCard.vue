@@ -5,12 +5,12 @@
       class="bg-white rounded pl-5 pt-3 pb-3 pr-3"
     >
       <div class="row">
-        <div class="col-md-3 px-0 pl-md-3">
+        <div class="col-md-3 px-0">
           <div class="rounded">
             <img
               :src="courseDetail.feature_image"
               alt=""
-              class="img-fluid rounded customsizing"
+              class="img-fluid rounded"
             />
           </div>
         </div>
@@ -25,7 +25,9 @@
               justify-content-between
             "
           >
-            <h2 class="largebrownparagraph py-3 bold700 text-capitalize mb-0">
+            <h2
+              class="largebrownparagraph ml-2 py-3 bold700 text-capitalize mb-0"
+            >
               {{ courseDetail.title }}
             </h2>
           </div>
@@ -51,11 +53,11 @@
                 {{ courseDetail.end_date | DateFormat }}
               </p>
             </div>
-            <div class="col-lg-12 pl-0 col-4">
+            <!-- <div class="col-lg-12 pl-0 col-4">
               <p class="my-md-2 my-0 p-1 medbrownparagraph">
                 {{ courseDetail.short_description | shortTextFilter }}
               </p>
-            </div>
+            </div> -->
           </div>
 
           <!-- <div>
@@ -85,4 +87,27 @@ export default {
 /* .headerheight {
   height: 200px;
 } */
+.img-fluid {
+  width: 100%;
+  min-height: 12rem;
+}
+@media screen and (max-width: 712px) {
+  .pl-5,
+  .px-5 {
+    padding-left: 0rem !important;
+  }
+  .img-fluid {
+    width: 80%;
+    margin: auto;
+    min-height: 12rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  .img-fluid {
+    width: 70%;
+    margin: auto;
+    padding-top: 1rem;
+    min-height: 12rem;
+  }
+}
 </style>

@@ -38,13 +38,13 @@
           <div class="row">
             <div class="col-md-6">
               <img
-                class="img-fluid img-control m-0"
+                class="img-fluid push img-control m-0"
                 :src="course ? course.feature_image : ''"
                 alt=""
               />
             </div>
             <div class="col-md-6">
-              <div class="d-flex flex-column">
+              <div class="d-flex flex-column pl-3 push">
                 <h3 class="text-18">{{ course.title }}</h3>
                 <p class="mb-1 medbrownparagraph">
                   <span class="lightgraytext">
@@ -143,20 +143,11 @@ export default {
   flex-wrap: nowrap !important;
   background: #e5e5e5;
 }
-.card-width {
-  min-width: 365px;
-  max-width: 610px;
-  cursor: pointer;
-}
+
 .img-control {
   height: 100%;
 }
 @media (max-width: 382px) {
-  .card-width {
-    min-width: 120px;
-    max-width: 610px;
-    cursor: pointer;
-  }
   .px-4 {
     padding-left: 0rem;
   }
@@ -170,6 +161,125 @@ export default {
   .pl-5,
   .px-5 {
     padding-left: 0.5rem !important;
+  }
+  .img-fluid {
+    max-width: 97%;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+}
+@media screen and (max-width: 500.5px) {
+  .forminputpadding {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .carouselheight {
+    height: 55vh;
+  }
+
+  .svgplaceholderimages {
+    top: 190px;
+  }
+
+  .mt-4,
+  .my-4 {
+    margin-top: 0rem !important;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    margin-bottom: 0rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  /* .horizontalspacing {
+    margin-left: 5px;
+    margin-right: 5px;
+  } */
+}
+@media (max-width: 382px) {
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12,
+  .col-md,
+  .col-md-auto,
+  .col-lg-1,
+  .col-lg-2,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-8,
+  .col-lg-9,
+  .col-lg-10,
+  .col-lg-11,
+  .col-lg-12,
+  .col-lg,
+  .col-lg-auto,
+  .col-xl-1,
+  .col-xl-2,
+  .col-xl-3,
+  .col-xl-4,
+  .col-xl-5,
+  .col-xl-6,
+  .col-xl-7,
+  .col-xl-8,
+  .col-xl-9,
+  .col-xl-10,
+  .col-xl-11,
+  .col-xl-12,
+  .col-xl,
+  .col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: 8px;
+    padding-left: 8px;
+    /* padding-bottom: 1rem; */
+    padding-top: 1rem;
+  }
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem;
+    padding-inline: 1rem;
+  }
+}
+
+@media screen and (max-width: 755px) {
+  .mt-4,
+  .my-4 {
+    margin-top: 0rem !important;
+  }
+
+  .pl-3,
+  .px-3 {
+    padding-left: 0rem !important;
+  }
+}
+@media screen and (max-width: 570px) {
+  .push {
+    padding-top: 1rem;
   }
 }
 </style>

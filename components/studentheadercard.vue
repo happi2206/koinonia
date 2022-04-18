@@ -120,7 +120,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .joinlive {
   cursor: pointer;
   width: 106px;
@@ -134,6 +134,63 @@ export default {
   .qrcodebutton {
     margin-left: 0;
     /* margin-top: 3rem; */
+  }
+}
+
+@media screen and (max-width: 382px) {
+  .img-fluid {
+    max-width: 90%;
+    height: auto;
+    /* margin-left: 5%; */
+    padding-top: 5%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .img-fluid {
+    max-width: 70%;
+    /* max-height: 90%; */
+    height: auto;
+    margin-left: auto;
+    /* padding-top: 5%; */
+  }
+}
+
+@media screen and (max-width: 389.5px) {
+  .qrcodebutton {
+    margin-left: 0;
+    /* margin-top: 3rem; */
+  }
+  .ml-4,
+  .mx-4 {
+    margin-left: 0rem !important;
+  }
+  .joinlive {
+    cursor: pointer;
+    width: 106px;
+    height: 35px;
+    background: #333333;
+    border-radius: 5px;
+    color: #fff;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+}
+@media screen and (max-width: 294.5px) {
+  .qrcodebutton {
+    margin-left: 0;
+    /* margin-top: 3rem; */
+  }
+  .joinlive {
+    cursor: pointer;
+    width: 106px;
+    height: 35px;
+    background: #333333;
+    border-radius: 5px;
+    color: #fff;
+    margin-left: 0rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
   }
 }
 </style>

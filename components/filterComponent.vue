@@ -8,6 +8,7 @@
           justify-content-between
           align-items-md-center
           flex-wrap
+          fixer
         "
       >
         <div
@@ -59,17 +60,8 @@
         </div>
 
         <slot name="filterby"></slot>
-        <div
-          class="
-            d-flex
-            my-2
-            align-items-md-center
-            flex-md-row flex-wrap
-            secondwidth
-            mb-1 mb-lg-0
-          "
-        >
-          <div class="flex width100 my-lg-0 my-3">
+        <div class="my-2 secondwidth mb-1 mb-lg-0">
+          <div class="flex width100 align-items-center my-lg-0">
             <input
               type="text"
               required
@@ -157,6 +149,13 @@ export default Vue.extend({
   width: 50%;
 }
 
+.secondwidth {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .display-toggle .icon-wrapper {
   background: #fbfdfe;
   /* Outline Color */
@@ -213,13 +212,17 @@ export default Vue.extend({
   }
 }
 
-@media (max-width: 767.5px) {
+@media (max-width: 768.5px) {
   .widthfullsearch {
-    width: 100%;
+    width: 70%;
   }
 
   .width100 {
     width: 100%;
+    margin-bottom: 0.8rem;
+  }
+  .fixer {
+    margin-left: 0.5rem;
   }
 }
 </style>

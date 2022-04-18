@@ -1,7 +1,7 @@
 <template>
   <div class="bodylightgray">
     <div class="mt-4 pt-3 pt-lg-5 horizontalspacing">
-      <div class="my-md-4">
+      <div class="my-md-4 move">
         <a
           href="#"
           @click.prevent="$router.go(-1)"
@@ -196,8 +196,22 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .classwidth {
   max-width: 300px !important;
+}
+.move {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .mt-md-4,
+  .my-md-4 {
+    margin-top: 1.5rem !important;
+  }
+
+  .move {
+    margin-top: 3rem;
+  }
 }
 </style>

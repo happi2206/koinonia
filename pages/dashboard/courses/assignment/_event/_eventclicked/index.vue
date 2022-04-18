@@ -1,5 +1,5 @@
 <template>
-  <div class="m-5">
+  <div class="m-5 space">
     <preloader :show="addPreloader" />
     <div v-if="isLoading" style="margin-top: 10rem">
       <b-row>
@@ -17,7 +17,15 @@
     </div>
 
     <div v-else>
-      <div class="d-flex mynav align-items-center justify-content-between">
+      <div
+        class="
+          d-flex
+          flex-wrap
+          mynav
+          align-items-center
+          justify-content-between
+        "
+      >
         <div
           @click.prevent="$router.go(-1)"
           class="d-flex"
@@ -36,7 +44,7 @@
               data-icon="dashicons:arrow-left-alt2"
             ></span>
           </a>
-          <span class="mainbluecolor bold700">{{ temp_name }}</span>
+          <span class="mainbluecolor text-16 bold700">{{ temp_name }}</span>
         </div>
 
         <div class="mr-4">
@@ -64,7 +72,7 @@
         </div>
       </div>
       <div class="mt-4">
-        <div class="container-fluid">
+        <div class="container">
           <div class="card pt-4">
             <div class="card-body">
               <div class="d-flex align-content-center align-items-center">
@@ -78,7 +86,7 @@
                       mb-3
                     "
                   >
-                    <div class="class-name">{{ temp_name }}</div>
+                    <div class="class-name text-18 ml-2">{{ temp_name }}</div>
                   </div>
                   <hr />
                   <!-- ***************************************************************** -->
@@ -117,7 +125,7 @@
                 <div id="pills-tabContent" class="tab-content card-body">
                   <div>
                     <div>
-                      <div class="row">
+                      <div class="row flex-wrap">
                         <div class="col-xl-7 w-50 mb-3 mb-xl-0">
                           <div class="mb-2" style="font-size: 0.95rem">
                             <label class="form-control-label mb-2"
@@ -133,10 +141,7 @@
                             </div>
                           </div>
                         </div>
-                        <div
-                          class="col-xl-5 w-50 py-4"
-                          style="border-left: 0.5px solid #dfe3e7"
-                        >
+                        <div class="col-xl-5 border-line w-50 py-4">
                           <div class="row">
                             <div
                               class="col-xl-6 col-lg-4 col-md-3 col-sm-4 mb-3"
@@ -588,7 +593,12 @@ export default {
 }
 </script>
 
-<style >
+<style scoped>
+@media screen and (nax-width: 960px) {
+  .space {
+    margin: 0 1rem;
+  }
+}
 .mynav {
   margin-top: 6rem;
   margin-left: 0rem;

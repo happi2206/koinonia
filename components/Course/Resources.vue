@@ -78,7 +78,7 @@
             <div class="px-0"></div>
             <div class="w-100">
               <div class="row">
-                <div class="">
+                <div class="w-100">
                   <label class="form-control-label w-100 text-12"
                     >Published Date<span class="font10 small"></span
                   ></label>
@@ -123,7 +123,7 @@
                 />
 
                 <div
-                  class="file-type-display py-3 px-3 text-center bg-white"
+                  class="file-type-display w-75 py-3 px-3 text-center bg-white"
                   @click.prevent="$refs.uploadfile.click()"
                 >
                   <div v-if="file" class="file-indicator">
@@ -131,7 +131,9 @@
                   </div>
                   <span v-else>Click to Upload</span>
                 </div>
-                <p class="text-grey text-14">Formats: PPT, DOC, PDF, JPEG</p>
+                <p class="text-grey text-center text-14">
+                  Formats: PPT, DOC, PDF, JPEG
+                </p>
               </div>
             </div>
           </div>
@@ -329,6 +331,7 @@ export default {
   line-height: 14px;
   color: #8b9eb0;
   cursor: pointer;
+  margin-inline: auto;
 }
 .p-3 {
   padding: 1rem !important;

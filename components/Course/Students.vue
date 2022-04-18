@@ -5,19 +5,20 @@
       <template #besideFilterButton>
         <div class="d-flex flex-wrap">
           <button
-            class="
-              btn btn-height
-              py-2
-              mainbtndashboard
-              medbrownparagraph
-              ml-lg-3
-            "
+            class="btn btn-height py-2 mainbtndashboard medbrownparagraph ml-3"
             v-b-modal.addStudent
           >
             Add Student
           </button>
           <button
-            class="btn btn-height py-2 mainbtndashboard medbrownparagraph ml-3"
+            class="
+              btn btn-height
+              py-2
+              ml-3
+              mainbtndashboard
+              medbrownparagraph
+              little-space
+            "
             v-b-modal.uploadModal
           >
             Bulk Upload
@@ -56,8 +57,8 @@
               </download-excel> -->
             </div>
 
-            <div class="d-flex justify-content-center">
-              <div class="div">
+            <div class="">
+              <div class="d-flex align-items-center justify-content-center">
                 <input
                   @change="uploadStudents"
                   accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
@@ -473,7 +474,7 @@ export default {
             email: iterator['Email'] || default_value,
             gender: iterator['Gender'] || default_value,
             registration_number: reg,
-            photo: iterator['Photo'] || default_value
+            photo: iterator['Photo'] || default_value,
           })
         }
       }

@@ -214,7 +214,8 @@ export default Vue.extend({
     width: 100%;
   }
   .secondwidth {
-    width: 100%;
+    width: 95%;
+    padding-left: 1rem;
   }
 }
 
@@ -225,6 +226,19 @@ export default Vue.extend({
 
   .width100 {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .img-fluid {
+    max-width: 90%;
+    max-height: 50%;
+    height: auto;
+    margin-left: 5%;
+    padding-top: 5%;
+  }
+  .secondwidth {
+    width: 95%;
   }
 }
 </style>

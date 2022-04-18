@@ -69,7 +69,7 @@
               data-icon="dashicons:arrow-left-alt2"
             ></span>
           </a>
-          <span class="mainbluecolor bold700">{{ temp_name }}</span>
+          <span class="mainbluecolor text-14 bold700">{{ temp_name }}</span>
         </div>
       </div>
       <div>

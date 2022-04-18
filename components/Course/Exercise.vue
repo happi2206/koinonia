@@ -40,7 +40,10 @@
         <div class="site-container font14">
           <div class="conatiner">
             <div class="m-3" @click="closeForm">
-              <button class="btn btn-height mainbtndashboard medbrownparagraph">
+              <button
+                class="btn btn-height mainbtndashboard medbrownparagraph"
+                style="text-align: center; max-width: 160px"
+              >
                 Back to Exercises
               </button>
             </div>
@@ -49,10 +52,10 @@
               <div class="pt-4 pl-4 pb-0">
                 <div class="card-title text-18 ml-0">Create Exercise</div>
               </div>
-              <div class="pl-0 ml-0 d-flex">
+              <div class="pl-0 ml-0">
                 <ValidationObserver v-slot="{ validate }">
                   <form class="px-4 mx-3">
-                    <div class="row mt-4 w-100" style="max-width: 1020px">
+                    <div class="row mt-4 w-100">
                       <div class="w-100">
                         <div class="mb-2">
                           <label class="form-control-label text-12"
@@ -77,7 +80,7 @@
                             }}</span>
                           </validation-provider>
                         </div>
-                        <div class="mb-2 w-100" style="width: 500px">
+                        <div class="mb-2">
                           <label class="form-control-label text-12"
                             >Exercise Instruction
                             <span class="font10 small" style="color: red"
@@ -108,8 +111,8 @@
                         <hr />
                       </div>
                       <div class="">
-                        <div class="row">
-                          <div class="col-6 mb-2">
+                        <div class="row w-100">
+                          <div class="col-md-6 padding-fix mb-2">
                             <label class="form-control-label text-12"
                               >Exercise Type
                               <span class="font10 small" style="color: red"
@@ -295,7 +298,7 @@
                           <div
                             class="
                               file-type-display
-                              w-75
+                              w-25
                               py-3
                               px-3
                               text-center
@@ -322,7 +325,7 @@
                       </div> -->
                               <span class="text-14">{{ file.name }}</span>
                             </div>
-                            <span v-else>Click to Upload</span>
+                            <span v-else class="text-16">Click to Upload</span>
                           </div>
                           <p class="text-grey text-14">
                             Formats: PPTX, DOC, PDF, XLXS, e.t.c
@@ -330,7 +333,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex conned justify-content-end">
                       <b-dropdown
                         text="Save"
                         size="md"
@@ -701,6 +704,29 @@ export default {
   width: 100%;
   flex-wrap: nowrap !important;
 }
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  position: relative;
+  width: 100%;
+  /* padding-right: 15px; */
+  /* padding-left: 15px; */
+}
+.col-6 {
+  position: relative;
+  width: 100%;
+  /* padding-right: 15px; */
+  /* padding-left: 15px; */
+}
 
 .file-type-display {
   background: #ecf7ff;
@@ -747,5 +773,54 @@ export default {
   line-height: 100%;
   color: #8f9aa3;
   margin-bottom: 0.25rem;
+}
+.padding-fix {
+  padding: 0;
+}
+/* .pl-3 {
+  padding-left: 0.75rem;
+}
+.pl-4,
+.px-4 {
+  padding-left: 1.5rem !important;
+}
+.pr-4,
+.px-4 {
+  padding-right: 1.5rem !important;
+}
+.ml-3,
+.mx-3 {
+  margin-left: 1rem !important;
+} */
+@media screen and (max-width: 393px) {
+  .mr-3,
+  .mx-3 {
+    margin-right: 1rem !important;
+  }
+  .px-4 {
+    padding-left: 1rem;
+    /* padding-right: 1rem; */
+  }
+  .mx-3 {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 382px) {
+  .file-type-display {
+    background: #ecf7ff;
+    border: 2px dashed #ffc107;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 14px;
+    color: #8b9eb0;
+    cursor: pointer;
+  }
+  .w-25 {
+    width: 50% !important;
+  }
 }
 </style>

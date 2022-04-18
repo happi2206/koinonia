@@ -251,7 +251,7 @@ export default {
         this.$router.push('/')
       } catch (e) {
         // show error
-        this.$toast.error(e)
+        this.$toast.error(e.data.detail)
       } finally {
         // hide preloader
         this.is_login = false

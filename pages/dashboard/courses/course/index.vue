@@ -1,7 +1,7 @@
 <template>
   <div class="bodylightgray">
     <div class="mt-5 pt-3 pt-lg-5 horizontalspacing">
-      <div class="my-4">
+      <div class="move">
         <a
           href="#"
           @click.prevent="$router.go(-1)"
@@ -196,7 +196,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .classwidth {
   max-width: 300px !important;
 }
