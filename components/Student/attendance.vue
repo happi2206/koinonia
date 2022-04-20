@@ -109,5 +109,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+table {
+  width: 100%;
+  /* margin-bottom: 1rem; */
+  margin: 0 1rem;
+  color: #212529;
+  padding: 1rem;
+}
 </style>

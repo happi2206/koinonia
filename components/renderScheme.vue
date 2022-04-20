@@ -21,13 +21,15 @@
               w-100
               d-flex
               justify-content-between
-              align-items-center
+              align-items-start
               p-2
               mr-0
               full
             "
           >
-            <h3 class="text-18 mb-2">{{ sec.title }}</h3>
+            <div class="w-75">
+              <h3 class="text-16 mb-2">{{ sec.title }}</h3>
+            </div>
             <span
               class="iconify"
               data-icon="ph:caret-down"
@@ -68,7 +70,7 @@
                 data-width="14"
                 data-height="14"
               ></span>
-              <div class="ml-2">
+              <div class="ml-2 text-14">
                 {{ tab.title }}
               </div>
               <!-- <div>
@@ -108,7 +110,7 @@
                         data-height="12"
                       ></span>
 
-                      <div class="ml-2">
+                      <div class="ml-2 text-14">
                         {{ items.title }}
                       </div>
                     </div>

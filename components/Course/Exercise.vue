@@ -50,7 +50,7 @@
 
             <div class="card bg-white mb-3">
               <div class="pt-4 pl-4 pb-0">
-                <div class="card-title text-18 ml-0">Create Exercise</div>
+                <div class="card-title text-16 ml-0">Create Exercise</div>
               </div>
               <div class="pl-0 ml-0">
                 <ValidationObserver v-slot="{ validate }">
@@ -80,7 +80,7 @@
                             }}</span>
                           </validation-provider>
                         </div>
-                        <div class="mb-2">
+                        <div class="mb-2 w-100">
                           <label class="form-control-label text-12"
                             >Exercise Instruction
                             <span class="font10 small" style="color: red"
@@ -110,8 +110,8 @@
                       <div class="col-12 pr-0 pl-0">
                         <hr />
                       </div>
-                      <div class="">
-                        <div class="row w-100">
+                      <div class="w-100">
+                        <div class="row">
                           <div class="col-md-6 padding-fix mb-2">
                             <label class="form-control-label text-12"
                               >Exercise Type
@@ -230,29 +230,6 @@
                               }}</span>
                             </validation-provider>
                           </div>
-
-                          <!-- <div class="col-md-6 mb-2">
-                            <label class="form-control-label text-12"
-                              >Start Date</label
-                            >
-                            <v-date-picker
-                              v-model="start_date"
-                              :model-config="modelConfig"
-                              mode="date"
-                              :min-date="new Date()"
-                            >
-                              <template #default="{ togglePopover }">
-                                <span @click="togglePopover()">
-                                  <input
-                                    v-model="start_date"
-                                    class="form-control form-control-md"
-                                    style="background: #fbfdfe"
-                                    placeholder="Start Date"
-                                  />
-                                </span>
-                              </template>
-                            </v-date-picker>
-                          </div> -->
 
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
@@ -777,21 +754,14 @@ export default {
 .padding-fix {
   padding: 0;
 }
-/* .pl-3 {
-  padding-left: 0.75rem;
+
+@media screen and (max-width: 992px) {
+  .mx-3 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 }
-.pl-4,
-.px-4 {
-  padding-left: 1.5rem !important;
-}
-.pr-4,
-.px-4 {
-  padding-right: 1.5rem !important;
-}
-.ml-3,
-.mx-3 {
-  margin-left: 1rem !important;
-} */
+
 @media screen and (max-width: 393px) {
   .mr-3,
   .mx-3 {

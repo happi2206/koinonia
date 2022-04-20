@@ -79,7 +79,7 @@
             <div class="w-100">
               <div class="row">
                 <div class="w-100">
-                  <label class="form-control-label w-100 text-12"
+                  <label class="form-control-label text-12"
                     >Published Date<span class="font10 small"></span
                   ></label>
                   <validation-provider rules="required" v-slot="{ errors }">

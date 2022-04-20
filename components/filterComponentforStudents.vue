@@ -3,12 +3,13 @@
     <div class="card-body">
       <div
         class="
-          mb-3
+          my-2
           d-flex
           flex-lg-row
           justify-content-between
-          align-items-md-center
+          align-items-center
           flex-wrap
+          mx-3
         "
       >
         <div
@@ -216,6 +217,19 @@ export default Vue.extend({
   .secondwidth {
     width: 95%;
     padding-left: 1rem;
+  }
+  ::-webkit-input-placeholder {
+    /* Edge */
+    font-size: 12px;
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-size: 12px;
+  }
+
+  ::placeholder {
+    font-size: 12px;
   }
 }
 

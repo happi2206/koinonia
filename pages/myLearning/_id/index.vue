@@ -95,11 +95,17 @@ export default {
   min-height: 1px;
   padding: 0rem;
   padding-top: 0;
+  background: #e5e5e5;
 }
 .custom-tabs {
   /* border-bottom: 0.2px solid #828282; */
   padding: 0rem;
   width: 100%;
   flex-wrap: nowrap !important;
+}
+@media screen and (max-width: 989px) {
+  .pt-5 {
+    padding-top: 2.5rem !important;
+  }
 }
 </style>

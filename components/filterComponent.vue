@@ -210,6 +210,19 @@ export default Vue.extend({
   .secondwidth {
     width: 100%;
   }
+  ::-webkit-input-placeholder {
+    /* Edge */
+    font-size: 12px;
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-size: 12px;
+  }
+
+  ::placeholder {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 768.5px) {

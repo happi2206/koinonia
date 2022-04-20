@@ -12,7 +12,7 @@
         </a>
       </div>
 
-      <div v-if="isLoading">
+      <div class="skeleton" v-if="isLoading">
         <b-row>
           <b-col cols="3">
             <b-skeleton-img height="70%"></b-skeleton-img>
@@ -177,9 +177,10 @@ export default {
           `course-v/get-a-course?course_id=${this.$route.params.id}`
         )
         this.courseDetail = courses
-        this.isLoading = false
       } catch (e) {
         console.log(e)
+      } finally {
+        this.isLoading = false
       }
     },
 
@@ -199,6 +200,9 @@ export default {
 <style scoped>
 .classwidth {
   max-width: 300px !important;
+}
+.skeleton {
+  height: 100vh;
 }
 .move {
   margin-top: 2rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="m-5 space">
     <preloader :show="addPreloader" />
-    <div v-if="isLoading" style="margin-top: 10rem">
+    <div v-if="isLoading" class="skeleton">
       <b-row>
         <b-col cols="12" class="">
           <b-skeleton animation="wave" width="85%"></b-skeleton>
@@ -26,11 +26,7 @@
           justify-content-between
         "
       >
-        <div
-          @click.prevent="$router.go(-1)"
-          class="d-flex"
-          style="font-size: 0.95rem; font-family: Brown"
-        >
+        <div @click.prevent="$router.go(-1)" class="d-flex text-16">
           <span style="cursor: "
             ><b-icon icon="arrow-left" class="mx-2 mainbluecolor"></b-icon
           ></span>
@@ -594,9 +590,22 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (nax-width: 960px) {
+.custom-tabs {
+  /* border-bottom: 0.2px solid #828282; */
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 100%;
+  flex-wrap: nowrap !important;
+  margin-bottom: 0;
+}
+@media screen and (max-width: 960px) {
   .space {
     margin: 0 1rem;
+  }
+}
+@media screen and (max-width: 387px) {
+  .justify-content-center {
+    justify-content: space-between !important;
   }
 }
 .mynav {
@@ -604,13 +613,7 @@ export default {
   margin-left: 0rem;
   padding-bottom: 2rem;
 }
-.custom-tabs {
-  border-bottom: 0.2px solid #828282;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  width: 100%;
-  flex-wrap: nowrap !important;
-}
+
 .file-display {
   background: #ecf7ff;
   border: 2px dashed #ffc107;
@@ -644,5 +647,9 @@ export default {
 
 .btn-width {
   width: 4rem;
+}
+.skeleton {
+  padding-top: 8rem;
+  height: 85vh;
 }
 </style>

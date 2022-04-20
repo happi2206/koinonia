@@ -103,7 +103,7 @@
                 v-if="isAdministrator"
                 @click.prevent="linkAdmin"
               >
-                Link an Administrator
+                Link to an Administrator
               </b-dropdown-item>
               <b-dropdown-item
                 class="medparagraph"

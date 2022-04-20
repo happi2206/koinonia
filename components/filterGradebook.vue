@@ -4,9 +4,9 @@
       <div class="">
         <div class="firstwidth">
           <div class="my-2 secondwidth mb-1">
-            <div class="d-flex flex-wrap justify-content-between">
+            <div class="d-flex flex-wrap justify-content-end">
               <slot name="gradebookModal"></slot>
-              <div class="d-flex justify-content-end">
+              <!-- <div class="d-flex justify-content-end">
                 <input
                   type="text"
                   :placeholder="`Search ${placeholder}`"
@@ -17,13 +17,13 @@
                 <button class="accentcolorbg py-2 px-3">
                   <b-icon icon="search"></b-icon>
                 </button>
-              </div>
+              </div> -->
             </div>
             <!-- <div class="mx-2 bg-yellow-400 py-2 px-4">
             <slot></slot>
           </div> -->
 
-            <div id="filters-container" class="filters-container d-none">
+            <!-- <div id="filters-container" class="filters-container d-none">
               <div
                 class="filter-closer"
                 data-toggle-visibility="#filters-container"
@@ -38,7 +38,7 @@
                   />
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -70,11 +70,45 @@ export default Vue.extend({
   width: 50%;
 }
 
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 0rem;
+  border: none;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #dee2e6;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0rem;
+}
+
 .display-toggle .icon-wrapper {
   background: #fbfdfe;
   /* Outline Color */
 
-  border: 0.5px solid #e7e8eb;
+  /* border: 0.5px solid #e7e8eb; */
   border-left: 0;
   border-radius: 0px;
   line-height: 0;

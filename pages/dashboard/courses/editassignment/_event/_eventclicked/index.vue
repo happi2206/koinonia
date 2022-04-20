@@ -1,7 +1,10 @@
 <template>
   <div>
     <preloader :show="addPreloader" />
-    <div v-if="isLoading" style="margin-top: 10rem; margin-left: 2rem">
+    <div
+      v-if="isLoading"
+      style="margin-top: 10rem; margin-left: 2rem; height: 100vh"
+    >
       <b-row>
         <b-col cols="12" class="">
           <b-skeleton animation="wave" width="70%"></b-skeleton>
@@ -51,11 +54,7 @@
       <div
         class="d-flex mynav text-14 align-items-center justify-content-between"
       >
-        <div
-          @click.prevent="$router.go(-1)"
-          class="d-flex"
-          style="font-size: 0.95rem; font-family: Brown"
-        >
+        <div @click.prevent="$router.go(-1)" class="d-flex text-14">
           <span style="cursor: "
             ><b-icon icon="arrow-left" class="mx-2 mainbluecolor"></b-icon
           ></span>
@@ -79,17 +78,21 @@
           <div class="conatiner w-100">
             <div class="card trojan bg-white mb-3">
               <div class="pt-6 pl-6 ml-4 mt-6 pb-0">
-                <div class="card-title text-18 ml-0">Edit Exercise</div>
+                <div class="card-title text-16 ml-0">Edit Exercise</div>
               </div>
-              <div class="pl-0 ml-0 d-flex">
+              <div class="pl-0 ml-0 w-100">
                 <ValidationObserver v-slot="{ validate }">
-                  <form class="pl-6 fix-width ml-6">
-                    <div class="row mt-4" style="max-width: 1020px">
-                      <div class="w-100">
+                  <form class="pl-0 fix-width ml-6 pr-0">
+                    <div class="row mt-4">
+                      <div class="w-100 box">
                         <div class="mb-2">
                           <label class="form-control-label text-12"
                             >Exercise Name
-                            <span class="font10 small">(Required)</span></label
+                            <span class="font10 small">
+                              <span class="font10 small" style="color: red"
+                                >*</span
+                              ></span
+                            ></label
                           >
                           <validation-provider
                             rules="required"
@@ -110,7 +113,11 @@
                         <div class="mb-2 w-100">
                           <label class="form-control-label text-12"
                             >Exercise Instruction
-                            <span class="font10 small">(Required)</span></label
+                            <span class="font10 small">
+                              <span class="font10 small" style="color: red"
+                                >*</span
+                              ></span
+                            ></label
                           >
                           <validation-provider
                             rules="required"
@@ -137,10 +144,14 @@
                       </div>
                       <div class="w-100">
                         <div class="row">
-                          <div class="col-6 mb-2">
+                          <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Exercise Type
-                              <span class="font10 small">(Required)</span>
+                              <span class="font10 small">
+                                <span class="font10 small" style="color: red"
+                                  >*</span
+                                ></span
+                              >
                             </label>
                             <validation-provider
                               rules="required"
@@ -166,7 +177,11 @@
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Obtainable Score
-                              <span class="font10 small">(Required)</span>
+                              <span class="font10 small">
+                                <span class="font10 small" style="color: red"
+                                  >*</span
+                                ></span
+                              >
                             </label>
                             <validation-provider
                               rules="required|digits"
@@ -188,8 +203,10 @@
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Available Date
-                              <span class="font10 small"
-                                >(Required)</span
+                              <span class="font10 small">
+                                <span class="font10 small" style="color: red"
+                                  >*</span
+                                ></span
                               ></label
                             >
                             <validation-provider
@@ -220,8 +237,10 @@
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Due Date
-                              <span class="font10 small"
-                                >(Required)</span
+                              <span class="font10 small">
+                                <span class="font10 small" style="color: red"
+                                  >*</span
+                                ></span
                               ></label
                             >
                             <validation-provider
@@ -250,28 +269,6 @@
                             </validation-provider>
                           </div>
 
-                          <!-- <div class="col-md-6 mb-2">
-                            <label class="form-control-label text-12"
-                              >Start Date</label
-                            >
-                            <v-date-picker
-                              v-model="start_date"
-                              :model-config="modelConfig"
-                              mode="date"
-                            >
-                              <template #default="{ togglePopover }">
-                                <span @click="togglePopover()">
-                                  <input
-                                    v-model="start_date"
-                                    class="form-control form-control-md"
-                                    style="background: #fbfdfe"
-                                    placeholder="Start Date"
-                                  />
-                                </span>
-                              </template>
-                            </v-date-picker>
-                          </div> -->
-
                           <div class="col-md-6 mb-2">
                             <label class="form-control-label text-12"
                               >Set duration
@@ -297,10 +294,7 @@
                       <div class="col-12 pl-0 pr-0">
                         <hr />
                         <div class="my-3 ml-3">
-                          <p
-                            style="font-size: 0.95rem"
-                            class="m-0 form-control-label"
-                          >
+                          <p class="m-0 form-control-label text-16">
                             Upload Essay Sample
                           </p>
 
@@ -343,7 +337,7 @@
                       </div> -->
                               <span class="text-14">{{ file.name }}</span>
                             </div>
-                            <span v-else>Click to Upload</span>
+                            <span class="text-14" v-else>Click to Upload</span>
                           </div>
                           <p class="text-grey text-14">
                             Formats: PPT, DOC, PDF, JPEG, PNG
@@ -766,11 +760,36 @@ export default {
 
 <style scoped>
 .custom-tabs {
-  border-bottom: 0.2px solid #828282;
+  border-bottom: none;
   padding-left: 2rem;
   padding-right: 2rem;
   width: 100%;
   flex-wrap: nowrap !important;
+  /* margin-bottom: 2rem; */
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  position: relative;
+  width: 100%;
+  /* padding-right: 15px; */
+  /* padding-left: 15px; */
+}
+.col-6 {
+  position: relative;
+  width: 100%;
+  /* padding-right: 15px; */
+  /* padding-left: 15px; */
 }
 
 .file-type-display {
@@ -798,9 +817,6 @@ export default {
   width: 90%;
   margin-left: 2.5rem;
 }
-/* .fix {
-  width: 100%;
-} */
 
 .trojan {
   margin-top: 2rem;
@@ -833,5 +849,90 @@ export default {
 .mynav {
   margin-top: 6rem;
   margin-left: 2rem;
+}
+@media screen and (max-width: 992px) {
+  .fix-width {
+    width: 100%;
+    margin-left: 0rem;
+  }
+  .pl-6 {
+    padding-left: 0.5rem;
+  }
+  .pr-0 {
+    padding-left: 0.5rem;
+  }
+  .box {
+    max-width: 50rem;
+  }
+}
+@media screen and (max-width: 776px) {
+  .m-5 {
+    margin: 0rem !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .container {
+    /* max-width: 640px; */
+  }
+}
+
+@media (min-width: 576px) {
+  .container,
+  .container-sm {
+    /* max-width: 540px; */
+  }
+}
+
+@media screen and (max-width: 393px) {
+  .mr-3,
+  .mx-3 {
+    margin-right: 1rem !important;
+  }
+  .px-4 {
+    padding-left: 1rem;
+    /* padding-right: 1rem; */
+  }
+  .mx-3 {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+  .trojan {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .fix-width {
+    width: 100%;
+    margin-left: 0rem;
+  }
+  .pl-6 {
+    padding-left: 0rem;
+  }
+  .pt-6 {
+    padding-top: 0rem;
+  }
+  .card-title {
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 382px) {
+  .file-type-display {
+    background: #ecf7ff;
+    border: 2px dashed #ffc107;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 14px;
+    color: #8b9eb0;
+    cursor: pointer;
+  }
+  .w-25 {
+    width: 75% !important;
+  }
 }
 </style>

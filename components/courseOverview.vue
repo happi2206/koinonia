@@ -6,12 +6,12 @@
           <div class="px-md-3 px-2 pb-3">
             <div class="my-3">
               <h1 class="brown24">Description</h1>
-              <div class="text-14 pb-3">
+              <div class="text-14 pb-0">
                 {{ courseDetail.description }}
               </div>
             </div>
             <hr class="my-2" />
-            <h2 class="brown24 my-3 graytext">Scheme of work</h2>
+            <h2 class="brown24 my-2 graytext">Scheme of work</h2>
             <p
               v-if="section.length === 0"
               class="lightgraytext medbrownparagraph d-flex align-items-center"
@@ -309,6 +309,20 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 457px) {
+  .row {
+    display: block;
+    /* flex-wrap: wrap; */
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
+@media screen and (max-width: 452px) {
+  .ml-4,
+  .mx-4 {
+    /* margin-left: 1.5rem !important; */
+  }
+}
 .grey {
   color: #828282;
 }
