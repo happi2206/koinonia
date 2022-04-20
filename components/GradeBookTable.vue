@@ -19,10 +19,12 @@
               class="filter-wrapper pb-0 border-bottom-0"
               style="width: 40%"
             >
-              <div class="search-input d-flex align-items-center mb-2">
-                <button class="accentcolorbg py-2 px-3" style="height: 38px">
-                  <b-icon icon="search"></b-icon>
-                </button>
+              <div class="search-input">
+                <span
+                  class="iconify icon"
+                  data-inline="false"
+                  data-icon="carbon:search"
+                ></span>
                 <input
                   v-model="searchQuery"
                   type="text"
@@ -126,132 +128,9 @@
         </tbody>
       </table>
       <div v-else class="row">
-        <!-- <div class="col text-center text-capitalize text-gray m-2 p-3 bg-light">
+        <div class="col text-center text-capitalize text-gray m-2 p-3 bg-light">
           No record to show
-        </div> -->
-
-        <table
-          v-if="theData.students.length > 0"
-          class="table gradebook-table border-bottom-0"
-        >
-          <thead>
-            <tr>
-              <th
-                scope="col"
-                colspan="2"
-                class="filter-wrapper pb-0 border-bottom-0"
-                style="width: 40%"
-              >
-                <div class="search-input">
-                  <span
-                    class="iconify icon"
-                    data-inline="false"
-                    data-icon="carbon:search"
-                  ></span>
-                  <input
-                    v-model="searchQuery"
-                    type="text"
-                    class="form-control w-100"
-                    placeholder="Search for student"
-                  />
-                </div>
-              </th>
-              <th
-                v-for="(entry, index) in theData.entries"
-                :key="index"
-                scope="col"
-                rowspan="2"
-                class="grade-col-head text-nowrap"
-                draggable="true"
-                @drop="onDrop($event, entry)"
-                @dragstart="startDrag($event, entry)"
-                @dragover.prevent
-                @dragenter.prevent
-                @click="$emit('column-clicked', entry)"
-              >
-                <div class="px-1 py-1">
-                  <svg
-                    class="pointer"
-                    width="8"
-                    height="13"
-                    viewBox="0 0 8 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect width="3" height="3" rx="1" fill="#B7CCDC" />
-                    <rect y="5" width="3" height="3" rx="1" fill="#B7CCDC" />
-                    <rect y="10" width="3" height="3" rx="1" fill="#B7CCDC" />
-                    <rect x="4.5" width="3" height="3" rx="1" fill="#B7CCDC" />
-                    <rect
-                      x="4.5"
-                      y="5"
-                      width="3"
-                      height="3"
-                      rx="1"
-                      fill="#B7CCDC"
-                    />
-                    <rect
-                      x="4.5"
-                      y="10"
-                      width="3"
-                      height="3"
-                      rx="1"
-                      fill="#B7CCDC"
-                    />
-                  </svg>
-                </div>
-                <div class="px-3 pb-3">
-                  <div class="title-text mb-2">{{ entry.name }}</div>
-                  <div class="score-text mb-2">
-                    Score:
-                    <span class="score-highlight">{{
-                      entry.max_obtainable_score
-                    }}</span>
-                  </div>
-                  <div class="period-text mb-1">
-                    {{ entry.academic_period }}
-                  </div>
-                  <div class="period-text">
-                    {{ formatDate(entry.create_date.split(' ')[0]) }}
-                  </div>
-                </div>
-              </th>
-            </tr>
-            <tr>
-              <th
-                scope="col"
-                class="sortable text-nowrap"
-                style="width: 40%"
-                @click="sortData('last_name', sortType['last_name'])"
-              >
-                <span class="sort-arrows">Surname</span>
-              </th>
-              <th
-                scope="col"
-                class="sortable text-nowrap"
-                style="width: 40%"
-                @click="sortData('first_name', sortType['first_name'])"
-              >
-                <span class="sort-arrows">First Name</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(student, index) in students" :key="index">
-              <td>{{ student.last_name }}</td>
-              <td>{{ student.first_name }}</td>
-              <template v-for="(entry, index2) in theData.entries">
-                <td :key="index2" class="grade-col-data">
-                  {{
-                    getScores(entry.scores, student.class_student_id)
-                      ? getScores(entry.scores, student.class_student_id).score
-                      : '-'
-                  }}
-                </td>
-              </template>
-            </tr>
-          </tbody>
-        </table>
+        </div>
       </div>
     </template>
   </div>
@@ -274,7 +153,7 @@ export default {
   data() {
     return {
       theData: {
-        students: [{}],
+        students: [],
       },
       searchQuery: '',
       sortType: {
@@ -372,6 +251,18 @@ export default {
       data.students = sortedStudent
       this.theData = data
     },
+    // toRoute(entry) {
+    //   this.$router.push({
+    //     name: 'sms-id-lms-classes-class-grade-book-grade_book',
+    //     params: {
+    //       grade_book: entry.id
+    //     },
+    //     query: {
+    //       grade_book_subject: this.$route.query.grade_book_subject,
+    //       grade_book_subject_name: this.$route.query.grade_book_subject_name
+    //     }
+    //   })
+    // }
   },
 }
 </script>
@@ -383,16 +274,5 @@ export default {
   left: 0;
   background: #ffff !important;
   z-index: 9;
-}
-.card-body {
-  flex: 1 1 auto;
-  min-height: 1px;
-  padding: 1rem;
-}
-.table th,
-.table td {
-  padding: 0.75rem;
-  vertical-align: top;
-  /* border-top: 1px solid #dee2e6; */
 }
 </style>

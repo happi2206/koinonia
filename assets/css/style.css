@@ -1627,6 +1627,19 @@ th {
     width: 100%;
   }
 
+  ::-webkit-input-placeholder {
+    /* Edge */
+    font-size: 12px;
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-size: 12px;
+  }
+
+  ::placeholder {
+    font-size: 12px;
+  }
 
   /* .mainparagraph18 {
     font-size: 18px;
