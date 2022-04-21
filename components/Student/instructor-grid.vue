@@ -11,12 +11,12 @@
       >
         <div class="d-flex flex-column" style="text-align: center">
           <p class="text-14 pt-3 pb-2 m-0">
-            {{ instructor ? instructor.firstname : '' }}
+            {{ instructor ? instructor.other_name : '' }}
             {{ instructor ? instructor.surname : '' }}
           </p>
           <div style="max-height: 6rem; min-height: 5.9rem" class="x mb-2">
             <p class="text-13">
-              <!-- {{ instructor.biodata }} -->
+              {{ instructor ? instructor.biography : '' }}
             </p>
           </div>
 

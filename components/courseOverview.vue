@@ -39,18 +39,6 @@
               ></b-icon>
             </div>
 
-            <!-- <div v-if="section.length > 0">
-              <div @click="openWarningModal" style="cursor: pointer">
-                <span
-                  class="iconify"
-                  data-icon="bytesize:trash"
-                  style="color: #2f2f2f"
-                  data-width="16"
-                  data-height="16"
-                ></span>
-              </div>
-            </div> -->
-
             <div
               v-if="updateButton && section.length > 0"
               class="d-flex justify-content-end"
@@ -77,7 +65,9 @@
                 :index="index"
                 :schema="section"
                 :collapse="collapse"
+                @toggle="collaspe"
                 :showAddedScheme="showAddedScheme"
+                @deleteEmit="deleteScheme($event)"
                 @deleteScheme="deleteScheme($event)"
                 @scheme="schemeAdd($event, index)"
                 @saveButton="saveButtonHandler"
@@ -181,7 +171,7 @@ export default {
       },
       updateButton: false,
       saveButton: false,
-      display: true,
+      display: false,
       showInput: false,
       isbusy: false,
       isbusyCreating: false,
@@ -213,10 +203,9 @@ export default {
       this.updateButton = e
       this.display = false
       this.showInput = true
+      this.collapse = false
     },
-    openWarningModal() {
-      console.log(`yay`)
-    },
+
     async sendDataModel() {
       try {
         this.isbusyCreating = true
@@ -234,6 +223,7 @@ export default {
       } finally {
         this.getSchemeOfWork()
         this.isbusyCreating = false
+        this.saveButton = false
       }
     },
 
@@ -280,9 +270,14 @@ export default {
         if (response.section.length === 0) {
           this.saveButton = true
         }
+        if (response.section.length > 0) {
+          this.display = true
+          this.collapse = false
+        }
 
         this.section = response.section
         this.schemeId = response.id
+        this.showInput = false
       } catch (error) {
         console.log(error)
       }
@@ -303,6 +298,10 @@ export default {
     },
     deleteScheme(e) {
       this.section.splice(e, 1)
+      this.saveButton = false
+    },
+    collaspe() {
+      this.collapse = !this.collapse
     },
   },
 }

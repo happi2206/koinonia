@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="collapse">
+    <div v-if="showSchemeinputField">
       <div v-if="isLoading">
         <b-row>
           <b-col cols="12" class="">
@@ -108,18 +108,27 @@ export default {
     },
     collapse: {
       type: Boolean,
-      default: false,
     },
     schema: {
       type: Array,
     },
   },
+
+  computed: {
+    showSchemeinputField() {
+      return this.collapse
+    },
+  },
   created() {
     this.scheme = this.schema[0]
+    if (this.scheme.length > 0) {
+      this.showAddedScheme = true
+    }
   },
   methods: {
     addScheme() {
-      this.collapse = false
+      this.$emit('toggle')
+
       this.showAddedScheme = true
       this.$emit('scheme', this.scheme)
     },
@@ -133,8 +142,8 @@ export default {
     deleteInstance(e) {
       this.$emit('deleteEmit', e)
     },
-    editScheme(e) {
-      this.collapse = e
+    editScheme() {
+      this.$emit('toggle')
       this.showAddedScheme = false
     },
 

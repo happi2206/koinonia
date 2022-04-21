@@ -1,6 +1,17 @@
 <template>
   <div class="container w-100 mb-3">
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end align-items-center">
+      <div v-if="section.length > 0" class="d-none mb-3 mr-3">
+        <div v-b-modal.delete-scheme style="cursor: pointer">
+          <span
+            class="iconify"
+            data-icon="bytesize:trash"
+            style="color: #2f2f2f"
+            data-width="16"
+            data-height="16"
+          ></span>
+        </div>
+      </div>
       <button
         @click="switchView"
         class="btn text-14 btn-height btn-width mb-3 mainbtndashboard"
@@ -129,6 +140,42 @@
         </div>
       </b-collapse>
     </b-card>
+    <b-modal
+      id="delete-scheme"
+      title="Delete Scheme"
+      centered
+      hide-footer
+      ref="deleteScheme"
+    >
+      <p class="text-16 text-center">
+        Are you sure you want to delete existing scheme of work ?
+      </p>
+      <div class="p-3 d-flex justify-content-center">
+        <button
+          @click="closeModal"
+          class="btn mainbtndashboard medbrownparagraph"
+          style="height: 40px; width: 5rem; text-align: center"
+        >
+          No
+        </button>
+        <button
+          @click="deleteSchemeOfWork"
+          class="ml-5 btn mainbtndashboard medbrownparagraph"
+          style="height: 40px; width: 5rem; text-align: center"
+        >
+          <span v-if="isbusy">
+            <b-spinner
+              label="loading"
+              variant="primary"
+              style="width: 1.5rem; height: 1.5rem"
+              class="text-center"
+            >
+            </b-spinner>
+          </span>
+          <span v-else>Yes</span>
+        </button>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -140,12 +187,17 @@ export default {
       items: [],
       view: true,
       rotateArrow: false,
+      id: '',
+      isbusy: false,
     }
   },
   created() {
     this.getSchemeOfWork()
   },
   methods: {
+    closeModal() {
+      this.$refs['deleteScheme'].hide()
+    },
     switchView() {
       this.$emit('view', this.view)
     },
@@ -157,6 +209,8 @@ export default {
         let response = await this.$axios.$get(
           `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
         )
+        console.log(response.id)
+        this.id = response.id
         this.subsection = response.section[0].section
 
         for (const iterator of this.subsection) {
@@ -165,6 +219,21 @@ export default {
         }
       } catch (error) {
         console.log(error)
+      }
+    },
+    async deleteSchemeOfWork() {
+      try {
+        this.isbusy = true
+        console.log(this.id)
+        let response = await this.$axios.$get(
+          `course-v/delete-scheme-of-work?scheme_id=${this.id}`
+        )
+        this.$toast.success(response)
+      } catch (error) {
+        this.$toast.error(error.data.detail)
+      } finally {
+        this.isbusy = false
+        this.$refs['deleteScheme'].hide()
       }
     },
   },

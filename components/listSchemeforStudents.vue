@@ -27,7 +27,7 @@
               full
             "
           >
-            <h3 class="text-18 mb-2">{{ sec.title }}</h3>
+            <h3 class="text-16 mb-2">{{ sec.title }}</h3>
             <span
               class="iconify"
               data-icon="ph:caret-down"
@@ -58,7 +58,7 @@
         <div class="p-2 bg-light">
           <div v-for="(tab, index) in subsection" :key="index">
             <div
-              class="text-16 p-2 m-2 row align-items-center"
+              class="text-14 p-2 m-2 row align-items-center"
               v-b-toggle="`collapse-${index}`"
             >
               <span
@@ -68,7 +68,7 @@
                 data-width="14"
                 data-height="14"
               ></span>
-              <div class="ml-2">
+              <div class="ml-2 text-14">
                 {{ tab.title }}
               </div>
               <!-- <div>
@@ -91,7 +91,7 @@
                 </div>
                 <ul
                   v-if="tab.items.length > 0"
-                  class="text-16 pr-2"
+                  class="text-14 pr-2"
                   style="list-style: none"
                 >
                   <li v-for="(items, index2) in tab.items" :key="index2">
@@ -142,24 +142,35 @@ export default {
       schemeExist: false,
     }
   },
-  created() {
-    this.getSchemeOfWork()
+  mounted() {
+    this.section = this.schemeOfWork
+    console.log(this.schemeOfWork)
+    if (this.section > 0) {
+      this.subsection = this.schemeOfWork[0].section
+    }
+  },
+  props: {
+    schemeOfWork: {
+      type: Array,
+    },
   },
   methods: {
     async getSchemeOfWork() {
       try {
         let response = await this.$axios.$get(
-          `course-v/get-scheme-of-work?course_id=${this.$route.params.id}`
+          `course-v/get-my-course-details?course_id=${this.$route.params.id}`
         )
-        this.section = response.section
-        if (this.section.length > 0) {
-          this.schemeExist = true
-          this.$emit('schemeExist', this.schemeExist)
-        }
+
+        this.section = response.scheme_of_works
+        console.log(this.section)
         this.subsection = response.section[0].section
 
         for (const iterator of this.subsection) {
           this.items = iterator.items
+        }
+        if (this.section.length > 0) {
+          this.schemeExist = true
+          this.$emit('schemeExist', this.schemeExist)
         }
       } catch (error) {
         console.log(error)

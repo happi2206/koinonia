@@ -108,7 +108,7 @@
               <b-dropdown-item
                 class="medparagraph"
                 @click.prevent="linkToContent"
-                v-if="!isAdministrator"
+                v-if="!isAdministrator && !isInstructor"
               >
                 Link a Course
               </b-dropdown-item>
