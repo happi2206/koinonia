@@ -234,7 +234,6 @@ export default {
           id: `${this.schemeId}`,
           section: this.section,
         }
-        console.log(updateDataModel)
 
         let response = await this.$axios.patch(
           `course-v/edit-scheme-of-work`,
@@ -246,6 +245,8 @@ export default {
         console.log(error)
       } finally {
         this.getSchemeOfWork()
+        this.saveButton = false
+        this.updateButton = false
         this.isbusy = false
       }
     },

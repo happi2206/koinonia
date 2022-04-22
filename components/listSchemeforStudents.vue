@@ -145,7 +145,7 @@ export default {
   mounted() {
     this.section = this.schemeOfWork
     console.log(this.schemeOfWork)
-    if (this.section > 0) {
+    if (this.section.length > 0) {
       this.subsection = this.schemeOfWork[0].section
     }
   },

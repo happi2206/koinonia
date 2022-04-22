@@ -163,7 +163,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(student, index) in students" :key="index">
+              <tr v-for="(student, index) in studentData.students" :key="index">
                 <td>{{ student.firstname }}</td>
                 <td>{{ student.surname }}</td>
                 <template v-for="(entry, index2) in thisData.entries">
@@ -316,96 +316,99 @@ export default {
       searchQuery: '',
       isbusy: false,
       placeholder: 'Gradebook',
-      students: [
-        {
-          admission_id: 'a106af99-7030-4cfa-bbcb-328501b526c1',
-          class_student_id: '322bbd56-cb24-4d2c-822b-d676b475bb13',
-          firstname: 'Range',
-          surname: 'Episode',
-          gender: 'female',
-          avatar: null,
-        },
-        {
-          admission_id: '522b7902-c1a1-4344-94b6-74702b827c4b',
-          class_student_id: '8b0b86c9-d4be-4c69-8770-7e642632934a',
-          firstname: 'Stephanie',
-          surname: 'Adiele',
-          gender: 'female',
-          avatar: null,
-        },
-        {
-          admission_id: '5c8e14c2-a90d-4e42-bca7-7b243474b0dc',
-          class_student_id: '4b497b6d-5010-4027-adb7-6b4fcac57671',
-          firstname: 'Jaden',
-          surname: 'Cross',
-          gender: 'female',
-          avatar: null,
-        },
-        {
-          admission_id: '0980a408-ee07-45bb-b28f-51465d1ab261',
-          class_student_id: '9e056911-fcb3-4ccc-b9d7-fbf7f3cbe8e9',
-          firstname: 'Scott',
-          surname: 'Travis',
-          gender: 'female',
-          avatar: null,
-        },
-        {
-          admission_id: 'f4610726-e106-4091-a041-d229f0c12537',
-          class_student_id: '03ba5c3f-d52a-4a99-a882-e49827929e23',
-          firstname: 'Happiness',
-          surname: 'Adeboye',
-          gender: 'female',
-          avatar: null,
-        },
-        {
-          admission_id: '10ca3141-4e26-4b77-9b20-711b763ed137',
-          class_student_id: '82fd841d-6e5c-40ee-ba39-b38d7f755273',
-          firstname: 'Moses',
-          surname: 'Simon',
-          gender: 'male',
-          avatar: null,
-        },
-        {
-          admission_id: 'e823e9a5-e223-4cbe-976e-bebbf69b70e0',
-          class_student_id: '5703c61f-d5d3-454b-93b9-fd7d2e1c8a1d',
-          firstname: 'Great',
-          surname: 'Ben',
-          gender: 'male',
-          avatar: null,
-        },
-        {
-          admission_id: '8b419d95-7b7a-455f-8304-54a62980fefe',
-          class_student_id: 'e9520c69-910f-4c54-bb10-2264ea7546a1',
-          firstname: 'Sabinus',
-          surname: 'Gordons',
-          gender: 'male',
-          avatar: null,
-        },
-        {
-          admission_id: 'a8de4097-1194-4443-83fc-004933320609',
-          class_student_id: 'f5a6ee3e-a2ec-4531-a2ff-d79bf2fbffd9',
-          firstname: 'Xavier',
-          surname: 'Andres',
-          gender: 'female',
-          avatar: null,
-        },
-        {
-          admission_id: 'e0ab5ca6-6c52-4b2f-9ddc-f9dfb943d9e5',
-          class_student_id: 'f4f7639b-d47d-48a0-ae08-1f3d909aead4',
-          firstname: 'Simmons',
-          surname: 'Mike',
-          gender: 'female',
-          avatar: null,
-        },
-        {
-          admission_id: '85ba6770-6561-4b75-bfbe-3e9d694d662c',
-          class_student_id: '1d003b6f-b5fa-4684-97c2-419bec78e08e',
-          firstname: 'Vale',
-          surname: 'Orthodox',
-          gender: 'male',
-          avatar: null,
-        },
-      ],
+
+      studentData: {
+        students: [
+          {
+            admission_id: 'a106af99-7030-4cfa-bbcb-328501b526c1',
+            class_student_id: '322bbd56-cb24-4d2c-822b-d676b475bb13',
+            firstname: 'Range',
+            surname: 'Episode',
+            gender: 'female',
+            avatar: null,
+          },
+          {
+            admission_id: '522b7902-c1a1-4344-94b6-74702b827c4b',
+            class_student_id: '8b0b86c9-d4be-4c69-8770-7e642632934a',
+            firstname: 'Stephanie',
+            surname: 'Adiele',
+            gender: 'female',
+            avatar: null,
+          },
+          {
+            admission_id: '5c8e14c2-a90d-4e42-bca7-7b243474b0dc',
+            class_student_id: '4b497b6d-5010-4027-adb7-6b4fcac57671',
+            firstname: 'Jaden',
+            surname: 'Cross',
+            gender: 'female',
+            avatar: null,
+          },
+          {
+            admission_id: '0980a408-ee07-45bb-b28f-51465d1ab261',
+            class_student_id: '9e056911-fcb3-4ccc-b9d7-fbf7f3cbe8e9',
+            firstname: 'Scott',
+            surname: 'Travis',
+            gender: 'female',
+            avatar: null,
+          },
+          {
+            admission_id: 'f4610726-e106-4091-a041-d229f0c12537',
+            class_student_id: '03ba5c3f-d52a-4a99-a882-e49827929e23',
+            firstname: 'Happiness',
+            surname: 'Adeboye',
+            gender: 'female',
+            avatar: null,
+          },
+          {
+            admission_id: '10ca3141-4e26-4b77-9b20-711b763ed137',
+            class_student_id: '82fd841d-6e5c-40ee-ba39-b38d7f755273',
+            firstname: 'Moses',
+            surname: 'Simon',
+            gender: 'male',
+            avatar: null,
+          },
+          {
+            admission_id: 'e823e9a5-e223-4cbe-976e-bebbf69b70e0',
+            class_student_id: '5703c61f-d5d3-454b-93b9-fd7d2e1c8a1d',
+            firstname: 'Great',
+            surname: 'Ben',
+            gender: 'male',
+            avatar: null,
+          },
+          {
+            admission_id: '8b419d95-7b7a-455f-8304-54a62980fefe',
+            class_student_id: 'e9520c69-910f-4c54-bb10-2264ea7546a1',
+            firstname: 'Sabinus',
+            surname: 'Gordons',
+            gender: 'male',
+            avatar: null,
+          },
+          {
+            admission_id: 'a8de4097-1194-4443-83fc-004933320609',
+            class_student_id: 'f5a6ee3e-a2ec-4531-a2ff-d79bf2fbffd9',
+            firstname: 'Xavier',
+            surname: 'Andres',
+            gender: 'female',
+            avatar: null,
+          },
+          {
+            admission_id: 'e0ab5ca6-6c52-4b2f-9ddc-f9dfb943d9e5',
+            class_student_id: 'f4f7639b-d47d-48a0-ae08-1f3d909aead4',
+            firstname: 'Simmons',
+            surname: 'Mike',
+            gender: 'female',
+            avatar: null,
+          },
+          {
+            admission_id: '85ba6770-6561-4b75-bfbe-3e9d694d662c',
+            class_student_id: '1d003b6f-b5fa-4684-97c2-419bec78e08e',
+            firstname: 'Vale',
+            surname: 'Orthodox',
+            gender: 'male',
+            avatar: null,
+          },
+        ],
+      },
 
       thisData: {
         entries: [

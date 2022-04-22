@@ -1481,6 +1481,7 @@ th {
   border-radius: 0 !important;
   border-right: none !important;
   border-top: none !important;
+  /* min-width: 150px; */
 }
 
 .custom-tabs .nav-link {

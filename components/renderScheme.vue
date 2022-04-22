@@ -224,7 +224,6 @@ export default {
     async deleteSchemeOfWork() {
       try {
         this.isbusy = true
-        console.log(this.id)
         let response = await this.$axios.$get(
           `course-v/delete-scheme-of-work?scheme_id=${this.id}`
         )
