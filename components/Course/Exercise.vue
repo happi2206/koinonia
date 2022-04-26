@@ -539,8 +539,6 @@ export default {
             }
           )
 
-          console.log(response.data.message)
-
           this.$toast.success(response.data.message)
         } catch (error) {
           this.$toast.error('Assignment could not be created')
@@ -641,8 +639,6 @@ export default {
               },
             }
           )
-
-          console.log(response.data.message)
 
           this.$toast.success(response.data.message)
         } catch (error) {

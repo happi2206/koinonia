@@ -1819,6 +1819,7 @@ th {
     font-size: 14px;
   }
 
+
   .text-24 {
     font-size: 16px;
   }
@@ -2422,12 +2423,6 @@ th {
   flex-wrap: nowrap !important;
   overflow-x: auto;
   overflow-y: hidden;
-}
-
-
-
-.text-18 {
-  font-size: 12px;
 }
 
 /*# sourceMappingURL=style.css.map */

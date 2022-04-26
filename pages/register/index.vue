@@ -140,7 +140,7 @@
                               type="text"
                               v-model="registerInputs.firstname"
                               required
-                              placeholder="Email"
+                              placeholder="First Name"
                               class="forminputs"
                             />
                           </div>

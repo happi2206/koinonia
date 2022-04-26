@@ -163,7 +163,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(student, index) in studentData.students" :key="index">
+              <tr v-for="(student, index) in students" :key="index">
                 <td>{{ student.firstname }}</td>
                 <td>{{ student.surname }}</td>
                 <template v-for="(entry, index2) in thisData.entries">
@@ -886,7 +886,7 @@ export default {
   computed: {
     students() {
       if (this.searchQuery) {
-        return this.students.filter((item) => {
+        return this.studentData.students.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(' ')
@@ -897,7 +897,7 @@ export default {
             )
         })
       } else {
-        return this.students
+        return this.studentData.students
       }
     },
   },
